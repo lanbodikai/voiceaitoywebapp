@@ -1,0 +1,11 @@
+* { box-sizing: border-box; }
+html { background: #f9f5fb; }
+body {
+  color: #211b27;
+  margin: 0;
+  min-width: 320px;
+  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Microsoft YaHei", sans-serif;
+  text-rendering: optimizeLegibility;
+}
+button:focus-visible { outline: 3px solid rgba(234, 95, 148, .52); outline-offset: 3px; }
+#root { min-height: 100dvh; }

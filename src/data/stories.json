@@ -1,0 +1,966 @@
+{
+  "version": "1.0.0",
+  "sfxManifest": [
+    { "id": "earcon_listen_start", "description": "Rising two-note chirp when mic capture begins" },
+    { "id": "earcon_listen_stop", "description": "Soft descending blip when mic capture ends" },
+    { "id": "earcon_thinking", "description": "Gentle ticking/bubbling loop while evaluating, max 3s" },
+    { "id": "earcon_success_sparkle", "description": "Bright sparkle for a correct/celebrated answer" },
+    { "id": "earcon_sticker_chime", "description": "Ding! chime when a sticker is awarded" },
+    { "id": "earcon_fanfare", "description": "Short fanfare at story completion" },
+    { "id": "sfx_phone_ring", "description": "Old-timey phone ring, 铃铃铃" },
+    { "id": "sfx_car_horn", "description": "Cheerful little-car beep-beep" },
+    { "id": "sfx_oven_ding", "description": "Oven timer ding" },
+    { "id": "sfx_party_horn", "description": "Birthday party horn toot" },
+    { "id": "sfx_confetti_pop", "description": "Confetti popper" },
+    { "id": "sfx_train_whistle", "description": "Toy train whistle" },
+    { "id": "sfx_farm_ambience", "description": "Soft farm morning bed: birds, distant animals (ambience channel)" },
+    { "id": "sfx_dog_sniff", "description": "Dog sniffing snuffles" },
+    { "id": "sfx_dog_bark", "description": "Friendly dog bark, 汪汪" },
+    { "id": "sfx_hen_cluck", "description": "Hen clucking, 咯咯哒" },
+    { "id": "sfx_horse_gallop", "description": "Light clip-clop gallop" },
+    { "id": "sfx_horse_neigh", "description": "Happy pony neigh" },
+    { "id": "sfx_duck_quack", "description": "Small duck quacks, 嘎嘎" },
+    { "id": "sfx_frog_croak", "description": "Little frog croak" },
+    { "id": "sfx_cheer", "description": "Small group cheer, kid-friendly" },
+    { "id": "sfx_shop_bell", "description": "Door bell ding-a-ling, 叮铃铃" },
+    { "id": "sfx_boiling", "description": "Pot bubbling, 咕嘟咕嘟" },
+    { "id": "sfx_blow_whoosh", "description": "Gentle blowing whoosh, 呼——" },
+    { "id": "sfx_cat_meow", "description": "Kitten meow, 喵" },
+    { "id": "sfx_cow_moo", "description": "Cow moo, 哞" },
+    { "id": "sfx_sheep_baa", "description": "Sheep baa, 咩" },
+    { "id": "sfx_pig_oink", "description": "Pig oink" },
+    { "id": "sfx_tiger_roar", "description": "Soft cartoon tiger roar (not scary)" },
+    { "id": "sfx_lion_roar", "description": "Soft cartoon lion roar (not scary)" },
+    { "id": "sfx_bird_tweet", "description": "Songbird tweet" }
+  ],
+  "animalEchoMap": {
+    "dog": "sfx_dog_bark",
+    "cat": "sfx_cat_meow",
+    "duck": "sfx_duck_quack",
+    "horse": "sfx_horse_neigh",
+    "chicken": "sfx_hen_cluck",
+    "cow": "sfx_cow_moo",
+    "sheep": "sfx_sheep_baa",
+    "pig": "sfx_pig_oink",
+    "tiger": "sfx_tiger_roar",
+    "lion": "sfx_lion_roar",
+    "bird": "sfx_bird_tweet",
+    "frog": "sfx_frog_croak"
+  },
+  "stories": [
+    {
+      "id": "choochoo-birthday-cake",
+      "title": "啾啾的生日蛋糕",
+      "englishTitle": "ChooChoo's Birthday Cake",
+      "subtitle": "你来决定啾啾先打电话给谁",
+      "coverEmoji": "🎂",
+      "estimatedMinutes": 8,
+      "vocabularyDomain": "friends, baking, celebration",
+      "startBeatId": "call-a-friend",
+      "typicalPathLength": 5,
+      "beats": [
+        {
+          "id": "call-a-friend",
+          "title": "先打电话给谁？",
+          "emoji": "📞",
+          "illustrationAsset": "scene_call_a_friend",
+          "audioCue": "scene_call_a_friend",
+          "narration": "今天是猫咪妙妙的生日。小龙啾啾想送她一个特别的惊喜：亲手做一个香香的生日蛋糕。可是，啾啾从来没有烤过蛋糕，他需要朋友们帮忙。啾啾有三个好朋友：小狐狸菲菲常常在厨房里做面包，小马燕丽最爱唱歌，盼盼有一辆黄色的小车，最喜欢开车。啾啾拿起电话，想了想——先打给谁呢？",
+          "englishNarration": "Today is Miaomiao the cat's birthday. ChooChoo the little dragon wants to surprise her with a homemade birthday cake. But ChooChoo has never baked a cake before, so he needs his friends. He has three good friends: Feifei the little fox often bakes bread in her kitchen, Yanli the pony loves to sing, and Panpan has a little yellow car and loves to drive. ChooChoo picks up the phone and thinks — who should he call first?",
+          "soundEffects": [],
+          "nextBeatId": null,
+          "checkpoint": {
+            "id": "call-a-friend",
+            "kind": "choice",
+            "promptType": "wh",
+            "question": "你想让啾啾先打电话给谁？小狐狸菲菲、小马燕丽，还是盼盼？",
+            "englishQuestion": "Who should ChooChoo call first? Feifei the fox, Yanli the pony, or Panpan?",
+            "audioCue": "question_call_a_friend",
+            "concepts": [
+              { "id": "fox", "zh": ["小狐狸", "狐狸", "菲菲", "小狐狸菲菲"], "en": ["fox", "little fox", "feifei"], "homophones": ["小湖里", "飞飞", "菲菲狐狸"] },
+              { "id": "pony", "zh": ["小马", "燕丽", "小马燕丽", "马"], "en": ["pony", "horse", "yanli"], "homophones": ["严丽", "艳丽", "眼里"] },
+              { "id": "panpan", "zh": ["盼盼"], "en": ["panpan", "pan pan"], "homophones": ["盘盘", "胖胖", "拍拍"] }
+            ],
+            "relatedTerms": ["打电话", "朋友", "帮忙"],
+            "knownWrongTerms": ["妙妙"],
+            "recast": "啾啾先打电话给小狐狸菲菲。",
+            "successLine": "好！我们打电话啦！",
+            "englishHint": "Say the name of the friend you want ChooChoo to call.",
+            "hints": [
+              { "level": 1, "text": "三个朋友都可以哦！你最喜欢谁？小狐狸、小马，还是盼盼？" },
+              { "level": 2, "text": "请说一个名字，比如：菲菲。" },
+              { "level": 3, "text": "You can pick any friend! 你可以说：小狐狸，小马，或者盼盼。" },
+              { "level": 4, "text": "我们一起打给小狐狸好不好？请跟我说：小狐狸。" }
+            ],
+            "branches": [
+              { "id": "route-fox", "conceptId": "fox", "nextBeatId": "fox-kitchen", "transitionLine": "好主意！我打电话给小狐狸菲菲！铃铃铃……", "recast": "啾啾先打电话给小狐狸菲菲。" },
+              { "id": "route-pony", "conceptId": "pony", "nextBeatId": "yanli-song", "transitionLine": "好主意！我打电话给小马燕丽！铃铃铃……", "recast": "啾啾先打电话给小马燕丽。" },
+              { "id": "route-panpan", "conceptId": "panpan", "nextBeatId": "panpan-pickup", "transitionLine": "好主意！我打电话给盼盼！铃铃铃……", "recast": "啾啾先打电话给盼盼。" }
+            ],
+            "defaultBranchId": "route-fox",
+            "reward": { "id": "reward-phone", "emoji": "📞", "zh": "电话", "pinyin": "diàn huà", "en": "telephone", "announcement": "叮！你得到了一个电话贴纸！", "sfxId": "earcon_sticker_chime" },
+            "vocabulary": [
+              { "id": "make-phone-call", "zh": "打电话", "pinyin": "dǎ diàn huà", "en": "make a phone call" },
+              { "id": "friend", "zh": "朋友", "pinyin": "péng yǒu", "en": "friend" }
+            ],
+            "successSfx": [{ "sfxId": "sfx_phone_ring", "timing": "onSuccess" }]
+          }
+        },
+        {
+          "id": "fox-kitchen",
+          "title": "菲菲的清单",
+          "emoji": "🦊",
+          "illustrationAsset": "scene_fox_kitchen",
+          "audioCue": "scene_fox_kitchen",
+          "narration": "小狐狸菲菲一听是做蛋糕，马上说：“我来啦！”她围上小围裙，带着她最宝贝的食谱书跑到啾啾家。菲菲翻开食谱，认真地写了一张材料清单：面粉、鸡蛋、牛奶，还有妙妙最喜欢的草莓。写完清单，她和啾啾又打电话请来了燕丽和盼盼。大家都到齐啦！",
+          "englishNarration": "As soon as Feifei the fox heard about the cake, she said, \"I'm coming!\" She put on her little apron, grabbed her treasured recipe book, and ran to ChooChoo's house. Feifei opened the recipe book and carefully wrote a shopping list: flour, eggs, milk, and Miaomiao's favorite strawberries. Then she and ChooChoo called Yanli and Panpan too. Now everyone was together!",
+          "soundEffects": [],
+          "nextBeatId": "gather-ingredients",
+          "checkpoint": {
+            "id": "fox-list",
+            "kind": "comprehension",
+            "promptType": "recall",
+            "question": "菲菲围上围裙以后，认真地写了什么？",
+            "englishQuestion": "After Feifei put on her apron, what did she carefully write?",
+            "audioCue": "question_fox_list",
+            "concepts": [
+              { "id": "list", "zh": ["清单", "材料清单", "单子", "购物清单"], "en": ["list", "shopping list", "ingredient list"], "homophones": ["青单", "清蛋"] }
+            ],
+            "relatedTerms": ["食谱", "围裙", "面粉", "鸡蛋", "牛奶", "草莓"],
+            "knownWrongTerms": ["信", "画", "作业"],
+            "recast": "菲菲认真地写了一张材料清单。",
+            "successLine": "答对了！菲菲写了一张材料清单，上面有做蛋糕要用的东西。",
+            "englishHint": "It is a piece of paper that tells you what to buy.",
+            "hints": [
+              { "level": 1, "text": "上面写着面粉、鸡蛋、牛奶……这张纸叫什么？" },
+              { "level": 2, "text": "请填空：菲菲写了一张材料清——。" },
+              { "level": 3, "text": "Feifei wrote a list. 你可以说：菲菲写了……" },
+              { "level": 4, "text": "请选择：菲菲写了清单，还是画了一幅画？请说完整答案。" }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": { "id": "reward-fox", "emoji": "🦊", "zh": "小狐狸徽章", "pinyin": "xiǎo hú li huī zhāng", "en": "little fox badge", "announcement": "叮！你得到了小狐狸徽章！菲菲说谢谢你打电话给她！", "sfxId": "earcon_sticker_chime" },
+            "vocabulary": [
+              { "id": "list", "zh": "清单", "pinyin": "qīng dān", "en": "list" },
+              { "id": "apron", "zh": "围裙", "pinyin": "wéi qún", "en": "apron" }
+            ],
+            "successSfx": []
+          }
+        },
+        {
+          "id": "yanli-song",
+          "title": "燕丽的歌声",
+          "emoji": "🐴",
+          "illustrationAsset": "scene_yanli_song",
+          "audioCue": "scene_yanli_song",
+          "narration": "小马燕丽接到电话，开心地说：“做蛋糕我不太会，可是我会唱歌呀！”她和啾啾一起走去小狐狸菲菲家请她帮忙。一路上，燕丽都在练习生日歌：“祝你生日快乐……”练了一遍又一遍，越唱越好听。到了菲菲家，菲菲带上食谱书，大家又接上盼盼。朋友们都到齐啦！",
+          "englishNarration": "When Yanli the pony got the call, she said happily, \"I'm not very good at baking — but I can sing!\" She walked with ChooChoo to Feifei the fox's house to ask for help. All along the way, Yanli practiced the birthday song: \"Happy birthday to you…\" She sang it again and again, and it got prettier every time. At Feifei's house, Feifei grabbed her recipe book, and then they picked up Panpan too. Now everyone was together!",
+          "soundEffects": [],
+          "nextBeatId": "gather-ingredients",
+          "checkpoint": {
+            "id": "yanli-practice",
+            "kind": "comprehension",
+            "promptType": "recall",
+            "question": "燕丽在路上，一遍又一遍练习什么歌？",
+            "englishQuestion": "What song did Yanli practice again and again on the way?",
+            "audioCue": "question_yanli_practice",
+            "concepts": [
+              { "id": "birthday-song", "zh": ["生日歌", "生日快乐", "祝你生日快乐"], "en": ["birthday song", "happy birthday"], "homophones": ["生日哥", "生日割"] }
+            ],
+            "relatedTerms": ["唱歌", "练习", "路上", "好听"],
+            "knownWrongTerms": ["儿歌", "国歌", "睡觉"],
+            "recast": "燕丽在路上练习生日歌。",
+            "successLine": "答对了！燕丽一路都在练习生日歌，唱得越来越好听。",
+            "englishHint": "It is the song we sing with a birthday cake.",
+            "hints": [
+              { "level": 1, "text": "祝你生日快乐——这首歌叫什么？" },
+              { "level": 2, "text": "请填空：燕丽在练习生——歌。" },
+              { "level": 3, "text": "She practiced the birthday song. 你可以说：燕丽在练习……" },
+              { "level": 4, "text": "请选择：燕丽在练习生日歌，还是在睡觉？请说完整答案。" }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": { "id": "reward-pony", "emoji": "🐴", "zh": "小马徽章", "pinyin": "xiǎo mǎ huī zhāng", "en": "pony badge", "announcement": "叮！你得到了小马徽章！燕丽说谢谢你打电话给她！", "sfxId": "earcon_sticker_chime" },
+            "vocabulary": [
+              { "id": "birthday-song", "zh": "生日歌", "pinyin": "shēng rì gē", "en": "birthday song" },
+              { "id": "practice", "zh": "练习", "pinyin": "liàn xí", "en": "practice" }
+            ],
+            "successSfx": []
+          }
+        },
+        {
+          "id": "panpan-pickup",
+          "title": "盼盼的小黄车",
+          "emoji": "🚗",
+          "illustrationAsset": "scene_panpan_pickup",
+          "audioCue": "scene_panpan_pickup",
+          "narration": "盼盼接到电话，马上说：“我开车来接大家！”嘀嘀——一辆黄色的小车开到了啾啾家门口。啾啾跳上车，盼盼先开到小狐狸菲菲家，菲菲抱着食谱书上了车；再开到小马燕丽家，燕丽也蹦蹦跳跳地上了车。小黄车装满了朋友，嘀嘀嘀地开回啾啾家。朋友们都到齐啦！",
+          "englishNarration": "When Panpan got the call, he said, \"I'll drive over and pick everyone up!\" Beep beep — a little yellow car pulled up at ChooChoo's door. ChooChoo hopped in. First Panpan drove to Feifei the fox's house, and Feifei climbed in hugging her recipe book. Then they drove to Yanli the pony's house, and Yanli bounced in too. The little yellow car was full of friends as it beeped its way back to ChooChoo's house. Now everyone was together!",
+          "soundEffects": [{ "sfxId": "sfx_car_horn", "timing": "beforeNarration" }],
+          "nextBeatId": "gather-ingredients",
+          "checkpoint": {
+            "id": "panpan-car-color",
+            "kind": "comprehension",
+            "promptType": "recall",
+            "question": "盼盼开的小车是什么颜色的？",
+            "englishQuestion": "What color is Panpan's little car?",
+            "audioCue": "question_panpan_car_color",
+            "concepts": [
+              { "id": "yellow", "zh": ["黄色", "黄", "黄色的"], "en": ["yellow"], "homophones": ["皇色", "王色"] }
+            ],
+            "relatedTerms": ["小车", "开车", "嘀嘀", "接"],
+            "knownWrongTerms": ["红色", "蓝色", "绿色", "黑色"],
+            "recast": "盼盼开的是一辆黄色的小车。",
+            "successLine": "答对了！盼盼的小车是黄色的，像小鸭子一样黄。",
+            "englishHint": "It is the color of a banana.",
+            "hints": [
+              { "level": 1, "text": "香蕉是什么颜色？盼盼的小车也是这个颜色。" },
+              { "level": 2, "text": "请填空：盼盼的小车是黄——的。" },
+              { "level": 3, "text": "The car is yellow. 你可以说：小车是……" },
+              { "level": 4, "text": "请选择：小车是黄色的，还是红色的？请说完整答案。" }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": { "id": "reward-panpan", "emoji": "🚗", "zh": "小黄车徽章", "pinyin": "xiǎo huáng chē huī zhāng", "en": "yellow car badge", "announcement": "叮！你得到了小黄车徽章！盼盼说谢谢你打电话给他！", "sfxId": "earcon_sticker_chime" },
+            "vocabulary": [
+              { "id": "yellow", "zh": "黄色", "pinyin": "huáng sè", "en": "yellow" },
+              { "id": "drive", "zh": "开车", "pinyin": "kāi chē", "en": "drive a car" }
+            ],
+            "successSfx": [{ "sfxId": "sfx_car_horn", "timing": "onSuccess" }]
+          }
+        },
+        {
+          "id": "gather-ingredients",
+          "title": "红红的草莓",
+          "emoji": "🍓",
+          "illustrationAsset": "scene_gather_ingredients",
+          "audioCue": "scene_gather_new",
+          "narration": "菲菲举起材料清单，念给大家听：面粉、鸡蛋、牛奶，还有妙妙最喜欢的草莓。大家分头准备。啾啾抱来面粉，燕丽小心地提来一篮鸡蛋。盼盼开着黄色小车去了果园，回来时车厢里装满了红红的草莓。朋友们把材料摆在桌上，一样一样对照清单，什么都没有忘记。",
+          "englishNarration": "Feifei held up the list and read it to everyone: flour, eggs, milk, and Miaomiao's favorite strawberries. Everyone helped. ChooChoo brought flour, Yanli carefully carried a basket of eggs, and Panpan drove the yellow car to the orchard. He came back with the car full of bright red strawberries. The friends laid everything on the table and checked the list, item by item. Nothing was forgotten.",
+          "soundEffects": [],
+          "nextBeatId": "mix-batter",
+          "checkpoint": {
+            "id": "panpan-strawberries",
+            "kind": "comprehension",
+            "promptType": "completion",
+            "question": "请帮我说完这句话：盼盼从果园带回来一车红红的草——？",
+            "englishQuestion": "Finish the sentence: Panpan brought back a car full of red, red straw—?",
+            "audioCue": "question_berries_completion",
+            "concepts": [
+              { "id": "strawberries", "zh": ["草莓", "莓", "红草莓", "一车草莓", "红红的草莓"], "en": ["strawberry", "strawberries", "berries"], "homophones": ["草梅", "草没"] }
+            ],
+            "relatedTerms": ["果园", "黄色小车", "水果", "材料", "车厢"],
+            "knownWrongTerms": ["面粉", "鸡蛋", "牛奶", "苹果"],
+            "recast": "盼盼开车带回来一车红红的草莓。",
+            "successLine": "没错！盼盼从果园带回了妙妙最喜欢的草莓。",
+            "englishHint": "It is a small red fruit.",
+            "hints": [
+              { "level": 1, "text": "这种水果红红的，表面有许多小点点。" },
+              { "level": 2, "text": "请填空：盼盼带回来一车草——。" },
+              { "level": 3, "text": "Pan Pan brought strawberries. 你可以说：盼盼带回了……" },
+              { "level": 4, "text": "请选择：盼盼带回草莓，还是面粉？请说完整答案。" }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": { "id": "reward-strawberry", "emoji": "🍓", "zh": "草莓", "pinyin": "cǎo méi", "en": "strawberry", "announcement": "叮！你得到了一颗草莓贴纸！", "sfxId": "earcon_sticker_chime" },
+            "vocabulary": [
+              { "id": "strawberry", "zh": "草莓", "pinyin": "cǎo méi", "en": "strawberry" },
+              { "id": "bring-back", "zh": "带回来", "pinyin": "dài huí lái", "en": "bring back" }
+            ],
+            "successSfx": []
+          }
+        },
+        {
+          "id": "mix-batter",
+          "title": "太稠的面糊",
+          "emoji": "🥣",
+          "illustrationAsset": "scene_mix_batter",
+          "audioCue": "scene_mix_together",
+          "narration": "菲菲把面粉和鸡蛋倒进大碗，啾啾用木勺搅呀搅。可是面糊越来越稠，木勺差点拔不出来。燕丽看了看清单，说还少了牛奶。她慢慢把牛奶倒进碗里，啾啾继续搅拌。一个倒牛奶，一个搅面糊，两个人配合得刚刚好。面糊终于变得又滑又香，菲菲把它放进烤箱。",
+          "englishNarration": "Feifei poured flour and eggs into a large bowl while ChooChoo stirred with a wooden spoon. The batter became so thick that the spoon almost got stuck. Yanli checked the list and noticed they still needed milk. She slowly poured milk into the bowl while ChooChoo kept stirring. Working together made the batter smooth and ready for the oven.",
+          "soundEffects": [],
+          "nextBeatId": "birthday-party",
+          "checkpoint": {
+            "id": "milk-and-stir",
+            "kind": "comprehension",
+            "promptType": "recall",
+            "question": "面糊太稠时，燕丽和啾啾一起做了什么？",
+            "englishQuestion": "What did Yanli and ChooChoo do when the batter was too thick?",
+            "audioCue": "question_milk_and_stir",
+            "concepts": [
+              { "id": "milk", "zh": ["倒牛奶", "倒了牛奶", "加牛奶", "加了牛奶", "放牛奶", "牛奶倒进去"], "en": ["add milk", "pour milk", "milk"], "homophones": ["到牛奶", "倒奶"] },
+              { "id": "stir", "zh": ["搅拌", "搅面糊", "用木勺搅", "继续搅"], "en": ["stir", "mix", "mix the batter"], "homophones": ["脚拌", "搅伴"] }
+            ],
+            "relatedTerms": ["面糊", "大碗", "木勺", "一起", "合作"],
+            "knownWrongTerms": ["加水", "扔掉", "不做了", "直接吃"],
+            "recast": "燕丽倒牛奶，啾啾继续搅拌面糊。",
+            "successLine": "说得很好！燕丽加牛奶，啾啾搅面糊，他们合作解决了问题。",
+            "englishHint": "One friend used milk, and the other used a spoon.",
+            "hints": [
+              { "level": 1, "text": "燕丽拿着牛奶，啾啾拿着木勺。想想他们各自做了什么。" },
+              { "level": 2, "text": "请填空：燕丽倒牛奶，啾啾继续——面糊。" },
+              { "level": 3, "text": "Yan Li poured milk, and ChooChoo stirred. 你可以说：燕丽……啾啾……" },
+              { "level": 4, "text": "请选择：他们加牛奶并搅拌，还是把面糊扔掉？请说完整答案。" }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": { "id": "reward-bowl", "emoji": "🥣", "zh": "面糊碗", "pinyin": "miàn hú wǎn", "en": "batter bowl", "announcement": "叮！你得到了一个面糊碗贴纸！", "sfxId": "earcon_sticker_chime" },
+            "vocabulary": [
+              { "id": "pour-milk", "zh": "倒牛奶", "pinyin": "dào niú nǎi", "en": "pour milk" },
+              { "id": "stir", "zh": "搅拌", "pinyin": "jiǎo bàn", "en": "stir" }
+            ],
+            "successSfx": [{ "sfxId": "sfx_oven_ding", "timing": "onSuccess" }]
+          }
+        },
+        {
+          "id": "birthday-party",
+          "title": "一起唱生日歌",
+          "emoji": "🎂",
+          "illustrationAsset": "scene_birthday_party",
+          "audioCue": "scene_birthday_surprise",
+          "narration": "蛋糕烤好了，菲菲在上面摆出一圈草莓。盼盼关上灯，燕丽轻轻弹起生日歌，大家躲在桌子后面。妙妙推门进来时，啾啾点亮小蜡烛，朋友们一起跳出来唱生日快乐。妙妙惊喜得眼睛亮亮的。她许下愿望，然后把蛋糕分给每一个朋友。啾啾觉得，最甜的不只是蛋糕，还有大家一起准备惊喜的心意。",
+          "englishNarration": "The cake was ready, and Feifei decorated it with a ring of strawberries. Panpan turned off the lights, Yanli softly began the birthday song, and everyone hid behind the table. When Miaomiao opened the door, ChooChoo lit the candles and the friends jumped out to sing Happy Birthday. Miaomiao's eyes went bright with surprise. She made a wish and shared the cake with every friend. The sweetest part wasn't just the cake — it was preparing the surprise together.",
+          "soundEffects": [{ "sfxId": "sfx_party_horn", "timing": "afterNarration" }],
+          "nextBeatId": null,
+          "checkpoint": {
+            "id": "your-birthday-cake",
+            "kind": "open",
+            "promptType": "distancing",
+            "question": "妙妙的蛋糕上放了草莓。你过生日的时候，最想在蛋糕上放什么？",
+            "englishQuestion": "Miaomiao's cake had strawberries on top. What would you put on YOUR birthday cake?",
+            "audioCue": "question_your_birthday_cake",
+            "concepts": [
+              { "id": "any-topping", "zh": ["草莓", "巧克力", "水果", "蓝莓", "樱桃", "糖", "奶油"], "en": ["strawberry", "chocolate", "fruit", "blueberry", "cherry", "candy", "cream"], "homophones": [] }
+            ],
+            "relatedTerms": ["蛋糕", "生日", "放", "喜欢"],
+            "knownWrongTerms": [],
+            "recast": "我想在蛋糕上放……",
+            "successLine": "哇，听起来一定很好吃！下次啾啾也想尝一口你的蛋糕。",
+            "englishHint": "Tell me anything yummy you like on a cake!",
+            "hints": [
+              { "level": 1, "text": "什么都可以哦！草莓？巧克力？还是别的好吃的？" },
+              { "level": 2, "text": "请说：我想放……然后说一个你喜欢的东西。" },
+              { "level": 3, "text": "Anything you like! 你可以说：我想放草莓。" },
+              { "level": 4, "text": "我们一起说好不好？我想在蛋糕上放草莓。" }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": { "id": "reward-cake", "emoji": "🎂", "zh": "生日蛋糕", "pinyin": "shēng rì dàn gāo", "en": "birthday cake", "announcement": "叮！你得到了生日蛋糕贴纸！五张贴纸都集齐啦！", "sfxId": "earcon_sticker_chime" },
+            "vocabulary": [
+              { "id": "cake", "zh": "蛋糕", "pinyin": "dàn gāo", "en": "cake" },
+              { "id": "birthday", "zh": "生日", "pinyin": "shēng rì", "en": "birthday" }
+            ],
+            "successSfx": [{ "sfxId": "sfx_confetti_pop", "timing": "onSuccess" }]
+          }
+        }
+      ]
+    },
+    {
+      "id": "choochoo-farm-duckling",
+      "title": "啾啾去农场",
+      "englishTitle": "ChooChoo at the Farm",
+      "subtitle": "小鸭子嘎嘎不见了，你来选谁帮忙找",
+      "coverEmoji": "🐤",
+      "estimatedMinutes": 8,
+      "vocabularyDomain": "animals, animal sounds, colors",
+      "startBeatId": "farm-arrival",
+      "typicalPathLength": 5,
+      "beats": [
+        {
+          "id": "farm-arrival",
+          "title": "先请谁帮忙？",
+          "emoji": "🚜",
+          "illustrationAsset": "scene_farm_arrival",
+          "audioCue": "scene_farm_arrival",
+          "narration": "今天，啾啾坐着小火车去山羊爷爷的农场玩。农场里有小狗汪汪，她的鼻子最灵；有母鸡咯咯，她认识院子里的每一个角落；还有小马驹达达，他跑得最快。可是，山羊爷爷很着急：小鸭子嘎嘎不见了！快吃晚饭了，嘎嘎会在哪里呢？啾啾想先请一个朋友帮忙。",
+          "englishNarration": "Today ChooChoo rode the little train to Grandpa Goat's farm. On the farm lives Wangwang the dog, whose nose can smell anything; Gege the hen, who knows every corner of the yard; and Dada the little foal, who runs the fastest of all. But Grandpa Goat was worried: Gaga the duckling was missing! Dinner was almost ready — where could Gaga be? ChooChoo wanted to ask one friend for help first.",
+          "soundEffects": [
+            { "sfxId": "sfx_train_whistle", "timing": "beforeNarration" },
+            { "sfxId": "sfx_farm_ambience", "timing": "beforeNarration" }
+          ],
+          "nextBeatId": null,
+          "checkpoint": {
+            "id": "farm-helper",
+            "kind": "choice",
+            "promptType": "wh",
+            "question": "你想让啾啾先请谁帮忙找嘎嘎？小狗汪汪、母鸡咯咯，还是小马驹达达？",
+            "englishQuestion": "Who should ChooChoo ask for help first? Wangwang the dog, Gege the hen, or Dada the foal?",
+            "audioCue": "question_farm_helper",
+            "concepts": [
+              { "id": "dog", "zh": ["小狗", "汪汪", "狗"], "en": ["dog", "puppy", "wangwang"], "homophones": ["旺旺", "王王"] },
+              { "id": "hen", "zh": ["母鸡", "咯咯", "鸡"], "en": ["hen", "chicken", "gege"], "homophones": ["哥哥", "格格"] },
+              { "id": "foal", "zh": ["小马驹", "达达", "小马", "马"], "en": ["foal", "pony", "horse", "dada"], "homophones": ["打打", "大大"] }
+            ],
+            "relatedTerms": ["帮忙", "找", "农场", "小鸭子"],
+            "knownWrongTerms": ["山羊爷爷"],
+            "recast": "啾啾先请小狗汪汪帮忙。",
+            "successLine": "好！我们出发去找嘎嘎！",
+            "englishHint": "Say the name of the animal friend you want to help.",
+            "hints": [
+              { "level": 1, "text": "三个朋友都可以哦！你想要灵灵的鼻子、聪明的母鸡，还是飞快的小马？" },
+              { "level": 2, "text": "请说一个名字，比如：汪汪。" },
+              { "level": 3, "text": "You can pick any friend! 你可以说：小狗，母鸡，或者小马。" },
+              { "level": 4, "text": "我们一起请小狗汪汪好不好？请跟我说：小狗。" }
+            ],
+            "branches": [
+              { "id": "route-dog", "conceptId": "dog", "nextBeatId": "dog-nose", "transitionLine": "好主意！汪汪，汪汪！小狗跑过来啦！", "recast": "啾啾先请小狗汪汪帮忙。" },
+              { "id": "route-hen", "conceptId": "hen", "nextBeatId": "hen-yard", "transitionLine": "好主意！咯咯哒，咯咯哒！母鸡拍着翅膀过来啦！", "recast": "啾啾先请母鸡咯咯帮忙。" },
+              { "id": "route-foal", "conceptId": "foal", "nextBeatId": "foal-run", "transitionLine": "好主意！哒哒哒！小马驹跑过来啦！", "recast": "啾啾先请小马驹达达帮忙。" }
+            ],
+            "defaultBranchId": "route-dog",
+            "reward": { "id": "reward-tractor", "emoji": "🚜", "zh": "小拖拉机", "pinyin": "xiǎo tuō lā jī", "en": "little tractor", "announcement": "叮！你得到了一个小拖拉机贴纸！", "sfxId": "earcon_sticker_chime" },
+            "vocabulary": [
+              { "id": "help", "zh": "帮忙", "pinyin": "bāng máng", "en": "help" },
+              { "id": "farm", "zh": "农场", "pinyin": "nóng chǎng", "en": "farm" }
+            ],
+            "successSfx": []
+          }
+        },
+        {
+          "id": "dog-nose",
+          "title": "汪汪的鼻子",
+          "emoji": "🐶",
+          "illustrationAsset": "scene_dog_nose",
+          "audioCue": "scene_dog_nose",
+          "narration": "小狗汪汪竖起耳朵，说：“交给我吧！”她把鼻子贴在地上，闻一闻，闻一闻。“我闻到啦！是小鸭子的味道！”汪汪顺着味道走过菜园，一直走到池塘边的大石头旁。她朝着池塘汪汪叫了两声：线索就在这里！",
+          "englishNarration": "Wangwang the dog perked up her ears and said, \"Leave it to me!\" She pressed her nose to the ground — sniff, sniff. \"I smell it! That's the duckling's smell!\" Wangwang followed the smell past the vegetable garden, all the way to the big rock by the pond. She barked twice toward the pond: the clue was right here!",
+          "soundEffects": [
+            { "sfxId": "sfx_dog_sniff", "timing": "afterNarration" }
+          ],
+          "nextBeatId": "pond-search",
+          "checkpoint": {
+            "id": "dog-smell",
+            "kind": "comprehension",
+            "promptType": "recall",
+            "question": "汪汪用什么找到了小鸭子的味道？",
+            "englishQuestion": "What did Wangwang use to find the duckling's smell?",
+            "audioCue": "question_dog_smell",
+            "concepts": [
+              { "id": "nose", "zh": ["鼻子", "用鼻子", "闻", "闻一闻", "用鼻子闻"], "en": ["nose", "smell", "sniff"], "homophones": ["比子", "闻闻"] }
+            ],
+            "relatedTerms": ["味道", "菜园", "池塘", "大石头"],
+            "knownWrongTerms": ["眼睛", "耳朵", "尾巴"],
+            "recast": "汪汪用鼻子闻到了小鸭子的味道。",
+            "successLine": "答对了！汪汪的鼻子最灵，一下就闻到了小鸭子的味道。",
+            "englishHint": "It is on your face, and you smell with it.",
+            "hints": [
+              { "level": 1, "text": "汪汪把它贴在地上，闻一闻，闻一闻。它是什么？" },
+              { "level": 2, "text": "请填空：汪汪用鼻——闻味道。" },
+              { "level": 3, "text": "She used her nose. 你可以说：汪汪用……" },
+              { "level": 4, "text": "请选择：汪汪用鼻子，还是用尾巴？请说完整答案。" }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": { "id": "reward-dog", "emoji": "🐶", "zh": "小狗徽章", "pinyin": "xiǎo gǒu huī zhāng", "en": "dog badge", "announcement": "叮！你得到了小狗徽章！汪汪说：汪汪，谢谢你！", "sfxId": "earcon_sticker_chime" },
+            "vocabulary": [
+              { "id": "nose", "zh": "鼻子", "pinyin": "bí zi", "en": "nose" },
+              { "id": "smell", "zh": "闻", "pinyin": "wén", "en": "smell" }
+            ],
+            "successSfx": [{ "sfxId": "sfx_dog_bark", "timing": "onSuccess" }]
+          }
+        },
+        {
+          "id": "hen-yard",
+          "title": "咯咯的发现",
+          "emoji": "🐔",
+          "illustrationAsset": "scene_hen_yard",
+          "audioCue": "scene_hen_yard",
+          "narration": "母鸡咯咯拍拍翅膀说：“院子里的每个角落我都认识！”她先看了看鸡窝后面，没有；又看了看大南瓜下面，也没有。忽然，咯咯在泥地上发现了一串小小的、湿湿的脚印。“咯咯哒！是小鸭子的脚印！”脚印一步一步，一直指向池塘。",
+          "englishNarration": "Gege the hen flapped her wings and said, \"I know every corner of this yard!\" She checked behind the henhouse — nothing. She peeked under the big pumpkin — nothing. Then suddenly, Gege spotted a trail of tiny wet footprints in the mud. \"Cluck-cluck! Duckling footprints!\" Step by step, the footprints pointed straight to the pond.",
+          "soundEffects": [
+            { "sfxId": "sfx_hen_cluck", "timing": "afterNarration" }
+          ],
+          "nextBeatId": "pond-search",
+          "checkpoint": {
+            "id": "hen-footprints",
+            "kind": "comprehension",
+            "promptType": "recall",
+            "question": "咯咯在泥地上发现了什么？",
+            "englishQuestion": "What did Gege find in the mud?",
+            "audioCue": "question_hen_footprints",
+            "concepts": [
+              { "id": "footprints", "zh": ["脚印", "小脚印", "湿湿的脚印", "一串脚印"], "en": ["footprints", "footprint", "tracks"], "homophones": ["脚映", "叫印"] }
+            ],
+            "relatedTerms": ["泥地", "鸡窝", "南瓜", "池塘"],
+            "knownWrongTerms": ["鸡蛋", "南瓜", "虫子"],
+            "recast": "咯咯在泥地上发现了小鸭子的脚印。",
+            "successLine": "答对了！小小的湿脚印，一步一步指向池塘。",
+            "englishHint": "They are little marks your feet leave in the mud.",
+            "hints": [
+              { "level": 1, "text": "小鸭子走过泥地，会留下小小的什么？" },
+              { "level": 2, "text": "请填空：咯咯发现了小鸭子的脚——。" },
+              { "level": 3, "text": "She found footprints. 你可以说：咯咯发现了……" },
+              { "level": 4, "text": "请选择：咯咯发现了脚印，还是鸡蛋？请说完整答案。" }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": { "id": "reward-hen", "emoji": "🐔", "zh": "母鸡徽章", "pinyin": "mǔ jī huī zhāng", "en": "hen badge", "announcement": "叮！你得到了母鸡徽章！咯咯说：咯咯哒，谢谢你！", "sfxId": "earcon_sticker_chime" },
+            "vocabulary": [
+              { "id": "footprint", "zh": "脚印", "pinyin": "jiǎo yìn", "en": "footprint" },
+              { "id": "find", "zh": "发现", "pinyin": "fā xiàn", "en": "find, discover" }
+            ],
+            "successSfx": [{ "sfxId": "sfx_hen_cluck", "timing": "onSuccess" }]
+          }
+        },
+        {
+          "id": "foal-run",
+          "title": "达达快快跑",
+          "emoji": "🐴",
+          "illustrationAsset": "scene_foal_run",
+          "audioCue": "scene_foal_run",
+          "narration": "小马驹达达刨刨蹄子说：“我跑得快，我去找！”哒哒哒、哒哒哒，达达绕着农场跑了一大圈：谷仓那里没有，果树下面也没有。跑到池塘边的时候，达达忽然停住了——芦苇丛里，有一个黄色的小东西动了一下！“是黄色的！”达达大声喊。",
+          "englishNarration": "Dada the foal pawed the ground and said, \"I'm fast — I'll go look!\" Clip-clop, clip-clop — Dada ran a big loop around the whole farm: nothing at the barn, nothing under the fruit trees. But by the pond, Dada suddenly stopped — in the reeds, something small and yellow moved! \"It's yellow!\" Dada shouted.",
+          "soundEffects": [
+            { "sfxId": "sfx_horse_gallop", "timing": "afterNarration" }
+          ],
+          "nextBeatId": "pond-search",
+          "checkpoint": {
+            "id": "foal-yellow",
+            "kind": "comprehension",
+            "promptType": "recall",
+            "question": "达达在芦苇丛里看到了什么颜色的小东西？",
+            "englishQuestion": "In the reeds, Dada saw something small. What color was it?",
+            "audioCue": "question_foal_yellow",
+            "concepts": [
+              { "id": "yellow", "zh": ["黄色", "黄", "黄色的"], "en": ["yellow"], "homophones": ["皇色", "王色"] }
+            ],
+            "relatedTerms": ["芦苇", "池塘", "谷仓", "果树"],
+            "knownWrongTerms": ["红色", "蓝色", "绿色", "黑色"],
+            "recast": "达达看到了一个黄色的小东西。",
+            "successLine": "答对了！黄色的小东西——会是谁呢？我们去池塘看看！",
+            "englishHint": "It is the color of a little duckling.",
+            "hints": [
+              { "level": 1, "text": "小鸭子的羽毛是什么颜色的？达达看到的就是这个颜色。" },
+              { "level": 2, "text": "请填空：达达看到一个黄——的小东西。" },
+              { "level": 3, "text": "It was yellow. 你可以说：是黄色的。" },
+              { "level": 4, "text": "请选择：是黄色的，还是蓝色的？请说完整答案。" }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": { "id": "reward-foal", "emoji": "🐴", "zh": "小马徽章", "pinyin": "xiǎo mǎ huī zhāng", "en": "pony badge", "announcement": "叮！你得到了小马徽章！达达说：谢谢你，我们快到啦！", "sfxId": "earcon_sticker_chime" },
+            "vocabulary": [
+              { "id": "yellow", "zh": "黄色", "pinyin": "huáng sè", "en": "yellow" },
+              { "id": "run", "zh": "跑", "pinyin": "pǎo", "en": "run" }
+            ],
+            "successSfx": [{ "sfxId": "sfx_horse_neigh", "timing": "onSuccess" }]
+          }
+        },
+        {
+          "id": "pond-search",
+          "title": "荷叶后面的声音",
+          "emoji": "🍃",
+          "illustrationAsset": "scene_pond_search",
+          "audioCue": "scene_pond_search",
+          "narration": "大家都来到了池塘边。池塘里荷叶圆圆，风轻轻吹。忽然，最大的那片荷叶后面，传来了小小的声音：“嘎……嘎……”啾啾把耳朵凑过去，仔细听——声音越来越近，越来越响。是谁在叫呢？大家屏住呼吸，轻轻地把荷叶掀开一条小缝。",
+          "englishNarration": "Everyone gathered at the pond. Round lotus leaves floated on the water, and the wind blew softly. Suddenly, from behind the biggest lotus leaf came a tiny sound: \"Quack… quack…\" ChooChoo leaned in and listened carefully — the sound came closer and louder. Who could it be? Everyone held their breath and gently lifted the edge of the leaf.",
+          "soundEffects": [
+            { "sfxId": "sfx_duck_quack", "timing": "afterNarration" }
+          ],
+          "nextBeatId": "bring-home",
+          "checkpoint": {
+            "id": "duck-sound",
+            "kind": "comprehension",
+            "promptType": "completion",
+            "question": "听！小鸭子在荷叶后面叫：嘎——？请帮我学着说完。",
+            "englishQuestion": "Listen! The duckling is calling behind the leaf: qua—? Finish the sound!",
+            "audioCue": "question_duck_sound",
+            "concepts": [
+              { "id": "quack", "zh": ["嘎", "嘎嘎", "嘎嘎嘎"], "en": ["quack", "quack quack"], "homophones": ["呱", "呱呱", "家家"] }
+            ],
+            "relatedTerms": ["荷叶", "池塘", "声音", "小鸭子"],
+            "knownWrongTerms": ["汪汪", "喵喵", "哞哞"],
+            "recast": "小鸭子在叫：嘎嘎！",
+            "successLine": "对啦！嘎嘎！小鸭子嘎嘎就躲在荷叶后面，正在和大家玩捉迷藏呢！",
+            "englishHint": "It is the sound a duck makes: quack!",
+            "hints": [
+              { "level": 1, "text": "小鸭子是这样叫的：嘎嘎、嘎嘎！你也学一学？" },
+              { "level": 2, "text": "请跟我说：嘎——嘎。" },
+              { "level": 3, "text": "A duck says quack! 用中文说就是：嘎嘎。" },
+              { "level": 4, "text": "我们一起来！小鸭子叫：嘎嘎！请跟我说：嘎嘎。" }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": { "id": "reward-lotus", "emoji": "🍃", "zh": "荷叶", "pinyin": "hé yè", "en": "lotus leaf", "announcement": "叮！你得到了一片荷叶贴纸！", "sfxId": "earcon_sticker_chime" },
+            "vocabulary": [
+              { "id": "quack", "zh": "嘎嘎", "pinyin": "gā gā", "en": "quack" },
+              { "id": "listen", "zh": "听", "pinyin": "tīng", "en": "listen" }
+            ],
+            "successSfx": [{ "sfxId": "sfx_duck_quack", "timing": "onSuccess" }]
+          }
+        },
+        {
+          "id": "bring-home",
+          "title": "抱嘎嘎回家",
+          "emoji": "🧣",
+          "illustrationAsset": "scene_bring_home",
+          "audioCue": "scene_bring_home",
+          "narration": "原来，嘎嘎追着一只小青蛙跑到了池塘边，玩着玩着就找不到回家的路了。她又冷又饿，羽毛都湿了。啾啾轻轻把嘎嘎抱起来，用围巾把她裹得暖暖的。朋友们在前面带路，大家一起把嘎嘎带回家。山羊爷爷看到嘎嘎，开心得胡子都翘起来了！",
+          "englishNarration": "It turned out Gaga had chased a little frog all the way to the pond, and lost her way home while playing. She was cold and hungry, and her feathers were wet. ChooChoo gently picked Gaga up and wrapped her snug in his scarf. The friends led the way, and together everyone brought Gaga home. When Grandpa Goat saw Gaga, he was so happy his beard curled right up!",
+          "soundEffects": [
+            { "sfxId": "sfx_frog_croak", "timing": "beforeNarration" }
+          ],
+          "nextBeatId": "farm-dinner",
+          "checkpoint": {
+            "id": "help-gaga",
+            "kind": "comprehension",
+            "promptType": "recall",
+            "question": "啾啾和朋友们是怎么帮小鸭子嘎嘎的？",
+            "englishQuestion": "How did ChooChoo and the friends help Gaga the duckling?",
+            "audioCue": "question_help_gaga",
+            "concepts": [
+              { "id": "carry", "zh": ["抱起来", "抱", "抱抱", "裹起来", "抱着她"], "en": ["picked up", "carried", "hug", "wrapped"], "homophones": ["报", "包起来"] },
+              { "id": "bring-home", "zh": ["带回家", "带她回家", "送回家", "回家"], "en": ["brought home", "took home", "go home"], "homophones": ["带回价"] }
+            ],
+            "relatedTerms": ["围巾", "暖暖的", "青蛙", "山羊爷爷"],
+            "knownWrongTerms": ["不管她", "扔下她"],
+            "recast": "啾啾把嘎嘎抱起来，大家一起把她带回家。",
+            "successLine": "说得很好！啾啾抱起嘎嘎，朋友们一起把她带回了家。",
+            "englishHint": "First they picked her up, then they took her somewhere warm.",
+            "hints": [
+              { "level": 1, "text": "啾啾用手把嘎嘎怎么样？然后大家把她送去哪里？" },
+              { "level": 2, "text": "请填空：啾啾把嘎嘎抱——来，带她回——。" },
+              { "level": 3, "text": "They carried her and brought her home. 你可以说：抱起来……带回家……" },
+              { "level": 4, "text": "请选择：他们把嘎嘎抱回家，还是留在池塘？请说完整答案。" }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": { "id": "reward-scarf", "emoji": "🧣", "zh": "小围巾", "pinyin": "xiǎo wéi jīn", "en": "little scarf", "announcement": "叮！你得到了一条暖暖的小围巾贴纸！", "sfxId": "earcon_sticker_chime" },
+            "vocabulary": [
+              { "id": "hug-carry", "zh": "抱", "pinyin": "bào", "en": "hug, carry" },
+              { "id": "go-home", "zh": "回家", "pinyin": "huí jiā", "en": "go home" }
+            ],
+            "successSfx": [{ "sfxId": "sfx_cheer", "timing": "onSuccess" }]
+          }
+        },
+        {
+          "id": "farm-dinner",
+          "title": "农场的晚饭",
+          "emoji": "🌽",
+          "illustrationAsset": "scene_farm_dinner",
+          "audioCue": "scene_farm_dinner",
+          "narration": "晚饭时间到啦！长长的木桌上摆满了好吃的：金黄的玉米、甜甜的南瓜汤，还有给嘎嘎准备的小鱼干。动物朋友们唱起了歌：汪汪汪！咯咯哒！哒哒哒！嘎嘎嘎！农场的夜晚，到处都是开心的声音。啾啾也想认识你喜欢的小动物呢。",
+          "englishNarration": "Dinnertime! The long wooden table was covered with good things: golden corn, sweet pumpkin soup, and little dried fish just for Gaga. The animal friends sang together: Woof-woof! Cluck-cluck! Clip-clop! Quack-quack! That night, the farm was full of happy sounds. And ChooChoo wanted to know about YOUR favorite animal, too.",
+          "soundEffects": [
+            { "sfxId": "sfx_farm_ambience", "timing": "beforeNarration" }
+          ],
+          "nextBeatId": null,
+          "checkpoint": {
+            "id": "your-animal",
+            "kind": "open",
+            "promptType": "distancing",
+            "question": "你最喜欢什么小动物？它是怎么叫的？学给我听吧！",
+            "englishQuestion": "What's YOUR favorite animal? What sound does it make? Show me!",
+            "audioCue": "question_your_animal",
+            "concepts": [
+              { "id": "dog", "zh": ["小狗", "狗", "汪汪"], "en": ["dog", "puppy", "woof"], "homophones": [] },
+              { "id": "cat", "zh": ["小猫", "猫", "喵"], "en": ["cat", "kitten", "meow"], "homophones": [] },
+              { "id": "duck", "zh": ["小鸭", "鸭子", "嘎嘎"], "en": ["duck", "quack"], "homophones": [] },
+              { "id": "horse", "zh": ["小马", "马"], "en": ["horse", "pony"], "homophones": [] },
+              { "id": "chicken", "zh": ["小鸡", "鸡", "母鸡"], "en": ["chicken", "hen", "chick"], "homophones": [] },
+              { "id": "cow", "zh": ["牛", "奶牛", "哞"], "en": ["cow", "moo"], "homophones": [] },
+              { "id": "sheep", "zh": ["羊", "小羊", "咩"], "en": ["sheep", "lamb", "baa"], "homophones": [] },
+              { "id": "pig", "zh": ["猪", "小猪"], "en": ["pig", "piggy", "oink"], "homophones": [] },
+              { "id": "tiger", "zh": ["老虎"], "en": ["tiger"], "homophones": [] },
+              { "id": "lion", "zh": ["狮子"], "en": ["lion"], "homophones": [] },
+              { "id": "bird", "zh": ["小鸟", "鸟"], "en": ["bird", "birdie", "tweet"], "homophones": [] },
+              { "id": "frog", "zh": ["青蛙", "呱呱"], "en": ["frog", "ribbit"], "homophones": [] }
+            ],
+            "relatedTerms": ["喜欢", "动物", "叫"],
+            "knownWrongTerms": [],
+            "recast": "我最喜欢……它是这样叫的……",
+            "successLine": "哇，它的叫声真好听！谢谢你学给啾啾听！",
+            "englishHint": "Any animal you like! Tell me its name and make its sound.",
+            "hints": [
+              { "level": 1, "text": "什么动物都可以哦！小狗？小猫？还是大老虎？" },
+              { "level": 2, "text": "请说：我喜欢……然后说一个小动物。" },
+              { "level": 3, "text": "Any animal! 你可以说：我喜欢小狗，汪汪！" },
+              { "level": 4, "text": "我们一起说好不好？我喜欢小鸭子，嘎嘎嘎！" }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": { "id": "reward-gaga", "emoji": "🐤", "zh": "小鸭子嘎嘎", "pinyin": "xiǎo yā zi gā gā", "en": "Gaga the duckling", "announcement": "叮！你得到了小鸭子嘎嘎贴纸！五张贴纸都集齐啦！", "sfxId": "earcon_sticker_chime" },
+            "vocabulary": [
+              { "id": "animal", "zh": "动物", "pinyin": "dòng wù", "en": "animal" },
+              { "id": "like", "zh": "喜欢", "pinyin": "xǐ huān", "en": "like" }
+            ],
+            "successSfx": [{ "sfxId": "sfx_cheer", "timing": "onSuccess" }]
+          }
+        }
+      ]
+    },
+    {
+      "id": "choochoo-noodle-shop",
+      "title": "啾啾的小面馆",
+      "englishTitle": "ChooChoo's Little Noodle Shop",
+      "subtitle": "第一位客人来了，你来决定做什么菜",
+      "coverEmoji": "🍜",
+      "estimatedMinutes": 7,
+      "vocabularyDomain": "food, counting 1-3, hot and cold",
+      "startBeatId": "shop-opening",
+      "typicalPathLength": 5,
+      "beats": [
+        {
+          "id": "shop-opening",
+          "title": "第一位客人",
+          "emoji": "🔔",
+          "illustrationAsset": "scene_shop_opening",
+          "audioCue": "scene_shop_opening",
+          "narration": "今天，啾啾和熊猫奶奶的小面馆开张啦！叮铃铃，门上的小铃铛响了——第一位客人来了！是小兔子蹦蹦。蹦蹦揉着肚子说：“我好饿呀！”墙上的菜单有两样好吃的：热乎乎的汤面，还有胖乎乎的饺子。做哪一样呢？啾啾系上小围裙，等你来决定！",
+          "englishNarration": "Today, ChooChoo and Grandma Panda opened their little noodle shop! Ding-a-ling — the bell on the door rang. The very first customer! It was Bengbeng the bunny. Bengbeng rubbed her tummy and said, \"I'm SO hungry!\" The menu on the wall had two yummy things: steaming noodle soup and plump little dumplings. Which one should they make? ChooChoo tied on his apron and waited for you to decide!",
+          "soundEffects": [
+            { "sfxId": "sfx_shop_bell", "timing": "beforeNarration" }
+          ],
+          "nextBeatId": null,
+          "checkpoint": {
+            "id": "pick-dish",
+            "kind": "choice",
+            "promptType": "wh",
+            "question": "你想让啾啾先做什么？长长的面条，还是胖胖的饺子？",
+            "englishQuestion": "What should ChooChoo make first? Long noodles, or plump dumplings?",
+            "audioCue": "question_pick_dish",
+            "concepts": [
+              { "id": "noodles", "zh": ["面条", "汤面", "面", "拉面"], "en": ["noodles", "noodle", "noodle soup"], "homophones": ["棉条", "年糕面"] },
+              { "id": "dumplings", "zh": ["饺子", "水饺"], "en": ["dumplings", "dumpling"], "homophones": ["脚子", "叫子"] }
+            ],
+            "relatedTerms": ["菜单", "客人", "饿", "好吃"],
+            "knownWrongTerms": ["米饭", "包子"],
+            "recast": "啾啾先做长长的面条。",
+            "successLine": "好！马上开始做！",
+            "englishHint": "Say noodles (miàn tiáo) or dumplings (jiǎo zi).",
+            "hints": [
+              { "level": 1, "text": "两样都很好吃哦！你想吃长长的，还是胖胖的？" },
+              { "level": 2, "text": "请说一个名字：面条，或者饺子。" },
+              { "level": 3, "text": "Noodles or dumplings? 你可以说：面条，或者饺子。" },
+              { "level": 4, "text": "我们先做面条好不好？请跟我说：面条。" }
+            ],
+            "branches": [
+              { "id": "route-noodles", "conceptId": "noodles", "nextBeatId": "make-noodles", "transitionLine": "好嘞！一碗长长的汤面，马上就来！", "recast": "啾啾先做长长的面条。" },
+              { "id": "route-dumplings", "conceptId": "dumplings", "nextBeatId": "make-dumplings", "transitionLine": "好嘞！胖胖的饺子，马上就来！", "recast": "啾啾先做胖胖的饺子。" }
+            ],
+            "defaultBranchId": "route-noodles",
+            "reward": { "id": "reward-bell", "emoji": "🔔", "zh": "小铃铛", "pinyin": "xiǎo líng dāng", "en": "little bell", "announcement": "叮！你得到了一个小铃铛贴纸！", "sfxId": "earcon_sticker_chime" },
+            "vocabulary": [
+              { "id": "noodles", "zh": "面条", "pinyin": "miàn tiáo", "en": "noodles" },
+              { "id": "dumplings", "zh": "饺子", "pinyin": "jiǎo zi", "en": "dumplings" }
+            ],
+            "successSfx": [{ "sfxId": "sfx_shop_bell", "timing": "onSuccess" }]
+          }
+        },
+        {
+          "id": "make-noodles",
+          "title": "拉长长的面条",
+          "emoji": "🍜",
+          "illustrationAsset": "scene_make_noodles",
+          "audioCue": "scene_make_noodles",
+          "narration": "熊猫奶奶把面团揉呀揉，啾啾帮忙拉面条。拉呀拉，拉呀拉，面条变得长长的，像小兔子的跳绳一样长！啾啾把面条放进锅里，咕嘟咕嘟，再放上绿绿的青菜和金黄的玉米。热气飘出来，香喷喷的汤面做好啦！",
+          "englishNarration": "Grandma Panda kneaded the dough, and ChooChoo helped pull the noodles. Pull and pull, pull and pull — the noodles grew looong, as long as a bunny's jump rope! ChooChoo slid them into the pot — bubble, bubble — and added green veggies and golden corn. Steam floated up: the fragrant noodle soup was ready!",
+          "soundEffects": [
+            { "sfxId": "sfx_boiling", "timing": "afterNarration" }
+          ],
+          "nextBeatId": "hot-soup",
+          "checkpoint": {
+            "id": "long-noodles",
+            "kind": "comprehension",
+            "promptType": "recall",
+            "question": "拉出来的面条是长长的，还是短短的？",
+            "englishQuestion": "Were the noodles they pulled looong, or short?",
+            "audioCue": "question_long_noodles",
+            "concepts": [
+              { "id": "long", "zh": ["长长的", "长", "很长"], "en": ["long", "looong"], "homophones": ["常常的", "唱"] }
+            ],
+            "relatedTerms": ["面团", "跳绳", "拉", "锅"],
+            "knownWrongTerms": ["短短的", "短", "圆圆的"],
+            "recast": "面条是长长的。",
+            "successLine": "答对了！面条长长的，像跳绳一样长！",
+            "englishHint": "Like a jump rope — is that long or short?",
+            "hints": [
+              { "level": 1, "text": "面条像小兔子的跳绳一样。跳绳是长的还是短的？" },
+              { "level": 2, "text": "请填空：面条是长——的。" },
+              { "level": 3, "text": "The noodles are long. 你可以说：面条是长长的。" },
+              { "level": 4, "text": "请选择：面条是长长的，还是短短的？请说完整答案。" }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": { "id": "reward-noodles", "emoji": "🍜", "zh": "汤面徽章", "pinyin": "tāng miàn huī zhāng", "en": "noodle soup badge", "announcement": "叮！你得到了汤面徽章！香喷喷！", "sfxId": "earcon_sticker_chime" },
+            "vocabulary": [
+              { "id": "long", "zh": "长", "pinyin": "cháng", "en": "long" },
+              { "id": "pull", "zh": "拉", "pinyin": "lā", "en": "pull" }
+            ],
+            "successSfx": []
+          }
+        },
+        {
+          "id": "make-dumplings",
+          "title": "数一数饺子",
+          "emoji": "🥟",
+          "illustrationAsset": "scene_make_dumplings",
+          "audioCue": "scene_make_dumplings",
+          "narration": "熊猫奶奶擀出圆圆的饺子皮，啾啾放上香香的馅儿。捏一捏，包一包——第一个饺子包好啦！我们一起数：一！再来一个：二！最后一个：三！三个胖乎乎的饺子跳进锅里，咕嘟咕嘟，像三个小枕头在洗澡。饺子浮起来了，熟啦！",
+          "englishNarration": "Grandma Panda rolled out round dumpling wrappers, and ChooChoo spooned in the yummy filling. Pinch and fold — the first dumpling was done! Let's count together: one! Another one: two! Last one: three! Three plump dumplings hopped into the pot — bubble, bubble — like three little pillows taking a bath. They floated up: all done!",
+          "soundEffects": [
+            { "sfxId": "sfx_boiling", "timing": "afterNarration" }
+          ],
+          "nextBeatId": "hot-soup",
+          "checkpoint": {
+            "id": "count-dumplings",
+            "kind": "comprehension",
+            "promptType": "recall",
+            "question": "啾啾和奶奶一共包了几个饺子？",
+            "englishQuestion": "How many dumplings did ChooChoo and Grandma make?",
+            "audioCue": "question_count_dumplings",
+            "concepts": [
+              { "id": "three", "zh": ["三个", "三", "三个饺子"], "en": ["three", "3"], "homophones": ["山个", "伞"] }
+            ],
+            "relatedTerms": ["饺子皮", "馅儿", "锅", "数"],
+            "knownWrongTerms": ["一个", "两个", "五个"],
+            "recast": "他们一共包了三个饺子。",
+            "successLine": "答对了！一、二、三，三个胖乎乎的饺子！",
+            "englishHint": "Count with me: one, two… and one more!",
+            "hints": [
+              { "level": 1, "text": "我们再数一次：一、二、……后面是几？" },
+              { "level": 2, "text": "请填空：他们包了——个饺子。" },
+              { "level": 3, "text": "They made three. 用中文说就是：三个。" },
+              { "level": 4, "text": "请选择：是三个，还是五个？请说完整答案：三个饺子。" }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": { "id": "reward-dumplings", "emoji": "🥟", "zh": "饺子徽章", "pinyin": "jiǎo zi huī zhāng", "en": "dumpling badge", "announcement": "叮！你得到了饺子徽章！一、二、三！", "sfxId": "earcon_sticker_chime" },
+            "vocabulary": [
+              { "id": "three", "zh": "三", "pinyin": "sān", "en": "three" },
+              { "id": "wrap", "zh": "包", "pinyin": "bāo", "en": "wrap" }
+            ],
+            "successSfx": []
+          }
+        },
+        {
+          "id": "hot-soup",
+          "title": "太烫了，吹一吹",
+          "emoji": "💨",
+          "illustrationAsset": "scene_hot_soup",
+          "audioCue": "scene_hot_soup",
+          "narration": "好吃的做好了，可是碗里冒着热气——太烫啦！蹦蹦的耳朵都急得竖起来了。熊猫奶奶笑着说：“别急别急，我们吹一吹。”啾啾鼓起腮帮子，对着碗轻轻地吹：呼——呼——热气跳着舞飞走了。再吹一次，呼——现在不烫了，温温的，刚刚好！",
+          "englishNarration": "The food was ready, but the bowl was steaming — too hot! Bengbeng's ears stood straight up with impatience. Grandma Panda smiled: \"No rush, no rush — let's blow on it.\" ChooChoo puffed up his cheeks and blew gently on the bowl: whoo… whoo… The steam danced away. One more blow — whoo — and now it was just warm. Just right!",
+          "soundEffects": [
+            { "sfxId": "sfx_blow_whoosh", "timing": "afterNarration" }
+          ],
+          "nextBeatId": "happy-customer",
+          "checkpoint": {
+            "id": "blow-on-it",
+            "kind": "comprehension",
+            "promptType": "completion",
+            "question": "碗太烫的时候，我们要轻轻地吹一——？请帮我说完。",
+            "englishQuestion": "When the bowl is too hot, we gently blow — finish it: we blow a…?",
+            "audioCue": "question_blow_on_it",
+            "concepts": [
+              { "id": "blow", "zh": ["吹", "吹一吹", "吹一下", "吹吹"], "en": ["blow", "blow on it"], "homophones": ["催", "炊"] }
+            ],
+            "relatedTerms": ["烫", "热气", "碗", "温温的"],
+            "knownWrongTerms": ["摸", "喝", "咬"],
+            "recast": "太烫的时候，我们要吹一吹。",
+            "successLine": "对啦！呼——呼——吹一吹就不烫啦！",
+            "englishHint": "Puff up your cheeks and… whoo!",
+            "hints": [
+              { "level": 1, "text": "鼓起腮帮子，呼——呼——这个动作叫什么？" },
+              { "level": 2, "text": "请跟我说：吹一吹。" },
+              { "level": 3, "text": "We blow on it. 用中文说就是：吹一吹。" },
+              { "level": 4, "text": "我们一起说：太烫了，吹一吹！" }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": { "id": "reward-spoon", "emoji": "🥄", "zh": "小勺子", "pinyin": "xiǎo sháo zi", "en": "little spoon", "announcement": "叮！你得到了一个小勺子贴纸！", "sfxId": "earcon_sticker_chime" },
+            "vocabulary": [
+              { "id": "blow", "zh": "吹", "pinyin": "chuī", "en": "blow" },
+              { "id": "hot", "zh": "烫", "pinyin": "tàng", "en": "hot (to touch)" }
+            ],
+            "successSfx": [{ "sfxId": "sfx_blow_whoosh", "timing": "onSuccess" }]
+          }
+        },
+        {
+          "id": "happy-customer",
+          "title": "谢谢啾啾！",
+          "emoji": "🥕",
+          "illustrationAsset": "scene_happy_customer",
+          "audioCue": "scene_happy_customer",
+          "narration": "蹦蹦大口大口地吃起来，耳朵开心地一晃一晃。吃完以后，她摸摸圆圆的肚子，大声说：“谢谢啾啾！真好吃！”她还从篮子里拿出一根大胡萝卜，送给小面馆做礼物。叮铃铃！门铃又响了，小羊和小猫也闻着香味来了。小面馆越来越热闹！",
+          "englishNarration": "Bengbeng ate in big happy bites, her ears bouncing with joy. When she finished, she patted her round tummy and said loudly, \"Thank you, ChooChoo! So yummy!\" Then she pulled a big carrot from her basket as a present for the shop. Ding-a-ling! The doorbell rang again — a little lamb and a kitten had followed the delicious smell. The little shop was getting busier and busier!",
+          "soundEffects": [
+            { "sfxId": "sfx_shop_bell", "timing": "afterNarration" }
+          ],
+          "nextBeatId": "your-food",
+          "checkpoint": {
+            "id": "bengbeng-thanks",
+            "kind": "comprehension",
+            "promptType": "recall",
+            "question": "蹦蹦吃完以后，大声说了什么？",
+            "englishQuestion": "What did Bengbeng say after she finished eating?",
+            "audioCue": "question_bengbeng_thanks",
+            "concepts": [
+              { "id": "thanks", "zh": ["谢谢", "谢谢啾啾"], "en": ["thank you", "thanks"], "homophones": ["些些", "写写"] },
+              { "id": "yummy", "zh": ["好吃", "真好吃", "很好吃"], "en": ["yummy", "delicious", "so good"], "homophones": ["好持", "好迟"] }
+            ],
+            "relatedTerms": ["肚子", "胡萝卜", "礼物", "客人"],
+            "knownWrongTerms": ["不好吃", "再见"],
+            "recast": "蹦蹦说：谢谢啾啾，真好吃！",
+            "successLine": "说得很好！蹦蹦说谢谢啾啾，真好吃！有礼貌的小兔子。",
+            "englishHint": "She said two things: a polite word, and how the food tasted.",
+            "hints": [
+              { "level": 1, "text": "吃到好吃的东西，我们会说哪两句话？" },
+              { "level": 2, "text": "请填空：谢谢啾啾，真好——！" },
+              { "level": 3, "text": "She said thank you, so yummy! 你可以说：谢谢……好吃……" },
+              { "level": 4, "text": "请选择：蹦蹦说真好吃，还是说不好吃？请说完整答案。" }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": { "id": "reward-carrot", "emoji": "🥕", "zh": "大胡萝卜", "pinyin": "dà hú luó bo", "en": "big carrot", "announcement": "叮！你得到了蹦蹦送的大胡萝卜贴纸！", "sfxId": "earcon_sticker_chime" },
+            "vocabulary": [
+              { "id": "thank-you", "zh": "谢谢", "pinyin": "xiè xie", "en": "thank you" },
+              { "id": "yummy", "zh": "好吃", "pinyin": "hǎo chī", "en": "yummy" }
+            ],
+            "successSfx": []
+          }
+        },
+        {
+          "id": "your-food",
+          "title": "你想吃什么？",
+          "emoji": "🏮",
+          "illustrationAsset": "scene_your_food",
+          "audioCue": "scene_your_food",
+          "narration": "天黑了，客人们都吃得饱饱的，摸着肚子回家了。啾啾和熊猫奶奶把小面馆打扫得干干净净，然后点亮了门口红红的小灯笼。忙了一天，啾啾的肚子也咕噜咕噜叫起来了。熊猫奶奶笑着问：“小啾啾，你想吃点什么呀？”啾啾也想知道你的答案呢。",
+          "englishNarration": "When it got dark, the customers went home with full, happy tummies. ChooChoo and Grandma Panda swept the little shop spotless, then lit the red lantern by the door. After such a busy day, ChooChoo's own tummy started to rumble! Grandma Panda smiled and asked, \"Little ChooChoo, what would YOU like to eat?\" ChooChoo wants to know your answer, too.",
+          "soundEffects": [],
+          "nextBeatId": null,
+          "checkpoint": {
+            "id": "your-favorite-food",
+            "kind": "open",
+            "promptType": "distancing",
+            "question": "你饿的时候，最想吃什么好吃的？",
+            "englishQuestion": "When YOU are hungry, what's your favorite thing to eat?",
+            "audioCue": "question_your_favorite_food",
+            "concepts": [
+              { "id": "any-food", "zh": ["面条", "饺子", "米饭", "包子", "冰淇淋", "苹果", "香蕉", "蛋糕"], "en": ["noodles", "dumplings", "rice", "bun", "ice cream", "apple", "banana", "cake"], "homophones": [] }
+            ],
+            "relatedTerms": ["饿", "吃", "喜欢", "好吃"],
+            "knownWrongTerms": [],
+            "recast": "我饿的时候，最想吃……",
+            "successLine": "哇，听起来真好吃！下次来啾啾的小面馆，我们做给你吃！",
+            "englishHint": "Anything yummy! Tell me your favorite food.",
+            "hints": [
+              { "level": 1, "text": "什么都可以哦！面条？饺子？还是冰淇淋？" },
+              { "level": 2, "text": "请说：我想吃……然后说一个好吃的。" },
+              { "level": 3, "text": "Any food you like! 你可以说：我想吃面条。" },
+              { "level": 4, "text": "我们一起说好不好？我想吃香喷喷的面条！" }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": { "id": "reward-lantern", "emoji": "🏮", "zh": "小灯笼", "pinyin": "xiǎo dēng lóng", "en": "little lantern", "announcement": "叮！你得到了小灯笼贴纸！五张贴纸都集齐啦！", "sfxId": "earcon_sticker_chime" },
+            "vocabulary": [
+              { "id": "eat", "zh": "吃", "pinyin": "chī", "en": "eat" },
+              { "id": "hungry", "zh": "饿", "pinyin": "è", "en": "hungry" }
+            ],
+            "successSfx": [{ "sfxId": "sfx_cheer", "timing": "onSuccess" }]
+          }
+        }
+      ]
+    }
+  ]
+}
