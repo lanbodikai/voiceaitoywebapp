@@ -6,11 +6,12 @@ import './App.css'
 import type { OrbState } from './ConversationOrb'
 import { catalog, findBeat, languageText } from './content'
 import { evaluateLocal } from './evaluator'
-import { evaluateRemotely, generateLine, recordConsent, safetyCheck, startResearchSession, transcribeAudio, uploadEvents } from './backend'
+import { hasPendingProgress, createRecoveryCode, restoreProgress, loadProgress, flushEventQueue, evaluateRemotely, generateLine, recordConsent, safetyCheck, startResearchSession, transcribeAudio, uploadEvents } from './backend'
+import { cacheProgress, savedProgress, type ProgressSnapshot } from './progress'
 import { cueForLanguage, playEarcon, playEffect, speak, stopVoice, storyFeedbackCue } from './audio'
 import { signInAnonymously } from './supabase'
 import { playDestinations, playIntro, playText, type PlayDestination } from './playContent'
-import { clearLocalResearchData, completedBefore, downloadJSON, markCompleted, saveReward, savedRewards, type CompletionData, type SessionConfig } from './session'
+import { clearLocalResearchData, downloadJSON, type CompletionData, type SessionConfig } from './session'
 import type { Checkpoint, LessonLanguage, Reward, SessionEvent, Story, VocabularyItem } from './types'
 
 type AppScreen = 'consent' | 'home' | 'story' | 'play' | 'complete'
@@ -40,8 +41,15 @@ function App() {
   async function consent() {
     await signInAnonymously()
     await recordConsent({ shareIdentity: false, consentVersion: 'web-research-1.1' })
+    await loadProgress()
     setScreen('home')
   }
+  useEffect(() => {
+    const retry = () => { void flushEventQueue().catch(() => undefined) }
+    window.addEventListener('online', retry)
+    const timer = window.setInterval(retry, 30_000)
+    return () => { window.removeEventListener('online', retry); window.clearInterval(timer) }
+  }, [])
 
   function finish(data: CompletionData) { setCompletion(data); setScreen('complete') }
   function replay() {
@@ -73,6 +81,7 @@ function ConsentScreen({ language, onLanguage, onContinue }: { language: LessonL
         <p>{t('和 ChooChoo 听故事、聊想法。开始前，请由成人确认。', 'Listen, talk, and imagine with ChooChoo. A grown-up needs to confirm before you begin.')}</p>
         <p>{t('按住按钮时才会录音。声音发送到语音服务识别回答，本应用不保存录音或孩子说的话。', 'Audio is sent to our speech service only when you hold the talk button. This app does not save recordings or what your child says.')}</p>
         <p>{t('请在成人陪同下使用。ChooChoo 是 AI，可能听错或说错。', 'Stay with your child while using ChooChoo. It is AI and can misunderstand or make mistakes.')}</p>
+        <p>{t('无需姓名或邮箱。我们用随机访客编号保存故事进度、答题次数和需要练习的词语。', 'No name or email is needed. A random guest ID saves story progress, answer attempts, and words to practice.')}</p>
       </div>
       <label className="check-row"><input type="checkbox" checked={accepted} onChange={(event) => setAccepted(event.target.checked)} /><span>{t('我已阅读并同意，并会陪同孩子使用。', 'I have read and agree, and will stay with my child.')}</span></label>
       {error && <p className="inline-error" role="alert">{t('暂时无法连接。请检查网络，然后重试。', 'We could not connect. Check your connection and try again.')}</p>}
@@ -92,7 +101,7 @@ function HomeScreen({ config, onConfig, onStory, onPlay }: { config: SessionConf
         <h1>{t('今天，去哪里冒险？', 'Where shall we go today?')}</h1>
         <div className="home-preferences"><Segmented value={config.language} options={ [['chinese', '中文'], ['english', 'English']] } onChange={(value) => onConfig({ ...config, language: value as LessonLanguage })} /><span>{t('听一个喜欢的故事，或和啾啾一起编故事。', 'Listen to a favorite story, or tell one with ChooChoo.')}</span></div>
         <div className="mode-grid">
-          {catalog.stories.map((story, index) => <button className="mode-card" key={story.id} onClick={() => onStory(story)}><span className="story-number" aria-hidden="true">0{index + 1}</span><span className="mode-kind">{t('故事时间', 'Story time')}{completedBefore(story.id) ? t(' · 再听一次', ' · Listen again') : ''}</span><strong>{languageText(story.title, story.englishTitle, config.language)}</strong><span className="card-meta">{story.estimatedMinutes} {t('分钟', 'min')}<span aria-hidden="true">↗</span></span></button>)}
+          {catalog.stories.map((story, index) => { const progress = savedProgress(story.id, config.language); return <button className="mode-card" key={story.id} onClick={() => onStory(story)}><span className="story-number" aria-hidden="true">0{index + 1}</span><span className="mode-kind">{progress?.completed ? t('已完成 · 再听一次', 'Completed · Listen again') : progress ? t('继续上次的故事', 'Continue your story') : t('故事时间', 'Story time')}</span><strong>{languageText(story.title, story.englishTitle, config.language)}</strong><span className="card-meta">{progress && !progress.completed ? t(`已完成 ${progress.completedCheckpoints.length} 个问题`, `${progress.completedCheckpoints.length} checkpoints complete`) : `${story.estimatedMinutes} ${t('分钟', 'min')}`}<span aria-hidden="true">↗</span></span></button> })}
           <button className="mode-card play-card" onClick={onPlay}><span className="mode-kind">{t('和啾啾一起', 'With ChooChoo')}</span><strong>{t(playIntro.title.zh, playIntro.title.en)}</strong><span className="card-meta">{t('你的点子，让故事更有趣', 'Bring your ideas')}<span aria-hidden="true">↗</span></span></button>
         </div>
       </section>
@@ -102,9 +111,40 @@ function HomeScreen({ config, onConfig, onStory, onPlay }: { config: SessionConf
       <fieldset><legend>{t('故事画面', 'Story display')}</legend><Segmented value={config.visualCondition} options={ [['voice', t('语音圆球', 'Voice orb')], ['pictures', t('故事场景', 'Story scenes')]] } onChange={(value) => onConfig({ ...config, visualCondition: value as SessionConfig['visualCondition'] })} /></fieldset>
       {config.language === 'chinese' && <label className="switch-row"><span>英文字幕</span><input type="checkbox" checked={config.englishSubtitles} onChange={(event) => onConfig({ ...config, englishSubtitles: event.target.checked })} /></label>}
       <p className="setting-note">{t('下次打开时会记住你的设置。', 'Your preferences will be remembered on this device.')}</p>
-      <details><summary>{t('研究设置', 'Research settings')}</summary><label><span>{t('测试编号（可选）', 'Session label (optional)')}</span><input value={config.sessionLabel} maxLength={80} onChange={(event) => onConfig({ ...config, sessionLabel: event.target.value })} /></label></details>
+      <RecoverySettings language={config.language} onRestored={() => setSettings(false)} />
+      <ProgressSaveStatus language={config.language} />
     </div></Modal>}
   </main>
+}
+
+function ProgressSaveStatus({language}: {language: LessonLanguage}) {
+  const [pending, setPending] = useState(hasPendingProgress)
+  useEffect(() => { const refresh = () => setPending(hasPendingProgress()); window.addEventListener('choochoo-progress', refresh); return () => window.removeEventListener('choochoo-progress', refresh) }, [])
+  return <p className="setting-note" role="status">{languageText(pending ? '进度暂存于此设备，联网后会重试同步。' : '进度已同步。', pending ? 'Progress is saved on this device. Cloud sync will retry when connected.' : 'Progress is synced.', language)}</p>
+}
+
+function RecoverySettings({language, onRestored}: {language: LessonLanguage; onRestored: () => void}) {
+  const t = (zh: string, en: string) => languageText(zh, en, language)
+  const [code, setCode] = useState('')
+  const [input, setInput] = useState('')
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState('')
+  async function recover(restore: boolean) {
+    setBusy(true); setError('')
+    try {
+      if (restore) { await restoreProgress(input.trim()); onRestored() }
+      else setCode((await createRecoveryCode()).code.match(/.{1,5}/g)!.join('-'))
+    } catch { setError(t('未能完成。请检查连接或恢复码后重试。', 'Could not finish. Check your connection or recovery code and try again.')) }
+    finally { setBusy(false) }
+  }
+  return <fieldset className="recovery-settings"><legend>{t('进度与恢复', 'Progress & recovery')}</legend>
+    <p className="setting-note">{t('进度自动保存。换设备或清除浏览器数据前，请让家长保存恢复码。', 'Progress saves automatically. Before changing devices or clearing browser data, ask a grown-up to keep a recovery code.')}</p>
+    <button className="secondary-action" disabled={busy} onClick={() => void recover(false)}>{t('生成恢复码', 'Create recovery code')}</button>
+    {code && <><output className="recovery-code">{code}</output><p className="setting-note">{t('请妥善保管。持有码的人可访问进度；新码会替换旧码。', 'Keep it private: anyone with this code can access progress. A new code replaces the old one.')}</p></>}
+    <label><span>{t('已有恢复码', 'Have a recovery code?')}</span><input autoComplete="off" spellCheck={false} value={input} maxLength={60} onChange={(e) => setInput(e.target.value)} /></label>
+    <button className="secondary-action" disabled={busy || !/^[a-f0-9]{40}$/i.test(input.trim().replace(/-/g,''))} onClick={() => void recover(true)}>{t('恢复进度', 'Restore progress')}</button>
+    {error && <p role="alert" className="inline-error">{error}</p>}
+  </fieldset>
 }
 
 function Segmented({ value, options, onChange }: { value: string; options: Array<[string, string]>; onChange: (value: string) => void }) {
@@ -118,21 +158,26 @@ function Modal({ title, closeLabel, onClose, children }: { title: string; closeL
 }
 
 function StorySession({ story, config, onClose, onComplete }: { story: Story; config: SessionConfig; onClose: () => void; onComplete: (data: CompletionData) => void }) {
-  const [beatID, setBeatID] = useState(story.startBeatId)
+  const [previous] = useState(() => savedProgress(story.id, config.language))
+  const resume = previous && !previous.completed ? previous : undefined
+  const [beatID, setBeatID] = useState(resume?.beatID ?? story.startBeatId)
   const [phase, setPhase] = useState<StoryPhase>('lobby')
   const [state, setState] = useState<ConversationState>('join')
-  const [headline, setHeadline] = useState(languageText(completedBefore(story.id) ? '欢迎回来。准备好再听一次了吗？' : '准备好和 ChooChoo 见面了吗？', completedBefore(story.id) ? 'Welcome back. Ready to listen again?' : 'Ready to meet ChooChoo?', config.language))
+  const [headline, setHeadline] = useState(languageText(resume ? '欢迎回来，继续上次的故事吧。' : previous?.completed ? '欢迎回来。准备好再听一次了吗？' : '准备好和 ChooChoo 见面了吗？', resume ? 'Welcome back. Let’s continue your story.' : previous?.completed ? 'Welcome back. Ready to listen again?' : 'Ready to meet ChooChoo?', config.language))
   const [connectionError, setConnectionError] = useState('')
   const [subtitle, setSubtitle] = useState('')
-  const [hintLevel, setHintLevel] = useState(0)
-  const [attemptCount, setAttemptCount] = useState(0)
+  const [hintLevel, setHintLevel] = useState(resume?.hintLevel ?? 0)
+  const [attemptCount, setAttemptCount] = useState(resume?.attemptCount ?? 0)
   const [unusableCount, setUnusableCount] = useState(0)
   const [tangentUsed, setTangentUsed] = useState(false)
   const [comfortUsed, setComfortUsed] = useState(false)
   const [questionAsked, setQuestionAsked] = useState(false)
-  const [rewards, setRewards] = useState<Reward[]>(() => savedRewards(story))
-  const [struggledVocabulary, setStruggledVocabulary] = useState<string[]>([])
-  const [beatPath, setBeatPath] = useState<string[]>([story.startBeatId])
+  const [rewards, setRewards] = useState<Reward[]>(() => story.beats.map((b) => b.checkpoint.reward).filter((r) => previous?.rewardIDs.includes(r.id)))
+  const [struggledVocabulary, setStruggledVocabulary] = useState<string[]>(resume?.vocabularyIDs ?? [])
+  const [beatPath, setBeatPath] = useState<string[]>(resume?.beatPath ?? [story.startBeatId])
+  const completedRef = useRef<string[]>(resume?.completedCheckpoints ?? [])
+  const finishedRef = useRef(false)
+  const startedRef = useRef(false)
   const [events, setEvents] = useState<SessionEvent[]>([])
   const [sessionID, setSessionID] = useState<string>()
   const runID = useRef(0)
@@ -160,7 +205,19 @@ function StorySession({ story, config, onClose, onComplete }: { story: Story; co
     // Session identity is intentionally fixed for one mounted story.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [story.id])
-  useEffect(() => { if (sessionID && events.length) uploadEvents(sessionID, events).catch(() => undefined) }, [events, sessionID])
+  function snapshot(completed = false): ProgressSnapshot {
+    return {beatID, phase: phase === 'recast' ? 'recast' : 'story', attemptCount, hintLevel, completed, beatPath: beatPathRef.current, completedCheckpoints: completedRef.current, rewardIDs: rewardsRef.current.map((r) => r.id), vocabularyIDs: struggledRef.current}
+  }
+  useEffect(() => {
+    if (!sessionID || !startedRef.current || finishedRef.current) return
+    const progress = snapshot()
+    cacheProgress(story.id, config.language, progress)
+    void uploadEvents(sessionID, events, progress, true)
+    const timer = window.setTimeout(() => { void flushEventQueue().catch(() => undefined) }, 1200)
+    return () => window.clearTimeout(timer)
+    // All state captured in a saved checkpoint is included below.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [events, sessionID, beatID, phase, attemptCount, hintLevel, rewards, struggledVocabulary])
   useEffect(() => { addEvent('state_transition', { state, phase, beatID }) // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, phase, beatID])
   useEffect(() => { if (autoplayNext.current) { autoplayNext.current = false; void playScene() } // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -206,7 +263,8 @@ function StorySession({ story, config, onClose, onComplete }: { story: Story; co
       setSessionID(result.sessionID)
     } catch { setConnectionError(t('无法连接语音服务。请检查网络，然后重试。', 'Could not connect. Check your connection, then try again.')); setState('join'); return }
     setPhase('warmup')
-    if (completedBefore(story.id)) {
+    if (resume) { await playScene(false); return }
+    if (previous?.completed) {
       if (!await say(t('欢迎回来！这一次，你可以选择不一样的朋友。', 'Welcome back! You can choose a different friend this time.'), '', cueForLanguage('welcome_returning', config.language))) return
       setPhase('ready'); setState('ready'); setHeadline(t('准备好听故事了吗？', 'Ready for the story?')); return
     }
@@ -221,8 +279,10 @@ function StorySession({ story, config, onClose, onComplete }: { story: Story; co
     setPhase('ready'); setState('ready'); setHeadline(t('准备好听故事了吗？', 'Ready for the story?'))
   }
 
-  async function playScene() {
-    setPhase('story'); setHintLevel(0); setAttemptCount(0); setUnusableCount(0); setTangentUsed(false); setComfortUsed(false); setQuestionAsked(false)
+  async function playScene(reset = true) {
+    const keepRecast = !reset && (phase === 'recast' || (!startedRef.current && resume?.phase === 'recast'))
+    startedRef.current = true
+    setPhase(keepRecast ? 'recast' : 'story'); if (reset) { setHintLevel(0); setAttemptCount(0) }; setUnusableCount(0); setTangentUsed(false); setComfortUsed(false); setQuestionAsked(false)
     beat.soundEffects.filter((item) => item.timing === 'beforeNarration').forEach((item) => playEffect(item.sfxId))
     lastSpokenKind.current = 'scene'
     if (!await say(narration, beat.englishNarration, cueForLanguage(beat.audioCue, config.language))) return
@@ -258,7 +318,7 @@ function StorySession({ story, config, onClose, onComplete }: { story: Story; co
     const reward = checkpoint.reward
     const nextRewards = rewardsRef.current.some((item) => item.id === reward.id) ? rewardsRef.current : [...rewardsRef.current, reward]
     rewardsRef.current = nextRewards; setRewards(nextRewards)
-    saveReward(story.id, reward); addEvent('sticker_earned', { beatID, rewardID: reward.id })
+    addEvent('sticker_earned', { beatID, rewardID: reward.id })
     playEarcon('sticker'); playEffect(reward.sfxId)
     const announcement = config.language === 'chinese' ? reward.announcement : `You earned the ${reward.en} sticker!`
     return say(announcement)
@@ -282,6 +342,10 @@ function StorySession({ story, config, onClose, onComplete }: { story: Story; co
   }
 
   async function celebrate(matchedConcepts: string[] = [], forcedBranchIndex?: number) {
+    if (!completedRef.current.includes(checkpoint.id)) {
+      completedRef.current = [...completedRef.current, checkpoint.id]
+      addEvent('checkpoint_completed', {beatID})
+    }
     setPhase('story'); playEarcon('success')
     const success = config.language === 'chinese' ? checkpoint.successLine : 'You did it!'
     if (!await say(success, '', storyFeedbackCue(story.id, checkpoint.id, 'success', config.language))) return
@@ -394,9 +458,9 @@ function StorySession({ story, config, onClose, onComplete }: { story: Story; co
 
   async function handleCommand(command: VoiceCommand) {
     if (command === 'pause') { interrupt(); setState('paused'); setHeadline(t('好的，我停在这里。想继续时对我说“继续”。', 'Okay, I’ll pause here. Say “continue” when you’re ready.')); return true }
-    if (command === 'continue') { if (lastSpokenKind.current === 'scene') await playScene(); else await repeatQuestion(); return true }
+    if (command === 'continue') { if (lastSpokenKind.current === 'scene') await playScene(false); else await repeatQuestion(); return true }
     if (command === 'question') { await repeatQuestion(); return true }
-    if (command === 'repeat') { await playScene(); return true }
+    if (command === 'repeat') { await playScene(false); return true }
     if (command === 'hint') { await giveHint(); return true }
     if (command === 'end') { finishStory('voice_end'); return true }
     return false
@@ -404,11 +468,13 @@ function StorySession({ story, config, onClose, onComplete }: { story: Story; co
 
   function finishStory(reason = 'completed') {
     interrupt()
-    if (reason === 'completed') markCompleted(story.id)
+    finishedRef.current = true
     playEarcon('complete')
     const vocabulary = uniqueVocabulary(story.beats.flatMap((item) => item.checkpoint.vocabulary).filter((item) => struggledRef.current.includes(item.id)))
     const finalEvents = [...eventsRef.current, { sequence: eventsRef.current.length + 1, type: 'session_ended', occurredAt: new Date().toISOString(), payload: { reason, beatPath: beatPathRef.current } }]
-    if (sessionID) void uploadEvents(sessionID, finalEvents).catch(() => undefined)
+    const progress = startedRef.current ? snapshot(reason === 'completed') : undefined
+    if (progress) cacheProgress(story.id, config.language, progress)
+    if (sessionID) void uploadEvents(sessionID, finalEvents, progress).catch(() => undefined)
     onComplete({ mode: 'story', title: languageText(story.title, story.englishTitle, config.language), story, config, rewards: rewardsRef.current, vocabulary, events: finalEvents, sessionID })
   }
 
@@ -461,7 +527,12 @@ function ImaginativePlaySession({ config, onClose, onComplete }: { config: Sessi
     return () => { mounted.current = false; runID.current += 1; stopVoice() }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  useEffect(() => { if (sessionID && events.length) uploadEvents(sessionID, events).catch(() => undefined) }, [events, sessionID])
+  useEffect(() => {
+    if (!sessionID || !events.length) return
+    void uploadEvents(sessionID, events, undefined, true)
+    const timer = window.setTimeout(() => { void flushEventQueue().catch(() => undefined) }, 1200)
+    return () => window.clearTimeout(timer)
+  }, [events, sessionID])
   useEffect(() => { addEvent('state_transition', { state, turn, destination: destination?.id }) // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, turn, destination?.id])
   useEffect(() => {
@@ -561,7 +632,7 @@ function ConversationRoom({ title, language, state, status, headline, subtitle, 
       {ideaLabel && onIdea && <button disabled={recording || state === 'thinking'} className="idea-button" onClick={onIdea}>{ideaLabel}</button>}
       {!showJoin && <button className="idea-button end-call" disabled={recording || state === 'thinking'} onClick={leave}>{t('结束', 'End')}</button>}
     </footer>
-    {panel === 'leave' && <Modal title={t('结束这次对话？', 'Leave this conversation?')} closeLabel={t('留在这里', 'Stay here')} onClose={() => setPanel(null)}><p>{t('已经获得的贴纸会保留。下次可以重新开始。', 'Your earned stickers will be kept. You can start again next time.')}</p><button className="primary-action" onClick={onEnd}>{t('结束对话', 'End conversation')}</button></Modal>}
+    {panel === 'leave' && <Modal title={t('结束这次对话？', 'Leave this conversation?')} closeLabel={t('留在这里', 'Stay here')} onClose={() => setPanel(null)}><p>{story ? t('进度和贴纸会保留，下次可以接着听。', 'Your progress and stickers will be kept. Continue next time.') : t('下次再一起编一个新故事。', 'Let’s make another story next time.')}</p><button className="primary-action" onClick={onEnd}>{t('结束对话', 'End conversation')}</button></Modal>}
     {panel === 'story' && story && <Modal title={title} closeLabel={t('关闭', 'Close')} onClose={() => setPanel(null)}><Segmented value={textLanguage} options={ [['chinese', '中文'], ['english', 'English']] } onChange={(value) => setTextLanguage(value as LessonLanguage)} /><div className="story-reader">{readingPath(story, visited).map((item, index) => <section key={item.id}><span>{String(index + 1).padStart(2, '0')}</span><p>{languageText(item.narration, item.englishNarration, textLanguage)}</p></section>)}</div></Modal>}
     {drawer && <div className="drawer-backdrop" onClick={() => setDrawer(false)}><aside className="research-drawer" onClick={(event) => event.stopPropagation()}><header><h2>测试控制</h2><button onClick={() => setDrawer(false)}>关闭</button></header>{onRecover && <button onClick={onRecover}>重新测试麦克风</button>}<button onClick={onRepeat}>重复问题 R</button>{onHint && <button onClick={onHint}>下一个提示 H</button>}<button onClick={onAdvance}>继续下一步 0</button><button onClick={onEnd}>结束本次测试</button><button className="danger-text" onClick={onClear}>清除本机测试数据</button><p>选择题可按 1、2、3 强制选择对应分支。</p></aside></div>}
   </main>
@@ -590,6 +661,7 @@ function CompletionScreen({ data, onHome, onReplay }: { data: CompletionData; on
     <section className="completion-card"><span className="wordmark">CHOOCHOO</span><h1>{t('下次再一起玩。', 'See you next time.')}</h1>
       {data.rewards.length > 0 && <div className="completion-stickers">{data.rewards.slice(-5).map((reward) => <span key={reward.id}>{reward.emoji}</span>)}</div>}
       {data.vocabulary.length > 0 && <div className="vocabulary-review"><h2>{t('下次可以再练', 'Words to practice next time')}</h2><ul>{data.vocabulary.map((word) => <li key={word.id}>{data.config.language === 'chinese' ? <><strong>{word.zh}</strong><span>{word.pinyin}</span><span>{word.en}</span></> : <strong>{word.en}</strong>}</li>)}</ul></div>}
+      <ProgressSaveStatus language={data.config.language} />
       {!answered ? <div className="play-again"><p>{t('还想再玩一次吗？', 'Would you like to play again?')}</p><div><button className="primary-action" onClick={() => answerAgain(true)}>{t('再玩一次', 'Play again')}</button><button className="secondary-action" onClick={() => answerAgain(false)}>{t('今天到这里', 'All done')}</button></div></div> : null}
       <details className="research-export"><summary>{t('研究工具', 'Research tools')}</summary><button className="download-link" onClick={download}>{t('下载互动记录', 'Download interaction log')}</button></details>
     </section>

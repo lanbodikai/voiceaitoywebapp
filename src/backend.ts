@@ -1,6 +1,7 @@
 import { accessToken } from './supabase'
 import type { Evaluation, SessionEvent } from './types'
 import { readStored, writeStored } from './storage'
+import { acceptCloudProgress, guestID, type GuestProgress, type ProgressSnapshot } from './progress'
 
 const configuredBaseURL = (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(/\/$/, '')
 const baseURL = import.meta.env.PROD ? '/api' : configuredBaseURL
@@ -18,52 +19,68 @@ async function request<T>(path: string, init: RequestInit = {}, authenticate = t
   return data as T
 }
 
-export function recordConsent(input: { shareIdentity: boolean; consentVersion: string }) {
-  return request('/participants/consent', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) })
+export async function recordConsent(input: { shareIdentity: boolean; consentVersion: string }) {
+  const data = await request<{participantID: string}>('/participants/consent', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) })
+  writeStored('choochoo:guest-profile', data.participantID)
+  return data
 }
 
 export function startResearchSession(input: Record<string, unknown>) {
   return request<{ sessionID: string }>('/sessions/start', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) })
 }
 
-const eventQueueKey = 'choochoo:upload-queue'
+const eventQueueKey = () => `choochoo:upload-queue:${guestID()}`
+type PendingBatch = { sessionID: string; events: SessionEvent[]; revision: number; snapshot?: ProgressSnapshot }
+let flushing: Promise<void> | undefined
+let revision = Date.now()
+export function hasPendingProgress() { return readStored<PendingBatch[]>(eventQueueKey(), []).length > 0 }
+function notifyProgress() { window.dispatchEvent(new Event('choochoo-progress')) }
 
-export async function uploadEvents(sessionID: string, events: SessionEvent[]) {
-  queueEventBatch(sessionID, events)
-  // Upload only the completed session: per-render uploads consumed the voice
-  // rate budget while research storage was offline.
-  if (!events.some((event) => event.type === 'session_ended')) return
-  try {
-    await sendEventBatch(sessionID, events)
-    await flushEventQueue()
-  } catch (error) {
-    queueEventBatch(sessionID, events)
-    throw error
+export async function uploadEvents(sessionID: string, events: SessionEvent[], snapshot?: ProgressSnapshot, defer = false) {
+  const key = eventQueueKey()
+  const queue = readStored<PendingBatch[]>(key, [])
+  const previous = queue.find((item) => item.sessionID === sessionID)
+  // Store only enumerated metrics, never arbitrary payloads or learner speech.
+  const safeEvents = events.map((event) => ({ sequence: event.sequence, type: event.type, occurredAt: event.occurredAt, payload: Object.fromEntries(Object.entries(event.payload).filter(([key, value]) => ['beatID','verdict','level','audioDurationMs','transcriptionLatencyMs'].includes(key) && (typeof value === 'string' || typeof value === 'number'))) }))
+  revision = Math.max(Date.now(), revision + 1)
+  writeStored(key, [...queue.filter((item) => item.sessionID !== sessionID), { sessionID, events: safeEvents, revision, snapshot: snapshot ?? previous?.snapshot }].slice(-12))
+  notifyProgress()
+  if (!defer) return flushEventQueue()
+}
+
+async function sendEventBatch(batch: PendingBatch) {
+  for (let offset = 0; offset < Math.max(batch.events.length, 1); offset += 100) {
+    await request('/sessions/log', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...batch, events: batch.events.slice(offset, offset + 100) }) })
   }
 }
 
-async function sendEventBatch(sessionID: string, events: SessionEvent[]) {
-  for (let offset = 0; offset < events.length; offset += 100) {
-    await request('/sessions/log', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ sessionID, events: events.slice(offset, offset + 100) }) })
-  }
+export function flushEventQueue(): Promise<void> {
+  if (flushing) return flushing
+  const key = eventQueueKey()
+  flushing = (async () => {
+    while (key === eventQueueKey()) {
+      const batch = readStored<PendingBatch[]>(key, [])[0]
+      if (!batch) return
+      await sendEventBatch(batch)
+      writeStored(key, readStored<PendingBatch[]>(key, []).filter((item) => item.sessionID !== batch.sessionID || item.revision !== batch.revision))
+    }
+  })().finally(() => { flushing = undefined; notifyProgress() })
+  return flushing
 }
 
-function queueEventBatch(sessionID: string, events: SessionEvent[]) {
-  const raw = readStored<unknown>(eventQueueKey, [])
-  const queue = (Array.isArray(raw) ? raw : []) as Array<{ sessionID: string; events: SessionEvent[] }>
-  const withoutOlderCopy = queue.filter((item) => item.sessionID !== sessionID)
-  writeStored(eventQueueKey, [...withoutOlderCopy, { sessionID, events }].slice(-12))
+export async function loadProgress() {
+  await flushEventQueue()
+  const data = await request<GuestProgress>('/progress/load', { method: 'POST' })
+  acceptCloudProgress(data)
+  return data
 }
-
-async function flushEventQueue() {
-  const raw = readStored<unknown>(eventQueueKey, [])
-  const queue = (Array.isArray(raw) ? raw : []) as Array<{ sessionID: string; events: SessionEvent[] }>
-  if (!queue.length) return
-  const remaining = []
-  for (const batch of queue) {
-    try { await sendEventBatch(batch.sessionID, batch.events) } catch { remaining.push(batch) }
-  }
-  writeStored(eventQueueKey, remaining)
+export function createRecoveryCode() { return request<{code: string}>('/progress/recovery-code', {method:'POST'}) }
+export async function restoreProgress(code: string) {
+  await flushEventQueue()
+  await request('/progress/restore', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({code})})
+  // Do not reuse a previous profile's cache after linking this device.
+  const data = await request<GuestProgress>('/progress/load', {method:'POST'})
+  acceptCloudProgress(data)
 }
 
 export function evaluateRemotely(input: Record<string, unknown>) {

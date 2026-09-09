@@ -25,6 +25,7 @@ Do not put an OpenAI API key or Supabase service-role key in the web folder.
 1. In Supabase Auth, enable **Anonymous sign-ins**. No child account form is shown.
 2. Add local and Vercel URLs to the allowed site URLs.
 3. Configure the two public `VITE_SUPABASE_*` values in the deployment.
+4. Run `supabase/20260909_guest_progress.sql` once in the SQL Editor. It creates new `cc_*` tables without altering the legacy research tables.
 
 ## Vercel handoff
 
@@ -32,7 +33,21 @@ This GitHub repository has the Vite app at its root. Import it in Vercel with ro
 
 Production requests use the included `api/index.mjs` through `/api`. Add `OPENAI_API_KEY` as a server-only Vercel environment variable, plus the public Supabase values above. `VITE_API_BASE_URL` is only used during local development. Never prefix a secret with `VITE_`.
 
-Research events are queued on the device; the research upload endpoint reports unavailable until durable storage is implemented. Do not treat a session-start response as proof of durable consent or research storage. Zero Data Retention verification and real-device voice testing remain required before the child pilot.
+Progress is stored in Supabase under a random guest profile, with a local retry queue. The app does not collect names or emails or store recordings/transcripts. This is pseudonymous data, not a claim of full anonymity: hosting/auth providers may still process technical connection information. Zero Data Retention verification and real-device voice testing remain required before the child pilot.
+
+## Guest progress
+
+- `cc_story_progress`: current scene, language, guidance attempt count, hint level, branch path, completed checkpoints, sticker IDs, and vocabulary IDs to revisit. Chinese and English progress are separate. Replays start a fresh visit; interrupted stories resume their current scene.
+- `cc_checkpoint_summary`: administrator-only view with total evaluated attempts, hints, wrong/partial answers, completion, and assisted completion per checkpoint per visit. Unusable audio is recorded separately and is not counted as a wrong answer. Vocabulary indicates comprehension/repetition difficulty, not a pronunciation diagnosis.
+- `cc_sessions` / `cc_checkpoint_events`: bounded, structured session facts. Duplicate event sequences are ignored, stale revisions cannot rewind progress, and late saves from older visits cannot replace newer visits.
+- `cc_guest_profiles` / `cc_guest_members`: consent version and anonymous auth-to-profile mapping. All new tables have RLS and no direct guest table grants; the restricted `cc_guest_action` function derives ownership from `auth.uid()`.
+- Settings → Progress & recovery generates a 160-bit recovery code. Only its hash is saved server-side. Anyone holding it can link a device to that profile; generating another replaces the previous code. Recovery switches profiles rather than merging their history. A lost browser session with no recovery code cannot be recovered without identity information.
+
+Save retries run after interaction settles, on reconnect, and every 30 seconds. The exit screen shows pending cloud sync. Keep the browser open until synced when moving devices. Clearing browser data before a pending save succeeds may lose those unsynced changes. Each browser profile currently represents one learner; separate children should use separate browser profiles/devices. Define retention/deletion procedures and add anti-abuse CAPTCHA before a public launch.
+
+To inspect progress in Supabase, open the Table Editor for `cc_story_progress`, or run `select * from public.cc_checkpoint_summary order by last_activity desc;` as an administrator. Do not expose that view publicly.
+
+`PROGRESS_TEST_SITE=https://your-deployment.example node scripts/verify-guest-progress.mjs` explicitly creates two synthetic guest accounts and checks persistence, recovery, isolation and retries. It prints only test results and test-user IDs, never credentials. Clean up only those synthetic records if needed.
 
 ## Verification
 

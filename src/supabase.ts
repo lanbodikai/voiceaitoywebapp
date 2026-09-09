@@ -10,11 +10,7 @@ export const supabase: SupabaseClient | null = url && key ? createClient(url, ke
 }) : null
 
 function participantFromUser(user: { id: string; is_anonymous?: boolean; email?: string; user_metadata?: Record<string, unknown> }): Participant {
-  const metadata = user.user_metadata ?? {}
-  const displayName = typeof metadata.full_name === 'string'
-    ? metadata.full_name
-    : typeof metadata.name === 'string' ? metadata.name : undefined
-  return { id: user.id, isAnonymous: Boolean(user.is_anonymous), email: user.email, displayName }
+  return { id: user.id, isAnonymous: Boolean(user.is_anonymous) }
 }
 
 export async function restoreParticipant(): Promise<Participant | null> {

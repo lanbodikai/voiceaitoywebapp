@@ -234,3 +234,5 @@ button:disabled { cursor: wait; opacity: .52; }
   .mic-button { height: 70px; width: 70px; }
 }
 @media (prefers-reduced-motion: reduce) { .mode-card { transition: none; } }
+.recovery-settings { display: grid; gap: 12px; }
+.recovery-code { display: block; overflow-wrap: anywhere; user-select: all; font-family: monospace; padding: 16px; background: #fff6f8; border-radius: 12px; }

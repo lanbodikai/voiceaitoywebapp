@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto'
 import Busboy from 'busboy'
 import { storyRubrics } from '../server/story-rubrics.mjs'
+import { guestAction, learningEvents, progressSnapshot } from '../server/progress-store.mjs'
 
 export const config = { api: { bodyParser: false } }
 
@@ -20,19 +21,24 @@ export default async function handler(request, response) {
     if (route === 'participants/consent') {
       const body = await readJSON(request)
       if (typeof body.consentVersion !== 'string' || body.consentVersion.length > 80) return json(response, 400, { error: 'Invalid consent' })
-      return json(response, 200, { participantID: user.id })
+      return json(response, 200, await guestAction(request.headers.authorization,'consent',{version:body.consentVersion}))
     }
     if (route === 'sessions/start') {
       const body = await readJSON(request)
       if (!['story', 'play'].includes(body.mode) || !['chinese', 'english'].includes(body.language) || !['pictures', 'voice'].includes(body.visualCondition)) return json(response, 400, { error: 'Invalid session' })
-      return json(response, 200, { sessionID: randomUUID(), label: typeof body.label === 'string' ? body.label.slice(0, 80) : 'web-session' })
+      return json(response, 200, await guestAction(request.headers.authorization,'start',{sessionID:randomUUID(),mode:body.mode,storyID:body.storyID,language:body.language,visual:body.visualCondition}))
     }
     if (route === 'sessions/log') {
       const body = await readJSON(request, 64 * 1024)
-      if (!Array.isArray(body.events) || body.events.length > 100) return json(response, 400, { error: 'Invalid event batch' })
-      // The browser retains a downloadable copy. Report a retryable failure until
-      // durable storage is configured so the client does not discard this batch.
-      return json(response, 503, { error: 'Durable research storage is not configured' })
+      if (!/^[a-f0-9-]{36}$/i.test(body.sessionID ?? '') || !Number.isSafeInteger(body.revision) || body.revision<0) return json(response,400,{error:'Invalid save request'})
+      return json(response,200,await guestAction(request.headers.authorization,'save',{sessionID:body.sessionID,revision:body.revision,events:learningEvents(body.events),snapshot:progressSnapshot(body.snapshot)}))
+    }
+    if (route === 'progress/load') return json(response,200,await guestAction(request.headers.authorization,'load'))
+    if (route === 'progress/recovery-code') return json(response,200,await guestAction(request.headers.authorization,'recovery_create'))
+    if (route === 'progress/restore') {
+      const body=await readJSON(request)
+      if (typeof body.code!=='string' || !/^[a-f0-9]{40}$/i.test(body.code.replaceAll('-',''))) return json(response,400,{error:'Invalid recovery code'})
+      return json(response,200,await guestAction(request.headers.authorization,'recovery_restore',{code:body.code}))
     }
     if (route === 'transcribe') {
       const { fields, audio } = await readMultipart(request)
