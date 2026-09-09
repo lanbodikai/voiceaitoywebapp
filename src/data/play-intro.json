@@ -1,0 +1,15 @@
+{
+  "title": { "zh": "一起编故事", "en": "Tell a story together" },
+  "lobby": { "zh": "和啾啾一起去冒险吧！你的点子，会让故事更有趣。", "en": "Let's go on an adventure! Your ideas can make it special." },
+  "greeting": {
+    "cue": "play_welcome_v2",
+    "zh": "嗨！和啾啾一起编个故事吧！我们可以坐着小船飞上云朵，去农场听动物唱歌，也可以在魔法餐厅做点好吃的。你想先去哪里？",
+    "en": "Hi! Let's tell a story together! We can sail through the clouds, visit a singing farm, or cook in a magic restaurant. Where would you like to go first?"
+  },
+  "choose": { "zh": "你想先去哪里？", "en": "Where would you like to go first?" },
+  "openings": {
+    "boat": { "cue": "play_boat_start_v2", "zh": "我们坐上云朵小船啦！你想带谁一起出发？", "en": "We're sailing through the clouds in our little boat! Who would you like to bring along?" },
+    "farm": { "cue": "play_farm_start_v2", "zh": "会唱歌的农场到了！你想先和哪只动物打招呼？", "en": "Here we are at the singing farm! Which animal would you like to say hello to first?" },
+    "restaurant": { "cue": "play_restaurant_start_v2", "zh": "魔法餐厅开门啦！今天你想做什么好吃的？", "en": "Our magic restaurant is open! What would you like to cook today?" }
+  }
+}

@@ -50,6 +50,8 @@ For local navigation and offline-error tests without sending audio, run `node te
 
 Story content lives in `src/data/stories.json`. `pnpm build` validates all story graph paths, checkpoint hints, branch targets, and sound identifiers before compiling. Illustration files can be added to `public/illustrations` using each beat's `illustrationAsset` filename.
 
+The story-creation introduction and destination openings share one text source, `src/data/play-intro.json`, used by both the UI and Edge-TTS generator. After editing it, regenerate the recordings with `python scripts/generate_edge_tts_assets.py --play-intro-only --force` in an environment with `edge-tts` installed. Change cue IDs when replacing deployed recordings so returning visitors receive the new audio.
+
 During a child session, press and hold the `CHOOCHOO` wordmark for the researcher drawer. Keyboard overrides are `R` for repeat, `H` for the next hint, `0` to advance, and `1`–`3` to force a choice branch.
 
 Home settings and language selection are visible. Research setup and exports live under expandable Research sections. In a conversation, hold the microphone button (or Space/Enter while it is focused), then release to send. Recording is limited to 30 seconds per turn. Opening the reader or exit dialog pauses narration; Continue resumes the current section or question.

@@ -9,9 +9,10 @@ from pathlib import Path
 import edge_tts
 
 
-ROOT = Path(__file__).resolve().parents[2]
-STORIES = ROOT / "web" / "src" / "data" / "stories.json"
-OUTPUT = ROOT / "web" / "public" / "audio"
+ROOT = Path(__file__).resolve().parents[1]
+STORIES = ROOT / "src" / "data" / "stories.json"
+PLAY_INTRO = ROOT / "src" / "data" / "play-intro.json"
+OUTPUT = ROOT / "public" / "audio"
 
 ZH_VOICE = "zh-CN-XiaoxiaoNeural"
 EN_VOICE = "en-US-AnaNeural"
@@ -75,9 +76,13 @@ async def generate(cues: dict[str, tuple[str, str, str, str]], force: bool) -> N
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--force", action="store_true")
+    parser.add_argument("--play-intro-only", action="store_true", help="Generate the bilingual play greeting and three destination openings.")
     args = parser.parse_args()
-    with STORIES.open(encoding="utf-8") as handle:
-        cues = story_cues(json.load(handle))
+    cues = {} if args.play_intro_only else story_cues(json.loads(STORIES.read_text(encoding="utf-8")))
+    intro = json.loads(PLAY_INTRO.read_text(encoding="utf-8"))
+    for line in [intro["greeting"], *intro["openings"].values()]:
+        cues[line["cue"]] = (line["zh"], ZH_VOICE, "-5%", "+1Hz")
+        cues[f"en_{line['cue']}"] = (line["en"], EN_VOICE, "-5%", "+0Hz")
     asyncio.run(generate(cues, args.force))
 
 
