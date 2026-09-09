@@ -77,10 +77,14 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--play-intro-only", action="store_true", help="Generate the bilingual play greeting and three destination openings.")
+    parser.add_argument("--handsfree-only", action="store_true", help="Generate the short bilingual hands-free prompts.")
     args = parser.parse_args()
-    cues = {} if args.play_intro_only else story_cues(json.loads(STORIES.read_text(encoding="utf-8")))
+    cues = {} if args.play_intro_only or args.handsfree_only else story_cues(json.loads(STORIES.read_text(encoding="utf-8")))
     intro = json.loads(PLAY_INTRO.read_text(encoding="utf-8"))
-    for line in [intro["greeting"], *intro["openings"].values()]:
+    lines = [] if args.handsfree_only else [intro["greeting"], *intro["openings"].values()]
+    if not args.play_intro_only:
+        lines += list(json.loads((ROOT / "src/data/handsfree-lines.json").read_text(encoding="utf-8")).values())
+    for line in lines:
         cues[line["cue"]] = (line["zh"], ZH_VOICE, "-5%", "+1Hz")
         cues[f"en_{line['cue']}"] = (line["en"], EN_VOICE, "-5%", "+0Hz")
     asyncio.run(generate(cues, args.force))

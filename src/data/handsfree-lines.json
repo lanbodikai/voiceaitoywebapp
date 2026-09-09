@@ -1,0 +1,8 @@
+{
+  "ready": {"cue":"hf_ready_v1", "zh":"准备好听故事了吗？你可以说，准备好了。", "en":"Ready for our story? You can say, I'm ready."},
+  "notYet": {"cue":"hf_not_yet_v1", "zh":"好呀，不着急。你想和我聊什么？", "en":"That's okay. What would you like to talk about?"},
+  "reminder": {"cue":"hf_listening_v1", "zh":"我在听呢，慢慢说。", "en":"I'm listening. Take your time."},
+  "sad": {"cue":"hf_sad_v1", "zh":"谢谢你告诉我。啾啾陪你慢慢来。", "en":"Thank you for telling me. We can take our time together."},
+  "pause": {"cue":"hf_pause_v1", "zh":"好的，我停一下。想继续时，告诉我就好。", "en":"Okay, I'll pause. Tell me when you'd like to continue."},
+  "storyDone": {"cue":"hf_story_done_v1", "zh":"故事讲完啦！你最喜欢故事里的谁呀？", "en":"That's the end of our story! Who was your favorite?"}
+}

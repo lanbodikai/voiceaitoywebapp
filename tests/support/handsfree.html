@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"><title>Hands-free synthetic-audio test</title></head>
+<body><div id="lab" style="position:fixed;z-index:9999;bottom:8px;left:8px;background:white;padding:10px;border:1px solid #aaa;font:12px sans-serif;max-width:300px">
+  <strong>Local test: synthetic microphone, mocked transcription</strong>
+  <label>Test reply <input id="reply" value="开心"></label>
+  <button id="speak">Send synthetic speech</button><output id="result" style="display:block">No microphone requested. 0 uploads.</output>
+</div><div id="root"></div>
+<script type="module">
+// This harness is outside public/ and dist/. It never requests a real microphone.
+const originalFetch=window.fetch.bind(window)
+let input, count=0
+Object.defineProperty(navigator.mediaDevices,'getUserMedia',{value:async()=>{
+  const context=new AudioContext(); await context.resume()
+  const destination=context.createMediaStreamDestination()
+  input={context,destination}
+  destination.stream.getTracks()[0].addEventListener('ended',()=>context.close())
+  return destination.stream
+}})
+window.fetch=async(url,options)=>{
+  const address=String(url)
+  if(address.endsWith('/transcribe')) {
+    count++
+    const file=options.body.get('audio')
+    document.querySelector('#result').textContent=`Synthetic input only. ${count} uploads. ${file.type}, ${file.size} bytes.`
+    return Response.json({transcript:document.querySelector('#reply').value,detectedLanguage:'chinese',durationMs:2000})
+  }
+  if(address.endsWith('/answers/safety-check')) return Response.json({safe:true,categories:[]})
+  if(address.endsWith('/lines/generate')) return Response.json({line:'我在听呢。',choices:[]})
+  return originalFetch(url,options)
+}
+document.querySelector('#speak').onclick=async()=>{
+  if(!input) return
+  const response=await originalFetch('/audio/en_welcome_mood_happy.mp3')
+  const buffer=await input.context.decodeAudioData(await response.arrayBuffer())
+  const source=input.context.createBufferSource();source.buffer=buffer;source.connect(input.destination);source.start(0,0,1.6)
+}
+await import('/src/main.tsx')
+</script></body></html>

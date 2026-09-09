@@ -25,7 +25,7 @@ Do not put an OpenAI API key or Supabase service-role key in the web folder.
 1. In Supabase Auth, enable **Anonymous sign-ins**. No child account form is shown.
 2. Add local and Vercel URLs to the allowed site URLs.
 3. Configure the two public `VITE_SUPABASE_*` values in the deployment.
-4. Run `supabase/20260909_guest_progress.sql` once in the SQL Editor. It creates new `cc_*` tables without altering the legacy research tables.
+4. Run `supabase/20260909_guest_progress.sql` once in the SQL Editor, followed by `supabase/20260910_handsfree_consent.sql`. They create protected `cc_*` tables and record the hands-free disclosure version without altering the legacy research tables.
 
 ## Vercel handoff
 
@@ -69,4 +69,14 @@ The story-creation introduction and destination openings share one text source, 
 
 During a child session, press and hold the `CHOOCHOO` wordmark for the researcher drawer. Keyboard overrides are `R` for repeat, `H` for the next hint, `0` to advance, and `1`–`3` to force a choice branch.
 
-Home settings and language selection are visible. Research setup and exports live under expandable Research sections. In a conversation, hold the microphone button (or Space/Enter while it is focused), then release to send. Recording is limited to 30 seconds per turn. Opening the reader or exit dialog pauses narration; Continue resumes the current section or question.
+Home settings and language selection are visible. A grown-up chooses an activity and presses **Turn on mic & begin**, then the child can respond entirely by voice. The microphone control toggles listening; it is never push-to-talk. Opening the reader or exit dialog turns the microphone off. Say “pause,” “continue,” “repeat the question,” or their Mandarin equivalents for conversational controls. Story completion saves progress and opens a follow-up conversation; “goodbye” or the adult End control finishes the visit.
+
+## Hands-free speech
+
+Local Silero V5 voice activity detection (`@ricky0123/vad-web`) identifies utterances. It keeps 320 ms of leading audio, allows a 1.2-second pause before submitting, and accepts speech as short as 160 ms. A long utterance is split before 30 seconds. Only speech clips are submitted as mono 16 kHz WAV; silence does not make transcription calls. WAV samples stay in memory and are discarded. Browser echo cancellation, noise suppression and automatic gain control are requested. This detects speech, not a particular child's identity, age or pronunciation accuracy.
+
+New speech interrupts playback and invalidates pending transcription/reply results. Muting immediately stops the microphone tracks and cancels pending client transcription; hiding the page, leaving, or a safety pause also turns capture off. Already submitted provider requests may still incur costs. Initialization loads approximately 14 MB of model/runtime assets from this site's origin, then uses the browser cache. `scripts/prepare-vad.mjs` copies pinned package assets during dev/build; no third-party CDN is contacted.
+
+The intro accepts spoken moods and explicit readiness; “not ready” never starts the story. Pretend-play destinations are selected by voice. No intro response is counted as an incorrect checkpoint answer. New bilingual fixed prompts come from `src/data/handsfree-lines.json`; generate them with `python scripts/generate_edge_tts_assets.py --handsfree-only` in the Edge-TTS environment.
+
+For a browser smoke test, start the local preview API and Vite as above, then open `/tests/support/handsfree.html`. It substitutes a synthetic microphone, runs the real local detector, and mocks transcription/moderation. Its test reply selector drives a spoken-turn scenario without recording anyone. It is outside `public/` and the production build. This does **not** validate real speech recognition or speaker echo cancellation. Test quiet, hesitant 3–5-year-old speech and speaker playback on actual target laptops/iPhones before a supervised child pilot; voices from a TV or nearby adults may also be detected. Retain the existing consent, supervision and ZDR prerequisites.

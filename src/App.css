@@ -235,4 +235,5 @@ button:disabled { cursor: wait; opacity: .52; }
 }
 @media (prefers-reduced-motion: reduce) { .mode-card { transition: none; } }
 .recovery-settings { display: grid; gap: 12px; }
+.mic-button[aria-pressed="false"] { background: #eee7eb; color: #716671; box-shadow: none; }
 .recovery-code { display: block; overflow-wrap: anywhere; user-select: all; font-family: monospace; padding: 16px; background: #fff6f8; border-radius: 12px; }

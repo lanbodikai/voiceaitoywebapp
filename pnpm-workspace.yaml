@@ -1,0 +1,4 @@
+allowBuilds:
+  protobufjs: false
+overrides:
+  onnxruntime-web: 1.22.0

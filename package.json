@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "node scripts/validate-stories.mjs && tsc -b && vite build",
+    "dev": "node scripts/prepare-vad.mjs && vite",
+    "build": "node scripts/prepare-vad.mjs && node scripts/validate-stories.mjs && tsc -b && vite build",
     "lint": "oxlint",
     "test": "node --test tests/*.test.mjs",
     "preview": "vite preview",
@@ -13,6 +13,7 @@
     "generate:voice": "../.edge-tts-venv/bin/python scripts/generate_edge_tts_assets.py"
   },
   "dependencies": {
+    "@ricky0123/vad-web": "0.0.30",
     "@supabase/supabase-js": "^2.115.0",
     "@xstate/react": "^6.1.0",
     "busboy": "^1.6.0",

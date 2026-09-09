@@ -93,11 +93,11 @@ export function safetyCheck(sessionID: string, transcript: string) {
   })
 }
 
-export function transcribeAudio(audio: Blob, fields: Record<string, string>) {
+export function transcribeAudio(audio: Blob, fields: Record<string, string>, signal?: AbortSignal) {
   const form = new FormData()
-  form.append('audio', audio, audio.type.includes('mp4') ? 'answer.m4a' : 'answer.webm')
+  form.append('audio', audio, audio.type.includes('wav') ? 'answer.wav' : audio.type.includes('mp4') ? 'answer.m4a' : 'answer.webm')
   Object.entries(fields).forEach(([key, value]) => form.append(key, value))
-  return request<{ transcript: string; detectedLanguage: string; durationMs: number }>('/transcribe', { method: 'POST', body: form })
+  return request<{ transcript: string; detectedLanguage: string; durationMs: number }>('/transcribe', { method: 'POST', body: form, signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(20_000)]) : undefined })
 }
 
 export function generateLine(input: Record<string, unknown>) {

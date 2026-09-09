@@ -5,7 +5,7 @@ export function detectVoiceCommand(source: string): VoiceCommand {
   const english = source.toLowerCase().replace(/[,.!?]/g, '').trim().replace(/\s+/g, ' ')
   const chinese = source.replace(/[，。！？\s]/g, '')
   const request = english.replace(/^(?:can you|could you|would you|please) /, '').replace(/ please$/, '')
-  if (/^(?:pause|stop|wait)(?: a (?:moment|second))?$/.test(request) || /^(?:请|可以)?(?:暂停|停一下|等等|等一下|别说了)(?:吗)?$/.test(chinese)) return 'pause'
+  if (/^(?:(?:pause|stop|wait)(?: a (?:moment|second))?|stop talking|hold on)$/.test(request) || /^(?:请|可以)?(?:暂停|停|停一下|等等|等一下|别说了)(?:吗)?$/.test(chinese)) return 'pause'
   if (/^(?:goodbye|bye|all done|all finished|end the (?:call|story))$/.test(request) || /^(?:结束|再见|不玩了|拜拜)$/.test(chinese)) return 'end'
   if (/^(?:continue|resume|keep going)$/.test(request) || /^(?:请)?(?:继续|接着说|继续讲)$/.test(chinese)) return 'continue'
   if (/^(?:(?:repeat|say|ask)(?: the)? question(?: again)?|what(?: is| was|'s) the question)$/.test(request) || /(?:重复|再问|再说|重新).*(?:问题)|问题.*(?:一遍|是什么)/.test(chinese)) return 'question'
