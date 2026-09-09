@@ -5,6 +5,7 @@ const url = import.meta.env.VITE_SUPABASE_URL as string | undefined
 const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined
 
 export const supabase: SupabaseClient | null = url && key ? createClient(url, key, {
+  global: { fetch: (input, init) => fetch(input, { ...init, signal: init?.signal ?? AbortSignal.timeout(12_000) }) },
   auth: { flowType: 'pkce', persistSession: true, autoRefreshToken: true },
 }) : null
 

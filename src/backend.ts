@@ -1,5 +1,6 @@
 import { accessToken } from './supabase'
 import type { Evaluation, SessionEvent } from './types'
+import { readStored, writeStored } from './storage'
 
 const configuredBaseURL = (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(/\/$/, '')
 const baseURL = import.meta.env.PROD ? '/api' : configuredBaseURL
@@ -11,7 +12,7 @@ async function request<T>(path: string, init: RequestInit = {}, authenticate = t
     const token = await accessToken()
     if (token) headers.set('Authorization', `Bearer ${token}`)
   }
-  const response = await fetch(`${baseURL}${path}`, { ...init, headers })
+  const response = await fetch(`${baseURL}${path}`, { ...init, headers, signal: init.signal ?? AbortSignal.timeout(20_000) })
   const data = await response.json().catch(() => ({}))
   if (!response.ok) throw new Error(typeof data.error === 'string' ? data.error : 'The service is unavailable')
   return data as T
@@ -28,6 +29,10 @@ export function startResearchSession(input: Record<string, unknown>) {
 const eventQueueKey = 'choochoo:upload-queue'
 
 export async function uploadEvents(sessionID: string, events: SessionEvent[]) {
+  queueEventBatch(sessionID, events)
+  // Upload only the completed session: per-render uploads consumed the voice
+  // rate budget while research storage was offline.
+  if (!events.some((event) => event.type === 'session_ended')) return
   try {
     await sendEventBatch(sessionID, events)
     await flushEventQueue()
@@ -37,25 +42,28 @@ export async function uploadEvents(sessionID: string, events: SessionEvent[]) {
   }
 }
 
-function sendEventBatch(sessionID: string, events: SessionEvent[]) {
-  return request('/sessions/log', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ sessionID, events }) })
+async function sendEventBatch(sessionID: string, events: SessionEvent[]) {
+  for (let offset = 0; offset < events.length; offset += 100) {
+    await request('/sessions/log', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ sessionID, events: events.slice(offset, offset + 100) }) })
+  }
 }
 
 function queueEventBatch(sessionID: string, events: SessionEvent[]) {
-  const queue = JSON.parse(localStorage.getItem(eventQueueKey) || '[]') as Array<{ sessionID: string; events: SessionEvent[] }>
+  const raw = readStored<unknown>(eventQueueKey, [])
+  const queue = (Array.isArray(raw) ? raw : []) as Array<{ sessionID: string; events: SessionEvent[] }>
   const withoutOlderCopy = queue.filter((item) => item.sessionID !== sessionID)
-  localStorage.setItem(eventQueueKey, JSON.stringify([...withoutOlderCopy, { sessionID, events }].slice(-12)))
+  writeStored(eventQueueKey, [...withoutOlderCopy, { sessionID, events }].slice(-12))
 }
 
 async function flushEventQueue() {
-  const queue = JSON.parse(localStorage.getItem(eventQueueKey) || '[]') as Array<{ sessionID: string; events: SessionEvent[] }>
+  const raw = readStored<unknown>(eventQueueKey, [])
+  const queue = (Array.isArray(raw) ? raw : []) as Array<{ sessionID: string; events: SessionEvent[] }>
   if (!queue.length) return
   const remaining = []
   for (const batch of queue) {
     try { await sendEventBatch(batch.sessionID, batch.events) } catch { remaining.push(batch) }
   }
-  if (remaining.length) localStorage.setItem(eventQueueKey, JSON.stringify(remaining))
-  else localStorage.removeItem(eventQueueKey)
+  writeStored(eventQueueKey, remaining)
 }
 
 export function evaluateRemotely(input: Record<string, unknown>) {

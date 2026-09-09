@@ -1,4 +1,5 @@
 import type { LessonLanguage, Reward, SessionEvent, Story, VocabularyItem, VisualCondition } from './types'
+import { readStored, writeStored } from './storage'
 
 export interface SessionConfig {
   language: LessonLanguage
@@ -19,23 +20,25 @@ export interface CompletionData {
 }
 
 export function completedBefore(storyID: string) {
-  return localStorage.getItem(`choochoo:completed:${storyID}`) === 'true'
+  return readStored<boolean>(`choochoo:completed:${storyID}`, false) === true
 }
 
 export function markCompleted(storyID: string) {
-  localStorage.setItem(`choochoo:completed:${storyID}`, 'true')
+  writeStored(`choochoo:completed:${storyID}`, true)
 }
 
 export function savedRewards(story: Story) {
-  const stored = JSON.parse(localStorage.getItem(`choochoo:rewards:${story.id}`) || '[]') as string[]
+  const raw = readStored<unknown>(`choochoo:rewards:${story.id}`, [])
+  const stored = Array.isArray(raw) ? raw : []
   const rewards = story.beats.map((beat) => beat.checkpoint.reward)
   return rewards.filter((reward, index) => stored.includes(reward.id) && rewards.findIndex((item) => item.id === reward.id) === index)
 }
 
 export function saveReward(storyID: string, reward: Reward) {
   const key = `choochoo:rewards:${storyID}`
-  const stored = JSON.parse(localStorage.getItem(key) || '[]') as string[]
-  if (!stored.includes(reward.id)) localStorage.setItem(key, JSON.stringify([...stored, reward.id]))
+  const raw = readStored<unknown>(key, [])
+  const stored = Array.isArray(raw) ? raw : []
+  if (!stored.includes(reward.id)) writeStored(key, [...stored, reward.id])
 }
 
 export function downloadJSON(fileName: string, value: unknown) {
@@ -48,5 +51,5 @@ export function downloadJSON(fileName: string, value: unknown) {
 }
 
 export function clearLocalResearchData() {
-  Object.keys(localStorage).filter((key) => key.startsWith('choochoo:')).forEach((key) => localStorage.removeItem(key))
+  try { Object.keys(localStorage).filter((key) => key.startsWith('choochoo:')).forEach((key) => localStorage.removeItem(key)) } catch { /* Storage is optional. */ }
 }

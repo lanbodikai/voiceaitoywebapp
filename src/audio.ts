@@ -1,4 +1,6 @@
 let activeAudio: HTMLAudioElement | undefined
+let cancelPlayback: (() => void) | undefined
+let playbackGeneration = 0
 
 /** The iOS app and the web app use the same fixed Edge-TTS cue filenames. */
 export function cueForLanguage(cueID: string, language: 'chinese' | 'english') {
@@ -12,7 +14,10 @@ export function storyFeedbackCue(storyID: string, checkpointID: string, kind: 'h
 }
 
 export function stopVoice() {
-  window.speechSynthesis.cancel()
+  playbackGeneration += 1
+  cancelPlayback?.()
+  cancelPlayback = undefined
+  window.speechSynthesis?.cancel()
   activeAudio?.pause()
   activeAudio?.removeAttribute('src')
   activeAudio = undefined
@@ -26,7 +31,9 @@ export function stopVoice() {
  */
 export async function speak(text: string, language: 'chinese' | 'english', cueID?: string) {
   stopVoice()
+  const generation = playbackGeneration
   if (cueID && await playCue(cueID)) return
+  if (generation !== playbackGeneration) return
   return speakWithBrowser(text, language)
 }
 
@@ -42,6 +49,7 @@ function playCue(cueID: string) {
       resolve(played)
     }
     audio.preload = 'auto'
+    cancelPlayback = () => finish(true)
     audio.addEventListener('ended', () => finish(true), { once: true })
     audio.addEventListener('error', () => finish(false), { once: true })
     audio.play().catch(() => finish(false))
@@ -50,6 +58,8 @@ function playCue(cueID: string) {
 
 function speakWithBrowser(text: string, language: 'chinese' | 'english') {
   return new Promise<void>((resolve) => {
+    if (!window.speechSynthesis || typeof SpeechSynthesisUtterance === 'undefined') { resolve(); return }
+    cancelPlayback = resolve
     const utterance = new SpeechSynthesisUtterance(text)
     utterance.lang = language === 'chinese' ? 'zh-CN' : 'en-US'
     utterance.rate = 0.85
