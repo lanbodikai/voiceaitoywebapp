@@ -34,5 +34,6 @@ document.querySelector('#speak').onclick=async()=>{
   const buffer=await input.context.decodeAudioData(await response.arrayBuffer())
   const source=input.context.createBufferSource();source.buffer=buffer;source.connect(input.destination);source.start(0,0,1.6)
 }
-await import('/src/main.tsx')
+// The current transport uses WebSocket chunks; keep old test bookmarks useful.
+location.replace('./streaming.html')
 </script></body></html>

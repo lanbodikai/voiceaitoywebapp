@@ -39,7 +39,15 @@ export function evaluateLocal(transcript: string, checkpoint: Checkpoint, target
   const related = checkpoint.relatedTerms.map(normalize).some((term) => value.includes(term))
   const knownWrong = checkpoint.knownWrongTerms.map(normalize).some((term) => value.includes(term))
 
-  if (checkpoint.kind === 'open') return { verdict: 'correct', language, matchedConcepts, confidence: 0.95 }
+  // Keyword substrings are not evidence that a whole utterance makes sense.
+  // Only an exact known answer takes the fast path; all other speech gets semantic
+  // evaluation, including open questions and short but meaningful Mandarin ideas.
+  const exactKnownAnswer = checkpoint.concepts.some(concept => [...concept.zh, ...concept.homophones, ...concept.en].some(term => normalize(term) === value))
+  if (!exactKnownAnswer) return { verdict: 'uncertain', language, matchedConcepts, confidence: 0.4 }
+  if (checkpoint.kind === 'open') {
+    const target = matches.some(match => targetLanguage === 'chinese' ? match.chinese : match.english)
+    return { verdict: target ? 'correct' : 'meaningUnderstood', language, matchedConcepts, confidence: 0.95 }
+  }
   if (checkpoint.kind === 'choice') {
     const targetChoice = matches.some((match) => targetLanguage === 'chinese' ? match.chinese : match.english)
     if (targetChoice) return { verdict: 'correct', language, matchedConcepts, confidence: 0.99 }

@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "sfxManifest": [
     { "id": "earcon_listen_start", "description": "Rising two-note chirp when mic capture begins" },
     { "id": "earcon_listen_stop", "description": "Soft descending blip when mic capture ends" },
@@ -58,6 +58,13 @@
       "vocabularyDomain": "friends, baking, celebration",
       "startBeatId": "call-a-friend",
       "typicalPathLength": 5,
+      "puzzle": {
+        "imageAsset": "scene_birthday_party",
+        "altText": "啾啾和朋友们围着草莓蛋糕为妙妙庆祝生日",
+        "englishAltText": "ChooChoo and friends celebrate Miaomiao's birthday around a strawberry cake",
+        "celebrationText": "拼图完成啦！大家一起准备的生日惊喜出现了！",
+        "englishCelebrationText": "Puzzle complete! The birthday surprise everyone made together is here!"
+      },
       "beats": [
         {
           "id": "call-a-friend",
@@ -66,7 +73,7 @@
           "illustrationAsset": "scene_call_a_friend",
           "audioCue": "scene_call_a_friend",
           "narration": "今天是猫咪妙妙的生日。小龙啾啾想送她一个特别的惊喜：亲手做一个香香的生日蛋糕。可是，啾啾从来没有烤过蛋糕，他需要朋友们帮忙。啾啾有三个好朋友：小狐狸菲菲常常在厨房里做面包，小马燕丽最爱唱歌，盼盼有一辆黄色的小车，最喜欢开车。啾啾拿起电话，想了想——先打给谁呢？",
-          "englishNarration": "Today is Miaomiao the cat's birthday. ChooChoo the little dragon wants to surprise her with a homemade birthday cake. But ChooChoo has never baked a cake before, so he needs his friends. He has three good friends: Feifei the little fox often bakes bread in her kitchen, Yanli the pony loves to sing, and Panpan has a little yellow car and loves to drive. ChooChoo picks up the phone and thinks — who should he call first?",
+          "englishNarration": "Today is Miaomiao the cat's birthday. ChooChoo the little dragon wants to surprise her with a homemade birthday cake. But ChooChoo has never baked a cake before, so he needs his friends. He has three good friends: Feifei the little fox often bakes bread in her kitchen, Yanli the pony loves to sing, and Panpan has a little yellow car and loves to drive. ChooChoo picks up the phone and thinks. Who should he call first?",
           "soundEffects": [],
           "nextBeatId": null,
           "checkpoint": {
@@ -89,7 +96,7 @@
             "hints": [
               { "level": 1, "text": "三个朋友都可以哦！你最喜欢谁？小狐狸、小马，还是盼盼？" },
               { "level": 2, "text": "请说一个名字，比如：菲菲。" },
-              { "level": 3, "text": "You can pick any friend! 你可以说：小狐狸，小马，或者盼盼。" },
+              { "level": 3, "text": "谁都可以来帮忙。你可以说：小狐狸、小马，或者盼盼。" },
               { "level": 4, "text": "我们一起打给小狐狸好不好？请跟我说：小狐狸。" }
             ],
             "branches": [
@@ -135,7 +142,7 @@
               { "level": 1, "text": "上面写着面粉、鸡蛋、牛奶……这张纸叫什么？" },
               { "level": 2, "text": "请填空：菲菲写了一张材料清——。" },
               { "level": 3, "text": "Feifei wrote a list. 你可以说：菲菲写了……" },
-              { "level": 4, "text": "请选择：菲菲写了清单，还是画了一幅画？请说完整答案。" }
+              { "level": 4, "text": "我们一起说完整答案：菲菲认真地写了一张材料清单。" }
             ],
             "branches": [],
             "defaultBranchId": null,
@@ -154,7 +161,7 @@
           "illustrationAsset": "scene_yanli_song",
           "audioCue": "scene_yanli_song",
           "narration": "小马燕丽接到电话，开心地说：“做蛋糕我不太会，可是我会唱歌呀！”她和啾啾一起走去小狐狸菲菲家请她帮忙。一路上，燕丽都在练习生日歌：“祝你生日快乐……”练了一遍又一遍，越唱越好听。到了菲菲家，菲菲带上食谱书，大家又接上盼盼。朋友们都到齐啦！",
-          "englishNarration": "When Yanli the pony got the call, she said happily, \"I'm not very good at baking — but I can sing!\" She walked with ChooChoo to Feifei the fox's house to ask for help. All along the way, Yanli practiced the birthday song: \"Happy birthday to you…\" She sang it again and again, and it got prettier every time. At Feifei's house, Feifei grabbed her recipe book, and then they picked up Panpan too. Now everyone was together!",
+          "englishNarration": "When Yanli the pony got the call, she said happily, \"I'm not very good at baking. But I can sing!\" She walked with ChooChoo to Feifei the fox's house to ask for help. All along the way, Yanli practiced the birthday song: \"Happy birthday to you, \" She sang it again and again, and it got prettier every time. At Feifei's house, Feifei grabbed her recipe book, and then they picked up Panpan too. Now everyone was together!",
           "soundEffects": [],
           "nextBeatId": "gather-ingredients",
           "checkpoint": {
@@ -176,7 +183,7 @@
               { "level": 1, "text": "祝你生日快乐——这首歌叫什么？" },
               { "level": 2, "text": "请填空：燕丽在练习生——歌。" },
               { "level": 3, "text": "She practiced the birthday song. 你可以说：燕丽在练习……" },
-              { "level": 4, "text": "请选择：燕丽在练习生日歌，还是在睡觉？请说完整答案。" }
+              { "level": 4, "text": "我们一起说完整答案：燕丽在路上练习生日歌。" }
             ],
             "branches": [],
             "defaultBranchId": null,
@@ -195,7 +202,7 @@
           "illustrationAsset": "scene_panpan_pickup",
           "audioCue": "scene_panpan_pickup",
           "narration": "盼盼接到电话，马上说：“我开车来接大家！”嘀嘀——一辆黄色的小车开到了啾啾家门口。啾啾跳上车，盼盼先开到小狐狸菲菲家，菲菲抱着食谱书上了车；再开到小马燕丽家，燕丽也蹦蹦跳跳地上了车。小黄车装满了朋友，嘀嘀嘀地开回啾啾家。朋友们都到齐啦！",
-          "englishNarration": "When Panpan got the call, he said, \"I'll drive over and pick everyone up!\" Beep beep — a little yellow car pulled up at ChooChoo's door. ChooChoo hopped in. First Panpan drove to Feifei the fox's house, and Feifei climbed in hugging her recipe book. Then they drove to Yanli the pony's house, and Yanli bounced in too. The little yellow car was full of friends as it beeped its way back to ChooChoo's house. Now everyone was together!",
+          "englishNarration": "When Panpan got the call, he said, \"I'll drive over and pick everyone up!\" Beep beep. A little yellow car pulled up at ChooChoo's door. ChooChoo hopped in. First Panpan drove to Feifei the fox's house, and Feifei climbed in hugging her recipe book. Then they drove to Yanli the pony's house, and Yanli bounced in too. The little yellow car was full of friends as it beeped its way back to ChooChoo's house. Now everyone was together!",
           "soundEffects": [{ "sfxId": "sfx_car_horn", "timing": "beforeNarration" }],
           "nextBeatId": "gather-ingredients",
           "checkpoint": {
@@ -217,7 +224,7 @@
               { "level": 1, "text": "香蕉是什么颜色？盼盼的小车也是这个颜色。" },
               { "level": 2, "text": "请填空：盼盼的小车是黄——的。" },
               { "level": 3, "text": "The car is yellow. 你可以说：小车是……" },
-              { "level": 4, "text": "请选择：小车是黄色的，还是红色的？请说完整答案。" }
+              { "level": 4, "text": "我们一起说完整答案：盼盼的小车是黄色的。" }
             ],
             "branches": [],
             "defaultBranchId": null,
@@ -258,7 +265,7 @@
               { "level": 1, "text": "这种水果红红的，表面有许多小点点。" },
               { "level": 2, "text": "请填空：盼盼带回来一车草——。" },
               { "level": 3, "text": "Pan Pan brought strawberries. 你可以说：盼盼带回了……" },
-              { "level": 4, "text": "请选择：盼盼带回草莓，还是面粉？请说完整答案。" }
+              { "level": 4, "text": "我们一起说完整答案：盼盼带回来一车红红的草莓。" }
             ],
             "branches": [],
             "defaultBranchId": null,
@@ -300,7 +307,7 @@
               { "level": 1, "text": "燕丽拿着牛奶，啾啾拿着木勺。想想他们各自做了什么。" },
               { "level": 2, "text": "请填空：燕丽倒牛奶，啾啾继续——面糊。" },
               { "level": 3, "text": "Yan Li poured milk, and ChooChoo stirred. 你可以说：燕丽……啾啾……" },
-              { "level": 4, "text": "请选择：他们加牛奶并搅拌，还是把面糊扔掉？请说完整答案。" }
+              { "level": 4, "text": "我们一起说完整答案：燕丽倒牛奶，啾啾继续搅拌面糊。" }
             ],
             "branches": [],
             "defaultBranchId": null,
@@ -319,7 +326,7 @@
           "illustrationAsset": "scene_birthday_party",
           "audioCue": "scene_birthday_surprise",
           "narration": "蛋糕烤好了，菲菲在上面摆出一圈草莓。盼盼关上灯，燕丽轻轻弹起生日歌，大家躲在桌子后面。妙妙推门进来时，啾啾点亮小蜡烛，朋友们一起跳出来唱生日快乐。妙妙惊喜得眼睛亮亮的。她许下愿望，然后把蛋糕分给每一个朋友。啾啾觉得，最甜的不只是蛋糕，还有大家一起准备惊喜的心意。",
-          "englishNarration": "The cake was ready, and Feifei decorated it with a ring of strawberries. Panpan turned off the lights, Yanli softly began the birthday song, and everyone hid behind the table. When Miaomiao opened the door, ChooChoo lit the candles and the friends jumped out to sing Happy Birthday. Miaomiao's eyes went bright with surprise. She made a wish and shared the cake with every friend. The sweetest part wasn't just the cake — it was preparing the surprise together.",
+          "englishNarration": "The cake was ready, and Feifei decorated it with a ring of strawberries. Panpan turned off the lights, Yanli softly began the birthday song, and everyone hid behind the table. When Miaomiao opened the door, ChooChoo lit the candles and the friends jumped out to sing Happy Birthday. Miaomiao's eyes went bright with surprise. She made a wish and shared the cake with every friend. The sweetest part wasn't just the cake. It was preparing the surprise together.",
           "soundEffects": [{ "sfxId": "sfx_party_horn", "timing": "afterNarration" }],
           "nextBeatId": null,
           "checkpoint": {
@@ -365,6 +372,13 @@
       "vocabularyDomain": "animals, animal sounds, colors",
       "startBeatId": "farm-arrival",
       "typicalPathLength": 5,
+      "puzzle": {
+        "imageAsset": "scene_farm_dinner",
+        "altText": "啾啾和农场朋友们在晚霞中围着长桌吃晚饭",
+        "englishAltText": "ChooChoo and the farm friends share dinner at a long table at sunset",
+        "celebrationText": "拼图完成啦！农场朋友们都来一起吃晚饭了！",
+        "englishCelebrationText": "Puzzle complete! All the farm friends are here for dinner!"
+      },
       "beats": [
         {
           "id": "farm-arrival",
@@ -373,7 +387,7 @@
           "illustrationAsset": "scene_farm_arrival",
           "audioCue": "scene_farm_arrival",
           "narration": "今天，啾啾坐着小火车去山羊爷爷的农场玩。农场里有小狗汪汪，她的鼻子最灵；有母鸡咯咯，她认识院子里的每一个角落；还有小马驹达达，他跑得最快。可是，山羊爷爷很着急：小鸭子嘎嘎不见了！快吃晚饭了，嘎嘎会在哪里呢？啾啾想先请一个朋友帮忙。",
-          "englishNarration": "Today ChooChoo rode the little train to Grandpa Goat's farm. On the farm lives Wangwang the dog, whose nose can smell anything; Gege the hen, who knows every corner of the yard; and Dada the little foal, who runs the fastest of all. But Grandpa Goat was worried: Gaga the duckling was missing! Dinner was almost ready — where could Gaga be? ChooChoo wanted to ask one friend for help first.",
+          "englishNarration": "Today ChooChoo rode the little train to Grandpa Goat's farm. On the farm lives Wangwang the dog, whose nose can smell anything; Gege the hen, who knows every corner of the yard; and Dada the little foal, who runs the fastest of all. But Grandpa Goat was worried: Gaga the duckling was missing! Dinner was almost ready. Where could Gaga be? ChooChoo wanted to ask one friend for help first.",
           "soundEffects": [
             { "sfxId": "sfx_train_whistle", "timing": "beforeNarration" },
             { "sfxId": "sfx_farm_ambience", "timing": "beforeNarration" }
@@ -399,7 +413,7 @@
             "hints": [
               { "level": 1, "text": "三个朋友都可以哦！你想要灵灵的鼻子、聪明的母鸡，还是飞快的小马？" },
               { "level": 2, "text": "请说一个名字，比如：汪汪。" },
-              { "level": 3, "text": "You can pick any friend! 你可以说：小狗，母鸡，或者小马。" },
+              { "level": 3, "text": "谁都可以来帮忙。你可以说：小狗、母鸡，或者小马。" },
               { "level": 4, "text": "我们一起请小狗汪汪好不好？请跟我说：小狗。" }
             ],
             "branches": [
@@ -423,7 +437,7 @@
           "illustrationAsset": "scene_dog_nose",
           "audioCue": "scene_dog_nose",
           "narration": "小狗汪汪竖起耳朵，说：“交给我吧！”她把鼻子贴在地上，闻一闻，闻一闻。“我闻到啦！是小鸭子的味道！”汪汪顺着味道走过菜园，一直走到池塘边的大石头旁。她朝着池塘汪汪叫了两声：线索就在这里！",
-          "englishNarration": "Wangwang the dog perked up her ears and said, \"Leave it to me!\" She pressed her nose to the ground — sniff, sniff. \"I smell it! That's the duckling's smell!\" Wangwang followed the smell past the vegetable garden, all the way to the big rock by the pond. She barked twice toward the pond: the clue was right here!",
+          "englishNarration": "Wangwang the dog perked up her ears and said, \"Leave it to me!\" She pressed her nose to the ground. Sniff, sniff. \"I smell it! That's the duckling's smell!\" Wangwang followed the smell past the vegetable garden, all the way to the big rock by the pond. She barked twice toward the pond: the clue was right here!",
           "soundEffects": [
             { "sfxId": "sfx_dog_sniff", "timing": "afterNarration" }
           ],
@@ -447,7 +461,7 @@
               { "level": 1, "text": "汪汪把它贴在地上，闻一闻，闻一闻。它是什么？" },
               { "level": 2, "text": "请填空：汪汪用鼻——闻味道。" },
               { "level": 3, "text": "She used her nose. 你可以说：汪汪用……" },
-              { "level": 4, "text": "请选择：汪汪用鼻子，还是用尾巴？请说完整答案。" }
+              { "level": 4, "text": "我们一起说完整答案：汪汪用鼻子闻到了小鸭子的味道。" }
             ],
             "branches": [],
             "defaultBranchId": null,
@@ -466,7 +480,7 @@
           "illustrationAsset": "scene_hen_yard",
           "audioCue": "scene_hen_yard",
           "narration": "母鸡咯咯拍拍翅膀说：“院子里的每个角落我都认识！”她先看了看鸡窝后面，没有；又看了看大南瓜下面，也没有。忽然，咯咯在泥地上发现了一串小小的、湿湿的脚印。“咯咯哒！是小鸭子的脚印！”脚印一步一步，一直指向池塘。",
-          "englishNarration": "Gege the hen flapped her wings and said, \"I know every corner of this yard!\" She checked behind the henhouse — nothing. She peeked under the big pumpkin — nothing. Then suddenly, Gege spotted a trail of tiny wet footprints in the mud. \"Cluck-cluck! Duckling footprints!\" Step by step, the footprints pointed straight to the pond.",
+          "englishNarration": "Gege the hen flapped her wings and said, \"I know every corner of this yard!\" She checked behind the henhouse. Nothing. She peeked under the big pumpkin. Nothing. Then suddenly, Gege spotted a trail of tiny wet footprints in the mud. \"Cluck-cluck! Duckling footprints!\" Step by step, the footprints pointed straight to the pond.",
           "soundEffects": [
             { "sfxId": "sfx_hen_cluck", "timing": "afterNarration" }
           ],
@@ -490,7 +504,7 @@
               { "level": 1, "text": "小鸭子走过泥地，会留下小小的什么？" },
               { "level": 2, "text": "请填空：咯咯发现了小鸭子的脚——。" },
               { "level": 3, "text": "She found footprints. 你可以说：咯咯发现了……" },
-              { "level": 4, "text": "请选择：咯咯发现了脚印，还是鸡蛋？请说完整答案。" }
+              { "level": 4, "text": "我们一起说完整答案：咯咯发现了小鸭子的脚印。" }
             ],
             "branches": [],
             "defaultBranchId": null,
@@ -509,7 +523,7 @@
           "illustrationAsset": "scene_foal_run",
           "audioCue": "scene_foal_run",
           "narration": "小马驹达达刨刨蹄子说：“我跑得快，我去找！”哒哒哒、哒哒哒，达达绕着农场跑了一大圈：谷仓那里没有，果树下面也没有。跑到池塘边的时候，达达忽然停住了——芦苇丛里，有一个黄色的小东西动了一下！“是黄色的！”达达大声喊。",
-          "englishNarration": "Dada the foal pawed the ground and said, \"I'm fast — I'll go look!\" Clip-clop, clip-clop — Dada ran a big loop around the whole farm: nothing at the barn, nothing under the fruit trees. But by the pond, Dada suddenly stopped — in the reeds, something small and yellow moved! \"It's yellow!\" Dada shouted.",
+          "englishNarration": "Dada the foal pawed the ground and said, \"I'm fast. I'll go look!\" Clip-clop, clip-clop. Dada ran a big loop around the whole farm: nothing at the barn, nothing under the fruit trees. But by the pond, Dada suddenly stopped. In the reeds, something small and yellow moved! \"It's yellow!\" Dada shouted.",
           "soundEffects": [
             { "sfxId": "sfx_horse_gallop", "timing": "afterNarration" }
           ],
@@ -533,7 +547,7 @@
               { "level": 1, "text": "小鸭子的羽毛是什么颜色的？达达看到的就是这个颜色。" },
               { "level": 2, "text": "请填空：达达看到一个黄——的小东西。" },
               { "level": 3, "text": "It was yellow. 你可以说：是黄色的。" },
-              { "level": 4, "text": "请选择：是黄色的，还是蓝色的？请说完整答案。" }
+              { "level": 4, "text": "我们一起说完整答案：达达看到了一个黄色的小东西。" }
             ],
             "branches": [],
             "defaultBranchId": null,
@@ -552,7 +566,7 @@
           "illustrationAsset": "scene_pond_search",
           "audioCue": "scene_pond_search",
           "narration": "大家都来到了池塘边。池塘里荷叶圆圆，风轻轻吹。忽然，最大的那片荷叶后面，传来了小小的声音：“嘎……嘎……”啾啾把耳朵凑过去，仔细听——声音越来越近，越来越响。是谁在叫呢？大家屏住呼吸，轻轻地把荷叶掀开一条小缝。",
-          "englishNarration": "Everyone gathered at the pond. Round lotus leaves floated on the water, and the wind blew softly. Suddenly, from behind the biggest lotus leaf came a tiny sound: \"Quack… quack…\" ChooChoo leaned in and listened carefully — the sound came closer and louder. Who could it be? Everyone held their breath and gently lifted the edge of the leaf.",
+          "englishNarration": "Everyone gathered at the pond. Round lotus leaves floated on the water, and the wind blew softly. Suddenly, from behind the biggest lotus leaf came a tiny sound: \"Quack,  quack, \" ChooChoo leaned in and listened carefully. The sound came closer and louder. Who could it be? Everyone held their breath and gently lifted the edge of the leaf.",
           "soundEffects": [
             { "sfxId": "sfx_duck_quack", "timing": "afterNarration" }
           ],
@@ -620,7 +634,7 @@
               { "level": 1, "text": "啾啾用手把嘎嘎怎么样？然后大家把她送去哪里？" },
               { "level": 2, "text": "请填空：啾啾把嘎嘎抱——来，带她回——。" },
               { "level": 3, "text": "They carried her and brought her home. 你可以说：抱起来……带回家……" },
-              { "level": 4, "text": "请选择：他们把嘎嘎抱回家，还是留在池塘？请说完整答案。" }
+              { "level": 4, "text": "我们一起说完整答案：啾啾抱起嘎嘎，大家把她带回家。" }
             ],
             "branches": [],
             "defaultBranchId": null,
@@ -698,6 +712,13 @@
       "vocabularyDomain": "food, counting 1-3, hot and cold",
       "startBeatId": "shop-opening",
       "typicalPathLength": 5,
+      "puzzle": {
+        "imageAsset": "scene_your_food",
+        "altText": "啾啾和熊猫奶奶在亮着红灯笼的小面馆前分享一碗面",
+        "englishAltText": "ChooChoo and Grandma Panda share noodles outside their lantern-lit noodle shop",
+        "celebrationText": "拼图完成啦！小面馆亮起了暖暖的灯！",
+        "englishCelebrationText": "Puzzle complete! The little noodle shop is glowing warmly!"
+      },
       "beats": [
         {
           "id": "shop-opening",
@@ -706,7 +727,7 @@
           "illustrationAsset": "scene_shop_opening",
           "audioCue": "scene_shop_opening",
           "narration": "今天，啾啾和熊猫奶奶的小面馆开张啦！叮铃铃，门上的小铃铛响了——第一位客人来了！是小兔子蹦蹦。蹦蹦揉着肚子说：“我好饿呀！”墙上的菜单有两样好吃的：热乎乎的汤面，还有胖乎乎的饺子。做哪一样呢？啾啾系上小围裙，等你来决定！",
-          "englishNarration": "Today, ChooChoo and Grandma Panda opened their little noodle shop! Ding-a-ling — the bell on the door rang. The very first customer! It was Bengbeng the bunny. Bengbeng rubbed her tummy and said, \"I'm SO hungry!\" The menu on the wall had two yummy things: steaming noodle soup and plump little dumplings. Which one should they make? ChooChoo tied on his apron and waited for you to decide!",
+          "englishNarration": "Today, ChooChoo and Grandma Panda opened their little noodle shop! Ding-a-ling. The bell on the door rang. The very first customer! It was Bengbeng the bunny. Bengbeng rubbed her tummy and said, \"I'm SO hungry!\" The kitchen could make steaming noodle soup or plump little dumplings. What should they make first? ChooChoo tied on his apron and listened for your idea!",
           "soundEffects": [
             { "sfxId": "sfx_shop_bell", "timing": "beforeNarration" }
           ],
@@ -753,7 +774,7 @@
           "illustrationAsset": "scene_make_noodles",
           "audioCue": "scene_make_noodles",
           "narration": "熊猫奶奶把面团揉呀揉，啾啾帮忙拉面条。拉呀拉，拉呀拉，面条变得长长的，像小兔子的跳绳一样长！啾啾把面条放进锅里，咕嘟咕嘟，再放上绿绿的青菜和金黄的玉米。热气飘出来，香喷喷的汤面做好啦！",
-          "englishNarration": "Grandma Panda kneaded the dough, and ChooChoo helped pull the noodles. Pull and pull, pull and pull — the noodles grew looong, as long as a bunny's jump rope! ChooChoo slid them into the pot — bubble, bubble — and added green veggies and golden corn. Steam floated up: the fragrant noodle soup was ready!",
+          "englishNarration": "Grandma Panda kneaded the dough, and ChooChoo helped pull the noodles. They pulled and pulled until the noodles were as long as a bunny's jump rope! ChooChoo slid them into the bubbling pot, then added green veggies and golden corn. Steam floated up. The fragrant noodle soup was ready!",
           "soundEffects": [
             { "sfxId": "sfx_boiling", "timing": "afterNarration" }
           ],
@@ -763,7 +784,7 @@
             "kind": "comprehension",
             "promptType": "recall",
             "question": "拉出来的面条是长长的，还是短短的？",
-            "englishQuestion": "Were the noodles they pulled looong, or short?",
+            "englishQuestion": "Were the noodles they pulled long, or short?",
             "audioCue": "question_long_noodles",
             "concepts": [
               { "id": "long", "zh": ["长长的", "长", "很长"], "en": ["long", "looong"], "homophones": ["常常的", "唱"] }
@@ -772,12 +793,12 @@
             "knownWrongTerms": ["短短的", "短", "圆圆的"],
             "recast": "面条是长长的。",
             "successLine": "答对了！面条长长的，像跳绳一样长！",
-            "englishHint": "Like a jump rope — is that long or short?",
+            "englishHint": "Like a jump rope. Is that long or short?",
             "hints": [
               { "level": 1, "text": "面条像小兔子的跳绳一样。跳绳是长的还是短的？" },
               { "level": 2, "text": "请填空：面条是长——的。" },
               { "level": 3, "text": "The noodles are long. 你可以说：面条是长长的。" },
-              { "level": 4, "text": "请选择：面条是长长的，还是短短的？请说完整答案。" }
+              { "level": 4, "text": "我们一起说完整答案：拉出来的面条是长长的。" }
             ],
             "branches": [],
             "defaultBranchId": null,
@@ -796,7 +817,7 @@
           "illustrationAsset": "scene_make_dumplings",
           "audioCue": "scene_make_dumplings",
           "narration": "熊猫奶奶擀出圆圆的饺子皮，啾啾放上香香的馅儿。捏一捏，包一包——第一个饺子包好啦！我们一起数：一！再来一个：二！最后一个：三！三个胖乎乎的饺子跳进锅里，咕嘟咕嘟，像三个小枕头在洗澡。饺子浮起来了，熟啦！",
-          "englishNarration": "Grandma Panda rolled out round dumpling wrappers, and ChooChoo spooned in the yummy filling. Pinch and fold — the first dumpling was done! Let's count together: one! Another one: two! Last one: three! Three plump dumplings hopped into the pot — bubble, bubble — like three little pillows taking a bath. They floated up: all done!",
+          "englishNarration": "Grandma Panda rolled out round dumpling wrappers, and ChooChoo spooned in the yummy filling. Pinch and fold. The first dumpling was done! Let's count together: one! Another one: two! Last one: three! Three plump dumplings hopped into the pot. Bubble, bubble. Like three little pillows taking a bath. They floated up: all done!",
           "soundEffects": [
             { "sfxId": "sfx_boiling", "timing": "afterNarration" }
           ],
@@ -815,12 +836,12 @@
             "knownWrongTerms": ["一个", "两个", "五个"],
             "recast": "他们一共包了三个饺子。",
             "successLine": "答对了！一、二、三，三个胖乎乎的饺子！",
-            "englishHint": "Count with me: one, two… and one more!",
+            "englishHint": "Count with me: one, two,  and one more!",
             "hints": [
               { "level": 1, "text": "我们再数一次：一、二、……后面是几？" },
               { "level": 2, "text": "请填空：他们包了——个饺子。" },
               { "level": 3, "text": "They made three. 用中文说就是：三个。" },
-              { "level": 4, "text": "请选择：是三个，还是五个？请说完整答案：三个饺子。" }
+              { "level": 4, "text": "我们一起说完整答案：他们一共包了三个饺子。" }
             ],
             "branches": [],
             "defaultBranchId": null,
@@ -839,7 +860,7 @@
           "illustrationAsset": "scene_hot_soup",
           "audioCue": "scene_hot_soup",
           "narration": "好吃的做好了，可是碗里冒着热气——太烫啦！蹦蹦的耳朵都急得竖起来了。熊猫奶奶笑着说：“别急别急，我们吹一吹。”啾啾鼓起腮帮子，对着碗轻轻地吹：呼——呼——热气跳着舞飞走了。再吹一次，呼——现在不烫了，温温的，刚刚好！",
-          "englishNarration": "The food was ready, but the bowl was steaming — too hot! Bengbeng's ears stood straight up with impatience. Grandma Panda smiled: \"No rush, no rush — let's blow on it.\" ChooChoo puffed up his cheeks and blew gently on the bowl: whoo… whoo… The steam danced away. One more blow — whoo — and now it was just warm. Just right!",
+          "englishNarration": "The food was ready, but the bowl was steaming. Too hot! Bengbeng's ears stood straight up with impatience. Grandma Panda smiled: \"No rush, no rush. Let's blow on it.\" ChooChoo puffed up his cheeks and blew gently on the bowl: a slow, gentle breath. The steam danced away. After one more gentle breath, it was just warm. Just right!",
           "soundEffects": [
             { "sfxId": "sfx_blow_whoosh", "timing": "afterNarration" }
           ],
@@ -849,7 +870,7 @@
             "kind": "comprehension",
             "promptType": "completion",
             "question": "碗太烫的时候，我们要轻轻地吹一——？请帮我说完。",
-            "englishQuestion": "When the bowl is too hot, we gently blow — finish it: we blow a…?",
+          "englishQuestion": "What should we do when the bowl is too hot?",
             "audioCue": "question_blow_on_it",
             "concepts": [
               { "id": "blow", "zh": ["吹", "吹一吹", "吹一下", "吹吹"], "en": ["blow", "blow on it"], "homophones": ["催", "炊"] }
@@ -858,7 +879,7 @@
             "knownWrongTerms": ["摸", "喝", "咬"],
             "recast": "太烫的时候，我们要吹一吹。",
             "successLine": "对啦！呼——呼——吹一吹就不烫啦！",
-            "englishHint": "Puff up your cheeks and… whoo!",
+            "englishHint": "Puff up your cheeks and blow gently.",
             "hints": [
               { "level": 1, "text": "鼓起腮帮子，呼——呼——这个动作叫什么？" },
               { "level": 2, "text": "请跟我说：吹一吹。" },
@@ -882,7 +903,7 @@
           "illustrationAsset": "scene_happy_customer",
           "audioCue": "scene_happy_customer",
           "narration": "蹦蹦大口大口地吃起来，耳朵开心地一晃一晃。吃完以后，她摸摸圆圆的肚子，大声说：“谢谢啾啾！真好吃！”她还从篮子里拿出一根大胡萝卜，送给小面馆做礼物。叮铃铃！门铃又响了，小羊和小猫也闻着香味来了。小面馆越来越热闹！",
-          "englishNarration": "Bengbeng ate in big happy bites, her ears bouncing with joy. When she finished, she patted her round tummy and said loudly, \"Thank you, ChooChoo! So yummy!\" Then she pulled a big carrot from her basket as a present for the shop. Ding-a-ling! The doorbell rang again — a little lamb and a kitten had followed the delicious smell. The little shop was getting busier and busier!",
+          "englishNarration": "Bengbeng ate in big happy bites, her ears bouncing with joy. When she finished, she patted her round tummy and said loudly, \"Thank you, ChooChoo! So yummy!\" Then she pulled a big carrot from her basket as a present for the shop. Ding-a-ling! The doorbell rang again. A little lamb and a kitten had followed the delicious smell. The little shop was getting busier and busier!",
           "soundEffects": [
             { "sfxId": "sfx_shop_bell", "timing": "afterNarration" }
           ],
@@ -907,7 +928,7 @@
               { "level": 1, "text": "吃到好吃的东西，我们会说哪两句话？" },
               { "level": 2, "text": "请填空：谢谢啾啾，真好——！" },
               { "level": 3, "text": "She said thank you, so yummy! 你可以说：谢谢……好吃……" },
-              { "level": 4, "text": "请选择：蹦蹦说真好吃，还是说不好吃？请说完整答案。" }
+              { "level": 4, "text": "我们一起说完整答案：蹦蹦说，谢谢啾啾，真好吃！" }
             ],
             "branches": [],
             "defaultBranchId": null,
@@ -958,6 +979,1038 @@
               { "id": "hungry", "zh": "饿", "pinyin": "è", "en": "hungry" }
             ],
             "successSfx": [{ "sfxId": "sfx_cheer", "timing": "onSuccess" }]
+          }
+        }
+      ]
+    },
+    {
+      "id": "little-red-hen",
+      "title": "小红母鸡",
+      "englishTitle": "Little Red Hen",
+      "subtitle": "一粒麦种，变成香喷喷的面包",
+      "coverEmoji": "🌾",
+      "estimatedMinutes": 9,
+      "vocabularyDomain": "wheat, baking, effort, helping",
+      "startBeatId": "red-hen-seed",
+      "typicalPathLength": 5,
+      "puzzle": {
+        "imageAsset": "scene_red_hen_finish",
+        "altText": "小红母鸡捧着自己烤好的面包，猪、猫和老鼠在一旁看着",
+        "englishAltText": "Little Red Hen holds the bread she baked while Pig, Cat, and Rat look on",
+        "celebrationText": "拼图完成啦！小红母鸡的香面包出炉了！",
+        "englishCelebrationText": "Puzzle complete! Little Red Hen's warm bread is ready!"
+      },
+      "summary": "小红母鸡在院子里找虫子喂自己和小鸡，发现一粒麦种。她请猪、猫和老鼠帮忙种麦子，大家都说不帮，她就自己种。夏天麦子长高成熟，她又独自收割。小鸡也需要照顾，她仍自己打麦，把麦粒送到磨坊磨成面粉。猪、猫和老鼠连做面包也不帮。小红母鸡照着食谱自己做面包。秋风送来香味，猪、猫和老鼠都想吃，但她说自己做了所有工作，要自己吃。故事中她最后自己吃了面包。",
+      "englishSummary": "Little Red Hen finds a wheat seed while looking for worms in the barnyard to feed herself and her chicks. The Pig, Cat, and Rat each refuse to help her plant it, so she plants it herself. Through summer she cares for her chicks and the wheat grows tall. The animals also refuse to cut and thresh it. She does both jobs herself and takes the grain to the mill for flour. They refuse to make bread, too. She follows a recipe and bakes it while the Cat laughs, the Rat admires himself, and the Pig snores. The autumn breeze carries the delicious smell. Now all three want to eat, but the hen says no: she did all the work and will eat the bread herself. And she does.",
+      "beats": [
+        {
+          "id": "red-hen-seed",
+          "title": "院子里的麦种",
+          "emoji": "🌱",
+          "illustrationAsset": "scene_red_hen_seed",
+          "audioCue": "scene_red_hen_seed",
+          "narration": "小红母鸡住在一个农家院子里。她每天迈着小步子，东抓抓，西刨刨，寻找虫子。有一天，她发现了一粒种子。她以为是好吃的小虫子，轻轻咬了一下，才知道这是一粒麦种。把它种下去，就能长出麦子，磨成面粉，再做成面包。可是，她还要找食物，照顾小鸡。她问猪、猫和老鼠：“谁来帮我种这粒麦种？”猪说：“我不种。”猫说：“我不种。”老鼠也说：“我不种。”“那我来种吧。”小红母鸡说。于是，她自己把麦种种进了土里。",
+          "englishNarration": "Little Red Hen lived in a barnyard. She spent her days taking little steps, scratching the ground and looking for worms. One day she found a seed. At first she thought it might be a tasty new bug! But she learned it was a wheat seed. Planted in the ground, it could grow into wheat, become flour, and then become bread. She was busy finding food for herself and her chicks. She called to the Pig, the Cat, and the Rat, \"Who will plant this seed?\" \"Not I,\" said the Pig. \"Not I,\" said the Cat. \"Not I,\" said the Rat. \"Then I will,\" said Little Red Hen. And she did.",
+          "soundEffects": [],
+          "nextBeatId": "red-hen-harvest",
+          "checkpoint": {
+            "id": "red-hen-seed",
+            "kind": "comprehension",
+            "promptType": "recall",
+            "question": "小红母鸡在院子里发现了什么种子？",
+            "englishQuestion": "What kind of seed did Little Red Hen find?",
+            "audioCue": "question_red_hen_seed",
+            "concepts": [
+              {
+                "id": "wheat-seed",
+                "zh": [
+                  "麦种",
+                  "小麦种子",
+                  "麦子种子",
+                  "小麦",
+                  "麦子"
+                ],
+                "en": [
+                  "wheat seed",
+                  "wheat",
+                  "a wheat seed"
+                ],
+                "homophones": []
+              }
+            ],
+            "relatedTerms": [
+              "麦种",
+              "种"
+            ],
+            "knownWrongTerms": [],
+            "recast": "小红母鸡发现了一粒麦种。",
+            "successLine": "是呀，一粒小小的麦种，种下去就能长出麦子。",
+            "englishHint": "It can grow into wheat, which becomes flour for bread.",
+            "hints": [
+              {
+                "level": 1,
+                "text": "这粒种子长大以后，可以磨成做面包的面粉。"
+              },
+              {
+                "level": 2,
+                "text": "它是小麦的种子，我们叫它麦种。"
+              },
+              {
+                "level": 3,
+                "text": "小红母鸡找到的是一粒麦种。"
+              },
+              {
+                "level": 4,
+                "text": "一粒小小的麦种，开始了这个面包故事。"
+              }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": {
+              "id": "legacy-red-hen-seed",
+              "zh": "麦种",
+              "pinyin": "mài zhǒng",
+              "en": "wheat seed",
+              "emoji": "🌱",
+              "announcement": "",
+              "sfxId": ""
+            },
+            "vocabulary": [
+              {
+                "id": "wheat-seed",
+                "zh": "麦种",
+                "pinyin": "mài zhǒng",
+                "en": "wheat seed"
+              },
+              {
+                "id": "plant",
+                "zh": "种",
+                "pinyin": "zhòng",
+                "en": "plant"
+              }
+            ],
+            "successSfx": []
+          }
+        },
+        {
+          "id": "red-hen-harvest",
+          "title": "麦子长高了",
+          "emoji": "🌾",
+          "illustrationAsset": "scene_red_hen_harvest",
+          "audioCue": "scene_red_hen_harvest",
+          "narration": "夏天一天一天过去了。小红母鸡忙着找虫子、喂小鸡，猪、猫和老鼠却过得很悠闲。地里的麦子越长越高，终于成熟了，可以收割啦！小红母鸡跑来跑去，问大家：“谁来割麦子？”猪说：“我不割。”猫说：“我不割。”老鼠也说：“我不割。”“那我来吧。”小红母鸡说。于是，她自己把成熟的麦子割了下来。",
+          "englishNarration": "The long summer days passed. Little Red Hen kept scratching for worms and feeding her chicks. The Pig, the Cat, and the Rat had plenty of time to rest, while the wheat grew tall. At last it was ripe and ready to harvest. Little Red Hen hurried around the barnyard, calling, \"Who will cut the wheat?\" \"Not I,\" said the Pig. \"Not I,\" said the Cat. \"Not I,\" said the Rat. \"Then I will,\" said Little Red Hen. And she did. She cut the ripe wheat herself.",
+          "soundEffects": [],
+          "nextBeatId": "red-hen-flour",
+          "checkpoint": {
+            "id": "red-hen-harvest",
+            "kind": "comprehension",
+            "promptType": "recall",
+            "question": "麦子成熟以后，是谁把它割下来的？",
+            "englishQuestion": "Who cut the wheat when it was ripe?",
+            "audioCue": "question_red_hen_harvest",
+            "concepts": [
+              {
+                "id": "red-hen",
+                "zh": [
+                  "小红母鸡",
+                  "红母鸡",
+                  "母鸡",
+                  "小红鸡",
+                  "她自己"
+                ],
+                "en": [
+                  "little red hen",
+                  "red hen",
+                  "the hen",
+                  "hen",
+                  "she did",
+                  "herself"
+                ],
+                "homophones": []
+              }
+            ],
+            "relatedTerms": [
+              "收割",
+              "麦子"
+            ],
+            "knownWrongTerms": [],
+            "recast": "小红母鸡自己割下了成熟的麦子。",
+            "successLine": "对呀，麦子成熟了，小红母鸡又亲自动手啦。",
+            "englishHint": "The same hen who planted the seed did this job herself.",
+            "hints": [
+              {
+                "level": 1,
+                "text": "猪、猫和老鼠都没有来帮忙。"
+              },
+              {
+                "level": 2,
+                "text": "种下麦种的那位朋友，又开始干活了。"
+              },
+              {
+                "level": 3,
+                "text": "是小红母鸡自己割的麦子。"
+              },
+              {
+                "level": 4,
+                "text": "小红母鸡把成熟的麦子收割好了。"
+              }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": {
+              "id": "legacy-red-hen-harvest",
+              "zh": "收割",
+              "pinyin": "shōu gē",
+              "en": "harvest",
+              "emoji": "🌾",
+              "announcement": "",
+              "sfxId": ""
+            },
+            "vocabulary": [
+              {
+                "id": "harvest",
+                "zh": "收割",
+                "pinyin": "shōu gē",
+                "en": "harvest"
+              },
+              {
+                "id": "wheat",
+                "zh": "麦子",
+                "pinyin": "mài zi",
+                "en": "wheat"
+              }
+            ],
+            "successSfx": []
+          }
+        },
+        {
+          "id": "red-hen-flour",
+          "title": "麦粒变面粉",
+          "emoji": "⚙️",
+          "illustrationAsset": "scene_red_hen_flour",
+          "audioCue": "scene_red_hen_flour",
+          "narration": "割好的麦子躺在地上，等着收起来。这时，一只小黄鸡叫了起来，也需要妈妈照顾。小红母鸡忙得不知道先做什么好。她还是满怀希望地问：“谁来帮我打麦，把麦粒从麦穗里分出来？”猪哼了一声，说不帮。猫叫了一声，说不帮。老鼠也说不帮。小红母鸡有些失望，但还是说：“那我来吧。”她自己打好了麦，又把麦粒送到磨坊。麦粒磨呀磨，变成了细细的面粉。",
+          "englishNarration": "The cut wheat lay on the ground, waiting to be gathered. Just then, one of the little yellow chicks began peeping for its mother. Everything needed Little Red Hen’s attention! Still hopeful, she asked, \"Who will thresh the wheat?\" Threshing means separating the grains from the stalks. The Pig grunted, the Cat meowed, and the Rat squeaked. Each said, \"Not I.\" Little Red Hen felt discouraged. \"Then I will,\" she said. And she did. She threshed the wheat herself and carried the grain to the mill, where it was ground into flour.",
+          "soundEffects": [],
+          "nextBeatId": "red-hen-bread",
+          "checkpoint": {
+            "id": "red-hen-flour",
+            "kind": "comprehension",
+            "promptType": "recall",
+            "question": "麦粒送到磨坊以后，被磨成了什么？",
+            "englishQuestion": "What did the grain become at the mill?",
+            "audioCue": "question_red_hen_flour",
+            "concepts": [
+              {
+                "id": "flour",
+                "zh": [
+                  "面粉",
+                  "粉",
+                  "小麦粉"
+                ],
+                "en": [
+                  "flour",
+                  "wheat flour"
+                ],
+                "homophones": []
+              }
+            ],
+            "relatedTerms": [
+              "面粉",
+              "磨坊"
+            ],
+            "knownWrongTerms": [],
+            "recast": "麦粒在磨坊里被磨成了面粉。",
+            "successLine": "没错，麦粒变成了细细的面粉，离面包又近一步啦。",
+            "englishHint": "It is the soft powder used to make bread.",
+            "hints": [
+              {
+                "level": 1,
+                "text": "磨坊把麦粒磨成了细细的粉。"
+              },
+              {
+                "level": 2,
+                "text": "这种粉可以用来做面包，叫面粉。"
+              },
+              {
+                "level": 3,
+                "text": "麦粒磨呀磨，变成了面粉。"
+              },
+              {
+                "level": 4,
+                "text": "现在，小红母鸡有了做面包需要的面粉。"
+              }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": {
+              "id": "legacy-red-hen-flour",
+              "zh": "面粉",
+              "pinyin": "miàn fěn",
+              "en": "flour",
+              "emoji": "⚙️",
+              "announcement": "",
+              "sfxId": ""
+            },
+            "vocabulary": [
+              {
+                "id": "flour",
+                "zh": "面粉",
+                "pinyin": "miàn fěn",
+                "en": "flour"
+              },
+              {
+                "id": "mill",
+                "zh": "磨坊",
+                "pinyin": "mò fáng",
+                "en": "mill"
+              }
+            ],
+            "successSfx": []
+          }
+        },
+        {
+          "id": "red-hen-bread",
+          "title": "照着食谱做面包",
+          "emoji": "🍞",
+          "illustrationAsset": "scene_red_hen_bread",
+          "audioCue": "scene_red_hen_bread",
+          "narration": "第二天，小红母鸡想把面粉做成面包。她平时不常做面包，不过她相信，认真照着食谱做，就能学会。她又问：“谁来做面包？”猪说：“我不做。”猫说：“我不做。”老鼠也说：“我不做。”“那我来做吧。”小红母鸡说。于是，她认真照着食谱，开始做面包。猫在旁边懒洋洋地笑着，老鼠对着镜子打扮，远处的猪已经睡着，打起了呼噜。小红母鸡继续忙着自己的面包。",
+          "englishNarration": "The next day, Little Red Hen knew it was time to turn the flour into bread. She did not often bake, but she knew she could follow a recipe carefully. Perhaps the others would help this time. \"Who will make the bread?\" she asked. \"Not I,\" said the Pig. \"Not I,\" said the Cat. \"Not I,\" said the Rat. \"Then I will,\" said Little Red Hen. And she did. She followed the recipe and made the bread herself. The Cat sat nearby, laughing lazily. The Rat admired himself in a mirror. In the distance, the sleeping Pig snored.",
+          "soundEffects": [],
+          "nextBeatId": "red-hen-finish",
+          "checkpoint": {
+            "id": "red-hen-bread",
+            "kind": "comprehension",
+            "promptType": "recall",
+            "question": "小红母鸡照着食谱，用面粉做了什么？",
+            "englishQuestion": "What did Little Red Hen make with the flour?",
+            "audioCue": "question_red_hen_bread",
+            "concepts": [
+              {
+                "id": "bread",
+                "zh": [
+                  "面包",
+                  "一个面包"
+                ],
+                "en": [
+                  "bread",
+                  "a loaf",
+                  "a loaf of bread"
+                ],
+                "homophones": []
+              }
+            ],
+            "relatedTerms": [
+              "面包",
+              "食谱"
+            ],
+            "knownWrongTerms": [],
+            "recast": "小红母鸡用面粉做了面包。",
+            "successLine": "是呀，她认真照着食谱，做出了面包。",
+            "englishHint": "Think of the loaf she is baking.",
+            "hints": [
+              {
+                "level": 1,
+                "text": "她正在做一种烤好以后很香的食物。"
+              },
+              {
+                "level": 2,
+                "text": "面粉做成面团，再烤成面包。"
+              },
+              {
+                "level": 3,
+                "text": "小红母鸡正在做面包。"
+              },
+              {
+                "level": 4,
+                "text": "她用自己磨好的面粉，做出了面包。"
+              }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": {
+              "id": "legacy-red-hen-bread",
+              "zh": "面包",
+              "pinyin": "miàn bāo",
+              "en": "bread",
+              "emoji": "🍞",
+              "announcement": "",
+              "sfxId": ""
+            },
+            "vocabulary": [
+              {
+                "id": "bread",
+                "zh": "面包",
+                "pinyin": "miàn bāo",
+                "en": "bread"
+              },
+              {
+                "id": "recipe",
+                "zh": "食谱",
+                "pinyin": "shí pǔ",
+                "en": "recipe"
+              }
+            ],
+            "successSfx": []
+          }
+        },
+        {
+          "id": "red-hen-finish",
+          "title": "香喷喷的面包",
+          "emoji": "🐔",
+          "illustrationAsset": "scene_red_hen_finish",
+          "audioCue": "scene_red_hen_finish",
+          "narration": "终于，面包烤好了！秋风把香味送到了院子的每个角落。猪、猫和老鼠都使劲闻着，馋得直咂嘴。小红母鸡迈着小步子走过来，心里高兴得几乎要唱歌跳舞。这香喷喷的面包，都是她自己辛苦做出来的呀！她问：“谁来吃面包？”这一次，猪说：“我来吃！”猫说：“我来吃！”老鼠也说：“我来吃！”可是小红母鸡说：“不，你们不吃。我要自己吃。”于是，她自己吃了面包。从种麦到烤面包，每一步都是她做的。",
+          "englishNarration": "At last, the bread was ready! The autumn breeze carried its delicious smell all around the barnyard. The Pig, the Cat, and the Rat sniffed the air and smacked their lips. Little Red Hen walked over in her small, busy steps. She felt so pleased she could almost dance and sing. She had done all the work to make this wonderful bread! \"Who will eat the bread?\" she called. \"I will,\" said the Pig. \"I will,\" said the Cat. \"I will,\" said the Rat. But Little Red Hen said, \"No, you won’t. I will.\" And she did. She ate the bread she had worked so hard to make.",
+          "soundEffects": [],
+          "nextBeatId": null,
+          "checkpoint": {
+            "id": "red-hen-finish",
+            "kind": "open",
+            "promptType": "distancing",
+            "question": "如果你也在那个院子里，你想怎样帮帮小红母鸡？",
+            "englishQuestion": "If you visited that barnyard, how would you help Little Red Hen?",
+            "audioCue": "question_red_hen_finish",
+            "concepts": [
+              {
+                "id": "help-hen",
+                "zh": [
+                  "种麦子",
+                  "种种子",
+                  "割麦子",
+                  "做面包",
+                  "照顾小鸡",
+                  "帮忙"
+                ],
+                "en": [
+                  "plant seeds",
+                  "plant",
+                  "cut wheat",
+                  "bake bread",
+                  "bake",
+                  "feed the chicks",
+                  "help"
+                ],
+                "homophones": []
+              }
+            ],
+            "relatedTerms": [
+              "帮忙",
+              "小鸡"
+            ],
+            "knownWrongTerms": [],
+            "recast": "我可以帮小红母鸡照顾小鸡。",
+            "successLine": "你愿意帮忙，小红母鸡就不用独自忙这么多事啦。",
+            "englishHint": "She has chicks to care for and bread to make. What could you help with?",
+            "hints": [
+              {
+                "level": 1,
+                "text": "小红母鸡既要照顾小鸡，又要做面包，真忙呀。"
+              },
+              {
+                "level": 2,
+                "text": "我想帮她喂小鸡，让她歇一会儿。你有什么想法呢？"
+              },
+              {
+                "level": 3,
+                "text": "一起干活，院子里会热闹起来。"
+              },
+              {
+                "level": 4,
+                "text": "我们可以陪她照顾小鸡，让她轻松一点。"
+              }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": {
+              "id": "legacy-red-hen-finish",
+              "zh": "帮忙",
+              "pinyin": "bāng máng",
+              "en": "help",
+              "emoji": "🐔",
+              "announcement": "",
+              "sfxId": ""
+            },
+            "vocabulary": [
+              {
+                "id": "help",
+                "zh": "帮忙",
+                "pinyin": "bāng máng",
+                "en": "help"
+              },
+              {
+                "id": "chick",
+                "zh": "小鸡",
+                "pinyin": "xiǎo jī",
+                "en": "chick"
+              }
+            ],
+            "successSfx": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "henny-penny",
+      "title": "小母鸡佩妮",
+      "englishTitle": "Henny Penny",
+      "subtitle": "先停一停，看看究竟发生了什么",
+      "coverEmoji": "🌳",
+      "estimatedMinutes": 10,
+      "vocabularyDomain": "animals, acorns, observation, thinking",
+      "startBeatId": "penny-acorn",
+      "typicalPathLength": 6,
+      "puzzle": {
+        "imageAsset": "scene_penny_home",
+        "altText": "佩妮在橡树下发现一颗橡子，和朋友们一起安全回家",
+        "englishAltText": "Henny Penny finds an acorn beneath the oak tree and heads safely home with her friends",
+        "celebrationText": "拼图完成啦！佩妮发现了橡子的秘密，大家安全回家了！",
+        "englishCelebrationText": "Puzzle complete! Henny Penny solved the acorn mystery and everyone is safe!"
+      },
+      "summary": "小母鸡佩妮在院子里啄玉米，一颗橡子落到头上，她误以为天要塌了，要去告诉国王。路上，公鸡洛奇、鸭子达达、鹅朵朵和火鸡卢奇先后加入。狐狸沃奇假装知道去王宫的路，把大家带到自己黑黑的洞口，谎称这是近路。鹅朵朵停下来，问去王宫为什么要钻黑洞。大家看到狐狸舔嘴唇，觉得不对劲。这时另一颗橡子落在佩妮头上，她仔细看了看，明白不是天塌了。所有小鸟一起跑回家，没有进狐狸洞，也没有去见国王。以后佩妮遇到意外，会先停一停、看一看、想一想。",
+      "englishSummary": "Henny Penny is picking up corn in the rickyard when an acorn hits her head. Mistaking it for the falling sky, she sets off to tell the King. Cocky Locky, Ducky Daddles, Goosey Poosey, and Turkey Lurkey join her in that order. Foxy Woxy says they are going the wrong way and offers to show them a shortcut to the palace. He leads them to his own dark den. As Turkey Lurkey steps forward, Goosey Poosey stops and asks why the way to the palace would go through a dark little hole. Everyone notices the fox licking his lips and looking hungry. Another acorn hits Henny Penny. She looks up, down, and at the acorn, and realizes the sky is not falling. All five birds run safely home without entering the den or telling the King. Afterwards she tries to stop, look, and think when something surprising happens.",
+      "beats": [
+        {
+          "id": "penny-acorn",
+          "title": "头上落下了什么",
+          "emoji": "🌰",
+          "illustrationAsset": "scene_penny_acorn",
+          "audioCue": "scene_penny_acorn",
+          "narration": "有一天，小母鸡佩妮正在院子里啄玉米。忽然，一颗橡子从树上落下来，碰到了她的头。“哎呀！”佩妮吓了一跳，“天要塌下来了！我得去告诉国王！”她没有抬头看树，也没有仔细看看掉下来的东西，就急急忙忙地出发了。",
+          "englishNarration": "One day Henny Penny was picking up corn in the rickyard. Suddenly, an acorn fell from a tree and hit her on the head. \"Goodness gracious me!\" said Henny Penny. \"The sky is going to fall! I must go and tell the King.\" She hurried off before looking carefully at what had fallen.",
+          "soundEffects": [],
+          "nextBeatId": "penny-king",
+          "checkpoint": {
+            "id": "penny-acorn",
+            "kind": "comprehension",
+            "promptType": "recall",
+            "question": "刚才从树上落到佩妮头上的，是什么呀？",
+            "englishQuestion": "What fell from the tree onto Henny Penny’s head?",
+            "audioCue": "question_penny_acorn",
+            "concepts": [
+              {
+                "id": "acorn",
+                "zh": [
+                  "橡子",
+                  "橡树果实",
+                  "橡树的果实",
+                  "坚果",
+                  "果实"
+                ],
+                "en": [
+                  "acorn",
+                  "an acorn",
+                  "nut",
+                  "a nut"
+                ],
+                "homophones": []
+              }
+            ],
+            "relatedTerms": [
+              "橡子",
+              "天空"
+            ],
+            "knownWrongTerms": [],
+            "recast": "落到佩妮头上的是一颗橡子。",
+            "successLine": "是呀，一颗橡子落了下来，佩妮却以为天要塌了。",
+            "englishHint": "It is a little nut that grows on an oak tree.",
+            "hints": [
+              {
+                "level": 1,
+                "text": "是树上掉下来的一颗小果实。"
+              },
+              {
+                "level": 2,
+                "text": "橡树的果实叫橡子。"
+              },
+              {
+                "level": 3,
+                "text": "刚才掉下来的，是一颗橡子。"
+              },
+              {
+                "level": 4,
+                "text": "一颗橡子碰到了佩妮的头，并不是天空掉下来了。"
+              }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": {
+              "id": "legacy-penny-acorn",
+              "zh": "橡子",
+              "pinyin": "xiàng zǐ",
+              "en": "acorn",
+              "emoji": "🌰",
+              "announcement": "",
+              "sfxId": ""
+            },
+            "vocabulary": [
+              {
+                "id": "acorn",
+                "zh": "橡子",
+                "pinyin": "xiàng zǐ",
+                "en": "acorn"
+              },
+              {
+                "id": "sky",
+                "zh": "天空",
+                "pinyin": "tiān kōng",
+                "en": "sky"
+              }
+            ],
+            "successSfx": []
+          }
+        },
+        {
+          "id": "penny-king",
+          "title": "一起去告诉国王",
+          "emoji": "🐓",
+          "illustrationAsset": "scene_penny_king",
+          "audioCue": "scene_penny_king",
+          "narration": "佩妮走呀走，遇到了公鸡洛奇。“佩妮，你去哪里？”洛奇问。“我要去告诉国王，天要塌了！”佩妮说。“我能跟你一起去吗？”“当然可以！”于是，他们一起往前走。走着走着，又遇到了鸭子达达。“你们去哪里？”达达问。“我们要去告诉国王，天要塌了！”“我能一起去吗？”“当然可以！”于是，佩妮、洛奇和达达一起赶路。",
+          "englishNarration": "Henny Penny went along until she met Cocky Locky. \"Where are you going, Henny Penny?\" he asked. \"I am going to tell the King the sky is falling,\" she said. \"May I come with you?\" asked Cocky Locky. \"Of course!\" So they went along together. Soon they met Ducky Daddles. \"Where are you going?\" asked Ducky Daddles. \"We are going to tell the King the sky is falling!\" \"May I come with you?\" \"Of course!\" Now Henny Penny, Cocky Locky, and Ducky Daddles were all walking together.",
+          "soundEffects": [],
+          "nextBeatId": "penny-friends",
+          "checkpoint": {
+            "id": "penny-king",
+            "kind": "comprehension",
+            "promptType": "recall",
+            "question": "佩妮和朋友们想去把这件事告诉谁？",
+            "englishQuestion": "Who do Henny Penny and her friends want to tell?",
+            "audioCue": "question_penny_king",
+            "concepts": [
+              {
+                "id": "king",
+                "zh": [
+                  "国王",
+                  "王",
+                  "大王"
+                ],
+                "en": [
+                  "king",
+                  "the king"
+                ],
+                "homophones": []
+              }
+            ],
+            "relatedTerms": [
+              "国王",
+              "一起"
+            ],
+            "knownWrongTerms": [],
+            "recast": "佩妮和朋友们想去告诉国王。",
+            "successLine": "对呀，他们正急着去找国王。",
+            "englishHint": "They are on their way to someone who lives in a palace.",
+            "hints": [
+              {
+                "level": 1,
+                "text": "他们想去王宫，告诉住在里面的人。"
+              },
+              {
+                "level": 2,
+                "text": "住在王宫里的，是国王。"
+              },
+              {
+                "level": 3,
+                "text": "佩妮要把这件事告诉国王。"
+              },
+              {
+                "level": 4,
+                "text": "大家一起赶路，想去告诉国王。"
+              }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": {
+              "id": "legacy-penny-king",
+              "zh": "国王",
+              "pinyin": "guó wáng",
+              "en": "king",
+              "emoji": "🐓",
+              "announcement": "",
+              "sfxId": ""
+            },
+            "vocabulary": [
+              {
+                "id": "king",
+                "zh": "国王",
+                "pinyin": "guó wáng",
+                "en": "king"
+              },
+              {
+                "id": "together",
+                "zh": "一起",
+                "pinyin": "yì qǐ",
+                "en": "together"
+              }
+            ],
+            "successSfx": []
+          }
+        },
+        {
+          "id": "penny-friends",
+          "title": "队伍越来越长",
+          "emoji": "🪿",
+          "illustrationAsset": "scene_penny_friends",
+          "audioCue": "scene_penny_friends",
+          "narration": "三个朋友走呀走，又遇到了鹅朵朵。朵朵问他们去哪里。他们说：“我们要去告诉国王，天要塌了！”朵朵也想一起去，大家高兴地答应了。他们继续往前走，又遇到了火鸡卢奇。卢奇听说了，也说：“我能一起去吗？”“当然可以！”大家回答。现在，小母鸡佩妮、公鸡洛奇、鸭子达达、鹅朵朵和火鸡卢奇，五个朋友一起赶路。可是，谁都还没有回去看看，究竟是什么掉了下来。",
+          "englishNarration": "The three friends went along until they met Goosey Poosey. \"Where are you going?\" asked Goosey Poosey. \"We are going to tell the King the sky is falling!\" \"May I come with you?\" \"Of course!\" So Goosey Poosey joined them. A little farther along, they met Turkey Lurkey. They told him where they were going, and he asked to come too. \"Of course!\" they said. Now Henny Penny, Cocky Locky, Ducky Daddles, Goosey Poosey, and Turkey Lurkey were all going together. None of them had gone back to see what really fell.",
+          "soundEffects": [],
+          "nextBeatId": "penny-fox",
+          "checkpoint": {
+            "id": "penny-friends",
+            "kind": "open",
+            "promptType": "distancing",
+            "question": "朋友们听到天要塌了，就急着赶路。如果你在旁边，你会提醒他们做什么？",
+            "englishQuestion": "The friends hurry off without checking what happened. What would you suggest they do?",
+            "audioCue": "question_penny_friends",
+            "concepts": [
+              {
+                "id": "check-first",
+                "zh": [
+                  "看一看",
+                  "看看",
+                  "停下来",
+                  "想一想",
+                  "回去看",
+                  "问一问",
+                  "检查"
+                ],
+                "en": [
+                  "look",
+                  "look up",
+                  "stop",
+                  "think",
+                  "check",
+                  "go back",
+                  "ask"
+                ],
+                "homophones": []
+              }
+            ],
+            "relatedTerms": [
+              "看",
+              "朋友"
+            ],
+            "knownWrongTerms": [],
+            "recast": "我会提醒他们先停下来，看一看发生了什么。",
+            "successLine": "多一个想法，也许就能帮朋友们弄清楚发生了什么。",
+            "englishHint": "They have not checked what fell. What could help them find out?",
+            "hints": [
+              {
+                "level": 1,
+                "text": "大家都很着急，却还没看看树底下的东西。"
+              },
+              {
+                "level": 2,
+                "text": "我想陪他们回去看看，地上有什么呢？"
+              },
+              {
+                "level": 3,
+                "text": "先停一停，看清楚再出发，也不错呀。"
+              },
+              {
+                "level": 4,
+                "text": "我们陪朋友们先看看发生了什么吧。"
+              }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": {
+              "id": "legacy-penny-friends",
+              "zh": "看",
+              "pinyin": "kàn",
+              "en": "look",
+              "emoji": "🪿",
+              "announcement": "",
+              "sfxId": ""
+            },
+            "vocabulary": [
+              {
+                "id": "look",
+                "zh": "看",
+                "pinyin": "kàn",
+                "en": "look"
+              },
+              {
+                "id": "friend",
+                "zh": "朋友",
+                "pinyin": "péng you",
+                "en": "friend"
+              }
+            ],
+            "successSfx": []
+          }
+        },
+        {
+          "id": "penny-fox",
+          "title": "狐狸带来的近路",
+          "emoji": "🦊",
+          "illustrationAsset": "scene_penny_fox",
+          "audioCue": "scene_penny_fox",
+          "narration": "五个朋友走呀走，遇到了狐狸沃奇。“你们去哪里？”狐狸问。大家说，他们要去告诉国王，天要塌了。“哎呀，这可很重要！”狐狸说，“不过，你们走错路了。我知道去王宫的路，要我带你们去吗？”大家都答应了。狐狸带着他们继续走，一直来到一个又窄又黑的洞口。其实，那是狐狸自己的家。“这是去王宫的近路。”狐狸说，“跟着我，很快就到了。”",
+          "englishNarration": "The five friends went along until they met Foxy Woxy. \"Where are you going?\" asked the fox. They told him they were going to tell the King the sky was falling. \"Dear me! That is very important,\" said Foxy Woxy. \"But this is not the way to the King. I know the proper way. Shall I show you?\" The friends agreed. Foxy Woxy led them along until they reached a narrow, very dark hole. It was the door of his own den. \"This is the shortcut to the King’s palace,\" he said. \"You will soon get there if you follow me.\"",
+          "soundEffects": [],
+          "nextBeatId": "penny-stop",
+          "checkpoint": {
+            "id": "penny-fox",
+            "kind": "comprehension",
+            "promptType": "recall",
+            "question": "狐狸说是去王宫的近路，其实那个黑黑的洞是谁的家？",
+            "englishQuestion": "The fox calls the dark hole a shortcut. Whose home is it really?",
+            "audioCue": "question_penny_fox",
+            "concepts": [
+              {
+                "id": "fox",
+                "zh": [
+                  "狐狸",
+                  "狐狸的家",
+                  "沃奇",
+                  "狐狸沃奇",
+                  "狐狸洞"
+                ],
+                "en": [
+                  "fox",
+                  "the fox",
+                  "foxy woxy",
+                  "fox den",
+                  "his den"
+                ],
+                "homophones": []
+              }
+            ],
+            "relatedTerms": [
+              "狐狸",
+              "近路"
+            ],
+            "knownWrongTerms": [],
+            "recast": "那个黑黑的洞，其实是狐狸的家。",
+            "successLine": "是呀，那是狐狸自己的家，并不是通往王宫的近路。",
+            "englishHint": "Foxy Woxy has brought them to his own den.",
+            "hints": [
+              {
+                "level": 1,
+                "text": "带路的狐狸对这个洞很熟悉。"
+              },
+              {
+                "level": 2,
+                "text": "那是狐狸自己住的地方。"
+              },
+              {
+                "level": 3,
+                "text": "黑黑的洞口通向狐狸的家。"
+              },
+              {
+                "level": 4,
+                "text": "狐狸把大家带到了自己的洞口。"
+              }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": {
+              "id": "legacy-penny-fox",
+              "zh": "狐狸",
+              "pinyin": "hú li",
+              "en": "fox",
+              "emoji": "🦊",
+              "announcement": "",
+              "sfxId": ""
+            },
+            "vocabulary": [
+              {
+                "id": "fox",
+                "zh": "狐狸",
+                "pinyin": "hú li",
+                "en": "fox"
+              },
+              {
+                "id": "shortcut",
+                "zh": "近路",
+                "pinyin": "jìn lù",
+                "en": "shortcut"
+              }
+            ],
+            "successSfx": []
+          }
+        },
+        {
+          "id": "penny-stop",
+          "title": "朵朵停下来了",
+          "emoji": "🛑",
+          "illustrationAsset": "scene_penny_stop",
+          "audioCue": "scene_penny_stop",
+          "narration": "狐狸先钻进黑洞。火鸡卢奇正要跟上去，鹅朵朵忽然停了下来。“等一等。”朵朵说，“去国王的王宫，为什么要钻进一个黑黑的小洞呢？”鸭子达达看着洞口，公鸡洛奇看着洞口，鹅朵朵和火鸡卢奇也看着洞口。然后，大家又看看狐狸。狐狸正舔着嘴唇，看起来很饿。“问得好。”佩妮说。朋友们停住了脚步，没有跟着狐狸进去。",
+          "englishNarration": "Foxy Woxy went first into the dark hole. Turkey Lurkey stepped forward to follow him. But Goosey Poosey stopped. \"Wait a moment,\" she said. \"Why would the way to the King’s palace go through a dark little hole?\" Ducky Daddles looked at the hole. Cocky Locky looked at it. Goosey Poosey and Turkey Lurkey looked too. Then they all looked at Foxy Woxy. He was licking his lips and looking very hungry. \"That is a good question,\" said Henny Penny. The friends stopped instead of following him inside.",
+          "soundEffects": [],
+          "nextBeatId": "penny-home",
+          "checkpoint": {
+            "id": "penny-stop",
+            "kind": "comprehension",
+            "promptType": "recall",
+            "question": "是谁觉得这条近路有点奇怪？",
+            "englishQuestion": "Who thought the shortcut seemed strange?",
+            "audioCue": "question_penny_stop",
+            "concepts": [
+              {
+                "id": "goose",
+                "zh": [
+                  "鹅",
+                  "大鹅",
+                  "朵朵",
+                  "鹅朵朵"
+                ],
+                "en": [
+                  "goose",
+                  "the goose",
+                  "goosey poosey",
+                  "goosey"
+                ],
+                "homophones": []
+              }
+            ],
+            "relatedTerms": [
+              "鹅",
+              "停"
+            ],
+            "knownWrongTerms": [],
+            "recast": "鹅朵朵先停下来，问了一个重要的问题。",
+            "successLine": "对呀，朵朵停下来想了想，朋友们也跟着仔细看了看。",
+            "englishHint": "It was their friend Goosey Poosey, the goose.",
+            "hints": [
+              {
+                "level": 1,
+                "text": "有一位鹅朋友，觉得这条路不太对劲。"
+              },
+              {
+                "level": 2,
+                "text": "她是鹅朵朵，先说了等一等。"
+              },
+              {
+                "level": 3,
+                "text": "鹅朵朵停下来，问出了心里的疑问。"
+              },
+              {
+                "level": 4,
+                "text": "朵朵的这个问题，让大家都停下来想了想。"
+              }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": {
+              "id": "legacy-penny-stop",
+              "zh": "鹅",
+              "pinyin": "é",
+              "en": "goose",
+              "emoji": "🛑",
+              "announcement": "",
+              "sfxId": ""
+            },
+            "vocabulary": [
+              {
+                "id": "goose",
+                "zh": "鹅",
+                "pinyin": "é",
+                "en": "goose"
+              },
+              {
+                "id": "stop",
+                "zh": "停",
+                "pinyin": "tíng",
+                "en": "stop"
+              }
+            ],
+            "successSfx": []
+          }
+        },
+        {
+          "id": "penny-home",
+          "title": "原来是一颗橡子",
+          "emoji": "🏡",
+          "illustrationAsset": "scene_penny_home",
+          "audioCue": "scene_penny_home",
+          "narration": "就在这时，又一颗橡子落下来，碰到了佩妮的头。佩妮抬头看看树，低头看看地，又仔细看看那颗橡子。她再看看狐狸和黑黑的洞口，终于明白了。“原来天没有塌下来呀！”佩妮说。于是，佩妮、洛奇、达达、朵朵和卢奇一起转身，飞快地跑回了家。大家都平安回去了。佩妮没有去告诉国王天要塌了。从那以后，遇到让她吃惊的事情，她会试着先停一停，看一看，想一想，再去告诉别人。",
+          "englishNarration": "Just then, another acorn fell from the tree and hit Henny Penny on the head. She looked up. She looked down. She looked at the acorn. Then she looked again at Foxy Woxy and his dark little hole. \"Oh!\" said Henny Penny. \"The sky is not falling at all!\" Henny Penny, Cocky Locky, Ducky Daddles, Goosey Poosey, and Turkey Lurkey turned around and ran safely home as fast as they could. So Henny Penny never did tell the King the sky was falling. After that, whenever something surprising happened, she tried to stop, look, and think before running off to tell everyone.",
+          "soundEffects": [],
+          "nextBeatId": null,
+          "checkpoint": {
+            "id": "penny-home",
+            "kind": "comprehension",
+            "promptType": "recall",
+            "question": "佩妮弄清楚是橡子掉下来以后，朋友们一起去了哪里？",
+            "englishQuestion": "Where did the friends go after Henny Penny realized it was only an acorn?",
+            "audioCue": "question_penny_home",
+            "concepts": [
+              {
+                "id": "home",
+                "zh": [
+                  "家",
+                  "回家",
+                  "跑回家",
+                  "回家了",
+                  "自己家"
+                ],
+                "en": [
+                  "home",
+                  "back home",
+                  "they went home",
+                  "ran home"
+                ],
+                "homophones": []
+              }
+            ],
+            "relatedTerms": [
+              "家",
+              "想"
+            ],
+            "knownWrongTerms": [],
+            "recast": "朋友们一起平安地回家了。",
+            "successLine": "是呀，大家都平安回家了。停下来看看，真的很有用。",
+            "englishHint": "They did not enter the den or visit the King. They went back where they lived.",
+            "hints": [
+              {
+                "level": 1,
+                "text": "大家转身离开了狐狸的洞口。"
+              },
+              {
+                "level": 2,
+                "text": "他们跑回了自己住的地方。"
+              },
+              {
+                "level": 3,
+                "text": "朋友们一起跑回家了。"
+              },
+              {
+                "level": 4,
+                "text": "他们没有进狐狸洞，而是平平安安地回家了。"
+              }
+            ],
+            "branches": [],
+            "defaultBranchId": null,
+            "reward": {
+              "id": "legacy-penny-home",
+              "zh": "家",
+              "pinyin": "jiā",
+              "en": "home",
+              "emoji": "🏡",
+              "announcement": "",
+              "sfxId": ""
+            },
+            "vocabulary": [
+              {
+                "id": "home",
+                "zh": "家",
+                "pinyin": "jiā",
+                "en": "home"
+              },
+              {
+                "id": "think",
+                "zh": "想",
+                "pinyin": "xiǎng",
+                "en": "think"
+              }
+            ],
+            "successSfx": []
           }
         }
       ]

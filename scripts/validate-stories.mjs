@@ -1,9 +1,10 @@
-import { readFile } from 'node:fs/promises'
+import { access, readFile } from 'node:fs/promises'
 
 const catalog = JSON.parse(await readFile(new URL('../src/data/stories.json', import.meta.url), 'utf8'))
 const errors = []
 const storyIDs = new Set()
 const sfxIDs = new Set()
+const menuDirections = /选一个|请选择|从(?:下面|以下)|以下选项|\b(?:pick|choose|select) (?:any|one)\b|\bwhich one\b|\boptions below\b/iu
 
 for (const item of catalog.sfxManifest || []) {
   if (!item.id || sfxIDs.has(item.id)) errors.push(`duplicate or empty SFX id: ${item.id || '(empty)'}`)
@@ -15,6 +16,13 @@ for (const story of catalog.stories || []) {
   storyIDs.add(story.id)
   const beats = new Map()
   if (!story.startBeatId || !Array.isArray(story.beats) || story.beats.length < 3) errors.push(`${story.id}: needs a start beat and at least three beats`)
+  const puzzle = story.puzzle
+  if (!puzzle || !/^[a-z0-9_-]+$/i.test(puzzle.imageAsset || '') || !puzzle.altText || !puzzle.englishAltText || !puzzle.celebrationText || !puzzle.englishCelebrationText) {
+    errors.push(`${story.id}: missing complete bilingual puzzle metadata`)
+  } else {
+    try { await access(new URL(`../public/illustrations/${puzzle.imageAsset}.png`, import.meta.url)) }
+    catch { errors.push(`${story.id}: missing puzzle image ${puzzle.imageAsset}.png`) }
+  }
   for (const beat of story.beats || []) {
     if (!beat.id || beats.has(beat.id)) errors.push(`${story.id}: duplicate or empty beat ${beat.id || '(empty)'}`)
     beats.set(beat.id, beat)
@@ -26,6 +34,9 @@ for (const story of catalog.stories || []) {
     const location = `${story.id}/${beat.id}`
     if (!beat.narration || !beat.englishNarration || !beat.audioCue) errors.push(`${location}: missing bilingual narration or audio cue`)
     if (!checkpoint?.id || !checkpoint.question || !checkpoint.englishQuestion || !checkpoint.recast) errors.push(`${location}: missing checkpoint copy`)
+    const spokenCopy = [beat.narration, beat.englishNarration, checkpoint?.question, checkpoint?.englishQuestion, checkpoint?.recast, checkpoint?.successLine,
+      ...(checkpoint?.hints || []).map((hint) => hint.text), ...(checkpoint?.branches || []).map((branch) => branch.transitionLine)]
+    if (spokenCopy.some((line) => menuDirections.test(String(line)))) errors.push(`${location}: spoken copy contains a menu-style direction`)
     if (!['comprehension', 'choice', 'open'].includes(checkpoint?.kind)) errors.push(`${location}: invalid checkpoint kind`)
     if (!Array.isArray(checkpoint?.hints) || checkpoint.hints.length !== 4 || checkpoint.hints.some((hint, index) => hint.level !== index + 1 || !hint.text)) errors.push(`${location}: must have exactly four ordered hints`)
     if (!Array.isArray(checkpoint?.concepts) || checkpoint.concepts.length < 1) errors.push(`${location}: missing answer concepts`)

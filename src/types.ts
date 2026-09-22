@@ -64,16 +64,28 @@ export interface Beat {
   checkpoint: Checkpoint
 }
 
+export interface StoryPuzzle {
+  imageAsset: string
+  altText: string
+  englishAltText: string
+  celebrationText: string
+  englishCelebrationText: string
+}
+
 export interface Story {
   id: string
   title: string
   englishTitle: string
+  /** Concise, source-grounded context for the final conversation. */
+  summary?: string
+  englishSummary?: string
   subtitle: string
   coverEmoji: string
   estimatedMinutes: number
   vocabularyDomain: string
   startBeatId: string
   typicalPathLength: number
+  puzzle: StoryPuzzle
   beats: Beat[]
 }
 

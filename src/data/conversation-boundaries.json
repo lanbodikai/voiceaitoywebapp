@@ -1,0 +1,12 @@
+{
+  "english": {
+    "retry": "I didn’t quite catch what you meant. Could you say that again?",
+    "acknowledgement": "Thanks for telling me!",
+    "bridge": "Back in our story,"
+  },
+  "chinese": {
+    "retry": "我刚才没太听明白，可以再说一次吗？",
+    "acknowledgement": "谢谢你告诉我！",
+    "bridge": "我们回到故事里，"
+  }
+}

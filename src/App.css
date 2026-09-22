@@ -30,6 +30,7 @@ button:disabled { cursor: wait; opacity: .52; }
   background: radial-gradient(circle at 50% 25%, #fff0f5 0, transparent 35%), var(--wash);
   display: flex;
   justify-content: center;
+  min-height: 100vh;
   min-height: 100dvh;
   padding: 28px;
 }
@@ -50,7 +51,7 @@ button:disabled { cursor: wait; opacity: .52; }
 .check-row { align-items: flex-start; display: flex; font-size: 14px; gap: 10px; line-height: 1.45; }
 .check-row input { accent-color: var(--pink); height: 18px; margin-top: 1px; width: 18px; }
 
-.home-screen { background: var(--paper); min-height: 100dvh; padding: 28px clamp(22px, 6vw, 92px) 54px; }
+.home-screen { background: var(--paper); min-height: 100vh; min-height: 100dvh; padding: 28px clamp(22px, 6vw, 92px) 54px; }
 .home-header { align-items: center; color: #8b7f8d; display: flex; font-size: 12px; justify-content: space-between; }
 .home-layout { display: grid; gap: clamp(52px, 8vw, 112px); grid-template-columns: minmax(230px, 300px) minmax(0, 760px); margin: clamp(70px, 11vh, 120px) auto 0; max-width: 1160px; }
 .setup-panel { align-self: start; display: grid; gap: 24px; }
@@ -78,7 +79,7 @@ button:disabled { cursor: wait; opacity: .52; }
 .three-orb canvas { height: 100% !important; inset: 0; position: absolute; width: 100% !important; z-index: 1; }
 .three-orb-fallback { background: radial-gradient(circle at 34% 28%, #ffe0e9 0 2%, #f58daf 25%, #a76edb 60%, #7047b5 100%); border-radius: 50%; box-shadow: 0 28px 75px rgba(204,98,158,.2), inset -18px -25px 40px rgba(46,17,83,.13), inset 18px 20px 34px rgba(255,255,255,.42); inset: 7%; position: absolute; }
 
-.room { background: radial-gradient(ellipse at 50% 45%, #fff3f7 0, #fcfafd 40%, #f8f5f9 100%); display: grid; grid-template-rows: auto 1fr auto; height: 100dvh; overflow: hidden; }
+.room { background: radial-gradient(ellipse at 50% 45%, #fff3f7 0, #fcfafd 40%, #f8f5f9 100%); display: grid; grid-template-rows: auto 1fr auto; height: 100vh; height: 100dvh; overflow: hidden; }
 .room-header { align-items: flex-start; display: flex; justify-content: space-between; min-height: 76px; padding: 24px clamp(22px, 4vw, 66px); position: relative; z-index: 4; }
 .room-brand { align-items: baseline; background: transparent; display: flex; gap: 12px; padding: 0; user-select: none; }
 .room-brand span { font-size: 11px; font-weight: 800; letter-spacing: .15em; }
@@ -87,6 +88,13 @@ button:disabled { cursor: wait; opacity: .52; }
 .progress-dots { display: flex; gap: 6px; }
 .progress-dots i { background: #ded5df; border-radius: 99px; height: 5px; width: 24px; }
 .progress-dots i.filled { background: var(--pink); }
+.puzzle-tray { align-items: center; color: #8e6179; display: flex; font-size: 10px; font-variant-numeric: tabular-nums; font-weight: 750; gap: 7px; }
+.puzzle-tray-pieces { display: flex; gap: 3px; }
+.puzzle-tray-pieces i { background: #eee7ec; clip-path: polygon(0 0, 39% 0, 39% 15%, 61% 15%, 61% 0, 100% 0, 100% 39%, 85% 39%, 85% 61%, 100% 61%, 100% 100%, 61% 100%, 61% 85%, 39% 85%, 39% 100%, 0 100%, 0 61%, 15% 61%, 15% 39%, 0 39%); display: block; height: 14px; transition: background .2s ease, transform .2s ease; width: 14px; }
+.puzzle-tray-pieces i.earned { background: linear-gradient(145deg, #f18bb0, #9e6bd6); }
+.puzzle-tray-pieces i.newest { animation: puzzle-piece-pop .5s ease both; }
+@keyframes puzzle-piece-pop { 0% { opacity: 0; transform: translateY(-12px) rotate(-12deg) scale(.35); } 65% { transform: translateY(1px) rotate(3deg) scale(1.18); } 100% { opacity: 1; transform: none; } }
+.sr-only { clip: rect(0 0 0 0); clip-path: inset(50%); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
 .sticker-shelf { display: flex; gap: 5px; min-height: 25px; }
 .sticker-shelf span { align-items: center; animation: sticker-pop .3s ease both; background: white; border-radius: 50%; box-shadow: 0 4px 12px rgba(65,38,60,.1); display: flex; height: 25px; justify-content: center; width: 25px; }
 @keyframes sticker-pop { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: scale(1); } }
@@ -109,6 +117,9 @@ button:disabled { cursor: wait; opacity: .52; }
 .mic-button:hover { transform: translateY(-2px); }
 .mic-button.active { background: var(--pink); transform: scale(1.04); }
 .mic-button svg { fill: none; height: 28px; stroke: currentColor; stroke-linecap: round; stroke-width: 1.7; width: 28px; }
+.mic-setup-status { align-items: center; color: var(--muted); display: flex; font-size: 13px; font-weight: 650; gap: 10px; min-height: 96px; }
+.mic-setup-status i { animation: mic-setup-spin .8s linear infinite; border: 2px solid #e2d9de; border-radius: 50%; border-top-color: var(--pink); height: 22px; width: 22px; }
+@keyframes mic-setup-spin { to { transform: rotate(360deg); } }
 .idea-button { background: white; border: 1px solid var(--line); border-radius: 999px; font-size: 12px; min-height: 44px; padding: 0 17px; }
 .drawer-backdrop { align-items: stretch; background: rgba(34,25,34,.2); display: flex; inset: 0; justify-content: flex-end; position: fixed; z-index: 20; }
 .research-drawer { background: #fffdfd; box-shadow: -18px 0 60px rgba(48,28,44,.14); display: flex; flex-direction: column; gap: 8px; max-width: 360px; padding: 28px; width: min(88vw, 360px); }
@@ -119,12 +130,33 @@ button:disabled { cursor: wait; opacity: .52; }
 .research-drawer .danger-text { color: #a73d66; margin-top: 14px; }
 .research-drawer p { color: var(--muted); font-size: 12px; line-height: 1.5; }
 
-.completion-screen { align-items: center; background: radial-gradient(circle at 30% 45%,#fff1f6 0,transparent 28%),var(--wash); display: grid; gap: clamp(20px,5vw,70px); grid-template-columns: minmax(220px,360px) minmax(320px,560px); justify-content: center; min-height: 100dvh; padding: 32px; }
+.completion-screen { align-items: center; background: radial-gradient(circle at 30% 45%,#fff1f6 0,transparent 28%),var(--wash); display: grid; gap: clamp(20px,5vw,70px); grid-template-columns: minmax(220px,360px) minmax(320px,560px); justify-content: center; min-height: 100vh; min-height: 100dvh; padding: 32px; }
 .completion-screen .three-orb { height: min(30vw,330px); max-height: none; min-height: 210px; min-width: 210px; width: min(30vw,330px); }
+.completion-screen.puzzle-completion { grid-template-columns: minmax(360px,640px) minmax(300px,520px); }
 .completion-card { display: grid; gap: 18px; }
 .completion-card h1 { font-size: clamp(32px,4vw,48px); letter-spacing: -.052em; line-height: 1.05; margin: 0; }
 .completion-stickers { display: flex; gap: 8px; }
 .completion-stickers span { align-items: center; background: white; border-radius: 50%; box-shadow: 0 6px 20px rgba(70,38,62,.1); display: flex; font-size: 24px; height: 52px; justify-content: center; width: 52px; }
+.puzzle-finale { margin: 0; position: relative; width: min(48vw,640px); }
+.puzzle-board { aspect-ratio: 16 / 10; background: #f5eaf1; border: 8px solid white; border-radius: 28px; box-shadow: 0 26px 70px rgba(78,43,68,.16); overflow: hidden; position: relative; width: 100%; }
+.puzzle-piece { animation: puzzle-assemble .75s cubic-bezier(.2,.85,.3,1) forwards; animation-delay: var(--piece-delay); background-image: var(--puzzle-image); background-position: center; background-repeat: no-repeat; background-size: cover; clip-path: var(--piece-clip); filter: drop-shadow(0 9px 8px rgba(54,31,52,.2)); inset: 0; opacity: .55; position: absolute; transform: translate(var(--piece-x), var(--piece-y)) rotate(var(--piece-rotation)) scale(.88); will-change: transform, opacity, filter; }
+.puzzle-finale.assembled .puzzle-piece { animation: none; filter: none; opacity: 1; transform: none; }
+.puzzle-piece.piece-placed { animation: none; filter: none; opacity: 1; transform: none; }
+.puzzle-seams { fill: none; height: 100%; inset: 0; pointer-events: none; position: absolute; width: 100%; }
+.puzzle-seams path { stroke: #fff9; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.2px; }
+.collection-cover > .puzzle-seams { filter: drop-shadow(0 1px 0 #36233380); }
+.puzzle-slot { background: #eadfe9; box-shadow: inset 0 0 0 2px #fff8; inset: 0; position: absolute; }
+.story-puzzle-stage { flex: 0 0 auto; max-width: 100%; width: min(540px, 54dvh); }
+.story-puzzle-picture { margin: 0; position: relative; width: 100%; }
+.story-puzzle-picture .puzzle-board { border-width: 5px; border-radius: 20px; }
+.story-puzzle-picture figcaption { color: #8e6179; font-size: 12px; font-weight: 650; margin-top: 10px; }
+@keyframes puzzle-assemble { to { filter: drop-shadow(0 1px 1px rgba(54,31,52,.08)); opacity: 1; transform: none; } }
+.puzzle-image-probe { height: 1px; opacity: 0; pointer-events: none; position: absolute; width: 1px; }
+.puzzle-fallback { align-items: center; background: radial-gradient(circle at 38% 28%, #ffe7ef, transparent 30%), linear-gradient(145deg,#fbf0f6,#e8dcf7); display: flex; inset: 0; justify-content: center; position: absolute; }
+.puzzle-fallback::after { background-image: linear-gradient(90deg,transparent 32.8%,rgba(255,255,255,.8) 33%,transparent 33.2%,transparent 66.2%,rgba(255,255,255,.8) 66.4%,transparent 66.6%), linear-gradient(transparent 49.7%,rgba(255,255,255,.8) 50%,transparent 50.3%); content: ''; inset: 0; position: absolute; }
+.puzzle-fallback span { filter: drop-shadow(0 18px 22px rgba(85,48,78,.16)); font-size: clamp(90px,14vw,170px); }
+.saved-puzzle { align-items: flex-start; background: white; border: 1px solid var(--line); border-radius: 18px; display: grid; gap: 10px; padding: 16px; }
+.saved-puzzle p { color: var(--muted); font-size: 13px; line-height: 1.5; margin: 0; }
 .vocabulary-review { border-top: 1px solid var(--line); padding-top: 17px; }
 .vocabulary-review h2 { font-size: 14px; margin: 0 0 12px; }
 .vocabulary-review p { color: var(--muted); font-size: 13px; }
@@ -136,6 +168,8 @@ button:disabled { cursor: wait; opacity: .52; }
 .download-link { background: transparent; color: #8d7180; font-size: 12px; justify-self: start; padding: 3px 0; text-decoration: underline; text-underline-offset: 3px; }
 
 @media (max-width: 780px) {
+  .completion-screen.puzzle-completion { grid-template-columns: 1fr; }
+  .puzzle-finale { width: min(92vw,620px); }
   .home-layout { grid-template-columns: 1fr; margin-top: 52px; }
   .setup-panel { border-bottom: 1px solid var(--line); grid-template-columns: 1fr 1fr; padding-bottom: 34px; }
   .setup-panel h2 { grid-column: 1 / -1; }
@@ -173,6 +207,7 @@ button:disabled { cursor: wait; opacity: .52; }
 
 @media (prefers-reduced-motion: reduce) {
   .mode-card, .mic-button { transition: none; }
+  .mic-setup-status i { animation: none; }
   .sticker-shelf span { animation: none; }
 }
 
@@ -209,6 +244,11 @@ button:disabled { cursor: wait; opacity: .52; }
 .app-dialog .setup-panel { grid-template-columns: 1fr; border: 0; padding: 0; }
 .app-dialog summary { cursor: pointer; font-size: 13px; color: var(--muted); padding: 12px 0; }
 .setting-note { color: var(--muted); font-size: 13px; line-height: 1.6; margin: 0; }
+.speed-setting { display: grid; gap: 10px; }
+.speed-setting label { align-items: center; color: var(--muted); display: grid; font-size: 12px; grid-template-columns: 1fr auto 1fr; }
+.speed-setting label span:last-child { text-align: right; }
+.speed-setting label strong { color: var(--ink); font-size: 14px; font-variant-numeric: tabular-nums; }
+.speed-setting input[type='range'] { accent-color: var(--pink); margin: 0; width: 100%; }
 .inline-error { background: #fff0f3; border: 1px solid #f2ccd8; border-radius: 14px; color: #934660; padding: 12px 16px; font-size: 14px; line-height: 1.6; max-width: 560px; }
 .story-reader section { padding: 22px 0; border-bottom: 1px solid var(--line); }
 .story-reader section > span { color: #b47d93; font-size: 12px; }
@@ -232,6 +272,9 @@ button:disabled { cursor: wait; opacity: .52; }
   .room-stage .three-orb { display: none; }
   .room-footer { min-height: 85px; padding-bottom: 10px; }
   .mic-button { height: 70px; width: 70px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .puzzle-piece, .puzzle-tray-pieces i.newest { animation: none; filter: none; opacity: 1; transform: none; }
 }
 @media (prefers-reduced-motion: reduce) { .mode-card { transition: none; } }
 .recovery-settings { display: grid; gap: 12px; }

@@ -1,6 +1,17 @@
+import { takePreparedSpeech, type PreparedSpeech } from './preparedSpeech.ts'
+import edgeCueIDs from './data/edge-cue-ids.json' with { type: 'json' }
+import edgeCues from './data/edge-cues.json' with { type: 'json' }
+import { audioContextClass } from './browserCompat.ts'
 let activeAudio: HTMLAudioElement | undefined
+let speechRequest: AbortController | undefined
 let cancelPlayback: (() => void) | undefined
 let playbackGeneration = 0
+let speechRate = 0.85
+const certifiedEdgeCues = new Set(edgeCueIDs)
+
+export function setSpeechRate(value: number) {
+  speechRate = Number.isFinite(value) ? Math.min(1.1, Math.max(0.7, value)) : 0.85
+}
 
 /** The iOS app and the web app use the same fixed Edge-TTS cue filenames. */
 export function cueForLanguage(cueID: string, language: 'chinese' | 'english') {
@@ -17,34 +28,53 @@ export function stopVoice() {
   playbackGeneration += 1
   cancelPlayback?.()
   cancelPlayback = undefined
-  window.speechSynthesis?.cancel()
+  speechRequest?.abort();speechRequest=undefined
   activeAudio?.pause()
   activeAudio?.removeAttribute('src')
   activeAudio = undefined
 }
 
 /**
- * Fixed story lines always play an Edge-TTS MP3. Browser speech synthesis is
- * retained only for a dynamic line that cannot be prerecorded (for example,
- * a live imaginative-play reply) or if an asset is unavailable during local
- * development.
+ * Fixed and dynamic lines both use Edge-TTS. Never silently change voices.
  */
 export async function speak(text: string, language: 'chinese' | 'english', cueID?: string) {
   stopVoice()
   const generation = playbackGeneration
-  if (cueID && await playCue(cueID)) return
-  if (generation !== playbackGeneration) return
-  return speakWithBrowser(text, language)
+  if (cueID && await playCue(cueID)) return true
+  if (generation !== playbackGeneration) return true
+  const controller=new AbortController();speechRequest=controller
+  try {
+    const prepared=takePreparedSpeech(text,language)
+    const speech=prepared || await (await import('./backend')).synthesizeSpeech(text,language,controller.signal)
+    if(generation!==playbackGeneration) return true
+    return await playPrepared(speech)
+  } catch {return generation!==playbackGeneration}
+  finally {if(speechRequest===controller)speechRequest=undefined}
 }
 
+export function isCertifiedEdgeCue(cueID: string) {return certifiedEdgeCues.has(cueID)}
 function playCue(cueID: string) {
+  // Old or manually copied MP3s never bypass the runtime Edge-TTS provider.
+  const metadata = (edgeCues as Record<string, {audioHash:string}>)[cueID]
+  return isCertifiedEdgeCue(cueID) && metadata ? playAudio(`/audio/${encodeURIComponent(cueID)}.mp3?v=${metadata.audioHash.slice(0,12)}`) : Promise.resolve(false)
+}
+function playPrepared(speech:PreparedSpeech) {
+  if(speech.provider!=='edge-tts' || speech.mimeType!=='audio/mpeg') return Promise.resolve(false)
+  const bytes=Uint8Array.from(atob(speech.audioBase64),c=>c.charCodeAt(0))
+  const url=URL.createObjectURL(new Blob([bytes],{type:'audio/mpeg'}));bytes.fill(0)
+  return playAudio(url).finally(()=>URL.revokeObjectURL(url))
+}
+function playAudio(url: string) {
   return new Promise<boolean>((resolve) => {
-    const audio = new Audio(`/audio/${encodeURIComponent(cueID)}.mp3`)
+    const audio = new Audio(url)
+    audio.playbackRate = speechRate
+    audio.preservesPitch = true
     activeAudio = audio
     let settled = false
     const finish = (played: boolean) => {
       if (settled) return
       settled = true
+      audio.pause();audio.removeAttribute('src')
       if (activeAudio === audio) activeAudio = undefined
       resolve(played)
     }
@@ -56,22 +86,10 @@ function playCue(cueID: string) {
   })
 }
 
-function speakWithBrowser(text: string, language: 'chinese' | 'english') {
-  return new Promise<void>((resolve) => {
-    if (!window.speechSynthesis || typeof SpeechSynthesisUtterance === 'undefined') { resolve(); return }
-    cancelPlayback = resolve
-    const utterance = new SpeechSynthesisUtterance(text)
-    utterance.lang = language === 'chinese' ? 'zh-CN' : 'en-US'
-    utterance.rate = 0.85
-    utterance.pitch = 1.08
-    utterance.onend = () => resolve()
-    utterance.onerror = () => resolve()
-    window.speechSynthesis.speak(utterance)
-  })
-}
-
 export function playEarcon(kind: 'listen' | 'stop' | 'thinking' | 'success' | 'sticker' | 'complete') {
-  const context = new AudioContext()
+  const AudioContextConstructor = audioContextClass()
+  if (!AudioContextConstructor) return
+  const context = new AudioContextConstructor()
   const oscillator = context.createOscillator()
   const gain = context.createGain()
   oscillator.connect(gain).connect(context.destination)
@@ -100,7 +118,9 @@ export function playEffect(sfxID: string) {
 }
 
 function tonePattern(frequencies: number[], step: number) {
-  const context = new AudioContext()
+  const AudioContextConstructor = audioContextClass()
+  if (!AudioContextConstructor) return
+  const context = new AudioContextConstructor()
   const gain = context.createGain()
   gain.connect(context.destination)
   gain.gain.setValueAtTime(.045, context.currentTime)

@@ -1,0 +1,2312 @@
+{
+  "en_hf_listening_v1": {
+    "audioHash": "1d2c3f54ad9f42044cdea130c3c7f411f3d7de4b0a12f691e26a1fb93f3ec4d5",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "ad2a818dd96da3808d3696cb067e5d7e52efa4b14d61400a952beb3030fa63dd",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hf_not_yet_v1": {
+    "audioHash": "f121f5bc42eba341a91178198cc6c2c7ee194e2a2ba1c075c70a9fb2401acaf6",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "717d00bdba5d17d3702dc7610ea3e12222b970a8524426c7930ac1b25500b7fa",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hf_pause_v1": {
+    "audioHash": "f8b0151e54dcdca5eb215dfe6ddb04b88b8c50d0ff15b915bd97cf86d6d4bf35",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "08967d5cb4129bae271ddbddb02be4186b709fdf90d52a3d93bfde94caa94837",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hf_ready_v1": {
+    "audioHash": "473d3a4b29dcce135ddef1863fb55c67f0931bb765df78d3f67e355f8813a99f",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "64350da6a8ded62ac9480b252b1509f12dc59eafc497675681e0a71a4fcf3bb8",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hf_sad_v1": {
+    "audioHash": "8aa6cb22492d6fbb71d5be1332672e4fd16286132f7e8e439a7942c5d8f713f9",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "51b0cbdda59c1cf79a0ec5ceeddb3bb25050c50fc65bdc1378efe90d498e14c2",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hf_story_done_v1": {
+    "audioHash": "e596791289757940822a16f1dd2ec6bca3beae8c86d7b255dd73a30d88dcf19f",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "8bb602e71035f9aa58e82443d16bfbea120fccc4c26e2db6a1630a8b2c271baa",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_play_boat_start_v2": {
+    "audioHash": "e83449e5a89634b9a40ba9e3508c9b22ff1e9defe09ae59890cbe83f330dbc10",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "0229b28688e28ea316f3bb0e3832da7e0519809ec6776c9deb333173ed41c3a5",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_play_farm_start_v2": {
+    "audioHash": "b5c866cf19e8cdd3bc628497d06a7d4f22c1de3dcba8521cbbe040435615bad1",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "edc86dad40dc29875804ae0e798a93ecfad848aa5a9fa52bd7e06659ee9604be",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_play_restaurant_start_v2": {
+    "audioHash": "957440774866ce95c4f3d19f2b2299bdb70a174cc50f6976185aaa60f51a1400",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "a0e39d43701e899aa5858918ddf30e783e23699bf796ae334cfbee73b8b71e41",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_play_welcome_v2": {
+    "audioHash": "2b31b7de751a79c79b4edfa82191368c79e2800d7cc2b563fd574b9ecc610374",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "1ee5c524a3e7cc47a613dba357c25934e81a104c4b1ed9985ec1310ecbea270d",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_bengbeng_thanks": {
+    "audioHash": "8dead73ea95f2f04362b22647288f7ecc41bd7e4469243d128d41fcef30b6d1a",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "022ff12aac306741ebb9c99b202818e20cf5d44f8ccf6b4ff4fba77484226f49",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_berries_completion": {
+    "audioHash": "62e33d01866997162595036528ba3bdd1075951b2dd15afe5195ee6c1f04e04e",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "528fe659b53c316bd9d2a24345883cd16fa0b669287879bbcac4c7f1df3d1008",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_blow_on_it": {
+    "audioHash": "8559eb531dc38fd6fc6b0dd1e928e78bef2abc343cff8304568abb3c35cb7180",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "63552350739d648ad21f6d7186dbb69fbbc0146c1bd395c2cfddd1d3f81bc549",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_call_a_friend": {
+    "audioHash": "93fa229252d4cf0cb1462e2941ecf8c4e86c10b644d5a2052ddb063ff1b90f59",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "ef7da9012cbc260f357d9cd60d8485921ab430b183199f25583eee612e2ca822",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_count_dumplings": {
+    "audioHash": "74139f5715457b0986b921e79b17d8bf6dc8ca13ae7e028bc19b2bb2a9f5b9e4",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "7348e8e4dc73595e63eabf4ca51dde012b68afb1df5eecfd13ced6aaac70cb4d",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_dog_smell": {
+    "audioHash": "3ba1b976c2e96dc31b49c794ba8d90735b4e08b662fa758f0d881877c7d40924",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "eccaf47eeff0592ee6ee23314157b919e143f8f8af8e1a00db739bd91ac8347e",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_duck_sound": {
+    "audioHash": "336126debe20f8ae896595f315737e775349f0daf3e9822d9659f2acdb83c9e5",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "2b20976823219f089523ac4c23036e3267098a26eff8351a6bf952e025e1b571",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_farm_helper": {
+    "audioHash": "a2b848eeae82c8978a64d3c9e5aad79cfd704d3442454bb841ba403867d1509b",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "ecf690b27fad05f8809768780fc1d0e95602a1e2cf2caac239a86b4c026c9b99",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_foal_yellow": {
+    "audioHash": "91bd2b31125fb5038e17701002ce31ff1dba9b7486a3b03ac0635dbc4656152d",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "97a9a68d93ccc6cc6a6b9fa4fa3295605714531c82adbcf2a3b7183b98ff03b8",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_fox_list": {
+    "audioHash": "4f1cce21f0f7eb4626e9b45bff20b9a0b00e51b77c5026cef9f873921055be2e",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "3875ddd144d2615d58fdaf72d24804cac54cda86420e62db8edd23c79b8ae9fc",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_help_gaga": {
+    "audioHash": "ebdd25db8749acccc569a036f30205dbd900bee6467c945d235a3f66f0cfdc34",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "e1f1eb94a8995788aa3ce3f61800425c042be03e75818353a35f83eafd592cb7",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_hen_footprints": {
+    "audioHash": "602b3654a23f290469db80b235aced8d78e896a58f902ba0f976e8713e56243b",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "9784a70f072f9c13d0252b55e9b1b966fc9d1580de5b759079422b18530f3f7a",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_long_noodles": {
+    "audioHash": "b0cda4dd8015e5526d8bb15245553ca323b43416597932d1d181fd093a57b66f",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "ef20512d038f1de9cdfd083476ef33e62dae1adf577834f3acfa07c34a5e5ef4",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_milk_and_stir": {
+    "audioHash": "47403c92c19c219f8b66b864c2d53d584a915293ea0f7165579980d3d0d82c70",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "f4d6530c122075a4ccc47c4e52223daa7a10390dba3f35feace9e0041cf929d7",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_panpan_car_color": {
+    "audioHash": "cc3f3e0d1ccd6a39093c7c818c3e84f3bb61d40f9e0b417572f391938eb2d05c",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "a701ffa963362f86280207ab9ed1d0e51be23cfcf2f349e8e3f30691ef557a83",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_penny_acorn": {
+    "audioHash": "2863a182e38b1f3cd88add9c4227d3f3ec3295f682bd8eda2f7e1a53c525ad14",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "e62bcb3fc788d1050d0cf76d55b10005da336b827ca87a191a7fc83ac6740585",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_penny_fox": {
+    "audioHash": "aa233182c434bf854ebb0f84e7466e4114cad4e90e873fdb7686d52b2217cbc1",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "6f0423732ce6c352eb0381071007f2afb3bff165a0c4b80e689499e562f7ca14",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_penny_friends": {
+    "audioHash": "13b7a4be79745cc0861b166220136deeee181d83ece77e7bf881e2502796cfaf",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "f68b448ec47170b9d208dce0799ea46be9964459ef1f2aa9a99bee80479eacdf",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_penny_home": {
+    "audioHash": "717a1ebcbbeaed2b8841feda8cd1acf7f186cf11924b7815325e22f05fb3bec8",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "d9eaba48cbf9d08056e82d37c0781f971b3c94d21e74dd1545c878dbe65f996e",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_penny_king": {
+    "audioHash": "f66fe9519222561c8b8a2b5b742ccab16cb0d268d113fff9e5fc7fb088643494",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "4d9ac33384db5dff00bc1a1750eebfa4ac510c138a479bfa6f285b81fe40a0bb",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_penny_stop": {
+    "audioHash": "046a247fbd56b366a74317b443a199c300df148aebb8c523eea37bc737b11bfd",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "0ec7947bbeec4487430a087875b9beeb1f3940398a30ed8594fe4d340f63c638",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_pick_dish": {
+    "audioHash": "aa0549f31f5704a1d78da3aa8bb095ecbac26cc8d09ebbc7dccd63c02e9ce1c9",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "836dd5eb4c7c5e52325245267af9b2635413a4e9f2365acb1a2ad1c60177600f",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_red_hen_bread": {
+    "audioHash": "f0b3f070add2d30d79da3b9d58e8d49c4145570eb313c13b4ca4eb3a1bc7e0a2",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "82dcc4808fde210e17ede31b55b18ea5927c92869dfae3da57f3eb39053ed494",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_red_hen_finish": {
+    "audioHash": "80e02e75eb19f3c2cf5a17caecc1190cfe176d7db095e8e19458c11fa81276d6",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "1556421f12a9c23b1283c35c5925ab4c9dc3a0b72e32adfe7c3f27db5ae61c0d",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_red_hen_flour": {
+    "audioHash": "36b63f431a9b8617dc5a81fd764647ab13a148234c6ecb3b301cf37e87e201f1",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "e53dc645bc18f15e73c9210f566191d98b7979365f8c1cf86b4ab98a52cce39e",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_red_hen_harvest": {
+    "audioHash": "e27966943a2e42a34e9be818eb41d701060333b4def81268c8bb2d8a133e4045",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "cfd8e6b673a669a4e06be2f0c7ac0515dfe411b500a5afe57a21aa1e4e63e5e8",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_red_hen_seed": {
+    "audioHash": "89572ffc735290a312b80086dbd11e7a5885508071ed4d218bc64195af22dfb1",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "dbcc51ce8435448b9b9a4526fdebee20839e829af62262b969adb008ba1a9e9e",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_yanli_practice": {
+    "audioHash": "e0137e0261c7d5d91435f0fefee2271572ce470bef77eacbe5aadf4a0c146cfd",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "3e6d586bce6a8879abb7e3a0097ed7e4c189842570f794dfb2224175696d7dad",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_your_animal": {
+    "audioHash": "e9590109c6e40b9b239d2b072b9d530e0510b25591ccfc950c8044fa21463057",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "ed9e5872f6a414f13553a011770ea5277da358eb3b4c8f21b9145017e7287998",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_your_birthday_cake": {
+    "audioHash": "dcf72ca67775a26e346a99b5174fd586069e4f724ed1df00b1956125dc10d683",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "7681d975710f74ad1373206aa4b229a5790a4692bd0701125da68e132c56ad49",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_question_your_favorite_food": {
+    "audioHash": "f572b91fa49aaa6b2d5972245bfe058580c284f56157523063e9775de33bdee7",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "5dc171fa99d4841d2960dcd93d100c3dbb33a82fa830ae2034e92fd4f6c6ad30",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_birthday_surprise": {
+    "audioHash": "983722f480a422fb0ed1cf7916d4e009d69b6959f4b7a52fa41b5e970aaadcae",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "4efed2f5aca44de3cea1734da9d6315090a02fd4dfd5530b41229bda93ecc87f",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_bring_home": {
+    "audioHash": "47b6adf636a138d7fdebe3a7e0ace43f796066bc30c56564446a6d2bc60512ab",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "0870727ba62205d3dbc67f13415570b29bdd49071b0da8361881d7f3ea7ee0eb",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_call_a_friend": {
+    "audioHash": "14827b10e7b6c0f2682ccc1827abe7a8822c97c70fa63ce3755ab85eaed3d7f5",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "30008f97e800f67e609018b4c6d3b444d2aa0b5e8367baf9e5a14f1034304bb4",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_dog_nose": {
+    "audioHash": "fdd05234fb73cec2a0c796cfb5775909521d2869f564261ea680228c77861d26",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "bb3c024b7c64c6c9410a8cbd2039eeb943b928587f988444f4ec9a62317977fe",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_farm_arrival": {
+    "audioHash": "ebd3823e54807a75bae81ff33c4a44f053d15af799f5ec9834ec4cfa6557dd0c",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "4f3b4f3eec095ab56b698466acaa6eb4bff7592255e53843b49e4d55711d308f",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_farm_dinner": {
+    "audioHash": "4fa3d199936df46ad5a0ee3b7cf3061e2e0b42ff549585cfeade26b321dc9db1",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "06b8cc95526c134996c738d7eb1609fbfb9f61924bf707db5d5b92da93d4a028",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_foal_run": {
+    "audioHash": "fef12542f625ebb34c0d8f4e957215b961164c48ecad32fcb8c7ba76ea404361",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "7e6f6a679fa5f6b81f384adc424811746bede2bb99f6aebf967c293522c69f18",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_fox_kitchen": {
+    "audioHash": "82c94018becee425ccf480f884357d532b131f045c15bd175eeaa45189f227c6",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "c831adc4cde45b3a721e5f79d578c2665a6a177c94cca48a79d6a80d30bc9e87",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_gather_new": {
+    "audioHash": "88107fe2c8e82ba0268853916c6128a820d556b5b426b2a08dc4b7a77dd151a6",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "9a6b466c422929b9615b6af38a16f502604c19d3ca42cc9af5f543eae31d2a95",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_happy_customer": {
+    "audioHash": "19f3f6085d5a766454fdb8e0c1138e5865dc679d00b6d56d735cd9925da757eb",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "62f9159d22726db06891334a4fbf9dac1e803b7e3c19b451642406a2e4cc9385",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_hen_yard": {
+    "audioHash": "7a8c647a43c6c7cef0a42b5f30116ee7011f56f6300f5d176bd4147ce5c09be7",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "d8bdc562e19fa8c59ee5e48cae2243e56d943b350edd29fff94bb36591e47937",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_hot_soup": {
+    "audioHash": "1482de392aea2f299bdcedf9a768bfd0bc61cb140d4e21206127c00b8bb3560f",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "3e560a4317e01cff4ddfaf22ee8cdf2a45c30efe7831b6a758353bb383a0099b",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_make_dumplings": {
+    "audioHash": "0a398bf6fbfd0819be212b8cd5e1ec57c9c85caae24373b41f02f9c38323ea54",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "a1c96103209179fac1884a90aec50ed4755ac64d2b41cb3307cfcf8f81b9cd8b",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_make_noodles": {
+    "audioHash": "4a5010b97dc607bed8ffff3de2611ea5ff0c68cd57a5fd12012e7e9c85afd36b",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "a7cb7dfa31e5681b116503f57aca2e5bb347663be83df34ea4477abee959f0b1",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_mix_together": {
+    "audioHash": "45b4795ce253194dc9138c6547ddd29c67bda74ddde099f73f1d6e7b46baf12d",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "964601ad0184aaf92662b63aff5d1d2c66d435eac44dc1c8bbf068051878f106",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_panpan_pickup": {
+    "audioHash": "41339e841c289c88ce9e461ff61ed7e9bc6907b4d85f639f046957becb0cc9b5",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "4dcfaff899b413ad754e8badb96ae849ab2f236c2bae9bfde27a7c440ed518e5",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_penny_acorn": {
+    "audioHash": "1881fb4b51f9c1ebbc5d2ea2fea5f0d1488f629cf5fa93dec55158ad209f1eb2",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "a9d83e3c0f427da2488a922be6012f5911818c11d2e22fc48bc2337e8d2b6a5a",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_penny_fox": {
+    "audioHash": "e6325eb6b731ce11ea0f11116a29e2c8b5b5bd2c6ac47d42153f13b5f35cba66",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "a41e99119630803fd7759fbf32ebae32c0564b8e74309872b101655bb303ded8",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_penny_friends": {
+    "audioHash": "7a78aac0415cc05994f16a8df5b4d4fba749033db6a183599de7fa03ac4dc32d",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "21b83ef2321dbcf8cced1d7f2170c9a6a8257130061c02e112b1d88e5de53018",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_penny_home": {
+    "audioHash": "5d97702277dacbeaf5481bb3838ef4be809e8162207bdf61c62fd014a28b437e",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "513e348f000b842dd46422ac9cc6c7dd9e6a2108fe2878b128b211af5a0eea5d",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_penny_king": {
+    "audioHash": "d6e4ed7a31c0417c319969573bc4c3ca8e82fba2c4aca1cb9cfdbdf4408b6f93",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "c4b87f4db677c8444b19fd489d2e8d20704ec350855985800cb2e8f013632fb2",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_penny_stop": {
+    "audioHash": "82c129a5c4fd5f7a9be3b60ec04dc3ea78fa424dc07394f9dbd276acdd13e19c",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "df370aade22b885481d9668ee56795632fcdbbf5bd67f450f0fea08e78bc61c6",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_pond_search": {
+    "audioHash": "1103b8ba53821a43c26dd7e295f9d4f3ee95714dc6b9104ff18090b738a4b74d",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "b5212afc49fd884634c48de3fba0a25dc03d5544324587e4f1345405e7e7314b",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_red_hen_bread": {
+    "audioHash": "c6f3811eb5747e670ed53db7b81c9c97c30b745e6544d2e33e55a8a022a75dd8",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "02b4d69d0037c4c7cf6216b4ac025d9a54b4f3dc5be106a1bec2a5d1947d1d96",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_red_hen_finish": {
+    "audioHash": "f946531b6ca8385fcdfc8f06fa84868bb0c9a10f15f756ec9b0f73dd224a6333",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "ea7085062540dd3d61d99afa84bf42b2fd56aa7c4a294d26479cc4f69062e6a7",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_red_hen_flour": {
+    "audioHash": "1277b5fc6f4792265f6102885d446964979dbc56f6b2bb6ad78815af13585410",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "11cce0f7866d22660ccc5ec3b16b7b373da24abb434b8298896dd1722bd489fe",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_red_hen_harvest": {
+    "audioHash": "c272fd86d4bb0fa7f87f0329712f82d0fa051024c223ec0f1bcb0f04a51995dc",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "aeafc260c5551dc30185be0adef7fb2024cd20ae9f3b7458279801f5070fb8ed",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_red_hen_seed": {
+    "audioHash": "c1f237eb8bc40662b60b777c15cac2bd710a9b287c000664ae0da6b2275353df",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "411ac81959a78952b90f50a60d50f08bab7396331dbe368d0793fbc28fdfeed6",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_shop_opening": {
+    "audioHash": "0648dbec9300d182078d12f3f6816ee7dde0193124c45fe004ba175d7c360ba6",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "e2a1b87236cfb4f1fbe5582d7fde792752b327eb438fcb9c1a76173648df1978",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_yanli_song": {
+    "audioHash": "d8d6463e4d1d3cd8354046420d3309d21f0ff0ab6b5b248e68b9a58bae1c727b",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "756d8686617d3cf9b2f61ced9f6f48171c8e0a3a84f7cd502ebe3dac4ec15bc1",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_scene_your_food": {
+    "audioHash": "5006c8a979734b4580dcd44fdb9d0152479da2c3277cc070f248b4fc645cf634",
+    "pitch": "+0Hz",
+    "rate": "-8%",
+    "textHash": "31354a8abca7789ba1f28a1470176034c21a0b94ff814dd77fa71d5178d65011",
+    "voice": "en-US-AvaNeural"
+  },
+  "hf_listening_v1": {
+    "audioHash": "563fcbc56be050aee89baed3aedefbe1ab08e736ff5ce76b0e7a2c5795eb68a8",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "38540dfa78245aca28d9cb5c0d70df548ab4b0f30caf83a80f78f2c6cdb618c6",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hf_not_yet_v1": {
+    "audioHash": "373bdeca3f9a36d052a6164d069e120fb2e6979de12a08d13e6a34888bb0f8a6",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "7db2594b3609c2e92d914fb730ade5c1b60a66182fedb68a7bde5206eb019f8a",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hf_pause_v1": {
+    "audioHash": "ed9a6d733b1dbec1662c4c6f53e63ea9e38a2ab603d42951673deee4a9da816a",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "b3718727719064d3408537ea4eb806b0b4a0b5095cd557b8faaa038de3797726",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hf_ready_v1": {
+    "audioHash": "82cf8ddab6a7a8b8d27e5c4250cacd33de90c5911a0fee91ad7dae06e7ee851b",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "9e82a5e0bc172426563ef97fa23bc4522426cd9fad40a2a4d3887aacb059d594",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hf_sad_v1": {
+    "audioHash": "bb019d80331bf353f3586950c4fe004996efe5e8a12cf513ae941c050cd3719a",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "8d5375f1d21d84eb6c913268e051e9950be957ee22d291a1efcd710d15995492",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hf_story_done_v1": {
+    "audioHash": "821cc8a87cf9fae757334418881461be33a43733f538250a4e6e37d52600fbff",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "d799bfc1f92cbdef7a50ffacfb5553ea17e29249b2433ada5140967d4c5018f0",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_choochoo-birthday-cake_call-a-friend": {
+    "audioHash": "9ef4528c0260d4e86b28909bb5a587d42d1edda9f8a6e23d4455cb960a6139d5",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "d5f884186f1c08b6dcaa0878d12242e446a1fbafffcf6a113931f8ad7b9c576e",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_choochoo-birthday-cake_fox-list": {
+    "audioHash": "0f23dee56a57b0fb1dc7c2feaabbdd6fb80e97c899dd55fffd634dedbfadf12c",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "c6fd11fa71f8357995e00d1b9c83b64434b5ee3377f862bbb54695e4eee20127",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_choochoo-birthday-cake_milk-and-stir": {
+    "audioHash": "a92c3731d159a330f307e1e58c85609a36889aadc22593c151c77dc802ad3193",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "0820447ec9111f864285762f136d05d42f59e104f295a8f09f563a48685ce2ea",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_choochoo-birthday-cake_panpan-car-color": {
+    "audioHash": "8f5a35603bec47c750daadb177ff2d394f3bb4f27fd76066013619a3ffd65497",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "ae5f7b1a2a5c9a9129709f03bc5f411c77fc629112d5d7c02c802224c4c6559c",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_choochoo-birthday-cake_panpan-strawberries": {
+    "audioHash": "31704c84679984a2be4b6e042ad6ba6e746ae9fcb2cccea9acfa00c79e5d0f4b",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "7875d4771cc352e1d957d03a67581cce8fd6e96ac15984a84836242ce9147b98",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_choochoo-birthday-cake_yanli-practice": {
+    "audioHash": "17e8e5cb59fffbad00df114171788e1b0e8cc826056349c9dbec745683dc3f01",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "f6599ef8a00f1451efff31f35168365b68535d0e3e85a0ea5ad8e66433268eee",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_choochoo-birthday-cake_your-birthday-cake": {
+    "audioHash": "278bab6b1ae58fcf5d849633c29f4bc4dd44340e5a2564c53146d022bd92159c",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "bbfdb7436e4563519f5bc6b1d17b9cf774f2cd6bb883dcb1bf8e2c6af1eba7cd",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_choochoo-farm-duckling_dog-smell": {
+    "audioHash": "d311272946654989d11e3a1082f1f396ea96b43f0dbb0477e159e502b3ab5530",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "fedcda7c1b487815a0a65b3622093033f44bcbf6e58fad9ab86367a790527153",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_choochoo-farm-duckling_duck-sound": {
+    "audioHash": "70143844da94659cdf50258a7f506ce3a5b21df643134d8de47da5b1c0d5d9f8",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "9431e3fdbd78c8b809234d3e90f32949c2df021439e6c71d33a85db58a07358f",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_choochoo-farm-duckling_farm-helper": {
+    "audioHash": "4900410fa89358f5064281327be001cabf687fa77d8210aedcf3c2e0d7163e31",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "e25fb3f626e2a58422b8c4a69ac818a5fe730cceb1ede1c8d5943ef3498b9cb7",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_choochoo-farm-duckling_foal-yellow": {
+    "audioHash": "9d944d71636b2a1e6d3761896ebe3408b0e1ea3498605e11e6d49b2b63c5f033",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "8e9caaaa7ec0f9b0eab450f0951c5d2d08f2ebc2b5523808c103395ec447ae63",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_choochoo-farm-duckling_help-gaga": {
+    "audioHash": "438c6104c437b93c10a7e7234a87f1196be7d3182de49cb45f4e10de030c2b1e",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "70d520e9549784653dde1b637534298eec3218ac0f17247978c04bcc2f25a34e",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_choochoo-farm-duckling_hen-footprints": {
+    "audioHash": "64129986e10294b144ba3c5613860b13d270298625c8e1d6b3187fa6250d549d",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "d8c10514298d9c3e37cf198aa02a2ed52b1b1405c39cbc1a98b5668e5a5980e6",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_choochoo-farm-duckling_your-animal": {
+    "audioHash": "be6f650891db8db4c36cb79a440f64bda7f512000b7b367e8b522c4eef059c25",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "a4d2b6c31687904651d12be9aeb5beb561d320ba240d6cfe31bb0e41c9e261f4",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_choochoo-noodle-shop_bengbeng-thanks": {
+    "audioHash": "2a1994a529743187941391b3ae275e4acfdb0cbe008f452d18569f881619e345",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "2e49e8619f9e8b8cbf92728fe7d861b00277714f716b205382284c03d1f45a7f",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_choochoo-noodle-shop_blow-on-it": {
+    "audioHash": "93117021ce8f2ac3a36d4faa51bfb53d4b359fbd1f53c283868977a71a17ba48",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "8e7779e6553a57013958ab8aa95e058f4dcd81030bc66b7000b22ec9173943bf",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_choochoo-noodle-shop_count-dumplings": {
+    "audioHash": "1c33f3a0ad75373d0dd4ee0b045e455cc4db569e3d90e183392b000ae7d6cbb0",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "2c32b9eca850f8d6f96b84ac647caa2b2a1c1c9c9dedf31bfa3177e72daf5d0f",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_choochoo-noodle-shop_long-noodles": {
+    "audioHash": "b62688d6886c33026137c1973addf18a4727b3deac7786ac957636dfcedf46a5",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "ca1ed716876a08eeeb1c0319821a877e9bc8006fabe1e2139418bd8d36c7d6e6",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_choochoo-noodle-shop_pick-dish": {
+    "audioHash": "a3e3cccb249f46e2b1168b80d7fc256c2703fe447763af96f75788f821b04d0b",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "d0a83756fcd203b9f162645e30540de6c1824c835cf61ab518e0789f69988cef",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_choochoo-noodle-shop_your-favorite-food": {
+    "audioHash": "60c52ecead7dd127401a6c4430749d3e7051c08388201f0abe446bcd26845d35",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "b149cd3e7c522583ebda6ffa895033d01a41db3b0e3adb8b4af532140b555206",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_henny-penny_penny-acorn": {
+    "audioHash": "06be71707bd48e5a9fc3ff4a9e45e80e52edc21c9ed300c2f8697cf91390aa67",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "4f966db5b6d42f2103131ce5b40941fcc32b7776af89b878e585debcf91b1631",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_henny-penny_penny-fox": {
+    "audioHash": "05b3a305d8b17af045665cce08c3e4263d405dc12c764c5c4a48ec4d6a59ae0f",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "3a9f1b88d388daf68855eee8d25e0063e3e251432cfae2912a83e2b016454129",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_henny-penny_penny-friends": {
+    "audioHash": "039d4660e55bd339a26f8df3e84cb35e335b1afc65e797783a17c3e57a86eba2",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "f8f01522127e4ee1e0f6ef80de93f68424a1da94a82ac4be8cb34910a311c694",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_henny-penny_penny-home": {
+    "audioHash": "67706c8bcd7fa45bd41006bf1c8df64ab7beff902e811338f552f30651dc266e",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "477c1a8c0fa2de582a5769dce77d11bb47cc12fc38fcfc68824be4b6bcc0ac83",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_henny-penny_penny-king": {
+    "audioHash": "6c27e67bba950e54df9d6e44cc4d162531d48d904d24a7233d19c08225608c50",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "1ab13f9474b4c28ce8fbf1ca43fa6443fa2d268ae77b5f10e3ec411bb6e87657",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_henny-penny_penny-stop": {
+    "audioHash": "979ca61dca7d63060337369b05823477fd6f187d720e293faf25cb502d34e8b2",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "4b4baad17d65a9272b54dc56e8626ad9cc858203715828752dcc1d7b43469a4f",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_little-red-hen_red-hen-bread": {
+    "audioHash": "7c2b36eb3aedfe13645491f1567a5e7db8856131f7f291168eafcf449499f676",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "ca55b971d3c5d7d8b7fa4d80924b5980dfdf53f6db026fcc76ac9cdb14601ad0",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_little-red-hen_red-hen-finish": {
+    "audioHash": "6d89b8a2dc7034cf9cacbb66c10c32a37e7899101be84b244d3ca1c2127f51de",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "6cb739f6a0cab6932e887f4a6482c7551001aa4e6af4bccbe489f23220afc99e",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_little-red-hen_red-hen-flour": {
+    "audioHash": "26a7ba2f4246cee56e693b1e5fd7746b529c8e3f7a7ac7caf042e8fb695f0eeb",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "3b9655f038ac35bb7c8fdf97a608ca51fdf31d5d2667741fdb9a4f31e08f7faf",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_little-red-hen_red-hen-harvest": {
+    "audioHash": "b5e380be7189054bc482c1f9764e17f3f0e6d589644752be4702a31d5bf17132",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "fc83d533ea4be8b0bb0447a5c63b71e25f188077e1c79150e89d5802b78f3529",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_1_little-red-hen_red-hen-seed": {
+    "audioHash": "d28dbaebc10249255766b6cab5c0ef9b21522c8d6f98fd20a4ed86f7a117d027",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "e6207bd738a04aa349f0c73a8e8f5f1836512f7a1ef1477018e9342ebd531165",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_choochoo-birthday-cake_call-a-friend": {
+    "audioHash": "0a4f9c27025b2ee4c11268cda49e8d81ed4210475e5cbcd7ba9f1317e7b222bb",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "53bb5ef3f209f85a17184455740f342f5906cc5f9998fa0bb6bcaf39755fab2a",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_choochoo-birthday-cake_fox-list": {
+    "audioHash": "01fb7d635ca331b79fc7939338fb2f1d1daed2d1e5f32a5ee548fbbdac0e27a1",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "ac8a3786355b70740eb918ed1dbeceb849eb882f2269cab2387c5db6211cd7d4",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_choochoo-birthday-cake_milk-and-stir": {
+    "audioHash": "f4f42ca7798dc2bfdddb13c966ef7de3671d454e45c70a8b02b1a6a70e57504f",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "6f0d3c6a21f3c88f72ddccc6ae014ce6d5c60ecfd30ba1d4332af5ab934f7015",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_choochoo-birthday-cake_panpan-car-color": {
+    "audioHash": "e21aa844e89917b97ef22be512aeebd480b626b550bcb3b4b8d5c5db8c909e93",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "f20a3e2b948b2bee8e00e6d5ea2df7737eb0389edc1f217cca68b74107aa17ae",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_choochoo-birthday-cake_panpan-strawberries": {
+    "audioHash": "1aaef9f2cecb72b46622c10d08cbb4f26d7018bb3677496f0912313b67db8fa8",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "4cbb3472c7976b743650834d6ecb2491216d44d42be4f04d1cf5424346ae046d",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_choochoo-birthday-cake_yanli-practice": {
+    "audioHash": "f64f87cff02da672b2d45916bafc19f10c7cf02b49ed81e84c0e744f8e8aadbb",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "6126e4795a2a2ab2d8891adac769f177309e0141ae4ada3b9a0c3966937e39c5",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_choochoo-birthday-cake_your-birthday-cake": {
+    "audioHash": "4c7f617c69c9f5f6c093cbc36b1b621047ab48b739ce636c863a4b15c77182d4",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "7fd7e292be6ea1e0edcad0d0e2699d1489c1ae3eed9f94831e3f3c4f43218963",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_choochoo-farm-duckling_dog-smell": {
+    "audioHash": "0e9aea8247587e683f2ba31321e9abce0f8f41f2fd736e186a85081d00ffee37",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "c0f40e11409c31113e5e6a59ce4c2cf85692d13f834d52b6344c6954b08f41d5",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_choochoo-farm-duckling_duck-sound": {
+    "audioHash": "b60020ef05311eed127360848b47776144f7508c9bc5d110d99221c16ca18fad",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "ee7d2fcc9a89c1925817b44b57cd6fdbf3235edd2a5b65a47349b53286d0b0c2",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_choochoo-farm-duckling_farm-helper": {
+    "audioHash": "83629d838e79e13a4b9c99c31916f52a5e110889fba83f10bb7ecee2b2696360",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "cb85d7d9ea57bea510b649589845ee454afec81c2c1d9cd4c9286fc1275a63a6",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_choochoo-farm-duckling_foal-yellow": {
+    "audioHash": "ea66543ca89426cb1cba410c6056a665dfa83a832bb140a5770f62e447af2523",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "d7703bfb92e4ba7a91754b03d3ed9aae09ac0f1f8515ac7c77e8f341b8546c34",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_choochoo-farm-duckling_help-gaga": {
+    "audioHash": "70cd1b3f2da802bdbae0b8197e4491c44887251ab15a19519c4d807efe817533",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "3c31c24d28f25c00cb8e02ee393c5645e9d65ec9722bb012ae7f3cbdc0079a36",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_choochoo-farm-duckling_hen-footprints": {
+    "audioHash": "e9e5628bf8a75982a842bfc2f107de961ec0090ac167898b82d6102a177c2bcb",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "a66b67ffb6081710ec64e498a48e4ade98e7729ba3259d8f63479597ff4265bf",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_choochoo-farm-duckling_your-animal": {
+    "audioHash": "581d8395efbbc88c59e1bc42f2fa42d659a976ef317da43ce660246592564805",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "11209f72bc6f52069767b2ceea5c1cc14fc8e212d33e1761558e9dc3c18873cd",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_choochoo-noodle-shop_bengbeng-thanks": {
+    "audioHash": "163e7650eecf2e75908db2ff2ca0b395a7fa7aaa4a4056e841fe2e7a2413729d",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "6fcdd80cdd6023c4a5995a2871f7e829ffa358dd91462b4dbdcc9a54f48f69f2",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_choochoo-noodle-shop_blow-on-it": {
+    "audioHash": "296bb5b528ea91d3131837d836b615dc5f5bdd51a046621709d94aba272f84d6",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "4687517d33d3b50dd23160eface62a537be0afa9e18c4218cf19bb4c35c3cde7",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_choochoo-noodle-shop_count-dumplings": {
+    "audioHash": "b51da533e9c3369705480f0ed4a057b271ec8b169b01a14e1ed045fad8381f20",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "4e8a4f6467b88bd1dee7a5e5d424e6e5bcdb3a4de4affb4b839a05421a398a33",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_choochoo-noodle-shop_long-noodles": {
+    "audioHash": "c5a6fb956fbc6b40a7256b2fb26fb92aee4ee6c9362fef8aa3add00cb27836b9",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "d3f7b5d4aa0437c61366d14d86cdb00a8d3ba44e80954f0b3f78c3ad11fb2599",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_choochoo-noodle-shop_pick-dish": {
+    "audioHash": "c75fe1d40c3c9996d89140ef2f1138a1d90b046b011afb21ca7312971ad05bbf",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "c8fa7f21b71d6df6db37b1c41c0c8c13b78a2dc588e1903e0d8a44558d12fc54",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_choochoo-noodle-shop_your-favorite-food": {
+    "audioHash": "85ee21ac5cc4f708c1f69fde7b76eb46258f67b0455159164e1006f7a669bff6",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "69fc86f35cb28d2ed9138692b8b7066d58cf1c1c25bd58623872e0dc63a63396",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_henny-penny_penny-acorn": {
+    "audioHash": "3f78b2543d89d242997364416ef776adeddb25128e6d8430d7437b7c6e676eee",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "ac45a5b203d509ff6b27d64c860a6512e8d10cc5f8e874eb43bb64a48e7afd4f",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_henny-penny_penny-fox": {
+    "audioHash": "c17d43ddad613b58face9967c716469ba7239d36ea27cf521bb106a69b3ddf41",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "ee25f80afc82c683e703440dd761c32a3951fa1e8e93465ffba4639df2dcade3",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_henny-penny_penny-friends": {
+    "audioHash": "7b86e38de7e1844a87ef9f9b5272a3964c7496eb130650a93a7d5639fbc687d3",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "3c32d37be92f021ac27cede41a59c9d9ab169da6ce7e5ec2793a938dad206e9e",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_henny-penny_penny-home": {
+    "audioHash": "ed4211bada1dd2171f5c6673e6bea8fdd0e3d478117840acee76478d9452a5ae",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "1c65e522711bb3970f47ba824e42803060393065c4eaf6d1a2ad674c717aacc4",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_henny-penny_penny-king": {
+    "audioHash": "7b69c1c29e49bcae1cff8ae5cea47c63c7699912466c981774a9c318c9465b40",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "a2ba5f96002fa400dd6a512f47515dc02edb14fb9e01bd3c25c7ed7c9e70f6ba",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_henny-penny_penny-stop": {
+    "audioHash": "404d892191cce248b020301ff92697b0e75d6c9eb4460e9841748ba2a2af2a17",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "0385a161fb15775420ff0d77f61153191e43d28ea4a0842ecef22060fc480866",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_little-red-hen_red-hen-bread": {
+    "audioHash": "0254b9bc772b5a87c12ba248377a9e05fab83beec5244bf9ede2c1f96a229237",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "4631aac9418cc6c6a6d7b22e1eb4440ce99b183d4389ff9cf793344b4ee5781e",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_little-red-hen_red-hen-finish": {
+    "audioHash": "acf33925e4f2562f1aa1d0582955d5a8bb8962f1958e9af15007323b4f682b66",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "3cb37cda9c980fb5d3a47f4c476ec3a821128dde332b7f27172dcf053b370482",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_little-red-hen_red-hen-flour": {
+    "audioHash": "40974704c9eedf7269acb9c766b6d771879daeb4dc5efcdaee8d5b3be44581a3",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "280f5ba3077c600128f4fc37024be6bffa445958fb9ebdfb3fa7645b2ac105d9",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_little-red-hen_red-hen-harvest": {
+    "audioHash": "cfe89648f46ab524a25f30d5f72b27356543fa19eb11015aafa057606a610c9d",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "354961a9f469e5d953c3d8789379daad138b730058b036030ba8523c83c07540",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_2_little-red-hen_red-hen-seed": {
+    "audioHash": "f5676107bf69ccf4cc6e923a64e93cb8c195458e28bc5a54b4d96249615f4228",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "665958fe5eeb4272e55d2da48a64cb4d449b777b39a25add4348b4b56f9c0765",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_choochoo-birthday-cake_call-a-friend": {
+    "audioHash": "53be347075861959b698c613d928fa55d5fd88649f3c08e8e9c4ee6a915e89c3",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "856ae32e69763aff97679aa5e0a8305105fd67e62a9d2c99ea7823cab86eb6cc",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_choochoo-birthday-cake_fox-list": {
+    "audioHash": "3bc34744bf7e33488ec12ff22c6246080eaf4b77ca71de9a87c904c6de201c86",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "50710b53bd0a62c19c01384ca403a2eb713ea5d85991d9e0e894cb04d1f2377e",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_choochoo-birthday-cake_milk-and-stir": {
+    "audioHash": "f1076fac1b51dcd46639e3cf780c91312f43214742d07c3bd7e415b9a3d6c7e7",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "2b2c13578abdd0d815b443c169b542ee9317ebacbd508b06895e4951c9cc947d",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_choochoo-birthday-cake_panpan-car-color": {
+    "audioHash": "d4ebc6eda3ef002ade5420bc743e966b249305deb8f8032301d12db22b243afb",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "cfc48c97599b28c0166953514353b6a7f3a2e0658dd2b998facd3031ddb01170",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_choochoo-birthday-cake_panpan-strawberries": {
+    "audioHash": "93c49647e6d77709cf139fe10212189d8e161fc09b1ad8790e04e96c953f1e5f",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "e66af7cfc2f9eae1b5ae7c32d806341af2390c2297b4ccb89df4550e9d3feb32",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_choochoo-birthday-cake_yanli-practice": {
+    "audioHash": "1d705b5ffef412ec7c7da74c4b02658593934c7e84d1dd11352ef88d27a4cf8a",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "d91e1a4da5f11a2f9e35b58c056d95a0538919a85ddea61c833b7a295abc207b",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_choochoo-birthday-cake_your-birthday-cake": {
+    "audioHash": "57c13b362ca327a0cc2cfe63de6e896225c6fbee44e56d83860501b36622e119",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "1e166620eadb9f35096d9b2bc6bd817494be9ee16cf52115fddb38a0f0d8d116",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_choochoo-farm-duckling_dog-smell": {
+    "audioHash": "b87e10e7875b1e13969e16331d19d770f2b307894eb3d220d348647a5e2ab928",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "2dcac37bc46ee7f6e0acbc89f8a4ab7a03630e545d8c796603508b259b395937",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_choochoo-farm-duckling_duck-sound": {
+    "audioHash": "f207d0713a767cb1bd9860b1c4b6eb59ded5f233abf97c1a25110ce1ad7b77c3",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "00f89d1c999904f7b0e12d32adb4ed0c833b731462c4dcb505cde7cd75178c85",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_choochoo-farm-duckling_farm-helper": {
+    "audioHash": "f0f2edd0a1e70df5e60fb1464820417f0e6ecd56f39cd43e7ef7e4ed07813c4e",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "c9b0eb1fad7389ff07fa9a1ebcdd4dea1d16a563ae0192d2c579e1b8bf0ab311",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_choochoo-farm-duckling_foal-yellow": {
+    "audioHash": "177039fb122cc0fc1f686541f706b5e78e3bce5fca79ee938ad28d2af9e91828",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "521c73c6041e431d407d2a5a4c4639008c0f41835f75d69c945082bb3fbb9c22",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_choochoo-farm-duckling_help-gaga": {
+    "audioHash": "4bcdc19ba46b7dcacdd21288443f46081210572cf9dcb84cf28924159a488de3",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "46b95dabff838b5f5e180508b46bc960ad081d434a021b1ad3af60107586050b",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_choochoo-farm-duckling_hen-footprints": {
+    "audioHash": "62f7e77329f1aa5b86eda0dccad1f7d37837c0649dabeb2e942ab0a3d4c04466",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "f5febc3a7aa1c2a04edb93740a995b5c9dc800aff4ae866ee1008de4e4acce6a",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_choochoo-farm-duckling_your-animal": {
+    "audioHash": "b096912c88b62c9a772ddc66be50ea0cd4316a902287ae907f996bee8638e47e",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "00ee5647ac039d8aac5cfb28fd57b80a69219174739b43a8c759e5fef5b928e7",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_choochoo-noodle-shop_bengbeng-thanks": {
+    "audioHash": "cefe28c1a243bca8acd7fbbd56ed139ada30bcb2035697ae1fa963e193b8c8fe",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "9b480415321b5e053578614c0f28136a18455f2e08478d86e854dc902edf72c0",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_choochoo-noodle-shop_blow-on-it": {
+    "audioHash": "b23b9e321212b98efafe2f0ef3b545a97c98a96063678e3a28decf60dfbd3c46",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "3f0b943f89a915af1ddd7809c6c660011be067ebb93f8fb404048c0dc6d213db",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_choochoo-noodle-shop_count-dumplings": {
+    "audioHash": "bc68b02e42889afdca0e7b63b9a3e5f98014407e11055b09cb8aaefb8fb998bc",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "7b0cf6bef249d5c7b00fcbc378a136778a9da94c453b0bd26fdf104c878bbb88",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_choochoo-noodle-shop_long-noodles": {
+    "audioHash": "3c321893202be18d7e5743337e6089d2c2e4847cc310cd76df8be9d9786fdd25",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "0c323f9e3d66254ff24ffec380c7776013d663590eb7ffe63d0a304cd624b5a7",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_choochoo-noodle-shop_pick-dish": {
+    "audioHash": "183302a4a837ee941461ee511a6b593f27382c0ced14f6bcb86e2a831bb04aa8",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "abb4b850c6fcbe322d7ae40845c1d3855e917ad1e75bc32f1c459c68fd5cde05",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_choochoo-noodle-shop_your-favorite-food": {
+    "audioHash": "ebe92a23ed30cd9011f3282cacae9e99d9fdc41576b0c67dbdfc4b0f34974ac0",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "d4da6672597e5fd6990c0faaff884fa5ff04c50e39c765094d2bb06492dafbe2",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_henny-penny_penny-acorn": {
+    "audioHash": "921bcc9439399ee9e742f7cbd86c94e28a8c834e06fd8334679b70a0ae2236a2",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "428f8faf4509841cee34e162619a4ff028231c21ae2ccd2b03f293a7f83f5c6f",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_henny-penny_penny-fox": {
+    "audioHash": "587b0633232beff723d6eaca39cbfeef1eb154261ff81ed3301e06b5644036cd",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "edac6a22fa36edc256b0c168cf192455bc1e69ed84dd79f96242498c94532456",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_henny-penny_penny-friends": {
+    "audioHash": "20e9c4689354f09fbf80392a9617af8401314bbde4a5290b9cd853ffac1f1bff",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "84c896c663c2713562049397fc93760586ec069cf0b877fbfb8fc013e2c9ee8c",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_henny-penny_penny-home": {
+    "audioHash": "c7b581d8709e49d9586e632120696cd04e54d8230cbfa0aad1a935622d1f6482",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "1cb02987937f6dac13f99413b864b4811607cc5d6d8847fe2ae6bed56690ae05",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_henny-penny_penny-king": {
+    "audioHash": "c588e4642175b62afe4feb0db99b80b17f6ffc7255eb4f173b5690b3be18f517",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "8ee2fa963ccff52ffc2ed2b41f3434d1fe40587d1a6c9504dabe123e038c3f66",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_henny-penny_penny-stop": {
+    "audioHash": "d0e5963eff86def6407096d97f3725f487662939f96864cbe29bedddde97b6bb",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "30ac882fd4bd4d5526b0c51bc730f12621bea696af530e20b490707ca1f2c3c0",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_little-red-hen_red-hen-bread": {
+    "audioHash": "d9b1d8639db0431c2f35db8338e6b987cf18dcd7aab0cc8285996e044c80a963",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "58f4c5775126eb21a8401e1d3d6d86f6c24c1ce0a512bf77a020fabe63666e2c",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_little-red-hen_red-hen-finish": {
+    "audioHash": "f650ecb222124cbf3505eb97e7d502ddcdeff0061a86f9898c31f31148de5ce1",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "14d7639e5423bd80b0186f6324e5b7b8be845493eef36825b09c88fbdbf4debf",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_little-red-hen_red-hen-flour": {
+    "audioHash": "e83d183cd75993277db38301f512ba6d3523715148fdec39ad3123c07c7833a1",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "6faf358ac2a34f9fdfd5861f100fd59208e89ca3fc1ab85f4ad53391c765d5eb",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_little-red-hen_red-hen-harvest": {
+    "audioHash": "d6d3209c4bea0e08a44dd736f5fbfcf839493537acf6bb297a927e0b5bfacd40",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "0520efb045895f614aab4949ae2d26cfa3b1e78f07d4059c504f5612047446e4",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_3_little-red-hen_red-hen-seed": {
+    "audioHash": "f3bb6e6beab065b8c987e65d0433dea9b3edd7133ac07c63e281fd871a4bba19",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "5413a6e1006a9b46e3415d00e3b234cbe06a9cb39c5952b821ca17df41ef89c6",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_choochoo-birthday-cake_call-a-friend": {
+    "audioHash": "2def3e86a19c6432e979ee8f71cbdac2a5de59877fba0c078aab144155dbdbe2",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "b3a02ec06a691f4ff703a2e9e5844a93779fecc60fea026ec51c6fe584d9bf5c",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_choochoo-birthday-cake_fox-list": {
+    "audioHash": "689a52ed6779c75057164b85cea4538f4e60f4352a661bbf6972ede4f66912db",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "062645c10b4a8196f42072a9b516ec69f3bf16f5c1099d4c0e8ae7da48557af0",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_choochoo-birthday-cake_milk-and-stir": {
+    "audioHash": "0e529c084ebeead02d0a5e2b7c37eb75ab6e455eea9c2f3a981fc183611cf7d5",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "ad7589709805a4f7b623c1e43f455297886753018f0b48c93c2778541d811cf9",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_choochoo-birthday-cake_panpan-car-color": {
+    "audioHash": "93ab2d645a95c5a5dae220734e8cf66f991a61fb79601b3ccc2dfb75a804e8d3",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "2e2776f12f2ca655ab60cb845ad996a78fa95c790254dad07ed4645d749d9a81",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_choochoo-birthday-cake_panpan-strawberries": {
+    "audioHash": "b62e9c6d73622164f4fb53c62693272cceb41c07d652b6c90fa3501509732586",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "cc807935592527fd277d1385265ae1f2b2f5e7b5cb80793d33962b3d84e92fb0",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_choochoo-birthday-cake_yanli-practice": {
+    "audioHash": "681300baa701c55c24c7a43b1363254168723f98479b0e4a100af377b4dcc176",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "09493c6e123c75508315651a87df1d9a7ac58a452457cd9afb51c6b59cc0997e",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_choochoo-birthday-cake_your-birthday-cake": {
+    "audioHash": "1532848ceef2d1f4b2217f1ccf546a61ab4458974a7f36764be7c299a2a25316",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "6b15b7f5c5bc312850d95b3576f8eb2911f86d1986dab584a0e0ac1a9a7064c0",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_choochoo-farm-duckling_dog-smell": {
+    "audioHash": "565436b6d221529f5a9f442cfb0190be829b199c67fe41207d3713cd4941eda5",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "f0c79537bbab8e7bc224b3ca78d4a95fb2ec4541cf8e03b92279ef25e0fa216a",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_choochoo-farm-duckling_duck-sound": {
+    "audioHash": "34356f8ecaf3a8420f7a7871afbfac88bba9cd9ba95b5f9aaf1a7853ea710130",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "a3e057e900b90fd97ecb0eb1a558941a4de4ae07393a8eaf4a43f8383b71b282",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_choochoo-farm-duckling_farm-helper": {
+    "audioHash": "ad156f05d1b19a1bd4b6faf0f453637c7629b7b399750123911c5aeaef9acffd",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "a92c3cd84183fdec895c115dddc928c2109d7658ad74f2700cbd39f5519ecc6f",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_choochoo-farm-duckling_foal-yellow": {
+    "audioHash": "7656a79a11f43d4021bdf3f42e14961fbf945aa8864a3879ef9421c5e2dca698",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "4fb088e3d9d44a9711c3f83de61081d0f7248d09cfb63ba3b693d1b93dfc1c71",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_choochoo-farm-duckling_help-gaga": {
+    "audioHash": "c86e593d3c7e19ef3a2cf63d59f74e7ca87d6dcc5f3f740be46ec91b8afac561",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "8d5af5eaf07bd4dc27b7886aa6198121211418129c82c3c8318284d10072e13e",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_choochoo-farm-duckling_hen-footprints": {
+    "audioHash": "666fb376dba8482b0b0bfef2902bd027fef1c4920050493c2a56b9dde3bd142c",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "dea09af0e70f3eac910446c362cb74bf8acf9c99e0d4a1835ec1239c87c9ad7d",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_choochoo-farm-duckling_your-animal": {
+    "audioHash": "c195dfc6d62f957db12a28252aae8565d382c27cf5fd3fc7106fb11d7b471490",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "46e2ced5d1977012a79f65e416b694afc8d831aea0306bfbb2c72ade9881e846",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_choochoo-noodle-shop_bengbeng-thanks": {
+    "audioHash": "c9be6510dcc268f96f43c920ff7294d3bfca2d9dffc5ec028d2f596f28ff736e",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "1ab30ae5849650029889a1ef5d15eaa9ce6d912085bcc424c8b7e00c64f34ec4",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_choochoo-noodle-shop_blow-on-it": {
+    "audioHash": "5d280d1773e7e078d40b659b3bbc1985b2a23d1846f050d7f1f7871be18bbd04",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "bbc1c63329d540ca9bba41beb878bf656199aed9df01056c376d7118a1ad40d8",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_choochoo-noodle-shop_count-dumplings": {
+    "audioHash": "efdc50bad8314546e262107b15e642853046f9cf20ba4d322410f466a1987363",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "6570f5e2cfcb8d47a066e42755fcd8a2db98d75584fceb551199823e00ed29b6",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_choochoo-noodle-shop_long-noodles": {
+    "audioHash": "c5a68f2d8cca166738ef8959d2688b3736e05947ebfb853bcf2cd59c318ef6bd",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "177af27bcd2e2a62ff3c4780d4c0842f8d5cf0c7c3bbeb61708d5185aff9b7c4",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_choochoo-noodle-shop_pick-dish": {
+    "audioHash": "40f81720e6e43ad7be09d5e2392332a6ebf44b5f6210656318eba8972d131dbc",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "682d93a954c59dfa52c2075dd2c6e8f0de7c1a4c33b168595b4cb20380e0a15e",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_choochoo-noodle-shop_your-favorite-food": {
+    "audioHash": "19612a1df7e9a10ecec2e153545a66af404fdc44a1925dcfe9d16ad9a0c21e72",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "09c4a5fa08e2dadbe91d9bbf2f101896593596d7c8a2499c5715c491174b25c1",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_henny-penny_penny-acorn": {
+    "audioHash": "5abeb5899fe7752d394e1ce0264f3968e913fe8a4d53b9b7fcec54236dd7452d",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "03dd639395d5646f13ccddfd4001ab47c55cf86c69cd817eff8346da816e9c3a",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_henny-penny_penny-fox": {
+    "audioHash": "a19c6130a425c544bc5723a3de6a043b74a6da092d3a6543ff0e314d9f06f289",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "141e8657939179c0c50d53aec72cee29fb52a8befea7c0104c2fa748f2d926d6",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_henny-penny_penny-friends": {
+    "audioHash": "9b9f5e25b164dce700642de7e318f2801fa933deea5a289adfc93174356a3a8f",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "544b5e9ccfef3b11786b54ed8e17c6d233cffc01fe54d7fc6636704f45c067f8",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_henny-penny_penny-home": {
+    "audioHash": "026afe6c51865569ff6ee618a080b7895621a03234ffd1ee444574dce3531def",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "8366d868a092150254a9ea4289456836f22990269b3aabf772eb7815d22de7b4",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_henny-penny_penny-king": {
+    "audioHash": "2386e8c16d8f6eddb23147858bebcb19d2e34dad88bfb3731fcdeb5065425323",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "f04cb90e0b5d36957b910dac7955ed4d0e3d753c7613b9718c9c5f9d8af9d202",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_henny-penny_penny-stop": {
+    "audioHash": "e4d3448aecb7435b0bfeaea45c0a4b3123f314f64228d54c0be0bcdaaa326e14",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "ace93b4b16ef17ecd87137e94ccb5e2d3c763aa1172a2932e2928a48a01cd6ed",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_little-red-hen_red-hen-bread": {
+    "audioHash": "c2b258b4a730b7ef6cfe3239c0bb4fef04440d213edcb236420d91f82c52eafa",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "379117913a919812012f4737bcea9e0a88878aae23b47ae27f862dbb2a8239fb",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_little-red-hen_red-hen-finish": {
+    "audioHash": "78f24897d4de3d559c39e0df1da8c9e32d3efe7e7444617f5d58ed93802abd26",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "630988e212d467bea6b798ed5e8bf148055f15edcffeb20259bee8e2653523c7",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_little-red-hen_red-hen-flour": {
+    "audioHash": "48ebcf986d0f6793767274647788e60a804f04e5c7b9eab8df742fdaffd79956",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "687c153c413e59d63775a2c4223928e3788260b9c82e277a7a7d96c6c40a8625",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_little-red-hen_red-hen-harvest": {
+    "audioHash": "d1d82f831779d7347f45451539741132b6738e7bbd52e970911607b1540ec558",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "fa1927e46bfc28ccc393ae51eb7c7f07b6d0e9351eb8c7bd39ee43b7f97c81c8",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "hint_4_little-red-hen_red-hen-seed": {
+    "audioHash": "3e20f1f6496c0d59033d6670694d623d88c04b82524866714393dae31b6d5910",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "de80481de3bd65dd2cc9322fd12e131a37224fbe52a6d69145c69871b290828d",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "play_boat_start_v2": {
+    "audioHash": "2ab778e67e4913ba4be5094d00ab3efdf58f70722e2cb529018bc7cfbc7f647f",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "851361f47c37fd899cfa6ccacc5e0a62dd7125bee93b5ca1b52ae043a2dc68c7",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "play_farm_start_v2": {
+    "audioHash": "a7a0f0f8f4b0407408f1d3a5aa85cc43bcb6ca52cf2599ca68b4936b7f752d37",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "a5c2fe28f71e22854e66c783d843c93f9a4567dcd1b3d667b46e1ab2dd85ec9a",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "play_restaurant_start_v2": {
+    "audioHash": "656d6a69a8be5125d9e3c664c3969c96190fc1d72f7e19b9f13b839f164af774",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "e64a2a4afdc5f1ce72b76318b3253d06802466ac218369cc7ea0c7a8757be40b",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "play_welcome_v2": {
+    "audioHash": "f089c8c0962acf2091c9cb61125021ea430e559fbfdf3bff50bb864f706d5193",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "e0b0e105dd056ebd193c5594eb7efd0bc618844ee5fd3b54fb848991bb63685f",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_bengbeng_thanks": {
+    "audioHash": "c87dc4edc630a079f24281e089f24072b19a1dce44395d5752bd0afb1a73701c",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "16e3e20ea6d54c2eaf827b89d6ab0b205da27b16b4ffb85c534659aa1ab96e31",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_berries_completion": {
+    "audioHash": "2c1c13418a280bc317bdb0fcc4efbecb2b88e28b58536a3e948f59877f075485",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "9b41f492556faade099aafe4d982fd50535e4d8be11161b7c5aa1dda2e1d94d3",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_blow_on_it": {
+    "audioHash": "0caf3f3f0b63c45338d21e47125ae11237a68da7bf4588d85b57afd9fc329e90",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "516db30419db6b00b6c857c2888deb7b0056441e6fbeb52f894302e403a4e792",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_call_a_friend": {
+    "audioHash": "c901568b2915796459ebcbbf3bcddac88ee836bf09f101a9c09368917431e1d6",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "6d7ddd29b23b25d038d70a77cccf5529665967e01852688e850765c58c685f6f",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_count_dumplings": {
+    "audioHash": "158034727b7ed80f5e68825aaff209b7894091cc37862f30e5f5feaf90b91422",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "671a9cf6411b158cfc8e159ac03d95ba3ff3fb19c25e30f5b42c3b26e66c7b52",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_dog_smell": {
+    "audioHash": "58081e6375f8b8661db868c2687d7a4625382501fd7359241bedf3844a353a57",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "3b50e792c8dee59f01348ca36d7b460e48361395b3f0602dc7a2ae05affd67bc",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_duck_sound": {
+    "audioHash": "5f3f5ddbce062d33245c0ef46a99ef96bf184246a47095a555d9f09a7f054cfd",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "bf9454e47525e8fab592a7d67bd541c95b9093102ef6056fa6b25d0c08e91bcf",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_farm_helper": {
+    "audioHash": "75143afddc85096873746e120a26cbc8204cde285a3dbcb90c8be68c70ced148",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "0d71c58583ff8b511031f06506804b5ac6927f2e7ab913f3be0e844086f3d220",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_foal_yellow": {
+    "audioHash": "7a42a5fdb741f183747fca1ceedbe4e9d03883ff24991071ede5388950eb8887",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "d13e60b9143c7d4cbd07bcd8b29fa135472386d657e2d2d2f03f185d21bb5873",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_fox_list": {
+    "audioHash": "dfffeae937988da1df2284370bff2484b92399ca4c4326dcb63b8f5d41ad71c9",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "87fa0d7553ea973df089bc660cc1048808b47953fb5a9b6d42a55ec3850b32d5",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_help_gaga": {
+    "audioHash": "fcfb1647fac2f9a26fe94b5d33a3d5089964813e6679f6f76cef9854647a10f5",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "ba92fc55c7a23967168c5ba7c7dacd7faf570b8e3123f2bb590bbf8aecc0d312",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_hen_footprints": {
+    "audioHash": "9915e2822f1533554aa5ecb9fc261d2930e11f77ddbb8af9eb1cc21dfc97cab1",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "ac57ee93eff97bd63ae789d247c35c4442f8e3eeca0635ab923c7cf92af326cb",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_long_noodles": {
+    "audioHash": "a91c18e566b8bca6e6960e99b3212625ac505028a23a652eb80ee9cf6b165d04",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "e5a74301fac8de7d32fbdbd27520d3f40673c65dfa8e65ed7a0256647de54f01",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_milk_and_stir": {
+    "audioHash": "1bd81d82399da301ea7a417a12a4a09886726473cc9fb4aa0c335375a52b4c94",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "dd8ec1e57c77c3a82d59d87501c3e68b96bbb9e3f2ac6610a87a59c810ddb3f3",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_panpan_car_color": {
+    "audioHash": "fa27c5da42414983c184640c02cada70f6c49a99f7edbaef87031baca0b03ffa",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "cb796c2c24492fe48be8b29b38213654e69e03ad1402bb554dd12a2f380ce8ff",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_penny_acorn": {
+    "audioHash": "29e519b5880eaabc1040163788c4db138b71cd5fc1795451fb4330bc8fd6db4c",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "a0da2c6c6f3beaab26178b3f167edadb60b588ced074d07a6ef2dcfe27cd588a",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_penny_fox": {
+    "audioHash": "c93ddb54087c866edee5132175e94021d26071b4e7a3dc4b32d8185787a0baa1",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "4a211890ddb219d9e4debec8a3baf273047475a2b8608ccbad44196c61938471",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_penny_friends": {
+    "audioHash": "1c18adeaf35f964d47041d7b2df3e688f13d77a3c12d51cc09c7bef604f76aae",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "0d2823700f6e80bb7661c254efbe1e2bac041664f80f40b4b77b024203ee3439",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_penny_home": {
+    "audioHash": "cfcbe06e8cf4ba1d59bc00ed0999279f67613a126ee8c491813188ac98ed9326",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "e71f7b8825698b8cfd84ab3a5806455503b340cb6ecde879575e1eca808bbcfa",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_penny_king": {
+    "audioHash": "55a51f0b275c21acfc093df491eeeccae66d7b1e20a496fc7159e5fca8c33ef4",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "9943cee01addd7019c4c63f79cd1f074076f8507408f023521941be97c51dfc5",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_penny_stop": {
+    "audioHash": "6dbdb499c5ea43b93f0b7c35780fc9b8530a131baf7f830ba97e670fdfb3b775",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "ce6c242b6cceb63e3d8fe95070037b052a397410cb6e91fa39c77af271953075",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_pick_dish": {
+    "audioHash": "680fc96884e74dca5ef0aeaf5dd416949c13eb7afb885cdda7f2ed219b94e017",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "2a08d6b06b6feb9e59cfafcd5688427ae7573ff26afeece9408549d6207cc144",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_red_hen_bread": {
+    "audioHash": "e1845071940e0708597392aaff0543465e1a48345b04eee45f024704d9b0b4ee",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "afd629b61337cb4694a0d3f75a6035c46d93d65261949a8454ca00730578f2ba",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_red_hen_finish": {
+    "audioHash": "243860bf4a8e99e815f69dbb61ede4183a0016f07488ce0d9278c209c9b4a25b",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "fb6790bd4741d5b89b335d8c7b87db7002826365c71fc388e5c6709345548dbf",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_red_hen_flour": {
+    "audioHash": "eb6b901154dbf96bcce9fa7e11fc605891cb2a46629719546f95cf3c20278d41",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "dcf7267862b422407671c0c847ec877a48599811363dd46f9ae93a01bd3736a5",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_red_hen_harvest": {
+    "audioHash": "c89a2147d76d985e9ed4dca2d493013e8da906c41f2250aeab34f138cfe756f5",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "7d3a1bc9d8093c46ec56cd811f7a9cff9e9aa1de357d2cf9222d6d5713a6c5b1",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_red_hen_seed": {
+    "audioHash": "eeec42215a7626c15acdf23e978b22118a7a875378e02b326c2627ad3dc57f39",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "2343acafad4113ce54c60a9b3c1671d56d0d0346b3aaadc28dbe50c1eb96c303",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_yanli_practice": {
+    "audioHash": "a389f1d760503ac9b08ab62b67de92a1d37eb440397c6a89c20474442f592304",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "49b4925250d67394dd7f63cfa3afce0d661d5bca3ad02cc627e33027c1cbc5d6",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_your_animal": {
+    "audioHash": "c01fb7d74efe402014bda13dadd05dc5fdead099ae11f234494d2e9d42dbc8bf",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "258cf72cf7ed5dd16a0813c9ed272e2da8d7e8feaf158d54cc744683eafd058e",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_your_birthday_cake": {
+    "audioHash": "8d998eb6a3f0af08760a714155fbf216df1e4e384dded32b47b275eefa993e16",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "66ab786e2d240da2a17b4071ea00d84c138e5089108b2ee2ea894ea808cd150b",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "question_your_favorite_food": {
+    "audioHash": "a30514bd7da692583c0f5cf8758986b669d1bbb0f153f8b30b3d3014f39f53f5",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "51f1f4f8774c1252f390166333f42c07c2cf077b6d3faee5253e1352bbc0e2e1",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_choochoo-birthday-cake_call-a-friend": {
+    "audioHash": "19f61b6c2054b77b8c8fabff8965e8ec9d4d0319d72524ff0c4695fe555142b0",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "642ec38351964ab1587bb2cc73c13ec964550bca28b6aaf8804afe987eafaf85",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_choochoo-birthday-cake_fox-list": {
+    "audioHash": "c0d97c67842583b5e9e88c97b9c8a1cc0ebd329d1fa4090ed1734c6ac9752873",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "3a7285384da973f0e39b7fae76da63b2c4195f429fcd8a3867dda190dd64ad49",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_choochoo-birthday-cake_milk-and-stir": {
+    "audioHash": "976114c51e864e9a6f955d2f9ef9947e18f61cd4f5e7e2fd2d8c9d71ef2e1cd7",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "76b3f40083ef2adc62270d6532b1cc78562ae8f110b9d675e14b30e9d00327b1",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_choochoo-birthday-cake_panpan-car-color": {
+    "audioHash": "7ca5d1652dfce7aa593b5a2cf2bcedc2751dbc5ac5b15a7e4aa605ea627632d3",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "2936acc095a44bdc01ed9a67e27c3c9086286b5cb42013fc1bd4180388284b77",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_choochoo-birthday-cake_panpan-strawberries": {
+    "audioHash": "2e31e8453546acf600aedb07a0613efe3e7ee1120c4de475b40d6a0a107d433b",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "c866bd3fa31ab2eff5149bbc46c07d5aff6af75409f7148dc935ae7f6de69511",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_choochoo-birthday-cake_yanli-practice": {
+    "audioHash": "79f1a4071dff1b4a8ad8c1f8cee6bc805779c86e23aa3d047993cfb82ba41c56",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "6abb27fbface39c6b83611c69ed13be57aa82d16e6a8d9a4a85afb4cbea440cd",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_choochoo-birthday-cake_your-birthday-cake": {
+    "audioHash": "2bf3d11d8d8ea8c7aab9152ccb9649f10555481818de0836f52b666ed345bb79",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "6d1fcecb258b984f6219f1a47ebc9493ac11dc8fb36eb08f8ac7ef4fd0299178",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_choochoo-farm-duckling_dog-smell": {
+    "audioHash": "273afd2dbac662e420d2d42c12ac73a18343f7db494604cf5d2b1e63e23bd538",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "89c52ecb3aca7e9af0f780be1dca1cfe32ac748cc05012d8f2413088ef2f923f",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_choochoo-farm-duckling_duck-sound": {
+    "audioHash": "10ac966d80cb50f4c4122b028448e5bead0181e28ffde4a7d0cecd20a5395cdb",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "54fe04b8f36bc4269edeb8a5784389ca1e8fe142aa094b1de0054a7005d7eae4",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_choochoo-farm-duckling_farm-helper": {
+    "audioHash": "920c8b245442f5b8efa1fac648922602f4aed6102e3f1136c7bdca32479a9a69",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "883718a65f9d51fe8f15fa5d0a171f2ff486f88b7161d82818ec91a2be3c38e7",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_choochoo-farm-duckling_foal-yellow": {
+    "audioHash": "c3686edb4fb255eaaa1a35067d3a221aafa035363c0ce836d360b4ab3de9c32b",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "7b195f94e29b4c15d3b65e0e6cca36581e672b71513802f935873b09fbdd7d0b",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_choochoo-farm-duckling_help-gaga": {
+    "audioHash": "4ee1bdafb04417f047628674f95335362ae2987eb9cb5c217aef841f99cc0b6a",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "06e37b644a15208d49884e4631b7f671746fc90faf3ab264d48cf3f8eb6e9bf2",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_choochoo-farm-duckling_hen-footprints": {
+    "audioHash": "e5f3bfec25603e84944a4ca331f8ffc47381241d715fbb64d84fca98d265d14b",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "a92cb09311ed154ce2b135dd7452dbbdc9c9f54b24c887e2c9acd9d559693ff8",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_choochoo-farm-duckling_your-animal": {
+    "audioHash": "4a25431dd7207fe60424aaa438fbdfddd97240e3a326a04691cbc977bb4067e0",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "65f1feb83d74a66902a42425d9c4edad80cc363eda0555f4921a9ef88b451a99",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_choochoo-noodle-shop_bengbeng-thanks": {
+    "audioHash": "5b70ae4d57889c36a58a2a0421238d96e5a0deff1af869b526f1e59b02b5bcd6",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "986274da57f7b273d2108a3fbd57b476bc7310541b83450ddc708adb97adeca7",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_choochoo-noodle-shop_blow-on-it": {
+    "audioHash": "4a9679ad3237b16490eea9db6338fc8a5ca42c8a27b3e9762460584dcb9da124",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "b262f0aff0d50f9036054e4baf9f42a032251c1066d6bfe2729a3abc89538b47",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_choochoo-noodle-shop_count-dumplings": {
+    "audioHash": "95ab721f7b295b54c18771979d831daa9fda6e74e8b854d2207a3971001c1a63",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "752381de50cceb51a732599b4741ecaa13347301bf308ad7de83cde05021fa03",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_choochoo-noodle-shop_long-noodles": {
+    "audioHash": "bd21f711a8375da67c21d42c0fa0bff32d39a2630b583531e117bb041d39fcf8",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "2c122f4a2a2ef4b9b12520b9c6dcac61a471d2171ae6af755e69a13fab3999d2",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_choochoo-noodle-shop_pick-dish": {
+    "audioHash": "dede413aaa101c8026d79153253a32022aa204ecbc4bef66ef6283eec12d0864",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "daa6543d046083fb306bf6bbff17e6928d62b625c9b218360b9f90f24bdb1ea7",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_choochoo-noodle-shop_your-favorite-food": {
+    "audioHash": "44de9fe88d311dcd70bff2feaf9c03da8860a6cb117ef7fca4dc9ccf83d9ba7b",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "1340b4bc92b620e592319621c67b26d082201df12a7fede997ff323d4586365e",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_henny-penny_penny-acorn": {
+    "audioHash": "6601f91748fa3571a35a0cf7e1c9f5801dcf00f198fb9a5dcf33c3eb0b8dce70",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "ccad72abf17fb55b4b11e0d41fc64739a1ff8e30fcbd793ddfa59009a643f4d2",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_henny-penny_penny-fox": {
+    "audioHash": "6615bcb4080771caaf98653b54230c70b493ebfecb3618312fffc8bc29ba7d63",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "c1be76e3643911012dd409ff874a04142a04383af51bbfd15606f2114aa57169",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_henny-penny_penny-friends": {
+    "audioHash": "17f8118e16a125838a8ef3803dbb4d49bad38e8348652376d3b8bbaf368013b0",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "5c810c07db55c1361044b9c1aec56eaa259c91f32887d3b1bc21da20bcbf35bd",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_henny-penny_penny-home": {
+    "audioHash": "2bd3b6011d68695572e89d33c759fc3cd5d114ddf0c03240874ddcdfe5d6b939",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "73f3c395c337d486b27583fc13cd810442a2aa44cf92b620bc9d9b292accc7e9",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_henny-penny_penny-king": {
+    "audioHash": "cdff7cef1138c6b3f8ac71d084fe32dbd7ff6ed65f82d8b9717fc351ab350dc7",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "bb8d2f0d2b88dfbd3c89b2eaeed442d69f08704d30b544dc6a3b525c76903599",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_henny-penny_penny-stop": {
+    "audioHash": "f2c016b0fc0127ce08d1428aadcb44608b1ace1e147b8c103954566e847ee9cd",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "351cc55d237f55c64230fbf73a834a8b5e5ab819f231b82c03dba23a502b95ae",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_little-red-hen_red-hen-bread": {
+    "audioHash": "2e01d6babbbb0bab10bc2bccf8da1b148bb25173f5ccdbe320dd2f4c4aa97403",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "939cb5d85845de92edc766609cdfaa47b1192c02df9c6f3c75fe65988346a0ca",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_little-red-hen_red-hen-finish": {
+    "audioHash": "4984baa0eaeb1a34384c340e0d8bda2d940bf8d188476d1c7d3fe03a85581825",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "241b648fea3a7775ff7d7e48901f0b54d96352c044fe8020684a301ea5a2d48d",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_little-red-hen_red-hen-flour": {
+    "audioHash": "e49377630f2c55fdd3381d6460d5f834d6a2c55be50fb14fe765dfbe6c22d018",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "f7e76ab749e470ae0fc0a98fb19d67ff883a183f9d29fc25161099d0116fdf3f",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_little-red-hen_red-hen-harvest": {
+    "audioHash": "ae759389adf7a373562a3c40f962bec21c1eb6a2de9da9b589c5a82d926f6792",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "af1bb6d14f021beff7343657785f8b78d1a820a7797ef2c40e4691626c314e39",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "recast_little-red-hen_red-hen-seed": {
+    "audioHash": "d941d0de04adf4c483a5e4c40d9bd37559cc32423b5ae9fe6e8ff9b2523c3d0f",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "f9dd2591f776ad33caa276f77d6cb4f7c301706ef6938e9a4b94b7bedc8894a6",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_birthday_surprise": {
+    "audioHash": "af4a020c26e7d986958f8e2eacde427f5e2b6417b61f2dea719ddb0c81719681",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "b65774689470ba90b59223727d9731158943bb3adee617269d2d0b0b5f514fef",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_bring_home": {
+    "audioHash": "002ab46d140e1add4c6d1400acbe5f200a29cb5ec95ccf16bfa4a181a8726407",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "41da168f2fc989d0bc1980409ab6baa915eb652f6b2ce6971ebb4236e25ee54e",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_call_a_friend": {
+    "audioHash": "90bd500028c3775af5308a3f805624bb9747e8bd35e87740bfa9a71ae84fe230",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "0bcdad982b6d105aa5fe544d378b8290f18ff3d82206f1810a9202f4d407e945",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_dog_nose": {
+    "audioHash": "7fd63035584269272c82741a322d932f41e9cf87836d9323c1b1fcbb74c74187",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "04beff2ecbe4dddb33ce58f25fb9928efa5fa05dafc6362dd1069b0d45373ba7",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_farm_arrival": {
+    "audioHash": "4f0f52c08401872fa7c46552c933b7b5e0dc6bf58f918a625c3cdc7704b27f0a",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "7b95b438f42e5c036fce1090760d84c3bd2b460daf9acb8d3afab655a16033dd",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_farm_dinner": {
+    "audioHash": "c835f1b6914bb420efc0c37251341f17080d1507927882c5b3bf999ec05b8cb5",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "5428ea4e0cd5c63cc3f2476b84d1d79507892370a38e375254b55f7cca56cb60",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_foal_run": {
+    "audioHash": "2cf925d2f86fd7afbda2a824619157b69ae60b92ebeb93c644fc6eb7ed890512",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "f571683ab9529415f2c4fed89c31982b5538f28e1b7df1aee0c1b729b68f07ab",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_fox_kitchen": {
+    "audioHash": "65e43dc5b2a73890dc77730e7fcd8c50850b313d40a990bd77511e283a58c017",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "d55489ec51dd67041ef9c9ba9c7d9ee6d73454cf6d0f659487e5070ebf06370f",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_gather_new": {
+    "audioHash": "6c79d5ca4abfcbbeaef53ebb5e2cc3fd693dca6fba2eb89f317106905de55482",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "363d5803ebec4988fdad7f5aba8208e700f3774f9322fe91817a31c676985eb8",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_happy_customer": {
+    "audioHash": "c0986bf3ba82bc02a1c15bffe11f5ce956672c58bddb72a87345245fb8532ae7",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "5a63ea712dbeb44e5b7dda8e2a04ef0be0f8f956ba3e379359e757e9b15fd73f",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_hen_yard": {
+    "audioHash": "bf196546c0b13d8da02e5ad32c8e557e247e5dfb486b4ea096f20bae0e10f5d4",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "f0c3206f9903feab060bbefa6cf59be95d8b1a1901091a5c3aff587f8d7dada3",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_hot_soup": {
+    "audioHash": "752025b9073feba582edc9cef3be728e1cc9805e4f78ae73d0fb0c92c1d24cf1",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "cac1080a63e1fcc7081cdfadeaed54a2f6701b57379769aeaf27d77c77b8bb13",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_make_dumplings": {
+    "audioHash": "f5732b09ca535c071c17ff3596d91a311bb111aba42553b5e8cb46bb8c1a8092",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "8683f0e3f920e39b050ec63bfa41acd7b02624def77fecae54ab2e498f8da4d0",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_make_noodles": {
+    "audioHash": "54f02bc77aba368f01a1bd9877d8162721b7fac772dae7104e9cc5f1dd02260f",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "00b216669ac9d9e1292ff84e1d39825e8cfa357375645bffb2c52c0a05b49cc7",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_mix_together": {
+    "audioHash": "e0970c4ddb0bc91bb6de5e5c4f902426aebfef7fd9427a3569f7f7a1591aaedc",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "97062e022020f4ea926dbbfb7f69f365f508e407a3958893ecee9b535944acac",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_panpan_pickup": {
+    "audioHash": "117b57d3afb34b6efc1d736f030f36719dc4ca9159b5234c8f5fe34eddb2605d",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "55ad0ebf41db6693724fb9a1b7b35c5e895f46e2d406e41ba8dae3c55f940bd6",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_penny_acorn": {
+    "audioHash": "9af01f8f9acf5e7b27b5e8f2f0ba7b7976290d500b49d06cdd374e58cf141c6e",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "e9a980d0e464aa1ee9581a210bcbcfd89d3e3946b219bb802ceaf235770593d3",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_penny_fox": {
+    "audioHash": "60e39ee7ad0733f097e2a28f778e62bf1442dbdb9dbf419f223b288632b05a05",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "ac88941f18e73f02090983fd56126e33bfc822100893f3403d0eee1ae447b649",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_penny_friends": {
+    "audioHash": "194de99f5a7fcf920bb962fa4f477da92b750e2f820b233fdc5101aa83ea337e",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "b34b775a3c5fe39c1d732809cac96c82d6d9edb6155655ed60e6d47777bf64da",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_penny_home": {
+    "audioHash": "ac85afb06af23d2885fda7d9542e9d0765f776f835c08dc496ddd2a7c85013b0",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "b9f4177a99cc4881a1996ed451d644777aad6f59140261cc99db863523e93f85",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_penny_king": {
+    "audioHash": "71e7b317d120617a49436ce4990772bfd46b59a27c33ea150b5a3f96f9b968a0",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "cd3d6b6bd159c1652af5315a11da1f8a12c4c17ab3500f60e866e1d283b62210",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_penny_stop": {
+    "audioHash": "9da37ff7aaf4d7826119c1e23e9056a25e2622fba0aeb748614a6cfac80d14a4",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "f359ce5f386d6e68e9871b5d5f7578c8c3467c39b17be3c3a501ae7a550e63a3",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_pond_search": {
+    "audioHash": "a4a48d5c4048ebf7f2042ca3de66c19206e10e051bfaecc46829fbfbc3bfc9cb",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "1d66979412fa59958fea255438d854ca4533257120e950b2244ccb3d41720ba3",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_red_hen_bread": {
+    "audioHash": "e89fde02176fd593983d3cf2cba2d655142e8d054dcd98d039bf1022f3556e09",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "14475045332ad5095396d13c9065414a7e8002c127af6daa8a4e9a1d9914c69b",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_red_hen_finish": {
+    "audioHash": "d315f55f8f6de3a923975ebe7ec0efe055b9ebfed71cf689c9af7e0675cd1df6",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "cf3298b2e510e1df0d47a265dac9d78b067daf609a199fe25daeb78eab8c525e",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_red_hen_flour": {
+    "audioHash": "6bafb74896967c930fd8b3a6f0483b9c7e3c5f1cb1ebeef2b076437c60647170",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "bbf9c6d291de5d7277cafc37c53e162d18f7bc88f75ea18cb2dd772c40f6dd5e",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_red_hen_harvest": {
+    "audioHash": "c9cb242da17367ff8611943869f8f4b840a2bf902c4a141b6201e45c78001c82",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "d00192a311325723bc19e109e5ce93fbac827931b8f861bded909778d7639f99",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_red_hen_seed": {
+    "audioHash": "dc237ff202c215a5fe7b0174a3f62cc70fdf44c6c33650ad481666cdd89818e9",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "4b247bd7b4ca774bd725b363f08c21c8a5775ccb549f80e34c2a65fc7ea28e56",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_shop_opening": {
+    "audioHash": "13c32717a42bf0a6118b940fb8ef2f0f5b4857dff4ea1439fa317554e5f81b01",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "58af43ed15a0f0b421e4d3d791301d4e322593d5e384ffd185fdf56bfb8578bd",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_yanli_song": {
+    "audioHash": "c9f6c2bcd67c817612a6664f7304d9d1a14b516b26b762e3cc17b4e0b035f094",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "8d4851782e0b932abc45b003dcc32beb2b00f7b83f81de4cc67178821937f0e3",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "scene_your_food": {
+    "audioHash": "ed730ea2543ae13b2dc1d408f1498c010c1b10ce158cc6b921ef6dcb03dc8b0d",
+    "pitch": "+1Hz",
+    "rate": "-8%",
+    "textHash": "ae1c570f8a245f04afb60dc98fdee1402317a7cb38fb8df030f58505d3d88798",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_choochoo-birthday-cake_call-a-friend": {
+    "audioHash": "47b8fbb186f2b0276811ae005aeb601503d79e6dd1b07bf3bed989a95fa3f366",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "7b53443a9cbdba0856ef932bf57988a570a4853ef5fcd1ba839fc28151325366",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_choochoo-birthday-cake_fox-list": {
+    "audioHash": "d35f0e948ed6af599f95d99315d6aeea721b2381b3bbd8d23a58c42003f0ecda",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "13d74748f11e4417bd4dc4e2f0a66dc726b873eb677073f70cd764e5d9d748fa",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_choochoo-birthday-cake_milk-and-stir": {
+    "audioHash": "a0bd609291e14c3f1a47b7db3eb6a2fadfb513071a5c6ed86dffcdfb1e4c09a7",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "f913cf1aee7932910acf5c439259d23a52c261f48a0fd92c097bfba97e960c8f",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_choochoo-birthday-cake_panpan-car-color": {
+    "audioHash": "04a3e659d02d69e96a9a56c943fbc19f6473b428c3337ebeb209e10d870bfc4c",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "5fcd62c1aa6d13020f5ae1447767ae93200d922f9c25c6c9c534214feecab269",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_choochoo-birthday-cake_panpan-strawberries": {
+    "audioHash": "6904acf4e2ad3ba403ed24f1fc380f4f34eacdba77e7e1621e53efe505e0a99f",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "0290b19273f25d117f2a84d9dc1d64252320a0dab8b4b544b03c53fa5c745647",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_choochoo-birthday-cake_yanli-practice": {
+    "audioHash": "4358e7f49409f972c22931b60e2ed423e2c5ece28e1a87d6cbcfacc292cd32ce",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "6510356b4d8842bd217524a19249b20d368e0bc3b6d8ad60bea8029024da5de9",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_choochoo-birthday-cake_your-birthday-cake": {
+    "audioHash": "d96fb4a0b9ebee05fbe0fd4b767d02795f9c5ed97a921ff6e88861e4b4287578",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "8e6031f5886257fb6bcb9f5e42b553ed9f149b18e327b87945cd35e15d32f7f8",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_choochoo-farm-duckling_dog-smell": {
+    "audioHash": "9b9ca69beb9a76b30083a7b59fb38e566b0d20b17c8154f59fd9b788cb89a9a6",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "67286c22f9c6c06c648b4893966b879fcf77957354f6ce55204569d4f48a7756",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_choochoo-farm-duckling_duck-sound": {
+    "audioHash": "f68312401ea93e6eac9eb35471ac3d13885ee4ac8e21e29cca7fd68b3116aa20",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "550470d3889a90894a5f8b11789b4db6e10e3073f5b86c3c648aa8009a06218c",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_choochoo-farm-duckling_farm-helper": {
+    "audioHash": "785cf8fbbfa9e13a8dc068c4598c9a4e3957e93abfabedeee3f4e8e6de0cbc73",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "c4520cf922a0aa3676eb52e8207e11cdceb60ca809a4fda9b0029c03af4ede29",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_choochoo-farm-duckling_foal-yellow": {
+    "audioHash": "1c6d3ceba9494ee421d70a6580c46d4776ca8caec727897edf57354f8ff17745",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "544179d67893f105db48f3e6fb6a5f4889d812ff8ba31b621fe84e35c44b9355",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_choochoo-farm-duckling_help-gaga": {
+    "audioHash": "2a9920a5472b80e8304cea533d133cf7b3fface00e94fe2e8a49591de5b8b113",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "b30491cbd0e8300f1da610dad73229b334334fd89b1447fcba2ceaaf31d231e4",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_choochoo-farm-duckling_hen-footprints": {
+    "audioHash": "772afbb821fb8981f2d75b8a9280cb1c3a2332bec0269ecfbc51fd2613ca3678",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "fe52cca5c4fb6a60d9cce9b90843258d7f6567d11154275478960b974e602ff1",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_choochoo-farm-duckling_your-animal": {
+    "audioHash": "f5434c0ee7268bb00b75b4ef51d3dfc6af833a0f4e8c7b8d59ec283cbe4bbfee",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "186794e708b7e7b9ab671c67a5ea4a421e4a25bd4aa1887ed4ec6f288187872e",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_choochoo-noodle-shop_bengbeng-thanks": {
+    "audioHash": "29652e34daa21ab4462b601e65813779bf5bfae9183d286802dd8d54677e8a02",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "3bb3d730c5d0b249a0876bd13470f2f34dc7976da7ca6b03d3173993f2a00277",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_choochoo-noodle-shop_blow-on-it": {
+    "audioHash": "6fdbf8cf930c1b0f713d39fd464787f6f06efdf0f3826989ff2179b7f5d4cce5",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "bf1e23c4703f417fb4546ff04e15f072822d0b4c973a5eb446484e1bce7e9394",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_choochoo-noodle-shop_count-dumplings": {
+    "audioHash": "5dae08cd53d476dd1fbe96acfc3f51f0e695cb02094f9075ff79bbf165dfe550",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "f89b66d1b9cf119eb77ed922214eea9ffcf271982379e17ed84b432d058ec2bc",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_choochoo-noodle-shop_long-noodles": {
+    "audioHash": "e3604a64f4fb54a758ca74c8785d90f1c8b32b70bfd275549e215c58ce8a8b69",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "be7a19a9ee93f53b256490bbb91807109fe74a9cef6d9f193f175973c4950899",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_choochoo-noodle-shop_pick-dish": {
+    "audioHash": "20bf29f1c1cd01958132dec1814d2b179fbc388bc6dabc42438e0f34d3ff9374",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "a13c4561bfa8c0577431ba6712c956b1944977c0fc2332d316a350c48df6504a",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_choochoo-noodle-shop_your-favorite-food": {
+    "audioHash": "f0a8df57bd49b9ea450b0e9624ff5fc8d44820aeb810f9147658ced6813a3527",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "9539c313ef6051865636d2ff7ed828e19f96d621f6cd0080b0b64b3cf75fc631",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_henny-penny_penny-acorn": {
+    "audioHash": "e1de8b1a3a7d88cf171aa1bbe3db44974def316c186a4b656996551bb19056b8",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "06a6fbe00b1f9567afdb4c1d6bd89c274fd76a84550ffacf3ca04dbd329bff19",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_henny-penny_penny-fox": {
+    "audioHash": "d78fff36ce75f17c1d20e4f5a7e9ce94e8a49bf923f51d700fe097ac6e480c70",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "ca4069dd807341eef92887b9f906ab8d3f754ab410c40d9aab315095c8ffbde2",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_henny-penny_penny-friends": {
+    "audioHash": "6d90d07f010c71ee9643044b43b865851b7dd61322ad16f4b54b6e10202741bd",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "4d02c6eb127227699c8e3830780617fb6f5cc70bde60ec690d7eb24d02699fa8",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_henny-penny_penny-home": {
+    "audioHash": "b9a04ca89933ca9f1cb16e23b24221dc046eef3f65138c85c577f42b1c8a10eb",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "24893c1ef783f339e4b4234818807cdb356bae011da2c78a815cacfc5ed7477c",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_henny-penny_penny-king": {
+    "audioHash": "32d4b2e32275efafcd69f6d23e1e7057f8812b83d9df2d0164fe9d3547d271fa",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "c513fddc719814c6671db8a03e0aa0eb95091e40bf467896f99df58042d1b143",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_henny-penny_penny-stop": {
+    "audioHash": "b40822619b6edf5561b50d1456742f02ccc13173a2f55a0c2c95cd5ac39ec7a8",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "73a81c755f6665a0d9f3b1b7c0569adb377250d8dd352e9020a02674dcc0d0d5",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_little-red-hen_red-hen-bread": {
+    "audioHash": "8a39cd8fe505430f0440f1f1696029414a86716759378ad2809e9caf45099a2e",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "2b3ae2abdb5e1f88a12501e50c27d2b6ce945c2fa4ca4d56853ed1e09cdc856e",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_little-red-hen_red-hen-finish": {
+    "audioHash": "d5d23a6fc24adf397d2ed77826d1f8076c587e5ccca0e8c60d89c294f3b93fdf",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "1c81e98427949467d83fd62ed6e2e092f0caa9124db2faffe35ad03857b8b6fd",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_little-red-hen_red-hen-flour": {
+    "audioHash": "df8c425f35f7989ce625f229a27250aa4354b5de2d1fc243b8f496310ba10b51",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "c131f694429bb4d190ae017a80f01ca17a401c32fb9c66dd81a88a24d061a3aa",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_little-red-hen_red-hen-harvest": {
+    "audioHash": "2f49ba8338954c7cb7f0d1164da9428f7e95b131f668291ee9574b17acc3147b",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "36a99a162edc9578ab8db8e9833ebd20559eae058cb30e5e8eda35e43eb75da5",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "success_little-red-hen_red-hen-seed": {
+    "audioHash": "d17d769362ccf3691410f347987d1c82788711feee87fbb8b5070f6e7b948d50",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "7ca9079911cdf8cd3e5ec908d644520b2d82edfad4f4b38fc11bc569827adb56",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  }
+}

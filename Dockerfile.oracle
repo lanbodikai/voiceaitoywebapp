@@ -1,0 +1,11 @@
+# Extend the existing Oracle image; its iOS API and configuration remain intact.
+FROM ai-toy-backend-ai-toy-backend:latest
+USER root
+RUN apk add --no-cache python3 py3-pip && python3 -m venv /opt/edge-tts && /opt/edge-tts/bin/pip install --no-cache-dir edge-tts==7.2.8
+WORKDIR /app/web
+RUN npm install --no-save --package-lock=false busboy@1.6.0 ws@8.21.3
+COPY --chown=node:node api ./api
+COPY --chown=node:node server ./server
+COPY --chown=node:node src/data ./src/data
+USER node
+CMD ["node", "/app/web/server/oracle-entry.mjs"]

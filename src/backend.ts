@@ -2,6 +2,9 @@ import { accessToken } from './supabase'
 import type { Evaluation, SessionEvent } from './types'
 import { readStored, writeStored } from './storage'
 import { acceptCloudProgress, guestID, type GuestProgress, type ProgressSnapshot } from './progress'
+import { prepareSpeech, takeSafety, type PreparedSpeech } from './preparedSpeech'
+import { getVoiceRPC } from './voiceTransport'
+import { combinedSignal, timeoutSignal } from './browserCompat'
 
 const configuredBaseURL = (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(/\/$/, '')
 const baseURL = import.meta.env.PROD ? '/api' : configuredBaseURL
@@ -13,7 +16,7 @@ async function request<T>(path: string, init: RequestInit = {}, authenticate = t
     const token = await accessToken()
     if (token) headers.set('Authorization', `Bearer ${token}`)
   }
-  const response = await fetch(`${baseURL}${path}`, { ...init, headers, signal: init.signal ?? AbortSignal.timeout(20_000) })
+  const response = await fetch(`${baseURL}${path}`, { ...init, headers, signal: init.signal ?? timeoutSignal(20_000) })
   const data = await response.json().catch(() => ({}))
   if (!response.ok) throw new Error(typeof data.error === 'string' ? data.error : 'The service is unavailable')
   return data as T
@@ -42,8 +45,11 @@ export async function uploadEvents(sessionID: string, events: SessionEvent[], sn
   const previous = queue.find((item) => item.sessionID === sessionID)
   // Store only enumerated metrics, never arbitrary payloads or learner speech.
   const safeEvents = events.map((event) => ({ sequence: event.sequence, type: event.type, occurredAt: event.occurredAt, payload: Object.fromEntries(Object.entries(event.payload).filter(([key, value]) => ['beatID','verdict','level','audioDurationMs','transcriptionLatencyMs'].includes(key) && (typeof value === 'string' || typeof value === 'number'))) }))
+  const mergedEvents = [...(previous?.events ?? []), ...safeEvents]
+    .filter((event, index, all) => all.findIndex((candidate) => candidate.sequence === event.sequence) === index)
+    .sort((a, b) => a.sequence - b.sequence)
   revision = Math.max(Date.now(), revision + 1)
-  writeStored(key, [...queue.filter((item) => item.sessionID !== sessionID), { sessionID, events: safeEvents, revision, snapshot: snapshot ?? previous?.snapshot }].slice(-12))
+  writeStored(key, [...queue.filter((item) => item.sessionID !== sessionID), { sessionID, events: mergedEvents, revision, snapshot: snapshot ?? previous?.snapshot }].slice(-12))
   notifyProgress()
   if (!defer) return flushEventQueue()
 }
@@ -88,6 +94,8 @@ export function evaluateRemotely(input: Record<string, unknown>) {
 }
 
 export function safetyCheck(sessionID: string, transcript: string) {
+  const checked=takeSafety(transcript)
+  if(checked) return Promise.resolve(checked)
   return request<{ safe: boolean; categories: string[] }>('/answers/safety-check', {
     method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ sessionID, transcript })
   })
@@ -97,12 +105,18 @@ export function transcribeAudio(audio: Blob, fields: Record<string, string>, sig
   const form = new FormData()
   form.append('audio', audio, audio.type.includes('wav') ? 'answer.wav' : audio.type.includes('mp4') ? 'answer.m4a' : 'answer.webm')
   Object.entries(fields).forEach(([key, value]) => form.append(key, value))
-  return request<{ transcript: string; detectedLanguage: string; durationMs: number }>('/transcribe', { method: 'POST', body: form, signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(20_000)]) : undefined })
+  const timeout = timeoutSignal(30_000)
+  return request<{ transcript: string; detectedLanguage: string; durationMs: number }>('/transcribe', { method: 'POST', body: form, signal: signal ? combinedSignal([signal, timeout]) : timeout })
 }
 
-export function generateLine(input: Record<string, unknown>) {
-  return request<{ line: string; choices?: string[] }>('/lines/generate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) })
+export async function generateLine(input: Record<string, unknown>) {
+  const rpc=getVoiceRPC()
+  const result=(rpc ? await rpc('reply',input) : await request('/lines/generate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) })) as {line:string;action:'continue'|'redirect'|'retry';speech?:PreparedSpeech}
+  if(result.speech) prepareSpeech(result.line,String(input.language),result.speech)
+  return result
 }
+
+export async function synthesizeSpeech(text:string,language:string,signal:AbortSignal) {const rpc=getVoiceRPC();return (rpc ? await rpc('synthesize',{text,language},signal) : await request('/speech/synthesize',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,language}),signal})) as PreparedSpeech}
 
 export function exportSession(sessionID: string) {
   return request<Record<string, unknown>>(`/sessions/${encodeURIComponent(sessionID)}/export`)

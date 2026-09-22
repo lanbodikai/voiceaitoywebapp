@@ -7,3 +7,8 @@ export function readStored<T>(key: string, fallback: T): T {
 export function writeStored(key: string, value: unknown) {
   try { localStorage.setItem(key, JSON.stringify(value)); memory.delete(key) } catch { memory.set(key, value) }
 }
+
+export function removeStored(key: string) {
+  memory.delete(key)
+  try { localStorage.removeItem(key) } catch { /* Storage is optional. */ }
+}

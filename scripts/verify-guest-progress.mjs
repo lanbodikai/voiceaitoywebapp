@@ -22,11 +22,19 @@ async function rpc(guest, action, input={}, expected=200) {
   assert.equal(r.status,expected,`RPC ${action}: ${data.message ?? r.status}`)
   return data
 }
+async function app(guest, path, input, expected=200) {
+  const r=await fetch(new URL(`/api/${path}`,site),{method:'POST',headers:{Authorization:`Bearer ${guest.access_token}`,'Content-Type':'application/json'},body:JSON.stringify(input)})
+  const data=await r.json()
+  assert.equal(r.status,expected,`App ${path}: ${data.error ?? r.status}`)
+  return data
+}
 const a=await signup(), b=await signup()
 const pa=await rpc(a,'consent',{version:'web-research-1.1'})
 await rpc(b,'consent',{version:'web-research-1.1'})
 const sid=randomUUID()
-await rpc(a,'start',{sessionID:sid,mode:'story',storyID:'choochoo-birthday-cake',language:'chinese',visual:'voice'})
+await app(a,'sessions/start',{sessionID:sid,mode:'story',storyID:'choochoo-birthday-cake',language:'chinese',visualCondition:'voice'})
+// A client retries this exact request after a timeout or reload. It must be a no-op.
+await app(a,'sessions/start',{sessionID:sid,mode:'story',storyID:'choochoo-birthday-cake',language:'chinese',visualCondition:'voice'})
 const snapshot={beatID:'call-a-friend',phase:'story',attemptCount:1,hintLevel:1,completed:false,beatPath:['call-a-friend'],completedCheckpoints:[],rewardIDs:[],vocabularyIDs:['friend']}
 const save={sessionID:sid,revision:2,events:[{sequence:1,kind:'answer_evaluated',beatID:'call-a-friend',verdict:'incorrect'},{sequence:2,kind:'hint_played',beatID:'call-a-friend',hintLevel:1}],snapshot}
 await rpc(a,'save',save)
@@ -34,6 +42,13 @@ await rpc(a,'save',save)
 await rpc(a,'save',{...save,revision:1,snapshot:{...snapshot,attemptCount:0}})
 assert.equal((await rpc(a,'load')).stories[0].snapshot.attemptCount,1)
 assert.equal((await rpc(b,'load')).stories.length,0)
+assert.deepEqual((await rpc(a,'load')).collections,[],'incomplete progress must not unlock artwork')
+const assembly={sessionID:sid,revision:3,events:[{sequence:3,type:'puzzle_assembled',payload:{}}]}
+await app(a,'sessions/log',assembly)
+await app(a,'sessions/log',assembly)
+const expectedCollection=[{storyID:'choochoo-birthday-cake',language:'chinese'}]
+assert.deepEqual((await rpc(a,'load')).collections,expectedCollection,'assembly unlocks once in its own language')
+assert.deepEqual((await rpc(b,'load')).collections,[],'another guest cannot see these collections')
 await rpc(b,'save',save,403)
 await rpc(a,'save',{...save,snapshot:{...snapshot,transcript:'must not persist'}},400)
 const direct=await fetch(`${url}/rest/v1/cc_story_progress?select=*`,{headers:{apikey:key,Authorization:`Bearer ${a.access_token}`}})
@@ -42,10 +57,12 @@ const recovery=await rpc(a,'recovery_create')
 await rpc(b,'recovery_restore',{code:recovery.code})
 assert.equal((await rpc(b,'load')).profileID,pa.participantID)
 assert.equal((await rpc(b,'load')).stories[0].snapshot.hintLevel,1)
+assert.deepEqual((await rpc(b,'load')).collections,expectedCollection,'recovery restores collection history')
 const newer=randomUUID()
-await rpc(b,'start',{sessionID:newer,mode:'story',storyID:'choochoo-birthday-cake',language:'chinese',visual:'voice'})
+await app(b,'sessions/start',{sessionID:newer,mode:'story',storyID:'choochoo-birthday-cake',language:'chinese',visualCondition:'voice'})
 await rpc(b,'save',{...save,sessionID:newer,revision:3,snapshot:{...snapshot,attemptCount:3}})
 await rpc(a,'save',{...save,revision:999})
 assert.equal((await rpc(a,'load')).stories[0].snapshot.attemptCount,3)
-console.log('PASS: guest signup, consent, persistence, duplicate/stale retry, cross-guest isolation, raw-text rejection, recovery, newer-visit protection')
+assert.deepEqual((await rpc(a,'load')).collections,expectedCollection,'an incomplete replay cannot relock collected artwork')
+console.log('PASS: guest signup, consent, idempotent session start, persistence, duplicate/stale retry, cross-guest isolation, raw-text rejection, recovery, newer-visit protection, permanent bilingual collection history')
 console.log('Synthetic test user IDs for optional administrator cleanup:', a.user.id, b.user.id)

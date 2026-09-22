@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><meta charset="UTF-8"><title>Streaming speech test</title>
+<body><h1>Synthetic streaming test</h1><p>No microphone or cloud account is used. Tests the real detector and chunk transport with a synthetic media stream.</p>
+<button id="start">Start test</button><button id="speak" disabled>Send synthetic speech</button><button id="stop" disabled>Mute</button><pre id="status">Ready</pre>
+<script type="module">
+import {MicVAD} from '@ricky0123/vad-web'
+import {StreamingSpeech} from '/src/StreamingSpeech.ts'
+let chunks=0,commits=0,started=false,ring=[],voice,detector,context,destination
+const status=()=>document.querySelector('#status').textContent=JSON.stringify({chunks,commits,speaking:started},null,2)
+window.WebSocket=class {
+  static OPEN=1
+  readyState=1;bufferedAmount=0
+  constructor(){queueMicrotask(()=>this.onopen())}
+  send(data){if(typeof data!=='string'){chunks++;status();return}const e=JSON.parse(data);if(e.type==='auth')queueMicrotask(()=>this.onmessage({data:'{"type":"ready"}'}));if(e.type==='commit'){commits++;status();queueMicrotask(()=>this.onmessage({data:JSON.stringify({type:'transcript',turn:e.turn,transcript:'synthetic',safety:{safe:true,categories:[]}})}))}}
+  close(){this.readyState=3;this.onclose()}
+}
+document.querySelector('#start').onclick=async()=>{
+  context=new AudioContext();await context.resume();destination=context.createMediaStreamDestination()
+  voice=new StreamingSpeech(()=>{});await voice.connect('synthetic','english')
+  detector=await MicVAD.new({model:'v5',audioContext:context,baseAssetPath:'/vad/',onnxWASMBasePath:'/vad/',ortConfig:ort=>ort.env.wasm.numThreads=1,
+    getStream:async()=>destination.stream,positiveSpeechThreshold:.30,negativeSpeechThreshold:.16,minSpeechMs:192,preSpeechPadMs:640,redemptionMs:1050,
+    onFrameProcessed:(_,frame)=>{if(started)voice.append(frame);else{ring.push(frame.slice());if(ring.length>16)ring.shift()}},
+    onSpeechRealStart:()=>{started=true;voice.begin({language:'english',storyID:'test',beatID:'test'});ring.forEach(f=>voice.append(f));ring=[]},
+    onSpeechEnd:async(samples)=>{samples.fill(0);started=false;await voice.commit();status()},
+  })
+  document.querySelector('#speak').disabled=false;document.querySelector('#stop').disabled=false;document.querySelector('#start').disabled=true
+}
+document.querySelector('#speak').onclick=async()=>{
+  const audio=await(await fetch('/audio/en_welcome_mood_happy.mp3')).arrayBuffer()
+  const source=context.createBufferSource();source.buffer=await context.decodeAudioData(audio);source.connect(destination);source.start(0,0,1.6)
+}
+document.querySelector('#stop').onclick=async()=>{destination.stream.getTracks().forEach(t=>t.stop());voice.close();started=false;await detector.destroy();await context.close();document.querySelector('#speak').disabled=true;status()}
+</script></body></html>

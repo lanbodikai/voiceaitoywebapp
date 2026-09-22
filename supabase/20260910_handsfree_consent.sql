@@ -40,7 +40,15 @@ begin
     if p_input->>'mode'='story' and not exists(select 1 from public.cc_checkpoint_catalog where story_id=p_input->>'storyID') then raise exception 'Unknown story'; end if;
     sid := (p_input->>'sessionID')::uuid;
     insert into public.cc_sessions(id,profile_id,mode,story_id,language,visual)
-      values(sid,pid,p_input->>'mode',case when p_input->>'mode'='story' then p_input->>'storyID' else null end,p_input->>'language',p_input->>'visual');
+      values(sid,pid,p_input->>'mode',case when p_input->>'mode'='story' then p_input->>'storyID' else null end,p_input->>'language',p_input->>'visual')
+      on conflict(id) do nothing;
+    select * into sess from public.cc_sessions where id=sid;
+    if sess.profile_id is distinct from pid
+      or sess.mode is distinct from p_input->>'mode'
+      or sess.story_id is distinct from (case when p_input->>'mode'='story' then p_input->>'storyID' else null end)
+      or sess.language is distinct from p_input->>'language'
+      or sess.visual is distinct from p_input->>'visual'
+    then raise exception 'Session ID already used' using errcode='42501'; end if;
     return jsonb_build_object('sessionID',sid);
   elsif p_action='save' then
     sid := (p_input->>'sessionID')::uuid;
@@ -86,4 +94,3 @@ begin
 end;
 $$;
 commit;
-

@@ -1,6 +1,6 @@
 import catalog from '../src/data/stories.json' with { type: 'json' }
 
-const eventKinds = new Set(['answer_evaluated','hint_played','mercy_fired','unusable_audio','sticker_earned','branch_taken','beat_advanced','session_ended','checkpoint_completed','transcription_completed','comfort_fired','play_turn'])
+const eventKinds = new Set(['answer_evaluated','hint_played','mercy_fired','unusable_audio','sticker_earned','branch_taken','beat_advanced','session_ended','checkpoint_completed','puzzle_piece_earned','puzzle_assembled','transcription_completed','comfort_fired','play_turn'])
 const verdicts = new Set(['correct','meaningUnderstood','partial','incorrect','uncertain','unusable','offTopic'])
 const integer = (value, max) => Number.isInteger(value) && value >= 0 && value <= max
 const badInput = () => { const error = new Error('Invalid progress'); error.statusCode = 400; throw error }
@@ -41,6 +41,15 @@ export async function guestAction(authorization, action, input={}) {
   })
   const data=await response.json().catch(()=>({}))
   if (!response.ok) {
+    // The database primary key guarantees only one row. Until every deployed
+    // database has the idempotent RPC migration, treat an identical client
+    // session key as a successful retry instead of surfacing a false failure.
+    if (action==='start' && data.code==='23505' && typeof input.sessionID==='string') {
+      // An empty save is also an ownership check, so a guessed ID belonging to
+      // another guest cannot be accepted as that caller's session.
+      await guestAction(authorization,'save',{sessionID:input.sessionID,revision:0,events:[],snapshot:null})
+      return {sessionID:input.sessionID}
+    }
     const error=new Error('Progress service unavailable')
     error.statusCode=data.code==='42501'?403 : data.message==='Invalid recovery code'?400 : 503
     throw error

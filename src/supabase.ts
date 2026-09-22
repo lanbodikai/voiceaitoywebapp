@@ -1,11 +1,12 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import type { Participant } from './types'
+import { randomUUID, timeoutSignal } from './browserCompat'
 
 const url = import.meta.env.VITE_SUPABASE_URL as string | undefined
 const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined
 
 export const supabase: SupabaseClient | null = url && key ? createClient(url, key, {
-  global: { fetch: (input, init) => fetch(input, { ...init, signal: init?.signal ?? AbortSignal.timeout(12_000) }) },
+  global: { fetch: (input, init) => fetch(input, { ...init, signal: init?.signal ?? timeoutSignal(12_000) }) },
   auth: { flowType: 'pkce', persistSession: true, autoRefreshToken: true },
 }) : null
 
@@ -15,12 +16,13 @@ function participantFromUser(user: { id: string; is_anonymous?: boolean; email?:
 
 export async function restoreParticipant(): Promise<Participant | null> {
   if (!supabase) return null
-  const { data } = await supabase.auth.getUser()
-  return data.user ? participantFromUser(data.user) : null
+  // This is only a fast local bootstrap; every API call still verifies the bearer token.
+  const { data } = await supabase.auth.getSession()
+  return data.session?.user ? participantFromUser(data.session.user) : null
 }
 
 export async function signInAnonymously(): Promise<Participant> {
-  if (!supabase) return { id: crypto.randomUUID(), isAnonymous: true }
+  if (!supabase) return { id: randomUUID(), isAnonymous: true }
   const { data: existing } = await supabase.auth.getUser()
   if (existing.user) return participantFromUser(existing.user)
   const { data, error } = await supabase.auth.signInAnonymously()

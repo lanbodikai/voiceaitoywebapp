@@ -8,4 +8,4 @@ body {
   text-rendering: optimizeLegibility;
 }
 button:focus-visible { outline: 3px solid rgba(234, 95, 148, .52); outline-offset: 3px; }
-#root { min-height: 100dvh; }
+#root { min-height: 100vh; min-height: 100dvh; }

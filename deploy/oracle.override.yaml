@@ -1,0 +1,12 @@
+# Apply with the existing /home/ubuntu/ai-toy-backend/compose.yaml.
+# The existing .env, network, port, restart policy, and iOS routes are preserved.
+services:
+  ai-toy-backend:
+    image: ai-toy-web-adapter:streaming
+    build:
+      context: /home/ubuntu/ai-toy-web-adapter
+      dockerfile: Dockerfile.oracle
+    environment:
+      ORACLE_VOICE_RUNTIME: "true"
+      VITE_SUPABASE_URL: "https://hosegtwtninytelgpfnp.supabase.co"
+      VITE_SUPABASE_PUBLISHABLE_KEY: "sb_publishable_qcOvzk70gm0FIZzkr4EBmw_Y6OQHeu-"

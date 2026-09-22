@@ -3,19 +3,25 @@
 
 import argparse
 import asyncio
+import hashlib
 import json
+import sys
 from pathlib import Path
 
 import edge_tts
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'server'))
+from speech_text import spoken_text
 STORIES = ROOT / "src" / "data" / "stories.json"
 PLAY_INTRO = ROOT / "src" / "data" / "play-intro.json"
 OUTPUT = ROOT / "public" / "audio"
+PROVENANCE = ROOT / "src" / "data" / "edge-cues.json"
+RUNTIME_MANIFEST = ROOT / "src" / "data" / "edge-cue-ids.json"
 
 ZH_VOICE = "zh-CN-XiaoxiaoNeural"
-EN_VOICE = "en-US-AnaNeural"
+EN_VOICE = "en-US-AvaNeural"
 
 
 def cue_id(story_id: str, checkpoint_id: str, kind: str, language: str) -> str:
@@ -45,13 +51,24 @@ def story_cues(stories: dict) -> dict[str, tuple[str, str, str, str]]:
     return cues
 
 
-async def generate(cues: dict[str, tuple[str, str, str, str]], force: bool) -> None:
+async def generate(cues: dict[str, tuple[str, str, str, str]], force: bool, preserve_existing: bool = False) -> None:
     OUTPUT.mkdir(parents=True, exist_ok=True)
+    try:
+        previous = json.loads(PROVENANCE.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        previous = {}
+    certified: dict[str, dict[str, str]] = dict(previous) if preserve_existing else {}
     generated = 0
     for index, (identifier, (text, voice, rate, pitch)) in enumerate(cues.items(), start=1):
+        text = spoken_text(text, voice.startswith('en-'))
         destination = OUTPUT / f"{identifier}.mp3"
-        if destination.exists() and not force:
-            continue
+        text_hash = hashlib.sha256(text.encode("utf-8")).hexdigest()
+        prior = previous.get(identifier, {})
+        if destination.exists() and not force and prior.get("textHash") == text_hash and prior.get("voice") == voice and prior.get("rate") == rate and prior.get("pitch") == pitch:
+            audio_hash = hashlib.sha256(destination.read_bytes()).hexdigest()
+            if prior.get("audioHash") == audio_hash:
+                certified[identifier] = prior
+                continue
         print(f"[{index}/{len(cues)}] {destination.name}")
         temporary = destination.with_suffix(".tmp.mp3")
         try:
@@ -61,6 +78,7 @@ async def generate(cues: dict[str, tuple[str, str, str, str]], force: bool) -> N
                     await edge_tts.Communicate(text=text, voice=voice, rate=rate, pitch=pitch).save(str(temporary))
                     if temporary.is_file() and temporary.stat().st_size > 0:
                         temporary.replace(destination)
+                        certified[identifier] = {"voice": voice, "rate": rate, "pitch": pitch, "textHash": text_hash, "audioHash": hashlib.sha256(destination.read_bytes()).hexdigest()}
                         generated += 1
                         break
                     raise RuntimeError("Edge-TTS returned no audio")
@@ -70,6 +88,8 @@ async def generate(cues: dict[str, tuple[str, str, str, str]], force: bool) -> N
                     await asyncio.sleep(1.0 * (attempt + 1))
         finally:
             temporary.unlink(missing_ok=True)
+    PROVENANCE.write_text(json.dumps(certified, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    RUNTIME_MANIFEST.write_text(json.dumps(sorted(certified), ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     print(f"Generated {generated} cue files in {OUTPUT}")
 
 
@@ -87,7 +107,7 @@ def main() -> None:
     for line in lines:
         cues[line["cue"]] = (line["zh"], ZH_VOICE, "-5%", "+1Hz")
         cues[f"en_{line['cue']}"] = (line["en"], EN_VOICE, "-5%", "+0Hz")
-    asyncio.run(generate(cues, args.force))
+    asyncio.run(generate(cues, args.force, args.play_intro_only or args.handsfree_only))
 
 
 if __name__ == "__main__":

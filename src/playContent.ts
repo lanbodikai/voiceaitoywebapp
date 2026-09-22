@@ -24,7 +24,7 @@ export const playDestinations: PlayDestination[] = [
     openingZh: playIntro.openings.boat.zh, openingEn: playIntro.openings.boat.en,
     ideasZh: ['可以带上一只小猫。', '我们可以带一把会唱歌的雨伞。'], ideasEn: ['We could bring a little cat.', 'We could bring a singing umbrella.'],
     challengesZh: ['前面有一朵痒痒云！我们要怎么绕过去？', '小船需要一句魔法中文才能继续。你会说“出发”吗？'],
-    challengesEn: ['A tickly cloud is ahead! How should we get around it?', 'The boat needs a magic word. Can you say “出发,” which means “let’s go”?'],
+    challengesEn: ['A tickly cloud is ahead! How should we get around it?', 'The boat is ready to fly. What shall we say as we set off?'],
     vocabulary: [{ id: 'boat', zh: '小船', pinyin: 'xiǎo chuán', en: 'boat' }, { id: 'go', zh: '出发', pinyin: 'chū fā', en: 'set off' }],
   },
   {
@@ -40,7 +40,7 @@ export const playDestinations: PlayDestination[] = [
     openingZh: playIntro.openings.restaurant.zh, openingEn: playIntro.openings.restaurant.en,
     ideasZh: ['我们可以做彩虹面条。', '我们可以包星星形状的饺子。'], ideasEn: ['We could make rainbow noodles.', 'We could make star-shaped dumplings.'],
     challengesZh: ['来了一位只会笑的客人。我们怎么知道他想吃什么？', '请用中文邀请客人：“请吃！”'],
-    challengesEn: ['A guest who only laughs has arrived. How can we learn what they want?', 'Invite the guest in Mandarin: “请吃,” meaning “please eat”!'],
+    challengesEn: ['A guest who only laughs has arrived. How can we learn what they want?', 'Our food is ready. What shall we tell our guest?'],
     vocabulary: [{ id: 'noodles', zh: '面条', pinyin: 'miàn tiáo', en: 'noodles' }, { id: 'please-eat', zh: '请吃', pinyin: 'qǐng chī', en: 'please eat' }],
   },
 ]
