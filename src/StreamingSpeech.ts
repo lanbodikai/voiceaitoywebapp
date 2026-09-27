@@ -23,6 +23,7 @@ export class StreamingSpeech {
   private requestID=0
   capabilities:readonly string[]=['reply','synthesize']
   private requests=new Map<number,{resolve:(v:unknown)=>void;reject:(e:Error)=>void;cleanup:()=>void}>()
+  private audioStreams=new Map<number,{controller:ReadableStreamDefaultController<Uint8Array>;timer:ReturnType<typeof setTimeout>}>()
   constructor(disconnected:()=>void) {this.disconnected=disconnected}
   async connect(token:string,language:string,url='wss://api.mousefit.pro/ai-toy/web/voice-stream') {
     this.closed=false
@@ -35,13 +36,33 @@ export class StreamingSpeech {
         try {
           const data=JSON.parse(event.data)
           if(data.type==='ready') {
-            this.capabilities=Array.isArray(data.capabilities)?data.capabilities.filter((type:unknown)=>['reply','synthesize','evaluate'].includes(String(type))):['reply','synthesize']
+            this.capabilities=Array.isArray(data.capabilities)?data.capabilities.filter((type:unknown)=>['reply','reply_stream','synthesize','evaluate'].includes(String(type))):['reply','synthesize']
             ready=true;clearTimeout(timeout);resolve()
           }
           if(data.type==='reply' || data.type==='request_error') {
             const request=this.requests.get(data.requestID)
-            if(request){this.requests.delete(data.requestID);request.cleanup();if(data.type==='reply')request.resolve(data.result);else request.reject(new Error('Voice request failed'))}
+            if(request){
+              this.requests.delete(data.requestID);request.cleanup()
+              if(data.type==='reply') {
+                if(data.result?.speech?.stream===true) {
+                  const requestID=data.requestID
+                  const stream=new ReadableStream<Uint8Array>({
+                    start:controller=>{
+                      const timer=setTimeout(()=>this.finishAudio(requestID,new Error('Speech stream timeout')),20000)
+                      this.audioStreams.set(requestID,{controller,timer})
+                    },
+                    cancel:()=>{const active=this.audioStreams.get(requestID);if(active){clearTimeout(active.timer);this.audioStreams.delete(requestID)}try{this.send({type:'cancel_request',requestID})}catch{/* disconnected */}},
+                  })
+                  request.resolve({...data.result,speech:{...data.result.speech,stream}})
+                } else request.resolve(data.result)
+              } else request.reject(new Error('Voice request failed'))
+            } else if(data.type==='request_error')this.finishAudio(data.requestID,new Error('Speech stream failed'))
           }
+          if(data.type==='reply_audio_chunk') {
+            const stream=this.audioStreams.get(data.requestID)
+            if(stream && typeof data.audio==='string' && data.audio.length<=131072)stream.controller.enqueue(Uint8Array.from(atob(data.audio),c=>c.charCodeAt(0)))
+          }
+          if(data.type==='reply_audio_done')this.finishAudio(data.requestID)
           if(data.type==='transcript' && this.pending && data.turn===this.pending.turn) {
             const pending=this.pending;this.pending=undefined;clearTimeout(pending.timer);pending.resolve(data)
           }
@@ -87,7 +108,12 @@ export class StreamingSpeech {
       try{this.send({type,body,requestID})}catch{cancel()}
     })
   }
-  private cancelRequests(){for(const request of this.requests.values()){request.cleanup();request.reject(new Error('Speech interrupted'))}this.requests.clear()}
+  private finishAudio(requestID:number,error?:Error){
+    const stream=this.audioStreams.get(requestID);if(!stream)return
+    this.audioStreams.delete(requestID);clearTimeout(stream.timer)
+    if(error)stream.controller.error(error);else stream.controller.close()
+  }
+  private cancelRequests(){for(const request of this.requests.values()){request.cleanup();request.reject(new Error('Speech interrupted'))}this.requests.clear();for(const id of this.audioStreams.keys())this.finishAudio(id,new Error('Speech interrupted'))}
   close() {this.closed=true;this.capturing=false;this.frames.forEach(f=>f.fill(0));this.frames=[];this.cancelPending();this.cancelRequests();this.socket?.close();this.socket=undefined}
 }
 import type { VoiceRequest } from './voiceTransport.ts'

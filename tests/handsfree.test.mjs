@@ -41,11 +41,11 @@ test('speech WAV is mono 16kHz PCM and bounded at 30 seconds', async () => {
   assert.equal(speechWav(new Float32Array(16000*31)).size,44+16000*30*2)
 })
 
-test('detector preserves a short answer and a thinking pause, but ignores silence and clicks', async () => {
+test('detector keeps a brief hesitation but ends a longer pause at the faster cutoff', async () => {
   let probability=0
   const events=[]
   const processor=new FrameProcessor(async()=>({isSpeech:probability,notSpeech:1-probability}),()=>{}, {
-    positiveSpeechThreshold:0.30,negativeSpeechThreshold:0.16,minSpeechMs:192,preSpeechPadMs:640,redemptionMs:1050,submitUserSpeechOnPause:true,
+    positiveSpeechThreshold:0.30,negativeSpeechThreshold:0.16,minSpeechMs:192,preSpeechPadMs:640,redemptionMs:512,submitUserSpeechOnPause:true,
   },32)
   processor.resume()
   const feed=async(p,n)=>{ probability=p; for(let i=0;i<n;i++) await processor.process(new Float32Array(512),e=>events.push(e)) }
@@ -55,10 +55,12 @@ test('detector preserves a short answer and a thinking pause, but ignores silenc
   assert.equal(events.filter(e=>e.audio).length,0)
   await feed(1,6); await feed(0,10); await feed(1,6); await feed(0,55)
   assert.equal(events.filter(e=>e.audio).length,1,'a 320 ms hesitation stays in the same turn')
+  await feed(1,6); await feed(0,15); await feed(1,6); await feed(0,55)
+  assert.equal(events.filter(e=>e.audio).length,2,'a 480 ms hesitation stays in the same turn')
   await feed(1,6); await feed(0,30); await feed(1,6); await feed(0,55)
-  assert.equal(events.filter(e=>e.audio).length,2,'a 960 ms child pause stays in the same turn')
+  assert.equal(events.filter(e=>e.audio).length,4,'a 960 ms pause creates a new turn')
   await feed(1,6); await feed(0,55)
-  assert.equal(events.filter(e=>e.audio).length,3,'a short yes is still accepted')
+  assert.equal(events.filter(e=>e.audio).length,5,'a short yes is still accepted')
   await feed(1,6); await feed(.18,32); await feed(1,6); await feed(0,55)
-  assert.equal(events.filter(e=>e.audio).length,4,'a quiet one-second syllable tail does not split one answer')
+  assert.equal(events.filter(e=>e.audio).length,6,'a quiet one-second syllable tail does not split one answer')
 })

@@ -1,4 +1,4 @@
-export type VoiceRequest = 'reply'|'synthesize'|'evaluate'
+export type VoiceRequest = 'reply'|'synthesize'|'evaluate'|'reply_stream'
 export type VoiceRPC = (type:VoiceRequest,body:unknown,signal?:AbortSignal)=>Promise<unknown>
 let rpc:VoiceRPC|undefined
 let supported:readonly string[]=[]

@@ -122,7 +122,9 @@ export function useHandsFree(options: Options) {
         baseAssetPath:'/vad/', onnxWASMBasePath:'/vad/',
         ortConfig: (ort) => { ort.env.wasm.numThreads = 1 },
         positiveSpeechThreshold:0.30, negativeSpeechThreshold:0.16,
-        minSpeechMs:192, preSpeechPadMs:640, redemptionMs:1050,
+        // About 640 ms total silence: 512 ms here plus the 128 ms continuation
+        // window below. Shorter than before, so longer child pauses can split.
+        minSpeechMs:192, preSpeechPadMs:640, redemptionMs:512,
         submitUserSpeechOnPause:true,
         getStream:async () => ownedStream!,
         // A short pause cuts a long utterance without requesting mic permission again.
@@ -207,7 +209,7 @@ export function useHandsFree(options: Options) {
               setError(captured.language==='chinese'?'语音连接暂时中断。可以直接再说一次。':'The speech connection dropped. You can say that again.')
               latest.current.onError()
             })
-          },150)
+          },128)
         },
       })
       if (!valid()) return false

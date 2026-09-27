@@ -31,7 +31,7 @@ assert.ok(token, 'synthetic guest token')
 const consent = await fetch(`${supabaseURL}/rest/v1/rpc/cc_guest_action`, {
   method: 'POST',
   headers: { apikey: publishableKey, Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-  body: JSON.stringify({ p_action: 'consent', p_input: { version: 'web-research-1.1' } }),
+  body: JSON.stringify({ p_action: 'consent', p_input: { version: 'web-handsfree-1.3' } }),
 })
 assert.equal(consent.status, 200, 'synthetic guest consent')
 
