@@ -3,6 +3,11 @@ import { readFileSync } from 'node:fs'
 export const boundaryLines = JSON.parse(readFileSync(new URL('../src/data/conversation-boundaries.json', import.meta.url), 'utf8'))
 const catalog = JSON.parse(readFileSync(new URL('../src/data/stories.json', import.meta.url), 'utf8'))
 
+export function storySelectionWords(language = 'chinese') {
+  const names = catalog.stories.map(story => language === 'english' ? story.englishTitle : story.title)
+  return language === 'english' ? [...names, 'Birthday Cake', 'Farm', 'Noodle Shop', 'surprise me'] : [...names, '生日蛋糕', '农场', '小面馆', '你选吧']
+}
+
 // Use the same localized scene and question the child actually hears, not a stale rubric.
 export function localizedRubric(storyID, checkpointID, language = 'chinese') {
   const beat = catalog.stories.find(story => story.id === storyID)?.beats.find(beat => beat.checkpoint.id === checkpointID || beat.id === checkpointID)
@@ -13,6 +18,7 @@ export function localizedRubric(storyID, checkpointID, language = 'chinese') {
     question: language === 'english' ? checkpoint.englishQuestion : checkpoint.question,
     sceneExcerpt: language === 'english' ? beat.englishNarration : beat.narration,
     requiredConcepts: checkpoint.concepts.map(concept => ({id: concept.id, chinese: [...concept.zh, ...concept.homophones], english: concept.en})),
+    sufficientConceptIDs: checkpoint.sufficientConceptIDs || [],
   }
 }
 

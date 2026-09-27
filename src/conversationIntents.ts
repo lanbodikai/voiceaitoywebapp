@@ -19,6 +19,14 @@ export function destinationFromSpeech(text: string): 'boat' | 'farm' | 'restaura
   return found.length === 1 ? found[0][0] : null
 }
 
+/** A child can choose to keep listening instead of answering a checkpoint. */
+export function wantsToListen(text: string) {
+  const english = normalized(text)
+  const chinese = english.replace(/\s+/g, '')
+  return /^(?:i (?:do not|don't|dont) know|i have no idea|not sure|dunno|skip|just (?:listen|tell me)|keep (?:reading|telling the story))$/.test(english)
+    || /^(?:我)?(?:不知道|不清楚|不会|想不起来|不知道答案|接着讲|继续讲故事|你讲吧)$/.test(chinese)
+}
+
 export function storyResumeTarget(questionAsked: boolean, lastSpoken: 'scene' | 'question') {
   return questionAsked || lastSpoken === 'question' ? 'question' : 'scene'
 }

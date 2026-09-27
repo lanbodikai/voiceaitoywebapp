@@ -5,6 +5,10 @@
 .dashboard-header .segmented button { min-height: 44px; }
 .dashboard-header .secondary-action { min-height: 46px; }
 .dashboard-layout { margin-top: 58px; }
+.voice-story-picker { align-items: center; background: #fff8fb; border: 1px solid #eadce5; border-radius: 22px; display: flex; gap: 24px; justify-content: space-between; margin-bottom: 36px; padding: 22px 26px; }
+.voice-story-picker strong { color: #533c4d; font-size: 18px; }
+.voice-story-picker p { color: var(--muted); font-size: 13px; line-height: 1.5; margin: 5px 0 0; }
+.voice-story-picker .primary-action { flex-shrink: 0; min-height: 48px; }
 .dashboard-welcome { align-items: center; display: grid; gap: 40px; grid-template-columns: minmax(0, 1fr) 280px; margin-bottom: 52px; }
 .dashboard-welcome h1 { font-size: clamp(34px, 4.5vw, 54px); font-weight: 550; letter-spacing: -.045em; line-height: 1.12; margin: 0; max-width: 570px; }
 .dashboard-intro { color: var(--muted); font-size: 15px; line-height: 1.6; margin: 18px 0 0; }
@@ -68,6 +72,7 @@
   .collection-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .dashboard-welcome { gap: 24px; grid-template-columns: minmax(0, 1fr) 245px; }
 }
+@media (max-width: 620px) { .voice-story-picker { align-items: stretch; flex-direction: column; gap: 14px; } }
 @media (max-width: 600px) {
   .dashboard-home { padding: 22px 20px 40px; }
   .dashboard-header { align-items: flex-start; flex-wrap: wrap; gap: 18px; }

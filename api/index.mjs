@@ -1,6 +1,6 @@
 import { randomUUID, createHash } from 'node:crypto'
 import Busboy from 'busboy'
-import { boundaryLines, evaluationBoundaries, replyBoundaries, understandingInstructions, retryReply, pendingQuestion, localizedRubric } from '../server/conversation-boundaries.mjs'
+import { boundaryLines, evaluationBoundaries, replyBoundaries, understandingInstructions, retryReply, pendingQuestion, localizedRubric, storySelectionWords } from '../server/conversation-boundaries.mjs'
 import { guestAction, learningEvents, progressSnapshot } from '../server/progress-store.mjs'
 import { proxyVoice, voiceRoutes } from '../server/oracle-proxy.mjs'
 import { transcribeRealtime } from '../server/realtime-audio.mjs'
@@ -68,7 +68,7 @@ export default async function handler(request, response) {
       const { fields, audio } = await readMultipart(request)
       if (!['chinese', 'english'].includes(fields.language)) return json(response, 400, { error: 'Invalid language' })
       const rubric = localizedRubric(fields.storyID, fields.beatID, fields.language)
-      const keywords = rubric?.requiredConcepts?.flatMap((concept) => fields.language === 'english' ? (concept.english || []) : (concept.chinese || [])).slice(0, 48) || []
+      const keywords = fields.storyID === 'story-picker' ? storySelectionWords(fields.language) : rubric?.requiredConcepts?.flatMap((concept) => fields.language === 'english' ? (concept.english || []) : (concept.chinese || [])).slice(0, 48) || []
       const prompt = fields.language === 'english'
         ? ['A child age three to six is practicing English. They may speak softly, use a high pitch, pause often, or use developing pronunciation. Transcribe only words actually spoken; never complete, rewrite, or guess their answer; never translate it.', rubric?.question ? `Current story question: ${rubric.question}` : '', keywords.length ? `Possible story words: ${keywords.join(', ')}` : ''].filter(Boolean).join('\n')
         : ['三至六岁的孩子正在练习普通话。孩子可能声音很轻、音调较高、停顿较多或发音尚在发展中。只转写孩子实际说出的中文，不要补全、改写、翻译或猜测答案。常见回答包括“准备好了”“我已经准备好了”“好了，我们开始吧”。', rubric?.question ? `当前故事问题：${rubric.question}` : '', keywords.length ? `可能出现的故事词语：${keywords.join('、')}` : ''].filter(Boolean).join('\n')
@@ -205,7 +205,7 @@ export async function evaluate({ rubric, transcript }, signal) {
     input: [
       { role: 'system', content: `${instructions}\n${evaluationBoundaries[rubric.targetLanguage]}\n${rubric.targetLanguage === 'english' ? 'Decide meaningStatus BEFORE relevance: clear means you can understand a definite point the child expressed, whether relevant or off-topic. unclear means you cannot tell what they meant; disconnected words do not become a clear tangent just because they are unrelated. Do not fill gaps by inventing a meaning. Short contextually meaningful answers remain clear.' : '必须先判断 meaningStatus，再判断是否相关：clear 表示能明确理解孩子表达了什么意思，不论是否偏题；unclear 表示不知道孩子想表达什么。零散混乱的词语不能仅因无关就当作清楚的闲聊。不得编造意思补空缺。有上下文依据的简短回答仍是 clear。'}` },
       ...evaluationExamples(rubric.targetLanguage),
-      { role: 'user', content: JSON.stringify({ sceneExcerpt: rubric.sceneExcerpt, question: rubric.question, kind: rubric.kind, ...(rubric.kind === 'comprehension' ? {requiredConcepts:rubric.requiredConcepts} : {answerExamples:rubric.requiredConcepts}), learnerSpeech: transcript }) }
+      { role: 'user', content: JSON.stringify({ sceneExcerpt: rubric.sceneExcerpt, question: rubric.question, kind: rubric.kind, ...(rubric.kind === 'comprehension' ? {requiredConcepts:rubric.requiredConcepts, sufficientConceptIDs:rubric.sufficientConceptIDs, gradingNote:rubric.sufficientConceptIDs?.length ? 'Any one sufficient concept is a complete answer. Do not demand the other concepts.' : undefined} : {answerExamples:rubric.requiredConcepts}), learnerSpeech: transcript }) }
     ],
     text: { format: { type: 'json_schema', name: 'answer_grade', strict: true, schema: { type: 'object', properties: { meaningStatus: { type:'string', enum:['clear','unclear'] }, verdict: { type: 'string', enum: allowedVerdicts }, language: { type: 'string', enum: ['chinese', 'english', 'mixed', 'unknown'] }, matchedConcepts: matchedConceptSchema, confidence: { type: 'number', description: 'Confidence in your classification, NOT how correct the answer is. Clearly off-topic speech can have high confidence.', minimum: 0, maximum: 1 } }, required: ['meaningStatus', 'verdict', 'language', 'matchedConcepts', 'confidence'], additionalProperties: false } } }
   } })
@@ -217,6 +217,9 @@ export async function evaluate({ rubric, transcript }, signal) {
   // Understanding a paraphrase in the practice language is already a correct
   // answer; recasting is only needed when the child used the other language.
   if (result.verdict === 'meaningUnderstood' && result.language === rubric.targetLanguage) return {...result, verdict:'correct'}
+  if (result.verdict === 'partial' && rubric.sufficientConceptIDs?.some(id => result.matchedConcepts.includes(id))) {
+    return {...result, verdict:result.language === rubric.targetLanguage ? 'correct' : 'meaningUnderstood'}
+  }
   return result
 }
 

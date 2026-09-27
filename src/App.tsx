@@ -2,8 +2,9 @@ import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from 'rea
 import { readStored, writeStored } from './storage'
 import { detectVoiceCommand, type VoiceCommand } from './voiceCommands'
 import { useHandsFree } from './useHandsFree'
-import { readiness, destinationFromSpeech, storyResumeTarget } from './conversationIntents'
+import { readiness, destinationFromSpeech, storyResumeTarget, wantsToListen } from './conversationIntents'
 import handsFreeLines from './data/handsfree-lines.json'
+import storyContinueLines from './data/story-continue-lines.json'
 import boundaryLines from './data/conversation-boundaries.json'
 import { readingPath } from './storyPath'
 import './App.css'
@@ -47,6 +48,7 @@ function App() {
   })
   useEffect(() => { writeStored('choochoo:preferences', config); setSpeechRate(config.speechRate); document.documentElement.lang = config.language === 'chinese' ? 'zh-CN' : 'en' }, [config])
   const [activeStory, setActiveStory] = useState<Story | null>(null)
+  const [autoJoinStory, setAutoJoinStory] = useState(false)
   const [replayRequested, setReplayRequested] = useState(false)
   const [completion, setCompletion] = useState<CompletionData | null>(null)
 
@@ -85,8 +87,8 @@ function App() {
 
   if (screen === 'loading') return <main className="consent-screen"><section className="consent-card"><span className="wordmark">CHOOCHOO</span><p>{languageText('正在找回你的故事…', 'Getting your stories ready…', config.language)}</p></section></main>
   if (screen === 'consent') return <ConsentScreen language={config.language} onLanguage={(language) => setConfig({ ...config, language })} onContinue={consent} />
-  if (screen === 'home') return <HomeScreen config={config} onConfig={setConfig} onStory={(story, replay = false) => { if (replay) completeActiveSession({ mode: 'story', storyID: story.id, language: config.language }); setActiveStory(story); setReplayRequested(replay); setScreen('story') }} onPlay={() => setScreen('play')} />
-  if (screen === 'story' && activeStory) return <StorySession story={activeStory} config={config} replayRequested={replayRequested} onClose={() => setScreen('home')} onComplete={finish} />
+  if (screen === 'home') return <HomeScreen config={config} onConfig={setConfig} onStory={(story, replay = false, autoJoin = false) => { if (replay) completeActiveSession({ mode: 'story', storyID: story.id, language: config.language }); setActiveStory(story); setReplayRequested(replay); setAutoJoinStory(autoJoin); setScreen('story') }} onPlay={() => setScreen('play')} />
+  if (screen === 'story' && activeStory) return <StorySession story={activeStory} config={config} replayRequested={replayRequested} autoJoin={autoJoinStory} onClose={() => setScreen('home')} onComplete={finish} />
   if (screen === 'play') return <ImaginativePlaySession config={config} onClose={() => setScreen('home')} onComplete={finish} />
   if (screen === 'complete' && completion) return <CompletionScreen data={completion} onHome={() => setScreen('home')} onReplay={replay} />
   return null
@@ -116,12 +118,12 @@ function ConsentScreen({ language, onLanguage, onContinue }: { language: LessonL
   </main>
 }
 
-function HomeScreen({ config, onConfig, onStory, onPlay }: { config: SessionConfig; onConfig: (config: SessionConfig) => void; onStory: (story: Story, replay?: boolean) => void; onPlay: () => void }) {
+function HomeScreen({ config, onConfig, onStory, onPlay }: { config: SessionConfig; onConfig: (config: SessionConfig) => void; onStory: (story: Story, replay?: boolean, autoJoin?: boolean) => void; onPlay: () => void }) {
   const [settings, setSettings] = useState(false)
   const [artwork, setArtwork] = useState<Story | null>(null)
   const t = (zh: string, en: string) => languageText(zh, en, config.language)
   return <main className="home-screen dashboard-home">
-    <Dashboard config={config} onLanguage={language => onConfig({ ...config, language })} onSettings={() => setSettings(true)} onStory={onStory} onPlay={onPlay} onInspect={setArtwork} />
+    <Dashboard config={config} onLanguage={language => onConfig({ ...config, language })} onSettings={() => setSettings(true)} onStory={onStory} onVoiceStory={story => onStory(story, false, true)} onPlay={onPlay} onInspect={setArtwork} />
     {artwork && <Modal title={languageText(artwork.title, artwork.englishTitle, config.language)} closeLabel={t('关闭', 'Close')} onClose={() => setArtwork(null)}>
       <div className="collection-detail"><div className="collection-cover"><PuzzleArtwork key={artwork.id} story={artwork} language={config.language} /><PuzzleSeams pieces={puzzleLayout(savedPuzzleLayout(artwork.id, config.language), artwork.typicalPathLength)} /></div><p>{languageText(artwork.puzzle.celebrationText, artwork.puzzle.englishCelebrationText, config.language)}</p><button className="primary-action" onClick={() => onStory(artwork, true)}>{t('再听一次', 'Replay story')}</button></div>
     </Modal>}
@@ -182,7 +184,7 @@ function Modal({ title, closeLabel, onClose, children }: { title: string; closeL
   return <dialog className="app-dialog" ref={dialog} aria-label={title} onCancel={(event) => { event.preventDefault(); onClose() }}><header><h2>{title}</h2><button className="secondary-action" onClick={onClose}>{closeLabel}</button></header>{children}</dialog>
 }
 
-function StorySession({ story, config, replayRequested = false, onClose, onComplete }: { story: Story; config: SessionConfig; replayRequested?: boolean; onClose: () => void; onComplete: (data: CompletionData) => void }) {
+function StorySession({ story, config, replayRequested = false, autoJoin = false, onClose, onComplete }: { story: Story; config: SessionConfig; replayRequested?: boolean; autoJoin?: boolean; onClose: () => void; onComplete: (data: CompletionData) => void }) {
   const visitScope: VisitScope = { mode: 'story', storyID: story.id, language: config.language }
   const [previous] = useState(() => savedProgress(story.id, config.language))
   const resume = !replayRequested && previous && !previous.completed ? previous : undefined
@@ -219,6 +221,7 @@ function StorySession({ story, config, replayRequested = false, onClose, onCompl
   const lastSpokenKind = useRef<'scene' | 'question'>('scene')
   const paused = useRef(false)
   const resuming = useRef(false)
+  const autoJoinStarted = useRef(false)
   const resumeAt = useRef<'scene' | 'question'>('scene')
   const reminderUsed = useRef(false)
   const pendingRepair = useRef(false)
@@ -242,6 +245,11 @@ function StorySession({ story, config, replayRequested = false, onClose, onCompl
     // Session identity is intentionally fixed for one mounted story.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [story.id])
+  useEffect(() => {
+    if (autoJoin && !autoJoinStarted.current) { autoJoinStarted.current = true; void beginWarmup() }
+    // A voice selection starts the same connection path as the join button.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoJoin])
   function snapshot(completed = storyComplete.current): ProgressSnapshot {
     return {beatID, phase: phase === 'recast' ? 'recast' : 'story', attemptCount, hintLevel, completed, beatPath: beatPathRef.current, completedCheckpoints: completedRef.current, rewardIDs: rewardsRef.current.map((r) => r.id), vocabularyIDs: struggledRef.current}
   }
@@ -272,7 +280,7 @@ function StorySession({ story, config, replayRequested = false, onClose, onCompl
     return () => window.removeEventListener('keydown', keyHandler)
   })
   useEffect(() => {
-    if (state !== 'ready' || !recorder.enabled || paused.current || pendingRepair.current || !['name', 'ready', 'story', 'recast', 'wrapup'].includes(phase)) return
+    if (state !== 'ready' || !recorder.enabled || paused.current || !['name', 'ready', 'story', 'recast', 'wrapup'].includes(phase)) return
     const timer = window.setTimeout(async () => {
       if (reminderUsed.current) {
         if (phase === 'name') { rememberLearnerName(); await askReady(); return }
@@ -289,7 +297,7 @@ function StorySession({ story, config, replayRequested = false, onClose, onCompl
         : phase === 'wrapup' ? t('我很喜欢和你一起听这个故事。你也可以说说喜欢的那一段。', 'I loved sharing this adventure. You can tell me about a favorite moment, too.')
         : storyFollowup(checkpoint.id,config.language)
       if (await say(followup)) setState('ready')
-    }, 18_000)
+    }, 12_000)
     return () => window.clearTimeout(timer)
   })
 
@@ -437,7 +445,7 @@ function StorySession({ story, config, replayRequested = false, onClose, onCompl
   async function celebrate(matchedConcepts: string[] = [], forcedBranchIndex?: number) {
     completeCheckpoint(false)
     setPhase('story'); playEarcon('success')
-    const success = config.language === 'chinese' ? checkpoint.successLine : 'You did it!'
+    const success = config.language === 'chinese' ? checkpoint.successLine : 'Lovely!'
     if (!await say(success, '', storyFeedbackCue(story.id, checkpoint.id, 'success', config.language))) return
     await advance(matchedConcepts, forcedBranchIndex)
   }
@@ -466,12 +474,9 @@ function StorySession({ story, config, replayRequested = false, onClose, onCompl
   async function mercyAdvance(noResponse = false) {
     markStruggled(); addEvent('mercy_fired', { beatID, mercy: true })
     const branch = checkpoint.branches.find((item) => item.id === checkpoint.defaultBranchId)
-    const chineseModel = branch?.recast ?? checkpoint.recast
-    const englishModel = checkpoint.concepts.map((concept) => concept.en[0]).filter(Boolean).join(' and ')
-    const line = noResponse
-      ? t(`没关系，我们继续听。刚才可以这样说：${chineseModel}`, `That’s okay—we can keep going. One answer was: ${englishModel}.`)
-      : t(`谢谢你和我一起想！可以这样说：${chineseModel} 我们继续看看发生什么。`, `Thanks for thinking with me! One answer is: ${englishModel}. Let’s see what happens next.`)
-    await completeKindly(line, branch ? [branch.conceptId] : [])
+    const line = noResponse ? storyContinueLines.noResponse : storyContinueLines.attempt
+    const speech = t(line.zh, line.en)
+    await completeKindly(speech, branch ? [branch.conceptId] : [])
   }
 
   async function forceChoice(index: number) {
@@ -564,6 +569,7 @@ function StorySession({ story, config, replayRequested = false, onClose, onCompl
     }
     if (await handleCommand(command)) return
     if (!questionAsked && phase === 'story') { await smallTalk(text, current); return }
+    if (wantsToListen(text)) { await mercyAdvance(true); return }
     let result = evaluateLocal(text, checkpoint, config.language)
     if (['uncertain', 'offTopic'].includes(result.verdict) && sessionID) {
       try {

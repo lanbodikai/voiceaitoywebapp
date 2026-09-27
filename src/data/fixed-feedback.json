@@ -5,7 +5,7 @@
   },
   "en_feedback_success_v1": {
     "language": "english",
-    "text": "You did it!"
+    "text": "Lovely!"
   },
   "en_hint_1_choochoo-birthday-cake_call-a-friend": {
     "language": "english",
@@ -506,5 +506,37 @@
   "english_feedback_retry_v1": {
     "language": "english",
     "text": "I didn’t quite catch what you meant. Could you say that again?"
+  },
+  "story_continue_attempt_en": {
+    "language": "english",
+    "text": "Let’s see what happens next."
+  },
+  "story_continue_attempt_zh": {
+    "language": "chinese",
+    "text": "我们接着看看发生什么吧。"
+  },
+  "story_continue_noResponse_en": {
+    "language": "english",
+    "text": "No worries. Let’s keep listening to the story."
+  },
+  "story_continue_noResponse_zh": {
+    "language": "chinese",
+    "text": "没关系，我们接着听故事吧。"
+  },
+  "voice_picker_choices_en": {
+    "language": "english",
+    "text": "Birthday Cake, Farm, Noodle Shop, Little Red Hen, or Henny Penny. You can say surprise me."
+  },
+  "voice_picker_choices_zh": {
+    "language": "chinese",
+    "text": "有生日蛋糕、农场、小面馆、小红母鸡和小母鸡佩妮。也可以说你选吧。"
+  },
+  "voice_picker_prompt_en": {
+    "language": "english",
+    "text": "Which story would you like?"
+  },
+  "voice_picker_prompt_zh": {
+    "language": "chinese",
+    "text": "想听哪个故事？"
   }
 }

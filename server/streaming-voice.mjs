@@ -1,15 +1,17 @@
 import WebSocket, { WebSocketServer } from 'ws'
 import { guestAction } from './progress-store.mjs'
-import { localizedRubric } from './conversation-boundaries.mjs'
+import { localizedRubric, storySelectionWords } from './conversation-boundaries.mjs'
 import { runtimeLimit } from './runtime-limits.mjs'
 
 export function transcriptionConfig(language, storyID, beatID) {
   const rubric = localizedRubric(storyID, beatID, language)
-  const context = rubric ? (language === 'english' ? `Current story question: ${rubric.question}` : `当前故事问题：${rubric.question}`) : (language === 'english' ? 'This is an open, friendly conversation.' : '这是一次自然、友好的中文对话。')
+  const picker = storyID === 'story-picker'
+  const context = picker ? (language === 'english' ? 'The child is naming a story to hear.' : '孩子正在说想听哪个故事。')
+    : rubric ? (language === 'english' ? `Current story question: ${rubric.question}` : `当前故事问题：${rubric.question}`) : (language === 'english' ? 'This is an open, friendly conversation.' : '这是一次自然、友好的中文对话。')
   const prompt = language === 'english'
     ? 'A child age three to six is practicing English. They may speak softly, use a high pitch, pause often, or use developing pronunciation. Transcribe only words actually spoken; never complete, rewrite, or guess their answer; never translate it.'
     : '三至六岁的孩子正在练习普通话。孩子可能声音很轻、音调较高、停顿较多或发音尚在发展中。只转写孩子实际说出的中文，不要补全、改写、翻译或猜测答案。常见回答包括“准备好了”“我已经准备好了”“好了，我们开始吧”。'
-  const keywords = rubric?.requiredConcepts?.flatMap((concept)=>language === 'english' ? (concept.english||[]) : (concept.chinese||[])).filter((word)=>!/[<>\r\n]/.test(word)).slice(0,48)||[]
+  const keywords = (picker ? storySelectionWords(language) : rubric?.requiredConcepts?.flatMap((concept)=>language === 'english' ? (concept.english||[]) : (concept.chinese||[])) || []).filter((word)=>!/[<>\r\n]/.test(word)).slice(0,48)
   return { type:'transcription', audio:{input:{
     format:{type:'audio/pcm',rate:24000},noise_reduction:{type:'near_field'},turn_detection:null,
     transcription:{model:process.env.OPENAI_TRANSCRIBE_MODEL || 'gpt-live-transcribe',languages:language === 'english' ? ['en'] : ['zh'],delay:'low',

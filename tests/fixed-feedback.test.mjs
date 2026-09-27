@@ -17,7 +17,7 @@ test('every English checkpoint hint and success has exact fixed audio, including
       assert.equal(feedback[cue]?.text,englishHintFor(checkpoint,level),cue)
       assert.ok(isCertifiedEdgeCue(cue))
     }
-    assert.equal(feedback[storyFeedbackCue(story.id,checkpoint.id,'success','english')].text,'You did it!')
+    assert.equal(feedback[storyFeedbackCue(story.id,checkpoint.id,'success','english')].text,'Lovely!')
   }
   for(const language of ['english','chinese'])assert.ok(isCertifiedEdgeCue(fixedFeedbackCue(boundaries[language].retry,language)))
   assert.equal(fixedFeedbackCue('a dynamic answer','english'),undefined)
@@ -38,8 +38,8 @@ test('only the active checkpoint feedback is prefetched and cleanup removes its 
   try {
     const story=stories[0],checkpoint=story.beats[0].checkpoint
     const cleanup=preloadStoryFeedback(story.id,checkpoint.id,'english')
-    assert.equal(links.length,6)
-    assert.ok(links.every(link=>link.rel==='prefetch' && link.as==='audio' && (link.href.includes(checkpoint.id)||link.href.includes('feedback_'))))
+    assert.equal(links.length,8)
+    assert.ok(links.every(link=>link.rel==='prefetch' && link.as==='audio' && (link.href.includes(checkpoint.id)||link.href.includes('feedback_')||link.href.includes('story_continue_'))))
     cleanup();assert.ok(links.every(link=>link.removed))
   }finally{globalThis.document=old}
 })
