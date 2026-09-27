@@ -129,6 +129,6 @@ test('a fixed retry skips speech synthesis but still moderates input and output'
   try {
     const result=await generateSpokenLine({kind:'openReply',language:'english',learnerSpeech:'garbled synthetic words',previousLine:'Synthetic question?',preferFixedFeedback:true})
     assert.equal(result.action,'retry');assert.equal(result.speech,undefined)
-    assert.equal(moderations,2);assert.equal(models,1)
+    assert.equal(moderations,2);assert.equal(models,2)
   }finally{globalThis.fetch=oldFetch;if(oldKey===undefined)delete process.env.OPENAI_API_KEY;else process.env.OPENAI_API_KEY=oldKey}
 })
