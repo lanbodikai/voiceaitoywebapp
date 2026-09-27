@@ -1,7 +1,8 @@
 # Voice AI Toy only: AWS migration
 
-Status: migration preparation. Production traffic must not be switched until both
-regional endpoints have valid TLS and pass authenticated HTTP and WebSocket tests.
+Status: web voice cutover active. The production Vercel project uses the AWS
+regional endpoint for web voice HTTP and WebSocket traffic. The old Oracle Voice
+AI Toy runtime remains online for rollback and iOS; Mousefit is unchanged.
 
 ## Isolation boundary
 
@@ -46,9 +47,9 @@ The user purchased `260926731.xyz` at Porkbun. The planned backend hostname is
 Route 53 public hosted zone `Z03136631Y6HZQZ7QSFMF` has been created in the
 approved AWS account. Porkbun now lists its four Route 53 nameservers, and the
 `api` A records have US East/US West latency routing with region-specific HTTP
-health checks. Wait for the `.xyz` registry and public resolvers to publish the
-new delegation before issuing a certificate. No production traffic has been
-moved. Never use or change `mousefit.pro`.
+health checks. The `.xyz` registry and public resolvers published the new
+delegation, and both health checks are healthy. Never use or change
+`mousefit.pro`.
 
 Issue one certificate on East with Certbot `webroot` at
 `/var/lib/voice-ai-toy/acme`, using `--register-unsafely-without-email` so no
@@ -65,25 +66,26 @@ TLS identity and West depends on the East deploy hook. A separate daily
 `voice-cert-sync.timer` reconciles a missed West copy after an outage; the
 installer skips unchanged certs so it does not reload Caddy every day.
 
-Only after the first certificate exists on **both** servers should their
-bootstrap Caddyfiles be replaced by `Caddyfile-east`/`Caddyfile-west` and
-validated. They expose the standalone voice API on HTTPS only; HTTP remains
-health/ACME only. Test direct IPs using `curl --resolve` to validate both
-regional endpoints before Vercel cutover.
+Both servers now use `Caddyfile-east`/`Caddyfile-west`, expose the standalone
+voice API on HTTPS only, and keep HTTP for health/ACME only. The first real
+certificate expires 2026-12-26; Certbot renewal dry-run with deploy hooks
+succeeded. Direct-IP HTTPS and the published Vercel path were tested with the
+synthetic canary in `scripts/smoke-aws-voice.mjs`. The canary uses anonymous
+test guests and fixed synthetic text; it sends no child recording.
 
-## Cutover and rollback
+## Verification and rollback
 
-1. Verify health, HTTPS, consent/auth rejection, synthetic grading, streaming
-   transcription, TTS, interruption, reconnect, memory use, and content-free logs
-   on each regional server separately. Do not test with child recordings.
-2. Configure latency records and health checks only for the new Voice AI Toy
-   domain. DNS failover depends on caches/TTL; existing sockets do not move.
-3. Set Vercel server env `VOICE_API_ORIGIN=https://NEW-HOST/web` and build env
-   `VITE_VOICE_STREAM_URL=wss://NEW-HOST/web/voice-stream`, then deploy the verified
-   commit to **lanbodikai/voiceaitoywebapp**, not the parent iOS repository.
-4. Verify the published build and both transport paths before calling migration
-   complete. Compare end-of-speech to actual audio-playing latency; regional
-   routing alone does not remove speech endpointing or model generation time.
-5. Rollback: remove the two new environment overrides and redeploy the prior
-   frontend. Existing legacy defaults still route to Oracle. Do not delete the
-   Oracle Voice AI Toy service as part of cutover.
+1. Re-run `SMOKE_SITE=https://web-chi-one-ojsrqj7r9h.vercel.app node
+   scripts/smoke-aws-voice.mjs` after infrastructure or frontend changes. It
+   checks each region's health, authenticated grading, TTS, and streaming
+   handshake, then confirms the published browser and Vercel proxy use AWS.
+2. Verify real-device interruption/reconnect and end-of-speech-to-audio latency
+   separately. DNS failover depends on caches/60-second TTL and cannot move an
+   existing WebSocket. Route 53 health checks monitor the local runtime, not
+   OpenAI/Supabase availability.
+3. The Vercel production variables are
+   `VOICE_API_ORIGIN=https://api.260926731.xyz/web` and
+   `VITE_VOICE_STREAM_URL=wss://api.260926731.xyz/web/voice-stream`.
+4. Rollback: remove those two Vercel production overrides and redeploy the
+   prior frontend. Existing legacy defaults still route to Oracle. Do not
+   delete Oracle Voice AI Toy as part of rollback.
