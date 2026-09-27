@@ -17,7 +17,7 @@ document.querySelector('#start').onclick=async()=>{
   context=new AudioContext();await context.resume();destination=context.createMediaStreamDestination()
   voice=new StreamingSpeech(()=>{});await voice.connect('synthetic','english')
   detector=await MicVAD.new({model:'v5',audioContext:context,baseAssetPath:'/vad/',onnxWASMBasePath:'/vad/',ortConfig:ort=>ort.env.wasm.numThreads=1,
-    getStream:async()=>destination.stream,positiveSpeechThreshold:.30,negativeSpeechThreshold:.16,minSpeechMs:192,preSpeechPadMs:640,redemptionMs:1050,
+    getStream:async()=>destination.stream,positiveSpeechThreshold:.30,negativeSpeechThreshold:.16,minSpeechMs:192,preSpeechPadMs:640,redemptionMs:640,
     onFrameProcessed:(_,frame)=>{if(started)voice.append(frame);else{ring.push(frame.slice());if(ring.length>16)ring.shift()}},
     onSpeechRealStart:()=>{started=true;voice.begin({language:'english',storyID:'test',beatID:'test'});ring.forEach(f=>voice.append(f));ring=[]},
     onSpeechEnd:async(samples)=>{samples.fill(0);started=false;await voice.commit();status()},
