@@ -12,7 +12,7 @@ if(JSON.stringify(runtimeIDs)!==JSON.stringify(entries.map(([cue])=>cue).sort())
 
 await Promise.all(entries.map(async([cue,metadata])=>{
   if(!/^[a-zA-Z0-9_-]+$/.test(cue)) throw new Error(`Invalid cue id: ${cue}`)
-  const expectedVoice=cue.startsWith('en_')?'en-US-AvaNeural':'zh-CN-XiaoxiaoNeural'
+  const expectedVoice=cue.startsWith('en_') || cue.startsWith('english_')?'en-US-AvaNeural':'zh-CN-XiaoxiaoNeural'
   if(metadata.voice!==expectedVoice) throw new Error(`Unexpected voice for ${cue}`)
   const bytes=await readFile(join(root,'public/audio',`${cue}.mp3`))
   const hash=createHash('sha256').update(bytes).digest('hex')

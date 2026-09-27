@@ -1,0 +1,15 @@
+# Bootstrap only: public health and ACME challenge, no voice route over HTTP.
+http://api.260926731.xyz {
+  handle /health {
+    reverse_proxy 127.0.0.1:8787
+  }
+  handle / {
+    rewrite * /health
+    reverse_proxy 127.0.0.1:8787
+  }
+  handle /.well-known/acme-challenge/* {
+    root * /var/lib/voice-ai-toy/acme
+    file_server
+  }
+  respond 404
+}

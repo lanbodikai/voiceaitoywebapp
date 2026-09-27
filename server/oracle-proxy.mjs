@@ -1,9 +1,9 @@
 export const voiceRoutes = new Set(['transcribe', 'answers/safety-check', 'answers/evaluate', 'lines/generate', 'speech/synthesize'])
 
-// Only the fixed voice routes can reach Oracle. Progress always stays on Vercel.
+// Only fixed voice routes reach the voice runtime. Progress stays on Vercel.
 export async function proxyVoice(route, request, signal, fetcher = fetch) {
   if (!voiceRoutes.has(route)) throw Object.assign(new Error('Invalid route'), { statusCode: 404 })
-  const origin = process.env.ORACLE_VOICE_ORIGIN || 'https://api.mousefit.pro/ai-toy/web'
+  const origin = process.env.VOICE_API_ORIGIN || process.env.ORACLE_VOICE_ORIGIN || 'https://api.mousefit.pro/ai-toy/web'
   const url = new URL(origin)
   if (url.protocol !== 'https:') throw Object.assign(new Error('Invalid upstream'), { statusCode: 503 })
   const chunks = []

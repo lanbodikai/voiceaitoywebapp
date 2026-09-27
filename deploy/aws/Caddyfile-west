@@ -1,0 +1,19 @@
+# West serves its own health check but forwards all ACME challenges to East.
+http://api.260926731.xyz {
+  handle /health {
+    reverse_proxy 127.0.0.1:8787
+  }
+  handle / {
+    rewrite * /health
+    reverse_proxy 127.0.0.1:8787
+  }
+  handle /.well-known/acme-challenge/* {
+    reverse_proxy http://100.51.236.202:80
+  }
+  respond 404
+}
+
+https://api.260926731.xyz {
+  tls /etc/voice-ai-toy/tls/current/fullchain.pem /etc/voice-ai-toy/tls/current/privkey.pem
+  reverse_proxy 127.0.0.1:8787
+}

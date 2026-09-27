@@ -7,6 +7,8 @@ export type PuzzleLayoutID = typeof puzzleLayoutIDs[number]
 export type PuzzleVisitKind = 'new' | 'resume' | 'replay'
 
 export interface PuzzlePieceLayout {
+  originX: number
+  originY: number
   clipPath: string
   path: string
   startX: number

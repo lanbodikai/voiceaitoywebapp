@@ -1,0 +1,21 @@
+# Certbot owns the one certificate for the latency-routed hostname.
+# HTTP stays available for health checks and ACME HTTP-01 challenges only.
+http://api.260926731.xyz {
+  handle /health {
+    reverse_proxy 127.0.0.1:8787
+  }
+  handle / {
+    rewrite * /health
+    reverse_proxy 127.0.0.1:8787
+  }
+  handle /.well-known/acme-challenge/* {
+    root * /var/lib/voice-ai-toy/acme
+    file_server
+  }
+  respond 404
+}
+
+https://api.260926731.xyz {
+  tls /etc/voice-ai-toy/tls/current/fullchain.pem /etc/voice-ai-toy/tls/current/privkey.pem
+  reverse_proxy 127.0.0.1:8787
+}

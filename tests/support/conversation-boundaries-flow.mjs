@@ -10,6 +10,7 @@ const story = catalog.stories[2]
 try {
   for (const language of ['english','chinese']) {
     for (const mode of ['choice','open','play']) {
+      if (process.env.FLOW_TEST_MODES && !process.env.FLOW_TEST_MODES.split(',').includes(mode)) continue
       const page = await browser.newPage()
       const errors=[]; page.on('pageerror',error=>errors.push(error.message))
       const transformed = await (await page.request.get(`${site}/src/App.tsx`)).text()
@@ -42,6 +43,7 @@ try {
         export const speak=async(text)=>{window.spoken.push(text);return true}; export const stopVoice=()=>{};
         export const setSpeechRate=()=>{}; export const cueForLanguage=x=>x;
         export const storyFeedbackCue=()=>undefined; export const playEarcon=()=>{}; export const playEffect=()=>{};
+        export const preloadStoryFeedback=()=>()=>{};
       `}))
       await page.route('**/src/useHandsFree.ts*',route=>route.fulfill({contentType:'application/javascript',body:`
         import React from '${reactURL}'; const {useState,useRef}=React;
@@ -79,6 +81,14 @@ try {
       const initialCompletions=await page.evaluate(()=>window.events.filter(event=>event.type==='checkpoint_completed'||event.type==='play_turn').length)
       const initialPieces = await page.locator('.story-puzzle-picture .puzzle-piece').count()
       assert.equal(await page.locator('.story-puzzle-picture .piece-entering').count(), 0, 'restored pieces must not animate again')
+      if (mode !== 'play') {
+        assert.equal(await page.locator('.story-puzzle-stage').isVisible(), false, 'resuming collected pieces must not replace the agent')
+        assert.equal(await page.locator('.story-agent-stage .three-orb').isVisible(), true)
+        assert.equal(await page.locator('.story-agent-stage .three-orb').evaluate(el => getComputedStyle(el).opacity), '1')
+        assert.equal(await page.locator('.puzzle-tray').isVisible(), false, 'puzzle status is not persistent during conversation')
+        await page.locator('.story-agent-stage .three-orb canvas').waitFor()
+        await page.locator('.story-agent-stage .three-orb').evaluate(el => { window.originalOrb = el })
+      }
       for(let i=0;i<4;i++) {
         await respond(language === 'english' ? "Today's weather is good" : '今天天气很好')
         assert.ok((await page.evaluate(()=>window.spoken.at(-1))).endsWith(originalQuestion), JSON.stringify(await page.evaluate(()=>({spoken:window.spoken.slice(-4),state:document.querySelector('.room-state')?.textContent}))))
@@ -137,7 +147,7 @@ try {
         assert.equal(await page.locator('.story-puzzle-picture .puzzle-piece').count(), initialPieces + 1)
         const entering = page.locator('.story-puzzle-picture .piece-entering').last()
         assert.equal(await entering.evaluate(el => getComputedStyle(el).animationDelay), '0s', 'place the piece immediately after the answer')
-        assert.equal(await entering.evaluate(el => getComputedStyle(el).animationName), 'puzzle-assemble')
+        assert.equal(await entering.evaluate(el => getComputedStyle(el).animationName), 'puzzle-grow-into-slot')
         if (mode === 'choice') {
           const firstPiece = page.locator('.story-puzzle-picture .puzzle-piece').first()
           // Playwright's JS clock does not advance CSS animations.
@@ -145,9 +155,29 @@ try {
           await respond('synthetic correct response')
           assert.equal(await page.locator('.story-puzzle-picture .puzzle-piece').count(), 2)
           assert.equal(await firstPiece.evaluate(el => el === window.firstPuzzlePiece), true, 'previous pieces remain mounted')
-          assert.equal(await firstPiece.evaluate(el => getComputedStyle(el).transform), 'matrix(1, 0, 0, 1, 0, 0)', 'previous pieces stay placed')
+          assert.equal(await firstPiece.evaluate(el => getComputedStyle(el).transform), 'none', 'previous pieces stay placed')
+          if (process.env.ORB_REWARD_SCREENSHOT_DIR && language === 'english') {
+            await page.screenshot({path:`${process.env.ORB_REWARD_SCREENSHOT_DIR}/reward-desktop.png`})
+            await page.setViewportSize({width:390,height:844})
+            await page.screenshot({path:`${process.env.ORB_REWARD_SCREENSHOT_DIR}/reward-phone.png`})
+          }
           await page.emulateMedia({ reducedMotion: 'reduce' })
           assert.equal(await entering.evaluate(el => getComputedStyle(el).animationName), 'none')
+        }
+        await page.clock.runFor(2700)
+        assert.equal(await page.locator('.story-puzzle-stage').isVisible(), false, 'checkpoint reward must dismiss automatically')
+        assert.equal(await page.locator('.puzzle-tray').isVisible(), false)
+        assert.equal(await page.locator('.story-agent-stage .three-orb').evaluate(el => el === window.originalOrb), true, 'reward must not remount the agent')
+        assert.equal(await page.locator('.story-agent-stage').evaluate(el => el.classList.contains('showing-reward')), false)
+        if (mode === 'choice') {
+          if (process.env.ORB_REWARD_SCREENSHOT_DIR && language === 'english') await page.screenshot({path:`${process.env.ORB_REWARD_SCREENSHOT_DIR}/orb-phone.png`})
+          await respond('another synthetic correct response')
+          assert.equal(await page.locator('.story-puzzle-stage').isVisible(), true, 'each new checkpoint gets a fresh reward')
+          await page.evaluate(()=>window.hideTab())
+          assert.equal(await page.locator('.story-puzzle-stage').isVisible(), false, 'pausing immediately dismisses the reward')
+          await page.getByRole('button',{name:language==='english'?'Resume story':'继续故事',exact:true}).click()
+          await page.clock.runFor(40)
+          assert.equal(await page.locator('.story-puzzle-stage').isVisible(), false, 'resuming never replays a dismissed reward')
         }
       }
       if(mode==='open') {

@@ -19,9 +19,25 @@ PLAY_INTRO = ROOT / "src" / "data" / "play-intro.json"
 OUTPUT = ROOT / "public" / "audio"
 PROVENANCE = ROOT / "src" / "data" / "edge-cues.json"
 RUNTIME_MANIFEST = ROOT / "src" / "data" / "edge-cue-ids.json"
+FEEDBACK_MANIFEST = ROOT / "src" / "data" / "fixed-feedback.json"
 
 ZH_VOICE = "zh-CN-XiaoxiaoNeural"
 EN_VOICE = "en-US-AvaNeural"
+
+
+def feedback_cues(stories: dict) -> dict[str, tuple[str, str, str, str]]:
+    cues = {"en_feedback_success_v1": ("You did it!", EN_VOICE, "-5%", "+0Hz")}
+    boundaries = json.loads((ROOT / "src/data/conversation-boundaries.json").read_text(encoding="utf-8"))
+    for language, voice, pitch in [("english", EN_VOICE, "+0Hz"), ("chinese", ZH_VOICE, "+1Hz")]:
+        cues[f"{language}_feedback_retry_v1"] = (boundaries[language]["retry"], voice, "-5%", pitch)
+    for story in stories["stories"]:
+        for beat in story["beats"]:
+            checkpoint = beat["checkpoint"]
+            model = " and ".join(concept["en"][0] for concept in checkpoint["concepts"] if concept["en"] and concept["en"][0])
+            hints = [checkpoint["englishHint"], f"Try saying one important word: {model}.", f"Here is a sentence starter: “I think {model}…”", f"Let’s say the complete answer together: {model}."]
+            for level, text in enumerate(hints, 1):
+                cues[cue_id(story["id"], checkpoint["id"], f"hint_{level}", "english")] = (text, EN_VOICE, "-5%", "+0Hz")
+    return cues
 
 
 def cue_id(story_id: str, checkpoint_id: str, kind: str, language: str) -> str:
@@ -98,16 +114,25 @@ def main() -> None:
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--play-intro-only", action="store_true", help="Generate the bilingual play greeting and three destination openings.")
     parser.add_argument("--handsfree-only", action="store_true", help="Generate the short bilingual hands-free prompts.")
+    parser.add_argument("--feedback-only", action="store_true", help="Generate English checkpoint feedback and bilingual retry cues.")
     args = parser.parse_args()
-    cues = {} if args.play_intro_only or args.handsfree_only else story_cues(json.loads(STORIES.read_text(encoding="utf-8")))
+    stories = json.loads(STORIES.read_text(encoding="utf-8"))
+    feedback = feedback_cues(stories)
+    cues = {} if args.play_intro_only or args.handsfree_only or args.feedback_only else story_cues(stories)
     intro = json.loads(PLAY_INTRO.read_text(encoding="utf-8"))
-    lines = [] if args.handsfree_only else [intro["greeting"], *intro["openings"].values()]
-    if not args.play_intro_only:
+    lines = [] if args.handsfree_only or args.feedback_only else [intro["greeting"], *intro["openings"].values()]
+    if not args.play_intro_only and not args.feedback_only:
         lines += list(json.loads((ROOT / "src/data/handsfree-lines.json").read_text(encoding="utf-8")).values())
     for line in lines:
         cues[line["cue"]] = (line["zh"], ZH_VOICE, "-5%", "+1Hz")
         cues[f"en_{line['cue']}"] = (line["en"], EN_VOICE, "-5%", "+0Hz")
-    asyncio.run(generate(cues, args.force, args.play_intro_only or args.handsfree_only))
+    if not args.play_intro_only and not args.handsfree_only:
+        cues.update(feedback)
+    asyncio.run(generate(cues, args.force, args.play_intro_only or args.handsfree_only or args.feedback_only))
+    if not args.play_intro_only and not args.handsfree_only:
+        # Runtime lookup requires an exact original-text match; audio provenance
+        # separately certifies the provider-normalized spoken text and MP3 hash.
+        FEEDBACK_MANIFEST.write_text(json.dumps({identifier: {"text": values[0], "language": "english" if values[1] == EN_VOICE else "chinese"} for identifier, values in feedback.items()}, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":

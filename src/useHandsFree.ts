@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from 'react'
 import type { MicVAD } from '@ricky0123/vad-web'
 import { accessToken } from './supabase'
 import { StreamingSpeech } from './StreamingSpeech'
+import { voiceStreamURL } from './voiceEndpoint'
 import { rememberSafety, clearSpeechMemory } from './preparedSpeech'
 import { setVoiceRPC } from './voiceTransport'
 import { SpeechTurn } from './speechTurn'
 import type { LessonLanguage } from './types'
 import { audioContextClass } from './browserCompat'
+import { beginLatencyTurn, cancelLatencyTurn, markEndpoint, noteSpeechFrame, startLatencyStage } from './latency'
 
 interface Options {
   language: LessonLanguage
@@ -56,6 +58,7 @@ export function useHandsFree(options: Options) {
   }, [options.allowed])
 
   function disable(notify = true) {
+    cancelLatencyTurn()
     lifecycle.current++; active.current = false; opening.current = false
     turn.current.cancel(); segment.current = null; clearTimeout(limit.current); clearTimeout(finalize.current); finalize.current=undefined
     capturedSamples.current=0
@@ -111,9 +114,9 @@ export function useHandsFree(options: Options) {
         disable();setError(latest.current.language==='chinese'?'语音连接中断，请重新打开麦克风。':'Speech disconnected. Turn the microphone on again.')
       })
       speech.current=voice
-      await voice.connect(token,latest.current.language)
+      await voice.connect(token,latest.current.language,voiceStreamURL(import.meta.env.VITE_VOICE_STREAM_URL))
       if(!valid()) {voice.close();return false}
-      setVoiceRPC((type,body,signal)=>voice.request(type,body,signal))
+      setVoiceRPC((type,body,signal)=>voice.request(type,body,signal),voice.capabilities)
       detector = await MicVAD.new({
         model:'v5', startOnLoad:false, audioContext:ownedContext,
         baseAssetPath:'/vad/', onnxWASMBasePath:'/vad/',
@@ -124,9 +127,10 @@ export function useHandsFree(options: Options) {
         getStream:async () => ownedStream!,
         // A short pause cuts a long utterance without requesting mic permission again.
         pauseStream:async () => {}, resumeStream:async () => ownedStream!,
-        onFrameProcessed: (_probability, frame) => {
+        onFrameProcessed: (probability, frame) => {
           if(!valid() || !active.current || !latest.current.allowed) return
           try {
+            if(segment.current!==null && probability.isSpeech>=0.16)noteSpeechFrame()
             if(segment.current!==null) voice.append(frame)
             else {leading.current.push(frame.slice());if(leading.current.length>20)leading.current.shift()?.fill(0)}
           } catch {disable();latest.current.onError()}
@@ -146,6 +150,7 @@ export function useHandsFree(options: Options) {
             return
           }
           segment.current = turn.current.next()
+          beginLatencyTurn()
           capturedSamples.current=0
           clearSpeechMemory()
           try {
@@ -165,6 +170,7 @@ export function useHandsFree(options: Options) {
         },
         onVADMisfire: () => {
           if (!valid() || segment.current === null) return
+          cancelLatencyTurn()
           turn.current.cancel(); segment.current=null; capturedSamples.current=0
           clearTimeout(limit.current); clearTimeout(finalize.current); finalize.current=undefined
           leading.current.forEach((frame)=>frame.fill(0));leading.current=[]
@@ -186,14 +192,18 @@ export function useHandsFree(options: Options) {
             const audioDurationMs=Math.min(30_000,Math.round(capturedSamples.current/16))
             capturedSamples.current=0;captured.onProcessing()
             const started=performance.now()
+            markEndpoint(started)
+            const finishTranscription=startLatencyStage('transcriptionMs',started)
             void voice.commit().then(async(result)=>{
               if(!current())return
+              finishTranscription()
               rememberSafety(result.transcript,result.safety)
               captured.onMetric?.({audioDurationMs,transcriptionLatencyMs:Math.round(performance.now()-started)})
               // Read the live handler: narration may have changed phase during capture.
               await latest.current.onTranscript(result.transcript,current)
             }).catch(()=>{
               if(!current())return
+              cancelLatencyTurn()
               setError(captured.language==='chinese'?'语音连接暂时中断。可以直接再说一次。':'The speech connection dropped. You can say that again.')
               latest.current.onError()
             })

@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily Voice AI Toy regional TLS reconciliation
+
+[Timer]
+OnCalendar=daily
+RandomizedDelaySec=1h
+Persistent=true
+Unit=voice-cert-sync.service
+
+[Install]
+WantedBy=timers.target

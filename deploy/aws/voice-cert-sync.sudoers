@@ -1,0 +1,2 @@
+# The forced SSH command can install only the validated Voice AI Toy TLS bundle.
+voice-cert-sync ALL=(root) NOPASSWD: /usr/local/sbin/voice-install-cert

@@ -37,6 +37,7 @@ try {
     export const setSpeechRate=()=>{};
     export const cueForLanguage=x=>x;
     export const storyFeedbackCue=()=>undefined;
+    export const preloadStoryFeedback=()=>()=>{};
     export const playEarcon=()=>{};
     export const playEffect=()=>{};
   `}))
@@ -72,6 +73,9 @@ try {
   assert.equal(await page.locator('.puzzle-tray-pieces .earned').count(),1)
   assert.equal(await page.locator('.story-puzzle-stage').isVisible(),true)
   assert.equal(await page.locator('.story-puzzle-picture .piece-entering').count(),1)
+  await page.clock.runFor(2700)
+  assert.equal(await page.locator('.story-puzzle-stage').isVisible(),false)
+  assert.equal(await page.locator('.story-agent-stage .three-orb').isVisible(),true)
   const lines=await page.evaluate(()=>window.spoken)
   assert.ok(!lines.some(x=>/sticker|take your time/i.test(x)))
   assert.equal(await page.locator('.sticker-shelf, .completion-stickers').count(),0)

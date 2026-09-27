@@ -5,6 +5,7 @@ import { acceptCloudProgress, guestID, type GuestProgress, type ProgressSnapshot
 import { prepareSpeech, takeSafety, type PreparedSpeech } from './preparedSpeech'
 import { getVoiceRPC } from './voiceTransport'
 import { combinedSignal, timeoutSignal } from './browserCompat'
+import { measureLatency } from './latency'
 
 const configuredBaseURL = (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(/\/$/, '')
 const baseURL = import.meta.env.PROD ? '/api' : configuredBaseURL
@@ -89,8 +90,11 @@ export async function restoreProgress(code: string) {
   acceptCloudProgress(data)
 }
 
-export function evaluateRemotely(input: Record<string, unknown>) {
-  return request<Evaluation>('/answers/evaluate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) })
+export async function evaluateRemotely(input: Record<string, unknown>) {
+  // An older voice server may not advertise grading yet. Keep HTTP rollout-safe;
+  // never retry a failed live request on another transport (or grade it twice).
+  const rpc=getVoiceRPC('evaluate')
+  return await measureLatency('evaluationMs',()=>rpc ? rpc('evaluate',input) : request<Evaluation>('/answers/evaluate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) })) as Evaluation
 }
 
 export function safetyCheck(sessionID: string, transcript: string) {
@@ -111,12 +115,13 @@ export function transcribeAudio(audio: Blob, fields: Record<string, string>, sig
 
 export async function generateLine(input: Record<string, unknown>) {
   const rpc=getVoiceRPC()
-  const result=(rpc ? await rpc('reply',input) : await request('/lines/generate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) })) as {line:string;action:'continue'|'redirect'|'retry';speech?:PreparedSpeech}
+  const body={...input,preferFixedFeedback:true}
+  const result=await measureLatency('replyMs',()=>rpc ? rpc('reply',body) : request('/lines/generate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })) as {line:string;action:'continue'|'redirect'|'retry';speech?:PreparedSpeech}
   if(result.speech) prepareSpeech(result.line,String(input.language),result.speech)
   return result
 }
 
-export async function synthesizeSpeech(text:string,language:string,signal:AbortSignal) {const rpc=getVoiceRPC();return (rpc ? await rpc('synthesize',{text,language},signal) : await request('/speech/synthesize',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,language}),signal})) as PreparedSpeech}
+export async function synthesizeSpeech(text:string,language:string,signal:AbortSignal) {const rpc=getVoiceRPC('synthesize');return (rpc ? await rpc('synthesize',{text,language},signal) : await request('/speech/synthesize',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,language}),signal})) as PreparedSpeech}
 
 export function exportSession(sessionID: string) {
   return request<Record<string, unknown>>(`/sessions/${encodeURIComponent(sessionID)}/export`)

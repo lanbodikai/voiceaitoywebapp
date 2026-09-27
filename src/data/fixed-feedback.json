@@ -1,0 +1,510 @@
+{
+  "chinese_feedback_retry_v1": {
+    "language": "chinese",
+    "text": "我刚才没太听明白，可以再说一次吗？"
+  },
+  "en_feedback_success_v1": {
+    "language": "english",
+    "text": "You did it!"
+  },
+  "en_hint_1_choochoo-birthday-cake_call-a-friend": {
+    "language": "english",
+    "text": "Say the name of the friend you want ChooChoo to call."
+  },
+  "en_hint_1_choochoo-birthday-cake_fox-list": {
+    "language": "english",
+    "text": "It is a piece of paper that tells you what to buy."
+  },
+  "en_hint_1_choochoo-birthday-cake_milk-and-stir": {
+    "language": "english",
+    "text": "One friend used milk, and the other used a spoon."
+  },
+  "en_hint_1_choochoo-birthday-cake_panpan-car-color": {
+    "language": "english",
+    "text": "It is the color of a banana."
+  },
+  "en_hint_1_choochoo-birthday-cake_panpan-strawberries": {
+    "language": "english",
+    "text": "It is a small red fruit."
+  },
+  "en_hint_1_choochoo-birthday-cake_yanli-practice": {
+    "language": "english",
+    "text": "It is the song we sing with a birthday cake."
+  },
+  "en_hint_1_choochoo-birthday-cake_your-birthday-cake": {
+    "language": "english",
+    "text": "Tell me anything yummy you like on a cake!"
+  },
+  "en_hint_1_choochoo-farm-duckling_dog-smell": {
+    "language": "english",
+    "text": "It is on your face, and you smell with it."
+  },
+  "en_hint_1_choochoo-farm-duckling_duck-sound": {
+    "language": "english",
+    "text": "It is the sound a duck makes: quack!"
+  },
+  "en_hint_1_choochoo-farm-duckling_farm-helper": {
+    "language": "english",
+    "text": "Say the name of the animal friend you want to help."
+  },
+  "en_hint_1_choochoo-farm-duckling_foal-yellow": {
+    "language": "english",
+    "text": "It is the color of a little duckling."
+  },
+  "en_hint_1_choochoo-farm-duckling_help-gaga": {
+    "language": "english",
+    "text": "First they picked her up, then they took her somewhere warm."
+  },
+  "en_hint_1_choochoo-farm-duckling_hen-footprints": {
+    "language": "english",
+    "text": "They are little marks your feet leave in the mud."
+  },
+  "en_hint_1_choochoo-farm-duckling_your-animal": {
+    "language": "english",
+    "text": "Any animal you like! Tell me its name and make its sound."
+  },
+  "en_hint_1_choochoo-noodle-shop_bengbeng-thanks": {
+    "language": "english",
+    "text": "She said two things: a polite word, and how the food tasted."
+  },
+  "en_hint_1_choochoo-noodle-shop_blow-on-it": {
+    "language": "english",
+    "text": "Puff up your cheeks and blow gently."
+  },
+  "en_hint_1_choochoo-noodle-shop_count-dumplings": {
+    "language": "english",
+    "text": "Count with me: one, two,  and one more!"
+  },
+  "en_hint_1_choochoo-noodle-shop_long-noodles": {
+    "language": "english",
+    "text": "Like a jump rope. Is that long or short?"
+  },
+  "en_hint_1_choochoo-noodle-shop_pick-dish": {
+    "language": "english",
+    "text": "Say noodles (miàn tiáo) or dumplings (jiǎo zi)."
+  },
+  "en_hint_1_choochoo-noodle-shop_your-favorite-food": {
+    "language": "english",
+    "text": "Anything yummy! Tell me your favorite food."
+  },
+  "en_hint_1_henny-penny_penny-acorn": {
+    "language": "english",
+    "text": "It is a little nut that grows on an oak tree."
+  },
+  "en_hint_1_henny-penny_penny-fox": {
+    "language": "english",
+    "text": "Foxy Woxy has brought them to his own den."
+  },
+  "en_hint_1_henny-penny_penny-friends": {
+    "language": "english",
+    "text": "They have not checked what fell. What could help them find out?"
+  },
+  "en_hint_1_henny-penny_penny-home": {
+    "language": "english",
+    "text": "They did not enter the den or visit the King. They went back where they lived."
+  },
+  "en_hint_1_henny-penny_penny-king": {
+    "language": "english",
+    "text": "They are on their way to someone who lives in a palace."
+  },
+  "en_hint_1_henny-penny_penny-stop": {
+    "language": "english",
+    "text": "It was their friend Goosey Poosey, the goose."
+  },
+  "en_hint_1_little-red-hen_red-hen-bread": {
+    "language": "english",
+    "text": "Think of the loaf she is baking."
+  },
+  "en_hint_1_little-red-hen_red-hen-finish": {
+    "language": "english",
+    "text": "She has chicks to care for and bread to make. What could you help with?"
+  },
+  "en_hint_1_little-red-hen_red-hen-flour": {
+    "language": "english",
+    "text": "It is the soft powder used to make bread."
+  },
+  "en_hint_1_little-red-hen_red-hen-harvest": {
+    "language": "english",
+    "text": "The same hen who planted the seed did this job herself."
+  },
+  "en_hint_1_little-red-hen_red-hen-seed": {
+    "language": "english",
+    "text": "It can grow into wheat, which becomes flour for bread."
+  },
+  "en_hint_2_choochoo-birthday-cake_call-a-friend": {
+    "language": "english",
+    "text": "Try saying one important word: fox and pony and panpan."
+  },
+  "en_hint_2_choochoo-birthday-cake_fox-list": {
+    "language": "english",
+    "text": "Try saying one important word: list."
+  },
+  "en_hint_2_choochoo-birthday-cake_milk-and-stir": {
+    "language": "english",
+    "text": "Try saying one important word: add milk and stir."
+  },
+  "en_hint_2_choochoo-birthday-cake_panpan-car-color": {
+    "language": "english",
+    "text": "Try saying one important word: yellow."
+  },
+  "en_hint_2_choochoo-birthday-cake_panpan-strawberries": {
+    "language": "english",
+    "text": "Try saying one important word: strawberry."
+  },
+  "en_hint_2_choochoo-birthday-cake_yanli-practice": {
+    "language": "english",
+    "text": "Try saying one important word: birthday song."
+  },
+  "en_hint_2_choochoo-birthday-cake_your-birthday-cake": {
+    "language": "english",
+    "text": "Try saying one important word: strawberry."
+  },
+  "en_hint_2_choochoo-farm-duckling_dog-smell": {
+    "language": "english",
+    "text": "Try saying one important word: nose."
+  },
+  "en_hint_2_choochoo-farm-duckling_duck-sound": {
+    "language": "english",
+    "text": "Try saying one important word: quack."
+  },
+  "en_hint_2_choochoo-farm-duckling_farm-helper": {
+    "language": "english",
+    "text": "Try saying one important word: dog and hen and foal."
+  },
+  "en_hint_2_choochoo-farm-duckling_foal-yellow": {
+    "language": "english",
+    "text": "Try saying one important word: yellow."
+  },
+  "en_hint_2_choochoo-farm-duckling_help-gaga": {
+    "language": "english",
+    "text": "Try saying one important word: picked up and brought home."
+  },
+  "en_hint_2_choochoo-farm-duckling_hen-footprints": {
+    "language": "english",
+    "text": "Try saying one important word: footprints."
+  },
+  "en_hint_2_choochoo-farm-duckling_your-animal": {
+    "language": "english",
+    "text": "Try saying one important word: dog and cat and duck and horse and chicken and cow and sheep and pig and tiger and lion and bird and frog."
+  },
+  "en_hint_2_choochoo-noodle-shop_bengbeng-thanks": {
+    "language": "english",
+    "text": "Try saying one important word: thank you and yummy."
+  },
+  "en_hint_2_choochoo-noodle-shop_blow-on-it": {
+    "language": "english",
+    "text": "Try saying one important word: blow."
+  },
+  "en_hint_2_choochoo-noodle-shop_count-dumplings": {
+    "language": "english",
+    "text": "Try saying one important word: three."
+  },
+  "en_hint_2_choochoo-noodle-shop_long-noodles": {
+    "language": "english",
+    "text": "Try saying one important word: long."
+  },
+  "en_hint_2_choochoo-noodle-shop_pick-dish": {
+    "language": "english",
+    "text": "Try saying one important word: noodles and dumplings."
+  },
+  "en_hint_2_choochoo-noodle-shop_your-favorite-food": {
+    "language": "english",
+    "text": "Try saying one important word: noodles."
+  },
+  "en_hint_2_henny-penny_penny-acorn": {
+    "language": "english",
+    "text": "Try saying one important word: acorn."
+  },
+  "en_hint_2_henny-penny_penny-fox": {
+    "language": "english",
+    "text": "Try saying one important word: fox."
+  },
+  "en_hint_2_henny-penny_penny-friends": {
+    "language": "english",
+    "text": "Try saying one important word: look."
+  },
+  "en_hint_2_henny-penny_penny-home": {
+    "language": "english",
+    "text": "Try saying one important word: home."
+  },
+  "en_hint_2_henny-penny_penny-king": {
+    "language": "english",
+    "text": "Try saying one important word: king."
+  },
+  "en_hint_2_henny-penny_penny-stop": {
+    "language": "english",
+    "text": "Try saying one important word: goose."
+  },
+  "en_hint_2_little-red-hen_red-hen-bread": {
+    "language": "english",
+    "text": "Try saying one important word: bread."
+  },
+  "en_hint_2_little-red-hen_red-hen-finish": {
+    "language": "english",
+    "text": "Try saying one important word: plant seeds."
+  },
+  "en_hint_2_little-red-hen_red-hen-flour": {
+    "language": "english",
+    "text": "Try saying one important word: flour."
+  },
+  "en_hint_2_little-red-hen_red-hen-harvest": {
+    "language": "english",
+    "text": "Try saying one important word: little red hen."
+  },
+  "en_hint_2_little-red-hen_red-hen-seed": {
+    "language": "english",
+    "text": "Try saying one important word: wheat seed."
+  },
+  "en_hint_3_choochoo-birthday-cake_call-a-friend": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think fox and pony and panpan…”"
+  },
+  "en_hint_3_choochoo-birthday-cake_fox-list": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think list…”"
+  },
+  "en_hint_3_choochoo-birthday-cake_milk-and-stir": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think add milk and stir…”"
+  },
+  "en_hint_3_choochoo-birthday-cake_panpan-car-color": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think yellow…”"
+  },
+  "en_hint_3_choochoo-birthday-cake_panpan-strawberries": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think strawberry…”"
+  },
+  "en_hint_3_choochoo-birthday-cake_yanli-practice": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think birthday song…”"
+  },
+  "en_hint_3_choochoo-birthday-cake_your-birthday-cake": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think strawberry…”"
+  },
+  "en_hint_3_choochoo-farm-duckling_dog-smell": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think nose…”"
+  },
+  "en_hint_3_choochoo-farm-duckling_duck-sound": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think quack…”"
+  },
+  "en_hint_3_choochoo-farm-duckling_farm-helper": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think dog and hen and foal…”"
+  },
+  "en_hint_3_choochoo-farm-duckling_foal-yellow": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think yellow…”"
+  },
+  "en_hint_3_choochoo-farm-duckling_help-gaga": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think picked up and brought home…”"
+  },
+  "en_hint_3_choochoo-farm-duckling_hen-footprints": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think footprints…”"
+  },
+  "en_hint_3_choochoo-farm-duckling_your-animal": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think dog and cat and duck and horse and chicken and cow and sheep and pig and tiger and lion and bird and frog…”"
+  },
+  "en_hint_3_choochoo-noodle-shop_bengbeng-thanks": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think thank you and yummy…”"
+  },
+  "en_hint_3_choochoo-noodle-shop_blow-on-it": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think blow…”"
+  },
+  "en_hint_3_choochoo-noodle-shop_count-dumplings": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think three…”"
+  },
+  "en_hint_3_choochoo-noodle-shop_long-noodles": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think long…”"
+  },
+  "en_hint_3_choochoo-noodle-shop_pick-dish": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think noodles and dumplings…”"
+  },
+  "en_hint_3_choochoo-noodle-shop_your-favorite-food": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think noodles…”"
+  },
+  "en_hint_3_henny-penny_penny-acorn": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think acorn…”"
+  },
+  "en_hint_3_henny-penny_penny-fox": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think fox…”"
+  },
+  "en_hint_3_henny-penny_penny-friends": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think look…”"
+  },
+  "en_hint_3_henny-penny_penny-home": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think home…”"
+  },
+  "en_hint_3_henny-penny_penny-king": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think king…”"
+  },
+  "en_hint_3_henny-penny_penny-stop": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think goose…”"
+  },
+  "en_hint_3_little-red-hen_red-hen-bread": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think bread…”"
+  },
+  "en_hint_3_little-red-hen_red-hen-finish": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think plant seeds…”"
+  },
+  "en_hint_3_little-red-hen_red-hen-flour": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think flour…”"
+  },
+  "en_hint_3_little-red-hen_red-hen-harvest": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think little red hen…”"
+  },
+  "en_hint_3_little-red-hen_red-hen-seed": {
+    "language": "english",
+    "text": "Here is a sentence starter: “I think wheat seed…”"
+  },
+  "en_hint_4_choochoo-birthday-cake_call-a-friend": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: fox and pony and panpan."
+  },
+  "en_hint_4_choochoo-birthday-cake_fox-list": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: list."
+  },
+  "en_hint_4_choochoo-birthday-cake_milk-and-stir": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: add milk and stir."
+  },
+  "en_hint_4_choochoo-birthday-cake_panpan-car-color": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: yellow."
+  },
+  "en_hint_4_choochoo-birthday-cake_panpan-strawberries": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: strawberry."
+  },
+  "en_hint_4_choochoo-birthday-cake_yanli-practice": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: birthday song."
+  },
+  "en_hint_4_choochoo-birthday-cake_your-birthday-cake": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: strawberry."
+  },
+  "en_hint_4_choochoo-farm-duckling_dog-smell": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: nose."
+  },
+  "en_hint_4_choochoo-farm-duckling_duck-sound": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: quack."
+  },
+  "en_hint_4_choochoo-farm-duckling_farm-helper": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: dog and hen and foal."
+  },
+  "en_hint_4_choochoo-farm-duckling_foal-yellow": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: yellow."
+  },
+  "en_hint_4_choochoo-farm-duckling_help-gaga": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: picked up and brought home."
+  },
+  "en_hint_4_choochoo-farm-duckling_hen-footprints": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: footprints."
+  },
+  "en_hint_4_choochoo-farm-duckling_your-animal": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: dog and cat and duck and horse and chicken and cow and sheep and pig and tiger and lion and bird and frog."
+  },
+  "en_hint_4_choochoo-noodle-shop_bengbeng-thanks": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: thank you and yummy."
+  },
+  "en_hint_4_choochoo-noodle-shop_blow-on-it": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: blow."
+  },
+  "en_hint_4_choochoo-noodle-shop_count-dumplings": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: three."
+  },
+  "en_hint_4_choochoo-noodle-shop_long-noodles": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: long."
+  },
+  "en_hint_4_choochoo-noodle-shop_pick-dish": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: noodles and dumplings."
+  },
+  "en_hint_4_choochoo-noodle-shop_your-favorite-food": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: noodles."
+  },
+  "en_hint_4_henny-penny_penny-acorn": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: acorn."
+  },
+  "en_hint_4_henny-penny_penny-fox": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: fox."
+  },
+  "en_hint_4_henny-penny_penny-friends": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: look."
+  },
+  "en_hint_4_henny-penny_penny-home": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: home."
+  },
+  "en_hint_4_henny-penny_penny-king": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: king."
+  },
+  "en_hint_4_henny-penny_penny-stop": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: goose."
+  },
+  "en_hint_4_little-red-hen_red-hen-bread": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: bread."
+  },
+  "en_hint_4_little-red-hen_red-hen-finish": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: plant seeds."
+  },
+  "en_hint_4_little-red-hen_red-hen-flour": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: flour."
+  },
+  "en_hint_4_little-red-hen_red-hen-harvest": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: little red hen."
+  },
+  "en_hint_4_little-red-hen_red-hen-seed": {
+    "language": "english",
+    "text": "Let’s say the complete answer together: wheat seed."
+  },
+  "english_feedback_retry_v1": {
+    "language": "english",
+    "text": "I didn’t quite catch what you meant. Could you say that again?"
+  }
+}

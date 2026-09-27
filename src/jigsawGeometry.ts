@@ -60,6 +60,8 @@ export function jigsawShapes(cells: readonly PuzzleCell[], seed: number) {
     const curves = [...side(true, y0, x0, x1, false), ...side(false, x1, y0, y1, false), ...side(true, y1, x0, x1, true), ...side(false, x0, y0, y1, true)]
     const points = [curves[0].from, ...curves.flatMap(sample)]
     return {
+      originX: (x0 + x1) / 2 / width * 100,
+      originY: (y0 + y1) / 2 / height * 100,
       path: `M ${xy(curves[0].from)} ${curves.map(c => c.c1 && c.c2 ? `C ${xy(c.c1)} ${xy(c.c2)} ${xy(c.to)}` : `L ${xy(c.to)}`).join(' ')} Z`,
       clipPath: `polygon(${points.map(([x, y]) => `${rounded(x / width * 100)}% ${rounded(y / height * 100)}%`).join(', ')})`,
     }

@@ -1,13 +1,17 @@
 import { takePreparedSpeech, type PreparedSpeech } from './preparedSpeech.ts'
 import edgeCueIDs from './data/edge-cue-ids.json' with { type: 'json' }
 import edgeCues from './data/edge-cues.json' with { type: 'json' }
+import feedback from './data/fixed-feedback.json' with { type: 'json' }
 import { audioContextClass } from './browserCompat.ts'
+import { measureLatency, startAudioLatency } from './latency.ts'
 let activeAudio: HTMLAudioElement | undefined
 let speechRequest: AbortController | undefined
 let cancelPlayback: (() => void) | undefined
 let playbackGeneration = 0
 let speechRate = 0.85
 const certifiedEdgeCues = new Set(edgeCueIDs)
+const feedbackByText=new Map(Object.entries(feedback as Record<string,{text:string;language:string}>).map(([cue,line])=>[`${line.language}:${line.text}`,cue]))
+export function fixedFeedbackCue(text:string,language:string){return feedbackByText.get(`${language}:${text}`)}
 
 export function setSpeechRate(value: number) {
   speechRate = Number.isFinite(value) ? Math.min(1.1, Math.max(0.7, value)) : 0.85
@@ -19,9 +23,28 @@ export function cueForLanguage(cueID: string, language: 'chinese' | 'english') {
 }
 
 export function storyFeedbackCue(storyID: string, checkpointID: string, kind: 'hint' | 'recast' | 'success', language: 'chinese' | 'english', hintLevel?: number) {
-  if (language === 'english') return undefined
+  if (language === 'english' && kind==='success') return 'en_feedback_success_v1'
+  if (language === 'english' && kind==='recast') return undefined
   const suffix = kind === 'hint' ? `hint_${hintLevel ?? 1}` : kind
-  return `${suffix}_${storyID}_${checkpointID}`
+  return cueForLanguage(`${suffix}_${storyID}_${checkpointID}`,language)
+}
+
+function cueURL(cueID:string) {
+  const metadata=(edgeCues as Record<string,{audioHash:string}>)[cueID]
+  return isCertifiedEdgeCue(cueID) && metadata ? `/audio/${encodeURIComponent(cueID)}.mp3?v=${metadata.audioHash.slice(0,12)}` : undefined
+}
+
+/** Only warm the active checkpoint's fixed feedback. Never plays or opens a mic. */
+export function preloadStoryFeedback(storyID:string,checkpointID:string,language:'chinese'|'english') {
+  if(typeof document==='undefined')return ()=>{}
+  const cues=[storyFeedbackCue(storyID,checkpointID,'success',language),`${language}_feedback_retry_v1`,...Array.from({length:4},(_,i)=>storyFeedbackCue(storyID,checkpointID,'hint',language,i+1))]
+  const links=cues.flatMap(cue=>{
+    const url=cue && cueURL(cue)
+    if(!url)return []
+    const link=document.createElement('link');link.rel='prefetch';link.as='audio';link.href=url;document.head.append(link)
+    return [link]
+  })
+  return ()=>links.forEach(link=>link.remove())
 }
 
 export function stopVoice() {
@@ -40,12 +63,13 @@ export function stopVoice() {
 export async function speak(text: string, language: 'chinese' | 'english', cueID?: string) {
   stopVoice()
   const generation = playbackGeneration
-  if (cueID && await playCue(cueID)) return true
+  const fixedCue=cueID ?? fixedFeedbackCue(text,language)
+  if (fixedCue && await playCue(fixedCue)) return true
   if (generation !== playbackGeneration) return true
   const controller=new AbortController();speechRequest=controller
   try {
     const prepared=takePreparedSpeech(text,language)
-    const speech=prepared || await (await import('./backend')).synthesizeSpeech(text,language,controller.signal)
+    const speech=prepared || await measureLatency('synthesisMs',async()=>(await import('./backend')).synthesizeSpeech(text,language,controller.signal))
     if(generation!==playbackGeneration) return true
     return await playPrepared(speech)
   } catch {return generation!==playbackGeneration}
@@ -55,8 +79,8 @@ export async function speak(text: string, language: 'chinese' | 'english', cueID
 export function isCertifiedEdgeCue(cueID: string) {return certifiedEdgeCues.has(cueID)}
 function playCue(cueID: string) {
   // Old or manually copied MP3s never bypass the runtime Edge-TTS provider.
-  const metadata = (edgeCues as Record<string, {audioHash:string}>)[cueID]
-  return isCertifiedEdgeCue(cueID) && metadata ? playAudio(`/audio/${encodeURIComponent(cueID)}.mp3?v=${metadata.audioHash.slice(0,12)}`) : Promise.resolve(false)
+  const url=cueURL(cueID)
+  return url ? playAudio(url) : Promise.resolve(false)
 }
 function playPrepared(speech:PreparedSpeech) {
   if(speech.provider!=='edge-tts' || speech.mimeType!=='audio/mpeg') return Promise.resolve(false)
@@ -65,6 +89,7 @@ function playPrepared(speech:PreparedSpeech) {
   return playAudio(url).finally(()=>URL.revokeObjectURL(url))
 }
 function playAudio(url: string) {
+  const startedPlaying=startAudioLatency()
   return new Promise<boolean>((resolve) => {
     const audio = new Audio(url)
     audio.playbackRate = speechRate
@@ -82,6 +107,7 @@ function playAudio(url: string) {
     cancelPlayback = () => finish(true)
     audio.addEventListener('ended', () => finish(true), { once: true })
     audio.addEventListener('error', () => finish(false), { once: true })
+    audio.addEventListener('playing', () => {if(!settled)startedPlaying()}, { once: true })
     audio.play().catch(() => finish(false))
   })
 }

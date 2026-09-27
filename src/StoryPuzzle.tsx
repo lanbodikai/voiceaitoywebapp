@@ -55,8 +55,9 @@ export function StoryPuzzlePicture({ puzzle, language, animateNewPieces = false 
           '--piece-y': `${piece.startY}%`,
           '--piece-rotation': `${piece.startRotation}deg`,
           '--piece-delay': '0ms',
+          transformOrigin: `${piece.originX}% ${piece.originY}%`,
         } as CSSProperties
-        const animated = animateNewPieces && index >= initialPieces
+        const animated = animateNewPieces && index >= initialPieces && index === puzzle.earnedPieces - 1
         return <i className={`puzzle-piece ${animated ? 'piece-entering' : 'piece-placed'}`} style={style} key={index}>
           {imageFailed && <span className="puzzle-fallback"><span>{puzzle.coverEmoji}</span></span>}
           <PuzzleSeams pieces={[piece]} />

@@ -44,6 +44,7 @@ try {
   await page.route('**/src/audio.ts*',route=>route.fulfill({contentType:'application/javascript',body:`
     export const speak=async(text)=>{window.spoken.push(text);return true};export const stopVoice=()=>{};
     export const setSpeechRate=()=>{};export const cueForLanguage=x=>x;export const storyFeedbackCue=()=>undefined;
+    export const preloadStoryFeedback=()=>()=>{};
     export const playEarcon=()=>{};export const playEffect=()=>{};
   `}))
   await page.route('**/src/useHandsFree.ts*',route=>route.fulfill({contentType:'application/javascript',body:`

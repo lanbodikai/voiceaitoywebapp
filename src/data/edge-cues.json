@@ -1,4 +1,18 @@
 {
+  "chinese_feedback_retry_v1": {
+    "audioHash": "db2d574678d9a0a42494c2651761ab79c3b5df069ab8ecf19bac863287a32362",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "dd10cacc957a92a0d5bb0311fb93075a68dbad2828fabf68f75e006f142b90a1",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "en_feedback_success_v1": {
+    "audioHash": "32090b76fe63db8c406ae0cd36c8f1844eff4713dc8b77cc7ddcac9273a2c397",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "7f6dd03e6c9e69016d2fee36a8dcc6ebac3bf3e4d20fefac17e65c94cef8b4ac",
+    "voice": "en-US-AvaNeural"
+  },
   "en_hf_listening_v1": {
     "audioHash": "1d2c3f54ad9f42044cdea130c3c7f411f3d7de4b0a12f691e26a1fb93f3ec4d5",
     "pitch": "+0Hz",
@@ -39,6 +53,874 @@
     "pitch": "+0Hz",
     "rate": "-5%",
     "textHash": "8bb602e71035f9aa58e82443d16bfbea120fccc4c26e2db6a1630a8b2c271baa",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_choochoo-birthday-cake_call-a-friend": {
+    "audioHash": "127212b85ef21823558255549056c0073c17000b8ba8810202bed2d111737c7c",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "3cbba70a9b8e038cb72c1928202250acd797e7346b322a79cf7bbd9805e8db89",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_choochoo-birthday-cake_fox-list": {
+    "audioHash": "6b4afa15306f2651eefff1d920b8c205262223613ceca938763d5174ab4e2c7e",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "52f3b91db753d28ada91e18c51343f3ddbcadbfd29702a99ccf93ee1630bb051",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_choochoo-birthday-cake_milk-and-stir": {
+    "audioHash": "f6fd7e74464e18e7bd05aaacc3e95f58955bc34e4dfdee5883b1a588f4f32399",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "44272aafa2a3f7e93b4acd2978198d0ea1fd44710b36849bec67c9c52d35b1c6",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_choochoo-birthday-cake_panpan-car-color": {
+    "audioHash": "e0afef363826eda337a367efd53e6cc97fcd9d4eca091344d3ccc9b676d9afd0",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "99819f274a1a18805f6aa360f99901de2ee9ea6052c2bb18d90b4b9290886017",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_choochoo-birthday-cake_panpan-strawberries": {
+    "audioHash": "9aee15eb6a1de6ea9c67e99c254f6102a4c9ca5062724b636a85667c4d943f09",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "7a77f1f512b68351e1bf784fe0e5d7abc60f0e0b78e4efeb7c831592c2e3f013",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_choochoo-birthday-cake_yanli-practice": {
+    "audioHash": "b41f76698ac44c608c19eaf0d84f3202850979d57a59d1e0d6588dea2a436c05",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "18cc7d3e372297e0f6af228f4232a43811486e6ab67470192df0b388a06a0aba",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_choochoo-birthday-cake_your-birthday-cake": {
+    "audioHash": "68e9e35299a35ad7771dd9707246e93adcd61bd4385835f51cbaa784e44cbe42",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "6270c6e58b88b856c6b06d2157a3a43bc7054b0b830a78bb4b77bd9b9b43d8a6",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_choochoo-farm-duckling_dog-smell": {
+    "audioHash": "5845ebae01a656bc1945f0fd2df646532016429d86f93863ba9abb419dec869f",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "7961c02d6764ae95ec81f28a4a9318f4ffb5a260f2b974b47715b433e9e435a3",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_choochoo-farm-duckling_duck-sound": {
+    "audioHash": "5afa78d320a9fa4c98c933d1646c14d98793c1b747952d5570871c2954b1b61f",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "eed56717d5a584cbb5f7f5a2c5e9a0ba9d8702edb00612d0d2296dd60b7eff43",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_choochoo-farm-duckling_farm-helper": {
+    "audioHash": "e3bd3b53b3067829c1918708a4ee96ecd01fba76a366f12396fe5d91de6cfa40",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "339a614c004161ce7dfc078ce3c01e917de1100c38d29a105f21948fee4e3469",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_choochoo-farm-duckling_foal-yellow": {
+    "audioHash": "2c69b395a402082441b7383d27917f28b109e33544155863f82037294f8ec8b8",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "c83880d595844ced4f9677deba558db96cefed2d679303831134ead15c2c15b0",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_choochoo-farm-duckling_help-gaga": {
+    "audioHash": "bcc254dc2d203e6a39a257341953b219424f3fe80a90c235e6fdc135669f4d27",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "5332924c971735216a15fd39c8b5840abda357de0b6bf75d22e943813374263f",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_choochoo-farm-duckling_hen-footprints": {
+    "audioHash": "e1af809c794cd30be956cb3d0a024e80e6158d78af7625923faa839eca0ee9cd",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "c55026a94883ff39fc71c57562b0d01d7b1e8de59c512f44cc52bdca8aa4e61d",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_choochoo-farm-duckling_your-animal": {
+    "audioHash": "42cb1cc5e02e9cd1b22692b79e3cac0fc98b64723a3fc51675d9f13ee7823c44",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "89be16d56b3aa1287b5cb9b8eb6c0f513b2bf974bfec6eaa809657f51e5b6780",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_choochoo-noodle-shop_bengbeng-thanks": {
+    "audioHash": "d8121677bd32131bf7030a58bd8844f0815cc51ad5a26c739e9c7d58f9a2f5dc",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "f46ae7d81bae7ff9a313e6fe259cd8e42e9adad1ad8d53cb74212688b7f1bc13",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_choochoo-noodle-shop_blow-on-it": {
+    "audioHash": "b789d33398d3d51d84a1cfa23b7ef692dd96364385431cfbe05e2b9f6f78b89c",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "e93b35436a69e6a1745ce7ad661d7c3038c74c365f827b618bf85ca846395bf7",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_choochoo-noodle-shop_count-dumplings": {
+    "audioHash": "3fa30049caea799e7fb7b557b32217460317af9920e30a6fba9060825074b66d",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "aef3f68cd1c330d0bb5a60470bb80a63bf6cda41ba62c216835cb5bdb799c9e9",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_choochoo-noodle-shop_long-noodles": {
+    "audioHash": "bde94712311af4ee1f89ea98ac1886c4ecb5f58b9d85a564f74e2000590ea5e5",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "8215be7acba88a45440b4075246275972d6f427777a1f874edf53296ef460570",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_choochoo-noodle-shop_pick-dish": {
+    "audioHash": "6c30d6779704a7bff600ca7ac1472eceafc36885e4fd4ad4bdd6e135c5a3900f",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "1bf27d0fbc15871528190f55324ed2c905e0509f52b9cfc17d723e212c07cd8f",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_choochoo-noodle-shop_your-favorite-food": {
+    "audioHash": "a7fa5efc5476474649d4de231f736ea51af8984cc722ea3565c32db0e18471d8",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "18d1ada7cb47be97fcdc75fa1d09fb9218fbc2b918ca975bf297145759de7178",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_henny-penny_penny-acorn": {
+    "audioHash": "9951fa77f192dcef64f26a93eff30aaecc4e65519af7b366b504d6c0aaf6c2af",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "62556d4e107a03484867d39944f8951baa2d96ff8c357f26d026cda7fe393eb6",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_henny-penny_penny-fox": {
+    "audioHash": "97012d22f7faaeb566fa9ad873d7306cd318b86a4b03f613aa91dccf2ffdee8a",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "072d8b269f03467e2d30a9ef9bc5b5af49887c5927f7258c25431f191ed71480",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_henny-penny_penny-friends": {
+    "audioHash": "3777525ba4d1c59d198bf5d3ac558a3dcca77eee72490a2f63efc4867e9fb145",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "111068c506a9e4162a6f98ee58804b507a52c74c16d8363cbc48e5f9cf891dbd",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_henny-penny_penny-home": {
+    "audioHash": "c830359598cbd8ab562215e9793eec75a1660c967aaf6bd52f73c90cd387afe3",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "3238489aec9d3f76fde8832dbb4e9a92e634f159a46bf3d1e4f1b8be24ff75b2",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_henny-penny_penny-king": {
+    "audioHash": "c1b3f0fd400161bcadb4c99f2f13230e35f17e14b7087bef61b083aaa9dc6d88",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "8a25193c5010432e0f09a0ed365cb94cafa265098b9384e35944ded8d7489d48",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_henny-penny_penny-stop": {
+    "audioHash": "002fb5f92bf2ebe555493a586c84e3dfa2e1fc1d107431b9517ff73bd49a6885",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "8990b61fef1b98185affe781898f50df23abd1c0859d9bf0afd9a9897833e4eb",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_little-red-hen_red-hen-bread": {
+    "audioHash": "dd8a7dedb83e1496c90f7b82d20f6b6468f3bdefc198b80c334a3336c3937849",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "32998ca85fb3420ffdcad4a65d2d31ed935b70fb7247a4bdb1a5000fa1bfb302",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_little-red-hen_red-hen-finish": {
+    "audioHash": "093ca5fe67af233fb7df0323a86ae24db8f9ba4ebf098f02ce2700536ba6cefb",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "6faa84abbebce9c7e04c095515389c3f732d2f2954525ced25c44b57bc92d372",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_little-red-hen_red-hen-flour": {
+    "audioHash": "69958e22b88f8d0cb11b9202a7ada23576599e3c6a702bb72b61d829e76233a5",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "30d3df7faa1c91900d7749dfdce8d6ed450c042a555b35a2f1743eac06c3b8d4",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_little-red-hen_red-hen-harvest": {
+    "audioHash": "ad1fae308b96eb502a1b5e49d5f25f6734be9fb4c8781794917ecebf10808ad5",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "6e514aba02629ed8bf3b2355bc8b5c6be14e064d5262ed802166e762505fb27d",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_1_little-red-hen_red-hen-seed": {
+    "audioHash": "1ca6748ae923c029394096f2cdf2bdbf38f5fc9a1024fd92d2187560060057ba",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "eb3e8bb425f70e649e25f814acd22423ed282f4be5d703fa9fa96ab8e98b528a",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_choochoo-birthday-cake_call-a-friend": {
+    "audioHash": "b06ed13e0dd0a6e4af7469e1c25199757f2e8d708107ba2c186665d1594a5d14",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "d19001f1518a953f08e7b8944291308247a5ba57453c934545b63befdd985928",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_choochoo-birthday-cake_fox-list": {
+    "audioHash": "58a69229e662d555686e4f0a9650d58fb0cc608169842e1f144cd112b165cd68",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "8a092c76caaba635098f6d48a55a8c929220683bdb2d21f69b6e0e05f62c70b9",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_choochoo-birthday-cake_milk-and-stir": {
+    "audioHash": "df461e43b457dd88b1678cd73087066d0a3d5659d31c36a347e6f66006e2d518",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "5edac95a00e92fcd972573a526b1522a396d2d1b95289fe3749b55e0e7685c5a",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_choochoo-birthday-cake_panpan-car-color": {
+    "audioHash": "a21684a06604933f77e6a3a6a945af3a69ec10d495f7c6e017efbe950c154207",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "44dbb5041e14946a8b71a41af478da9c04723dc8b449888bfa513d043d8b32d7",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_choochoo-birthday-cake_panpan-strawberries": {
+    "audioHash": "b3f07ddb5b1e358c5da7c850341faa8da58ba83c359874462db9e7457353e805",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "13167ba685fc61493710a3569b0e99fb6b633a4f2660ce05a850b268ead68f59",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_choochoo-birthday-cake_yanli-practice": {
+    "audioHash": "28f058330f3cd2e76fa23e96cd86a7eae9d32e740ddad8dce5ce567450621159",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "3a16cd80500ff4a18feee88d76792f6aa58220d61528fb158cacc2bb320b310b",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_choochoo-birthday-cake_your-birthday-cake": {
+    "audioHash": "0834de4f1aac156fcadc93f28d7b188137d84cc52ea20f2a7dee75d11fbe1b9a",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "13167ba685fc61493710a3569b0e99fb6b633a4f2660ce05a850b268ead68f59",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_choochoo-farm-duckling_dog-smell": {
+    "audioHash": "039bb83b3a7fcebc844f38c1a29be8108839e7b11c95a9286d61170cf2a7fe57",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "bd2910609ced8308672ad21f7b71074dab4680f04e5cd325e9fffca46d87787e",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_choochoo-farm-duckling_duck-sound": {
+    "audioHash": "b145001d67457e7c555b5e8a1baec34c2c9efad8f4f64c7deaefdb29d00436c8",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "7f6c3b5991c57af3c4395e418a5a88626edbf55e66727320ccd64f0aa604d313",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_choochoo-farm-duckling_farm-helper": {
+    "audioHash": "2755b7938650c6f5aee727926b9f58a536b5b722837e22eb62850274b335f9c6",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "c051de637baa0230c5636047a82e6ba0e07c8a5f63a4180e5f14ff8e5e74f4e8",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_choochoo-farm-duckling_foal-yellow": {
+    "audioHash": "57f7ac73f768e95d6a7e79d8277483e2524e9189425bb63df1f88e2911f11188",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "44dbb5041e14946a8b71a41af478da9c04723dc8b449888bfa513d043d8b32d7",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_choochoo-farm-duckling_help-gaga": {
+    "audioHash": "373925afb43009ed3662f631a8ab4d9b702c8d2a63a0854617d09a027df3db36",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "43906878f8d97bc055cc91d6a48a8a4b6d31fd9dba6760f1521aba5f8be73a4d",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_choochoo-farm-duckling_hen-footprints": {
+    "audioHash": "0f96c757d3e3b8457482e2ee622de8cd9c968ed26c2f4be6e6924ba0c0774058",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "48e72bf79df2959f611ef91401496783ff1fee13e80d0ebafc218dbc48389670",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_choochoo-farm-duckling_your-animal": {
+    "audioHash": "adc1c71ec9fc430931ce807eb71f8fae2aac4e80420f4a20640363d059aa5ade",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "be676dad87ca74635c85cea6157c56aa5da43c82e25f50697e00c086a2a5a30b",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_choochoo-noodle-shop_bengbeng-thanks": {
+    "audioHash": "1b900ba373cab5192c4b8e26bee747c2ab2ee96096d500543679bca48c346e32",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "3cfd45463ae999f1d77d34c9360e630abbf9c0d19626a26d8046eb7b09faf8d2",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_choochoo-noodle-shop_blow-on-it": {
+    "audioHash": "005a51887dbffce36c4382a33cd167e3a6fe9e46a3cd6aa035a4e07ce6f9267b",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "8cee5dbd486f12572e4b89fa56ab3320b3360f3591d8ff6ce773cd6914f112bf",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_choochoo-noodle-shop_count-dumplings": {
+    "audioHash": "edf6b160043191727c0820bf83922af4677763a2f653249680c7ea1fafc4e909",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "a5f73ebe7a418f4695d92253bcca220f6e1c378b299527aba4824d4679903afe",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_choochoo-noodle-shop_long-noodles": {
+    "audioHash": "16d125938f4c8c6f94394547723394e3bbf45183026578c14bbc4c38d1b9d776",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "e42f7e62a50cab2a56d58c32c0203c2f18cb45989f84759661e5f90b3dabca4f",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_choochoo-noodle-shop_pick-dish": {
+    "audioHash": "455acdbc9e5854df834dcfc664fd99f55533f23d1f6b3f9d59f9587ea9ea6dc4",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "d87fed481bcd550a174dc5d9856c79f74cfc6bfce25e5c29ee4ad1000e0830cb",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_choochoo-noodle-shop_your-favorite-food": {
+    "audioHash": "5d2f3ba0ce803ba96a36bedc9721dca5a4cf1b8944e06c6ac29ebc2bc8d01fba",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "0b7d3477f63b725a9d24c7c7b6047edc83e305f28af686c492bfdfa349aac85e",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_henny-penny_penny-acorn": {
+    "audioHash": "d6191db229e9d771235eba1d4c36c210b86516a31a58d9d3dedbc6360fd5c5f5",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "567f391c427be4bf75301e664c48fefaf5c02607e33d0b1a4c3b7d79ee0b6c03",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_henny-penny_penny-fox": {
+    "audioHash": "ffd2050b136fbafe6a11d28b0fc1e4eb68d9c1c5857d4bfd710f03b4df3ca6d1",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "89c535be1db487706bf11e71125fd112e4c4ff6642f065b6b041a47d1cf6a079",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_henny-penny_penny-friends": {
+    "audioHash": "71182bf5eae62a6718cd760d3557c10fd7106ee4c49dd07b06c87b11fe48fc1c",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "48937a27ef05d859d0928465face5831e239e702f2b26cd19d7b6e787b055eb9",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_henny-penny_penny-home": {
+    "audioHash": "08cad71e8deedb4c7b6a4d09e9b26a6643dead8cb0691fc5d98ad194a7c83089",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "553b3339bbf6b7371ad1c1b2c6ecee1fc04531a79bdbeb8d5dd1287ed8d7bee0",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_henny-penny_penny-king": {
+    "audioHash": "c0347bb89d95b97b7c8cbc948a4c6e95bbb00137ec3867d78d4c50cc739c0896",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "424ea225e95f405f080b98ae8dfc633dc32bcd56b2f6c9bbb498cf5578cac896",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_henny-penny_penny-stop": {
+    "audioHash": "af12399799fbb4cbe1b7bbfd70806c27a2010a689532f187318378430aee0e5d",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "1423aaff1a5a7c6fe3d27ce077b988949637823854f24b29119ea10d770bcf05",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_little-red-hen_red-hen-bread": {
+    "audioHash": "e9299407b6b9e0e0f62ae8ea32a306e761b26239ec24c99ad8a2a648601abfbc",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "79c03d4c4bf7c4f93d4abaaa9645b757d5c2fba2567f63dc0f8fe1c3c9a73ac8",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_little-red-hen_red-hen-finish": {
+    "audioHash": "215366c0d0233cbcf2447ac1b13161ac8404c1fe7e943e9da440c70949e3e56f",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "5d52e38f58bb3b29055a6dfb607689835edd21e63d18d326ab4889b38b303a3e",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_little-red-hen_red-hen-flour": {
+    "audioHash": "b0599570942072f8641633abd391ba6dbd9d1c94d6f3f482a4158da2551492f4",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "dca12b72b93bc4ab042d34ab25149f4d23645c9d675ac09fdb795daee9b699f1",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_little-red-hen_red-hen-harvest": {
+    "audioHash": "1297a383f65757f5d8e4468369f0015dedfb86377249b56b499186f082a902cf",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "07d67a6de5a3f849ae8f12ddfd52ce7226b65bf9d840314e93ae056d0ddf4091",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_2_little-red-hen_red-hen-seed": {
+    "audioHash": "3c0d115bb6282722ca6e416224786223621687d40936d7d5285cf5d1957836dd",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "db7a863e0ad9d89580a0c99866db6f06a723ed457b43909f7926ed8434265d53",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_choochoo-birthday-cake_call-a-friend": {
+    "audioHash": "8cc146d5a0900aaeb71755c5c62987403a43d6bc0d2f09b57182064d294ac27a",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "d3f753b77400ec66ac0882778afe7d1818e874097d4eec40a60a09509f7b6a33",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_choochoo-birthday-cake_fox-list": {
+    "audioHash": "3302c91813648124f170852cee930d7d68ecce9e1e3ff46d3597a414efcd9ce5",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "569463823cff91f9f68f5457ccc885138625f89f1335f548fcbc739238b8dcd4",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_choochoo-birthday-cake_milk-and-stir": {
+    "audioHash": "61f017f5ab90958f4e4c79646c4c1752fe2630f8f3bc436bd61dd718f3420f21",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "276242237ea013f5b2d29275e2a17f94d19294e534cfe82dbc0ee88a399e6a38",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_choochoo-birthday-cake_panpan-car-color": {
+    "audioHash": "f087b94ce2c4c12e8452c2c9e247081fa44bbbd70fcbc875caefc91784372389",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "97a76f1e298476b93b16050956bcd4835eae00f202996fb9b736bfc97dcde536",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_choochoo-birthday-cake_panpan-strawberries": {
+    "audioHash": "4553d8bd50a3585fdd856656ce032e19a956f90df2f8aeeaf926f784d9674bb8",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "c2f4ce12330ef9a1b122734d2d4d8d0532303a5ec7365995225d8ef5b66b9108",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_choochoo-birthday-cake_yanli-practice": {
+    "audioHash": "55c0173a7d5c590da3ab6fb4d324b5c8c1a9b061a1cec8221087b66bdef84efa",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "82323973deb81258421a9b71a99fcf0df35288eba128339cf40b8960ab03496e",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_choochoo-birthday-cake_your-birthday-cake": {
+    "audioHash": "f9a6ccaf82b254d7bbb9b57703ab6f0fe9c0e989450f24a8f90c7d5229a06cb8",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "c2f4ce12330ef9a1b122734d2d4d8d0532303a5ec7365995225d8ef5b66b9108",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_choochoo-farm-duckling_dog-smell": {
+    "audioHash": "a6dc95892042799b83a39eb7c9fc11795fee94938c83edb2c286b32158e3c6a6",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "73a7ee551bdd507cac5aa39a2e2916f4b1575a6e17395fc589ce05271add6ca2",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_choochoo-farm-duckling_duck-sound": {
+    "audioHash": "2c5c6aeb02d915992b757409d0e73bbc26858472296c68d3efabf393130c23fa",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "c0685db1970977dd503d313d3f2fca5f301b87e25cd9af93655c1ce17a6213c0",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_choochoo-farm-duckling_farm-helper": {
+    "audioHash": "2219e4b486ea1a1a11f2f30b51e081da3c81107bbecdc0f47c54c29219c0e7ca",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "9a4dc46d60ddd4e76f959602af72d817c99c6d43951af60fc755136696c4b3c9",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_choochoo-farm-duckling_foal-yellow": {
+    "audioHash": "6870531500fd48b19cb1ff475aa11ae1bd9b1041a5dc5c292c5a2116d0d86258",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "97a76f1e298476b93b16050956bcd4835eae00f202996fb9b736bfc97dcde536",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_choochoo-farm-duckling_help-gaga": {
+    "audioHash": "9f3df23f49eaa875a07c913671812ca426f85c3c67d0f06780f5e8180c3b538e",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "814d49c1b29eefd081b3c1f55abb3703862ff5f1e3b3242a7a942f706d0da4d0",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_choochoo-farm-duckling_hen-footprints": {
+    "audioHash": "3c9f19bb89e38ed3fb9bb07216ce3bea0a22d181c150824136096e0d0c86a4e5",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "ba50be35dbff5aea41d909ddfdd6d0c0f72c03ea5e73304c217877b2ffee61f4",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_choochoo-farm-duckling_your-animal": {
+    "audioHash": "fc3858e937b069b4068d9fce38103811e264c42dd3b5642ef1e93a6984fda459",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "6cc163752b3a6797846f86a52808ff60f472635e7b87a33855e65bffd35c0a92",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_choochoo-noodle-shop_bengbeng-thanks": {
+    "audioHash": "538cca1d02fb20b801d757b099e0e2755385b4e775d9a7237dc8ee58ce48e20f",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "7a7b7a811972ea9ac2e3f3759aa207fad96c011ab313640c91e47df3e4d6fd43",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_choochoo-noodle-shop_blow-on-it": {
+    "audioHash": "0d80b17a3af3d7f4e427d70efc7a6361a02763261f2bc49a0c3fbfdeffb9e711",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "f50abbc926495d2b5bb4405dfeac2735d79f895b82f4a765227075447e6706e2",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_choochoo-noodle-shop_count-dumplings": {
+    "audioHash": "1425cfbe13dc8c99d6a58aa1cd904d2215cae84ec4c1a06a4b1df71b83130f59",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "72b043398dc6ac5203b9f5c7ef3a0c6bf1650123c169022a3a1564124f323683",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_choochoo-noodle-shop_long-noodles": {
+    "audioHash": "1359691c93af61ed4b85f32b81f7fd00cd7cecee5644d921d05feb70275df399",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "6bc8926d32a20bf207d634a3d0b44d911d05962606d8ad3af6099adcd4d20698",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_choochoo-noodle-shop_pick-dish": {
+    "audioHash": "621209172664bc8be463b83a0271e9bd7d3dd8be628727d40951d83ecee05f20",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "e0b882abe31449fa83d4703f52de701eee997894aa14e69148a24d57615c752e",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_choochoo-noodle-shop_your-favorite-food": {
+    "audioHash": "44db9a7f25a7b4d837ed859873c7aca888f10c2a489b574f2086dd6fc01747d9",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "fe991c070276f05d9d178bc2732e619e5562cd6cf57c11ed00dbbc374b479fd4",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_henny-penny_penny-acorn": {
+    "audioHash": "245fd560296cf1f43403fca2cc10be602c198d092ca27cd25aa761cff3cc7fa6",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "e530ec4d248ef636f59c4bb27421e85d4eb128c9b90c259c9c623db567d7258f",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_henny-penny_penny-fox": {
+    "audioHash": "a7eb723f3d7a2c905ac1adf06b57131702f00a6a9ca15dacf8b148310bf0b806",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "3f99d87b5486a6ff9fa0dd36120f9050c45d5cb3fe3b7c116026c7c379cea419",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_henny-penny_penny-friends": {
+    "audioHash": "d02f42c067f37781c1db723d22149b23d5bf5e6d31ce43c16b1f48dbc969493d",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "8da5e4aa0c8eb3b3e1385e528e7fb493699f49a2c7c831d830a8b5f044cf34f4",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_henny-penny_penny-home": {
+    "audioHash": "fa02247d229c219d94be726405b861ab962d5af91db22115b11ea2ae8aab2258",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "1447144b8568ae5662d0cf353a31542629b187af47466c152242a33dc8ff453e",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_henny-penny_penny-king": {
+    "audioHash": "87fff43bb623ceb0810fb475bf0eac607896c6f2a9ef268bb5015f26093519f0",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "c32d50acb240a852738eb8bcdcd2bdf7e8d97f981d852b4565b0e1f123fa2b78",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_henny-penny_penny-stop": {
+    "audioHash": "86c7f5891f0b91162b62f72ca0b37470c6784dccc0bce1e96d0f16235843a39a",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "75de4c41bb0032c0e1a33c211957ae2c63770b7da310953876b914f9e0b332d1",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_little-red-hen_red-hen-bread": {
+    "audioHash": "a6e72031489b5dbefc8c9d319f12e34791279eec1c21d5772781a86aae87b1dd",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "3b92a8253d1bd868a985ee194c6926e3e3f8542bb3ba7377d0fe2b466a7983e6",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_little-red-hen_red-hen-finish": {
+    "audioHash": "88c1f2b0461c082e6090fc835f66fa74cc4423952c775f2300eee704fde6d339",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "25cac4d2ac5eea1a6ab8aa81e44ddfd759c3b832f387b6b10b1a947ec88570e1",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_little-red-hen_red-hen-flour": {
+    "audioHash": "d7974bebb94da2bf23a1aae84b1b96dda7c3712ca7061c58b06ac5286007113e",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "011fbbdcd7e41f62a6066373f853c15b3ac37134addb4ca06a724ff5c0820043",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_little-red-hen_red-hen-harvest": {
+    "audioHash": "d94de01f1c4c2ba94ce84e2c2054206936a32c25039e942f8ac094719799da46",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "25eac71bb4ecfd3712d1ca5369bd65636eb91a6375977f82430c390736a27855",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_3_little-red-hen_red-hen-seed": {
+    "audioHash": "48a00ad471bae8878d0f31db526c5c477f85816e4db7c8bcfc34a19397db9e30",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "e9b22ce7de6bede3dd8dcefd9188debdab864f628d017b477d7b9aaddfa809f7",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_choochoo-birthday-cake_call-a-friend": {
+    "audioHash": "fa3cf50825267901ad38f8560591d0b38ae7208d7e4ed6ab8dfde74ae71824a7",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "3808004012c712dd597b0f759461c094de3b99971276fd9144c23c1ae451b01c",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_choochoo-birthday-cake_fox-list": {
+    "audioHash": "369ff37084edf9b7a3f5d3462be483115a169da76b7c00afd2820e21365e04c4",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "ae5afdf208d38f679553cbf0054a66fb2f8fe046d8540bffa44461557e7ffcca",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_choochoo-birthday-cake_milk-and-stir": {
+    "audioHash": "4e3bc49f83c7045b8d65980223301426a9202e578a8b2067b39936eb1f4ee918",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "8a4fd25e5f348ded045fe23adc1020b07a132f780002733f21d21e3f046660a9",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_choochoo-birthday-cake_panpan-car-color": {
+    "audioHash": "1b2ea015c7ea03ea400d3728d7523e5d6ebc723b2572bf5b6b9c07714bf05bed",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "fedd57d9e62bf929afd81c480d3590edfb988aa46256b7c38e7024fe83b33e0a",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_choochoo-birthday-cake_panpan-strawberries": {
+    "audioHash": "dd0037d13f4ce0032ba060a59dcc36ed0e846059f3c533f2db115be53c28b7b3",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "b0ac00a9a2a1e758333b44565e7d5cabf3bc31ec1c31dcf3155fe1b0ba421366",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_choochoo-birthday-cake_yanli-practice": {
+    "audioHash": "906f6fb97784dcd317efae148eef812f9ca75450e9505f1447872fdb1bd91cb3",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "fd89e97e52f55cd8733360eb5fb8526afd8abf61e445e0bf77beaaf3f4122b7c",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_choochoo-birthday-cake_your-birthday-cake": {
+    "audioHash": "dd48bd120ba2db8805dcfa6ba941866d560834503d74f306b4ccd37c78b5cda2",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "b0ac00a9a2a1e758333b44565e7d5cabf3bc31ec1c31dcf3155fe1b0ba421366",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_choochoo-farm-duckling_dog-smell": {
+    "audioHash": "065ec4511ba44bbfd0afa5cad6972e5d4eb4229674ecf6a8d9ef25921ad31d5d",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "0887a60b4d17a8a13dae21eb2a73de73a9acfd6ff19d3cf8acb31a8c4ce9fac8",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_choochoo-farm-duckling_duck-sound": {
+    "audioHash": "38e8b5a555a511739e2dce48d501df1ead01a0a0fd5ec9861cf8c18974fe53bb",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "eafc6e0afe6c9d9bbc8a2508f21f07a9e8d09fb0a84ece1cd8b6d25c778b6533",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_choochoo-farm-duckling_farm-helper": {
+    "audioHash": "aacbc4311cac8526a8cca9e78d818e60b8918044b6fc5584417714874cc95a91",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "41f397a5a2adfe06182fdac24fe3f77a7291d9022aee870503b59891d547b0f0",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_choochoo-farm-duckling_foal-yellow": {
+    "audioHash": "f6bf51ccadf315aadfd6dc35fc567272e5e638a24e55954ad15e385244ac56ba",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "fedd57d9e62bf929afd81c480d3590edfb988aa46256b7c38e7024fe83b33e0a",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_choochoo-farm-duckling_help-gaga": {
+    "audioHash": "06520fa1870c38ba0a4f4fa4a48809ec7b35651f858371a9479d66c04b29396e",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "396a0826f76b57e37997c44d19c7b80eedbdda6cd39301e5cb3448767d96fbec",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_choochoo-farm-duckling_hen-footprints": {
+    "audioHash": "962faabd6d8ec9e030efa51c3578ed656f98cdb8593ddc12a38c231102a46511",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "f2438220a05ec5e39d0beb6db64c3adbcc850c9b7995240c829a705287488cef",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_choochoo-farm-duckling_your-animal": {
+    "audioHash": "992087037ec80775844f19719255c809a350bdd53be79430e77bdb06c222f5d0",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "19d20769ecfc1616969aad0bc756800dc0fb42c41e8719971ab038a8399107c3",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_choochoo-noodle-shop_bengbeng-thanks": {
+    "audioHash": "241359d6aa28f2991824d22acb76c6181a853cbf24045b0ccc400f908117bd3f",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "2e08f01da468f7f24e992bc4b8479f1c21e6df787c7392d6083a9b8230254430",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_choochoo-noodle-shop_blow-on-it": {
+    "audioHash": "c941a77b0212133f7ad49decc61cf5fac346a06614c0c30c24f086ffb90bf83e",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "d99fd8d16c0610d74c37c6614220b6df6881d684ce0752d6b3cfe767ec1b49ae",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_choochoo-noodle-shop_count-dumplings": {
+    "audioHash": "f21b4fbfbee1d6fc4c1e009c160e0cd2e68219df62c96aea61c38314f2c68978",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "917d42a5f8c4ddb52f9622868d484ad7731b0adda74b3a15487c717f188e7be8",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_choochoo-noodle-shop_long-noodles": {
+    "audioHash": "11f8e192907e5a447d9278c77898152917e5f4602fd1e5b2ad1fdf840b2d4fb8",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "cd0838d72ae1f0902e5216a036e9523faf0fde82ea9c55db9dccd8e46da37f73",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_choochoo-noodle-shop_pick-dish": {
+    "audioHash": "3986c2899b3137b6ce11f2c7b52a731c30c39f298901beba761198666b1817e2",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "79b328db2ace7d01028da1d022ee80fb5751874a0b64a42654d7a71992af4992",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_choochoo-noodle-shop_your-favorite-food": {
+    "audioHash": "c897b98723e2d1dbff766ee329686d1d16a1bf792275f9d89f7575da22b9455f",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "afab2b5b9ce4c3587c7a9021ae0a7e801e72a87acd6d7edb94424bb3dc3927b6",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_henny-penny_penny-acorn": {
+    "audioHash": "2e6bec7ae5ab6436e2c7e2bb780394230510eb0dab5803296bf85d1594d97e95",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "a8eb6d5960f905fc3ca80f24498913a9f3b573f987b65e47356921740ec3bae7",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_henny-penny_penny-fox": {
+    "audioHash": "3f8d7d0036d70cbc4e6c3039b6bf5418f1a7dab520aac86ba9393dac007c3b81",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "5d99a4a5c07c899b6424080419e77cc32f3ad5d59265d924ee8d54409f27436d",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_henny-penny_penny-friends": {
+    "audioHash": "28e8ac380b79926cea4378e3a72068193236f4e4acf3678ff8927bbce306eabe",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "457a4049ce3e0b95d8c519b616b491047436d52b8e7b70e7dee86191d5d42063",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_henny-penny_penny-home": {
+    "audioHash": "e96db0ee0c795bd47efb21137b9cd75534bf747fc225b9a05f8f70713d92914f",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "da7d5e341105d3d69e92abd1e392d555ef3cd5e721a11735659369182d32089d",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_henny-penny_penny-king": {
+    "audioHash": "cc341ae16fd83196846640cab9dd2cdf0530f52b1180c22e8f9a800007db63d4",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "96152c3c7c2b135cf49970c407674f00c7a82a729e0880b47d450115d0a066e2",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_henny-penny_penny-stop": {
+    "audioHash": "fdd5e3e10f73bdfce96cda84db4ab53c80102c238f55145ba5c36673aa3be141",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "8dc84424dd2244dd006cdb087d0e6b8de60f263ad51cdd4000924f148c169abb",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_little-red-hen_red-hen-bread": {
+    "audioHash": "191b0cc0fc720bac758bd75d5d4047a0f6b04d3ffe4a55bd5c10566a79ee99b5",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "8da126929aa7c9cd4b85a16aa95c70537ac0f10207cb7ebeec99642c85b6397a",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_little-red-hen_red-hen-finish": {
+    "audioHash": "2987608b806f70647dbc2d41997ff412920893c68bbfc30c8fe5815754d73f05",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "c3fef48a06caa8208f59fbeea5be5f5b430b1a1a52f5d3f574cd3ac17cf3f40e",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_little-red-hen_red-hen-flour": {
+    "audioHash": "46982a3a2a32a57970e5bb2f01c9f77387caaca854e44aae0ca3f85316452ec6",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "c0b0a020f8878703c6a6b1326c004467c0f2eac41f592e882735f408e568dfaa",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_little-red-hen_red-hen-harvest": {
+    "audioHash": "a11c4cb79cba959c27940167e244733e62c09c2b648ef1c68378da0652714aa0",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "f901c6b0c4130c7e9d5ea8b370b25a61615715c126decbe24853b5a032339f9e",
+    "voice": "en-US-AvaNeural"
+  },
+  "en_hint_4_little-red-hen_red-hen-seed": {
+    "audioHash": "e1dd8deb3dca6b153326cd24fc468f6482b45a32758db4aef7d96a3b4103578f",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "4bd3803be26ffcbc0dde903b43be51c9bffcd6f5ccf6d51333ba3d24ec05c7ed",
     "voice": "en-US-AvaNeural"
   },
   "en_play_boat_start_v2": {
@@ -501,6 +1383,13 @@
     "pitch": "+0Hz",
     "rate": "-8%",
     "textHash": "31354a8abca7789ba1f28a1470176034c21a0b94ff814dd77fa71d5178d65011",
+    "voice": "en-US-AvaNeural"
+  },
+  "english_feedback_retry_v1": {
+    "audioHash": "e0187cca7d5f8f89a266e42793c236c3fabafb5d56eca88aa7ea77b5916f9aeb",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "415a1af07d7465d0cff7ae60ab4ed3366752f677abcb9bd9d1bcdf03459b6ddc",
     "voice": "en-US-AvaNeural"
   },
   "hf_listening_v1": {

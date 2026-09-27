@@ -1,10 +1,11 @@
 import { spawn } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
+import { runtimeLimit } from './runtime-limits.mjs'
 let active = 0
 
 export function edgeSpeech(text, language, signal) {
   if (typeof text !== 'string' || !text.trim() || text.length > 1600 || !['chinese','english'].includes(language)) return Promise.reject(Object.assign(new Error('Invalid speech'),{statusCode:400}))
-  if (active >= 8) return Promise.reject(Object.assign(new Error('Speech busy'),{statusCode:429}))
+  if (active >= runtimeLimit('VOICE_MAX_TTS', 8, 8)) return Promise.reject(Object.assign(new Error('Speech busy'),{statusCode:429}))
   active++
   return new Promise((resolve, reject) => {
     const child = spawn(process.env.EDGE_TTS_PYTHON || '/opt/edge-tts/bin/python', [fileURLToPath(new URL('./edge-speech.py', import.meta.url))], {stdio:['pipe','pipe','ignore']})

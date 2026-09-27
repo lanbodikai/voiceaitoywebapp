@@ -1,0 +1,40 @@
+[Unit]
+Description=Voice AI Toy web voice runtime
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=voice-ai-toy
+Group=voice-ai-toy
+WorkingDirectory=/opt/voice-ai-toy/current
+EnvironmentFile=/etc/voice-ai-toy/runtime.env
+Environment=NODE_ENV=production
+Environment=VOICE_RUNTIME=true
+Environment=NODE_OPTIONS=--max-old-space-size=128
+Environment=VOICE_MAX_TTS=2
+Environment=VOICE_MAX_CONNECTIONS=8
+Environment=EDGE_TTS_PYTHON=/opt/voice-ai-toy/tts/bin/python
+ExecStart=/opt/voice-ai-toy/node/bin/node server/voice-entry.mjs
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=15
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+UMask=0077
+MemoryHigh=280M
+MemoryMax=340M
+TasksMax=64
+LimitNOFILE=1024
+# Do not retain child speech or request/response bodies in application logs.
+StandardOutput=null
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

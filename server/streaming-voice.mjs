@@ -1,6 +1,7 @@
 import WebSocket, { WebSocketServer } from 'ws'
 import { guestAction } from './progress-store.mjs'
 import { localizedRubric } from './conversation-boundaries.mjs'
+import { runtimeLimit } from './runtime-limits.mjs'
 
 export function transcriptionConfig(language, storyID, beatID) {
   const rubric = localizedRubric(storyID, beatID, language)
@@ -19,12 +20,14 @@ export function transcriptionConfig(language, storyID, beatID) {
 }
 
 const counts = new Map()
-export function attachStreamingVoice(server, moderate, handlers = {}) {
+export function attachStreamingVoice(server, moderate, handlers = {}, dependencies = {}) {
+  const authenticate=dependencies.authenticate || guestAction
+  const UpstreamSocket=dependencies.UpstreamSocket || WebSocket
   const sockets = new WebSocketServer({noServer:true,maxPayload:16384,perMessageDeflate:false})
   server.on('upgrade',(request,socket,head)=>{
     const path = new URL(request.url,'http://localhost').pathname
     const origins = new Set(['https://web-chi-one-ojsrqj7r9h.vercel.app',process.env.WEB_ORIGIN,'http://localhost:5173'])
-    if (path !== '/web/voice-stream' || sockets.clients.size >= 64 || (request.headers.origin && !origins.has(request.headers.origin))) { socket.destroy(); return }
+    if (path !== '/web/voice-stream' || sockets.clients.size >= runtimeLimit('VOICE_MAX_CONNECTIONS', 64, 64) || (request.headers.origin && !origins.has(request.headers.origin))) { socket.destroy(); return }
     sockets.handleUpgrade(request,socket,head,(client)=>sockets.emit('connection',client))
   })
   sockets.on('connection',(client)=>{
@@ -58,7 +61,7 @@ export function attachStreamingVoice(server, moderate, handlers = {}) {
           authenticating=true
           if(typeof message.token!=='string' || message.token.length>8000 || !['chinese','english'].includes(message.language)) {close();return}
           if(process.env.CHILD_PILOT_MODE!=='false' && process.env.OPENAI_ZDR_VERIFIED!=='true') {close();return}
-          const guest=await guestAction(`Bearer ${message.token}`,'load')
+          const guest=await authenticate(`Bearer ${message.token}`,'load')
           if(controller.signal.aborted || (counts.get(guest.profileID)||0)>=2) {close();return}
           profile=guest.profileID; counts.set(profile,(counts.get(profile)||0)+1)
           const response=await fetch('https://api.openai.com/v1/realtime/client_secrets',{
@@ -68,12 +71,12 @@ export function attachStreamingVoice(server, moderate, handlers = {}) {
           })
           const credential=await response.json()
           if(!response.ok || !credential.value || controller.signal.aborted) {close();return}
-          upstream=new WebSocket('wss://api.openai.com/v1/realtime',{headers:{Authorization:`Bearer ${credential.value}`},handshakeTimeout:8000})
+          upstream=new UpstreamSocket('wss://api.openai.com/v1/realtime',{headers:{Authorization:`Bearer ${credential.value}`},handshakeTimeout:8000})
           upstream.on('error',close); upstream.on('close',close)
           upstream.on('message',async(raw)=>{
             try {
               const event=JSON.parse(raw.toString())
-              if(event.type==='session.created' || event.type==='transcription_session.created') {ready=true;clearTimeout(authTimer);send({type:'ready'})}
+              if(event.type==='session.created' || event.type==='transcription_session.created') {ready=true;clearTimeout(authTimer);send({type:'ready',capabilities:['reply','synthesize','evaluate'].filter(type=>typeof handlers[type]==='function')})}
               if(event.type==='input_audio_buffer.committed') items.set(event.item_id,commits.shift())
               if(event.type==='conversation.item.input_audio_transcription.completed') {
                 const turn=items.get(event.item_id); items.delete(event.item_id)
@@ -92,7 +95,7 @@ export function attachStreamingVoice(server, moderate, handlers = {}) {
         }
         if(!ready) {close();return}
         if(message.type==='cancel_request') {requests.get(message.requestID)?.abort();requests.delete(message.requestID);return}
-        if(message.type==='reply' || message.type==='synthesize') {
+        if(message.type==='reply' || message.type==='synthesize' || message.type==='evaluate') {
           if(Date.now()-requestWindow>60000){requestWindow=Date.now();requestCount=0}
           if(++requestCount>60 || requests.size>=2 || !Number.isSafeInteger(message.requestID) || requests.has(message.requestID) || !handlers[message.type]) {close();return}
           const pending=new AbortController();requests.set(message.requestID,pending)

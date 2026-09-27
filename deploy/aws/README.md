@@ -1,0 +1,89 @@
+# Voice AI Toy only: AWS migration
+
+Status: migration preparation. Production traffic must not be switched until both
+regional endpoints have valid TLS and pass authenticated HTTP and WebSocket tests.
+
+## Isolation boundary
+
+- Do not stop or modify the shared Oracle VM, Mousefit containers/database, shared
+  Caddy, or **any DNS record under mousefit.pro**.
+- Keep the existing Oracle Voice AI Toy runtime for rollback and legacy iOS.
+- Deploy only this repository's `api`, `server`, and `src/data` runtime inputs.
+- Progress, consent, collections, and recovery stay on Vercel/Supabase. No database
+  migration or database copy is required.
+- Copy only Voice AI Toy's explicitly required environment values. Never copy the
+  shared host's complete environment, containers, volumes, or credentials.
+
+## Small-server runtime
+
+The standalone entry point is `server/voice-entry.mjs`. It binds to loopback port
+8787, serves voice HTTP routes under `/web/`, and upgrades `/web/voice-stream`.
+It imports no legacy Oracle application. `/health` returns 503 when configuration
+or the existing child-pilot privacy gate is not ready; it is not an upstream
+OpenAI/Supabase availability test and incurs no model usage.
+
+On dedicated Ubuntu servers, install Node LTS and Python from verified official
+sources. Install runtime dependencies `busboy@1.6.0` and `ws@8.21.3`; create a
+Python venv with `edge-tts==7.2.8`. Keep application files root-owned and run as
+the unprivileged `voice-ai-toy` service account using `voice-ai-toy.service`.
+Store configuration in `/etc/voice-ai-toy/runtime.env`, root-owned mode 0600.
+Copy the *active* privacy flags exactly; never change them just to make health pass.
+
+The service caps Node heap at 128 MB, simultaneous TTS workers at 2, and sockets
+at 8 per region. These are conservative demo limits, not a load-test capacity
+claim. HTTP/per-profile limits remain per process, not globally shared between
+regions. Verify actual peak RSS under representative synthetic voice traffic.
+Application output is suppressed; do not add request-body or child-speech logs.
+
+Put Caddy in front of loopback port 8787. Expose only HTTP/HTTPS publicly; restrict
+SSH to approved management access. Do not expose 8787 or install a database.
+Attach a Lightsail static IPv4 to each instance before creating DNS records.
+
+## Domain, regional routing, and TLS
+
+The user purchased `260926731.xyz` at Porkbun. The planned backend hostname is
+`api.260926731.xyz`; the Vercel-provided website hostname stays on Vercel.
+Route 53 public hosted zone `Z03136631Y6HZQZ7QSFMF` has been created in the
+approved AWS account. Porkbun now lists its four Route 53 nameservers, and the
+`api` A records have US East/US West latency routing with region-specific HTTP
+health checks. Wait for the `.xyz` registry and public resolvers to publish the
+new delegation before issuing a certificate. No production traffic has been
+moved. Never use or change `mousefit.pro`.
+
+Issue one certificate on East with Certbot `webroot` at
+`/var/lib/voice-ai-toy/acme`, using `--register-unsafely-without-email` so no
+additional personal details are transmitted. Both port-80 Caddy configurations
+serve East's challenge, regardless of which IP Route 53 returns. East's Certbot
+deploy hook installs a validated fullchain/private-key pair atomically on East
+and sends the same bundle to West over SSH. West accepts only a forced command
+under the dedicated `voice-cert-sync` account; sudo permits only the validating
+certificate installer. The dedicated key is root-only on East and pinned to the
+verified West host key. Each certificate installer checks the hostname, expiry,
+and matching private key before swapping `tls/current` and reloading Caddy.
+Certbot's timer renews it. Monitor renewal, because the two servers share one
+TLS identity and West depends on the East deploy hook. A separate daily
+`voice-cert-sync.timer` reconciles a missed West copy after an outage; the
+installer skips unchanged certs so it does not reload Caddy every day.
+
+Only after the first certificate exists on **both** servers should their
+bootstrap Caddyfiles be replaced by `Caddyfile-east`/`Caddyfile-west` and
+validated. They expose the standalone voice API on HTTPS only; HTTP remains
+health/ACME only. Test direct IPs using `curl --resolve` to validate both
+regional endpoints before Vercel cutover.
+
+## Cutover and rollback
+
+1. Verify health, HTTPS, consent/auth rejection, synthetic grading, streaming
+   transcription, TTS, interruption, reconnect, memory use, and content-free logs
+   on each regional server separately. Do not test with child recordings.
+2. Configure latency records and health checks only for the new Voice AI Toy
+   domain. DNS failover depends on caches/TTL; existing sockets do not move.
+3. Set Vercel server env `VOICE_API_ORIGIN=https://NEW-HOST/web` and build env
+   `VITE_VOICE_STREAM_URL=wss://NEW-HOST/web/voice-stream`, then deploy the verified
+   commit to **lanbodikai/voiceaitoywebapp**, not the parent iOS repository.
+4. Verify the published build and both transport paths before calling migration
+   complete. Compare end-of-speech to actual audio-playing latency; regional
+   routing alone does not remove speech endpointing or model generation time.
+5. Rollback: remove the two new environment overrides and redeploy the prior
+   frontend. Existing legacy defaults still route to Oracle. Do not delete the
+   Oracle Voice AI Toy service as part of cutover.

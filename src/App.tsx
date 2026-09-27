@@ -13,7 +13,8 @@ import { evaluateLocal } from './evaluator'
 import { hasPendingProgress, createRecoveryCode, restoreProgress, loadProgress, flushEventQueue, evaluateRemotely, generateLine, recordConsent, safetyCheck, startResearchSession, uploadEvents } from './backend'
 import { cacheProgress, collectPuzzle, savedProgress, type ProgressSnapshot } from './progress'
 import { Dashboard, PuzzleArtwork } from './Dashboard'
-import { cueForLanguage, playEarcon, playEffect, setSpeechRate, speak, stopVoice, storyFeedbackCue } from './audio'
+import { cueForLanguage, playEarcon, playEffect, preloadStoryFeedback, setSpeechRate, speak, stopVoice, storyFeedbackCue } from './audio'
+import { englishHintFor } from './fixedFeedback'
 import { restoreParticipant, signInAnonymously } from './supabase'
 import { playDestinations, playIntro, playText, type PlayDestination } from './playContent'
 import { activeSessionID, clearLocalResearchData, completeActiveSession, downloadJSON, nextEventSequence, type CompletionData, type SessionConfig, type VisitScope } from './session'
@@ -21,7 +22,7 @@ import { learnerProfile, nameFromSpeech, rememberLearnerName } from './learnerPr
 import { storyFollowup } from './storyFollowup'
 import { PuzzleFinale, PuzzleSeams, PuzzleTray, StoryPuzzlePicture, type PuzzleFinaleData } from './StoryPuzzle'
 import { earnedPuzzlePieceCount, markPuzzleLayoutCompleted, puzzleLayout, savedPuzzleLayout, selectPuzzleLayout } from './puzzle'
-import type { Checkpoint, LessonLanguage, Reward, SessionEvent, Story, VocabularyItem } from './types'
+import type { LessonLanguage, Reward, SessionEvent, Story, VocabularyItem } from './types'
 
 type AppScreen = 'loading' | 'consent' | 'home' | 'story' | 'play' | 'complete'
 type ConversationState = 'join' | 'speaking' | 'listening' | 'thinking' | 'ready' | 'paused'
@@ -201,6 +202,8 @@ function StorySession({ story, config, replayRequested = false, onClose, onCompl
   const [beatPath, setBeatPath] = useState<string[]>(resume?.beatPath ?? [story.startBeatId])
   const completedRef = useRef<string[]>(resume?.completedCheckpoints ?? [])
   const [earnedPuzzlePieces, setEarnedPuzzlePieces] = useState(() => earnedPuzzlePieceCount(completedRef.current, story.typicalPathLength))
+  const [puzzleRewardVisible, setPuzzleRewardVisible] = useState(false)
+  const puzzleRewardTimer = useRef<number | undefined>(undefined)
   const finishedRef = useRef(false)
   const startedRef = useRef(false)
   const storyComplete = useRef(false)
@@ -221,6 +224,7 @@ function StorySession({ story, config, replayRequested = false, onClose, onCompl
   const pendingRepair = useRef(false)
   const beat = findBeat(story, beatID)
   const checkpoint = beat.checkpoint
+  useEffect(() => preloadStoryFeedback(story.id,checkpoint.id,config.language),[story.id,checkpoint.id,config.language])
   const narration = languageText(beat.narration, beat.englishNarration, config.language)
   const question = languageText(checkpoint.question, checkpoint.englishQuestion, config.language)
   const t = (zh: string, en: string) => languageText(zh, en, config.language)
@@ -234,7 +238,7 @@ function StorySession({ story, config, replayRequested = false, onClose, onCompl
     addEvent('session_started', { storyID: story.id, mode: 'story', condition: { language: config.language, visual: config.visualCondition } })
     const puzzleImage = new Image()
     puzzleImage.src = `/illustrations/${encodeURIComponent(story.puzzle.imageAsset)}.png`
-    return () => { mounted.current = false; runID.current += 1; stopVoice() }
+    return () => { mounted.current = false; runID.current += 1; window.clearTimeout(puzzleRewardTimer.current); stopVoice() }
     // Session identity is intentionally fixed for one mounted story.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [story.id])
@@ -289,7 +293,7 @@ function StorySession({ story, config, replayRequested = false, onClose, onCompl
     return () => window.clearTimeout(timer)
   })
 
-  const interrupt = () => { runID.current += 1; stopVoice() }
+  const interrupt = () => { runID.current += 1; window.clearTimeout(puzzleRewardTimer.current); setPuzzleRewardVisible(false); stopVoice() }
   const rememberPausePoint = () => {
     paused.current = true
     resumeAt.current = storyResumeTarget(questionAsked,lastSpokenKind.current)
@@ -450,6 +454,11 @@ function StorySession({ story, config, replayRequested = false, onClose, onCompl
     if (completedRef.current.includes(checkpoint.id)) return
     completedRef.current = [...completedRef.current, checkpoint.id]
     setEarnedPuzzlePieces(earnedPuzzlePieceCount(completedRef.current, story.typicalPathLength))
+    // Only a newly completed checkpoint shows a reward; restored pieces never do.
+    // The timer is presentation-only and never holds up narration or mic input.
+    window.clearTimeout(puzzleRewardTimer.current)
+    setPuzzleRewardVisible(true)
+    puzzleRewardTimer.current = window.setTimeout(() => setPuzzleRewardVisible(false), 2600)
     addEvent('checkpoint_completed', assisted ? { beatID, assisted: true } : { beatID })
     addEvent('puzzle_piece_earned', { beatID })
   }
@@ -659,6 +668,7 @@ function StorySession({ story, config, replayRequested = false, onClose, onCompl
     visualCondition={config.visualCondition} scene={{ emoji: beat.emoji, title: beat.title, asset: beat.illustrationAsset }}
     progress={{ current: Math.min(beatPath.length, story.typicalPathLength), total: story.typicalPathLength }} rewards={rewards}
     puzzleProgress={{ earned: earnedPuzzlePieces, total: story.typicalPathLength }}
+    puzzleRewardVisible={puzzleRewardVisible}
     storyPuzzle={{ storyID: story.id, ...story.puzzle, coverEmoji: story.coverEmoji, earnedPieces: earnedPuzzlePieces, totalPieces: story.typicalPathLength, layoutID: puzzleLayoutID, completed: earnedPuzzlePieces === story.typicalPathLength }}
     showJoin={phase === 'lobby'} joinLabel={t('打开麦克风，开始聊天', 'Turn on mic & begin')} onJoin={beginWarmup}
     showMic={(Boolean(sessionID) && !['unsafe','audioProblem'].includes(phase)) || recorder.starting} recording={recorder.recording} micEnabled={recorder.enabled} micStarting={recorder.starting} onToggleMic={recorder.toggle}
@@ -820,15 +830,17 @@ function ImaginativePlaySession({ config, onClose, onComplete }: { config: Sessi
 interface RoomAction { label: string; onClick: () => void }
 interface SceneInfo { emoji: string; title: string; asset: string }
 
-function ConversationRoom({ title, language, state, status, headline, subtitle, question = '', visualCondition, scene, progress, puzzleProgress, storyPuzzle, actions = [], showJoin, joinLabel, onJoin, showMic, recording, micEnabled, micStarting, onToggleMic, ideaLabel, onIdea, onRepeat, onHint, onAdvance, onEnd, onClear, onRecover, onClose, onPause, onResume, story, error, visited }: {
+function ConversationRoom({ title, language, state, status, headline, subtitle, question = '', visualCondition, scene, progress, puzzleProgress, storyPuzzle, puzzleRewardVisible = false, actions = [], showJoin, joinLabel, onJoin, showMic, recording, micEnabled, micStarting, onToggleMic, ideaLabel, onIdea, onRepeat, onHint, onAdvance, onEnd, onClear, onRecover, onClose, onPause, onResume, story, error, visited }: {
   onResume?: () => void
   storyPuzzle?: PuzzleFinaleData
+  puzzleRewardVisible?: boolean
   onClose: () => void; onPause: () => void; story?: Story; error?: string; visited?: string[]
   title: string; language: LessonLanguage; state: ConversationState; status: string; headline: string; subtitle: string; question?: string; visualCondition: SessionConfig['visualCondition']; scene?: SceneInfo; progress?: { current: number; total: number }; puzzleProgress?: { earned: number; total: number }; rewards?: Reward[]; actions?: RoomAction[]; showJoin: boolean; joinLabel: string; onJoin: () => void; showMic: boolean; recording: boolean; micEnabled: boolean; micStarting: boolean; onToggleMic: () => void; ideaLabel?: string; onIdea?: () => void; onRepeat: () => void; onHint?: () => void; onAdvance: () => void; onEnd: () => void; onClear: () => void; onRecover?: () => void
 }) {
   const [drawer, setDrawer] = useState(false)
   const [panel, setPanel] = useState<'story' | 'leave' | null>(null)
   const [textLanguage, setTextLanguage] = useState(language)
+  const showPuzzleReward = puzzleRewardVisible && !showJoin && !recording && !['listening', 'thinking', 'paused'].includes(state)
   const t = (zh: string, en: string) => languageText(zh, en, language)
   const leave = () => { if (showJoin) onClose(); else { onPause(); setPanel('leave') } }
   const longPress = useRef<number | undefined>(undefined)
@@ -839,11 +851,13 @@ function ConversationRoom({ title, language, state, status, headline, subtitle, 
     <header className="room-header">
       <button className="room-back secondary-action" onClick={leave} aria-label={t('返回首页', 'Back to home')}>← <span>{t('首页', 'Home')}</span></button>
       <button className="room-brand" onPointerDown={beginLongPress} onPointerUp={cancelLongPress} onPointerLeave={cancelLongPress}><span>CHOOCHOO</span><small>{title}</small></button>
-      {progress && <div className="session-progress" aria-label={`${progress.current} / ${progress.total}`}><div className="progress-dots">{Array.from({ length: progress.total }, (_, index) => <i key={index} className={index < progress.current ? 'filled' : ''} />)}</div>{puzzleProgress && <PuzzleTray earned={puzzleProgress.earned} total={puzzleProgress.total} language={language} />}</div>}
+      {progress && <div className="session-progress" aria-label={`${progress.current} / ${progress.total}`}><div className="progress-dots">{Array.from({ length: progress.total }, (_, index) => <i key={index} className={index < progress.current ? 'filled' : ''} />)}</div>{puzzleProgress && <div hidden={!showJoin && !showPuzzleReward}><PuzzleTray earned={puzzleProgress.earned} total={puzzleProgress.total} language={language} /></div>}</div>}
     </header>
     <section className="room-stage">
-      {storyPuzzle && <div className="story-puzzle-stage" hidden={storyPuzzle.earnedPieces === 0}><StoryPuzzlePicture puzzle={storyPuzzle} language={language} animateNewPieces /></div>}
-      {!storyPuzzle?.earnedPieces && (visualCondition === 'pictures' && scene ? <SceneVisual key={scene.asset} scene={scene} /> : <ConversationOrb state={orbState} />)}
+      {storyPuzzle ? <div className={`story-agent-stage${showPuzzleReward ? ' showing-reward' : ''}`}>
+        <ConversationOrb state={orbState} />
+        <div className="story-puzzle-stage" hidden={!showPuzzleReward}><StoryPuzzlePicture puzzle={storyPuzzle} language={language} animateNewPieces /></div>
+      </div> : visualCondition === 'pictures' && scene ? <SceneVisual key={scene.asset} scene={scene} /> : <ConversationOrb state={orbState} />}
       <div className="room-copy" aria-live="polite">{status && <p className="room-state">{status}</p>}<h1>{headline}</h1>{subtitle && <p className="subtitle">{subtitle}</p>}{question && <p className="question-reminder">{language === 'chinese' ? '问题' : 'Question'}：{question}</p>}</div>
       {error && <p className="inline-error" role="alert">{error}</p>}
       {onRecover && <button className="secondary-action" onClick={onRecover}>{t('重新连接麦克风', 'Try microphone again')}</button>}
@@ -915,14 +929,6 @@ function CompletionScreen({ data, onHome, onReplay }: { data: CompletionData; on
 
 function uniqueVocabulary(items: VocabularyItem[]) {
   return items.filter((item, index) => items.findIndex((candidate) => candidate.id === item.id) === index)
-}
-
-function englishHintFor(checkpoint: Checkpoint, level: number) {
-  const model = checkpoint.concepts.map((concept) => concept.en[0]).filter(Boolean).join(' and ')
-  if (level === 1) return checkpoint.englishHint
-  if (level === 2) return `Try saying one important word: ${model}.`
-  if (level === 3) return `Here is a sentence starter: “I think ${model}…”`
-  return `Let’s say the complete answer together: ${model}.`
 }
 
 function MicIcon({muted = false}: {muted?: boolean}) { return <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="3" width="8" height="12" rx="4" /><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8" />{muted && <path d="M3 3l18 18" />}</svg> }

@@ -21,6 +21,7 @@ export class StreamingSpeech {
   private closed=false
   private disconnected:()=>void
   private requestID=0
+  capabilities:readonly string[]=['reply','synthesize']
   private requests=new Map<number,{resolve:(v:unknown)=>void;reject:(e:Error)=>void;cleanup:()=>void}>()
   constructor(disconnected:()=>void) {this.disconnected=disconnected}
   async connect(token:string,language:string,url='wss://api.mousefit.pro/ai-toy/web/voice-stream') {
@@ -33,7 +34,10 @@ export class StreamingSpeech {
       socket.onmessage=(event)=>{
         try {
           const data=JSON.parse(event.data)
-          if(data.type==='ready') {ready=true;clearTimeout(timeout);resolve()}
+          if(data.type==='ready') {
+            this.capabilities=Array.isArray(data.capabilities)?data.capabilities.filter((type:unknown)=>['reply','synthesize','evaluate'].includes(String(type))):['reply','synthesize']
+            ready=true;clearTimeout(timeout);resolve()
+          }
           if(data.type==='reply' || data.type==='request_error') {
             const request=this.requests.get(data.requestID)
             if(request){this.requests.delete(data.requestID);request.cleanup();if(data.type==='reply')request.resolve(data.result);else request.reject(new Error('Voice request failed'))}
@@ -71,7 +75,8 @@ export class StreamingSpeech {
   }
   private send(value:unknown) {if(this.socket?.readyState!==WebSocket.OPEN)throw new Error('Speech is not ready');this.socket.send(JSON.stringify(value))}
   private cancelPending() {if(this.pending){clearTimeout(this.pending.timer);this.pending.reject(new Error('Speech interrupted'));this.pending=undefined}}
-  request(type:'reply'|'synthesize',body:unknown,signal?:AbortSignal):Promise<unknown> {
+  request(type:VoiceRequest,body:unknown,signal?:AbortSignal):Promise<unknown> {
+    if(!this.capabilities.includes(type))return Promise.reject(new Error('Unsupported voice request'))
     return new Promise((resolve,reject)=>{
       const requestID=++this.requestID
       const cancel=()=>{const request=this.requests.get(requestID);if(!request)return;this.requests.delete(requestID);request.cleanup();reject(new Error('Voice request cancelled'));try{this.send({type:'cancel_request',requestID})}catch{/* already closed */}}
@@ -85,3 +90,4 @@ export class StreamingSpeech {
   private cancelRequests(){for(const request of this.requests.values()){request.cleanup();request.reject(new Error('Speech interrupted'))}this.requests.clear()}
   close() {this.closed=true;this.capturing=false;this.frames.forEach(f=>f.fill(0));this.frames=[];this.cancelPending();this.cancelRequests();this.socket?.close();this.socket=undefined}
 }
+import type { VoiceRequest } from './voiceTransport.ts'
