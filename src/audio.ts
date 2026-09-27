@@ -67,9 +67,7 @@ export function stopVoice() {
   activeAudio = undefined
 }
 
-/**
- * Fixed and dynamic lines both use Edge-TTS. Never silently change voices.
- */
+/** Fixed lines use certified Edge cues; dynamic replies use the prepared voice. */
 export async function speak(text: string, language: 'chinese' | 'english', cueID?: string) {
   stopVoice()
   const generation = playbackGeneration
@@ -93,10 +91,37 @@ function playCue(cueID: string) {
   return url ? playAudio(url) : Promise.resolve(false)
 }
 function playPrepared(speech:PreparedSpeech) {
-  if(speech.provider!=='edge-tts' || speech.mimeType!=='audio/mpeg') return Promise.resolve(false)
+  if(!['edge-tts','deepgram-aura-2'].includes(speech.provider) || speech.mimeType!=='audio/mpeg') return Promise.resolve(false)
+  if('stream' in speech)return playStream(speech.stream)
   const bytes=Uint8Array.from(atob(speech.audioBase64),c=>c.charCodeAt(0))
   const url=URL.createObjectURL(new Blob([bytes],{type:'audio/mpeg'}));bytes.fill(0)
   return playAudio(url).finally(()=>URL.revokeObjectURL(url))
+}
+async function playStream(stream:ReadableStream<Uint8Array>) {
+  if(typeof MediaSource==='undefined' || !MediaSource.isTypeSupported?.('audio/mpeg')){await stream.cancel();return false}
+  const media=new MediaSource(),url=URL.createObjectURL(media),reader=stream.getReader()
+  const source=new Promise<SourceBuffer>((resolve,reject)=>{
+    media.addEventListener('sourceopen',()=>{try{resolve(media.addSourceBuffer('audio/mpeg'))}catch(error){reject(error)}},{once:true})
+    media.addEventListener('error',()=>reject(new Error('Audio stream failed')),{once:true})
+  })
+  const pump=(async()=>{
+    const buffer=await source
+    while(true){
+      const {done,value}=await reader.read()
+      if(done)break
+      await new Promise<void>((resolve,reject)=>{
+        const finished=()=>{buffer.removeEventListener('error',failed);resolve()}
+        const failed=()=>{buffer.removeEventListener('updateend',finished);reject(new Error('Audio buffer failed'))}
+        buffer.addEventListener('updateend',finished,{once:true});buffer.addEventListener('error',failed,{once:true})
+        try{buffer.appendBuffer(new Uint8Array(value).buffer)}catch(error){buffer.removeEventListener('updateend',finished);buffer.removeEventListener('error',failed);reject(error)}
+      })
+    }
+    if(media.readyState==='open')media.endOfStream()
+  })()
+  const playback=playAudio(url),stop=cancelPlayback
+  cancelPlayback=()=>{void reader.cancel().catch(()=>{});stop?.()}
+  try{const played=await Promise.race([playback,pump.then(()=>new Promise<boolean>(()=>{}),()=>false)]);if(!played)stop?.();return played}
+  finally{void reader.cancel().catch(()=>{});if(cancelPlayback!==stop)cancelPlayback=undefined;URL.revokeObjectURL(url)}
 }
 function playAudio(url: string) {
   const startedPlaying=startAudioLatency()

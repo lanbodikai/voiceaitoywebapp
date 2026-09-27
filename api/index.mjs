@@ -390,10 +390,26 @@ async function openAI(path, options) {
   return data
 }
 
-export async function generateSpokenLine(body, signal) {
+function validateSpokenLine(body) {
   if (!body || !validText(body.learnerSpeech,500) || !validText(body.previousLine,180) || !['chinese','english'].includes(body.language) || !['tangent','comfort','openReply','imaginativePlay','storyWrapup'].includes(body.kind)) throw statusError(400)
   if ((body.storyID !== undefined && !validText(body.storyID,80)) || (body.storyTitle !== undefined && !validText(body.storyTitle,120)) || (body.storyContext !== undefined && !validText(body.storyContext,1800))) throw statusError(400)
   if ((body.checkpointID !== undefined && !validText(body.checkpointID,80)) || (body.currentQuestion !== undefined && !validText(body.currentQuestion,180))) throw statusError(400)
+}
+
+// The live voice socket uses this for progressive audio. Every line is
+// moderated before any audio is made available to the browser.
+export async function generateStreamingLine(body, signal) {
+  validateSpokenLine(body)
+  if (!(await moderate(body.learnerSpeech,signal)).safe) throw statusError(422)
+  signal?.throwIfAborted()
+  const generated=await generateLine(body,signal)
+  signal?.throwIfAborted()
+  if (!(await moderate(generated.line,signal)).safe) throw statusError(422)
+  return body.preferFixedFeedback===true && generated.line===boundaryLines[body.language].retry ? {...generated,skipSpeech:true} : generated
+}
+
+export async function generateSpokenLine(body, signal) {
+  validateSpokenLine(body)
   if (!(await moderate(body.learnerSpeech)).safe) throw statusError(422)
   signal?.throwIfAborted()
   const generated=await generateLine(body,signal)

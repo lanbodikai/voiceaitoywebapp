@@ -44,6 +44,34 @@ test('PCM chunks have the expected sample rate, bounds and amplitude',()=>{
   assert.equal(new DataView(pcm.buffer).getInt16(0,true),-32768)
 })
 
+test('progressive reply resolves before audio finishes and interruption cancels its stream',async()=>{
+  let socket
+  globalThis.WebSocket=class {
+    static OPEN=1
+    readyState=1;bufferedAmount=0;sent=[]
+    constructor(){socket=this;queueMicrotask(()=>this.onopen())}
+    send(raw){const data=JSON.parse(raw);this.sent.push(data);if(data.type==='auth')queueMicrotask(()=>this.deliver({type:'ready',capabilities:['reply','reply_stream']}))}
+    deliver(data){this.onmessage({data:JSON.stringify(data)})}
+    close(){this.readyState=3;this.onclose()}
+  }
+  const speech=new StreamingSpeech(()=>{})
+  await speech.connect('synthetic','english')
+  const pending=speech.request('reply',{preferProgressive:true})
+  socket.deliver({type:'reply',requestID:1,result:{line:'Hello',action:'continue',speech:{stream:true,mimeType:'audio/mpeg',provider:'deepgram-aura-2'}}})
+  const result=await pending
+  const reader=result.speech.stream.getReader()
+  socket.deliver({type:'reply_audio_chunk',requestID:1,audio:'SUQz'})
+  assert.deepEqual(Array.from((await reader.read()).value),[73,68,51])
+  socket.deliver({type:'reply_audio_done',requestID:1})
+  assert.equal((await reader.read()).done,true)
+  const next=speech.request('reply',{preferProgressive:true})
+  socket.deliver({type:'reply',requestID:2,result:{line:'Again',speech:{stream:true,mimeType:'audio/mpeg',provider:'edge-tts'}}})
+  const second=await next
+  await second.speech.stream.cancel()
+  assert.equal(socket.sent.at(-1).type,'cancel_request')
+  speech.close()
+})
+
 test('stream moderation is consumed once and erased on interruption',()=>{
   rememberSafety('hello',{safe:true,categories:[]})
   assert.equal(takeSafety('different'),undefined)

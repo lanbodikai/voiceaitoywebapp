@@ -6,6 +6,53 @@ import WebSocket from 'ws'
 import {attachStreamingVoice} from '../server/streaming-voice.mjs'
 import {evaluateAnswer,generateSpokenLine} from '../api/index.mjs'
 
+test('progressive reply sends the safe line before audio, then ordered MP3 chunks',async()=>{
+  const oldFetch=globalThis.fetch,oldPilot=process.env.CHILD_PILOT_MODE,oldKey=process.env.OPENAI_API_KEY
+  process.env.CHILD_PILOT_MODE='false';process.env.OPENAI_API_KEY='synthetic'
+  globalThis.fetch=async()=>Response.json({value:'synthetic'})
+  class UpstreamSocket extends EventEmitter {
+    readyState=1;bufferedAmount=0
+    constructor(){super();queueMicrotask(()=>this.emit('message',JSON.stringify({type:'session.created'})))}
+    send(){}terminate(){this.readyState=3}
+  }
+  let releaseAudio
+  const server=createServer()
+  const sockets=attachStreamingVoice(server,async()=>({safe:true,categories:[]}),{
+    reply:async()=>{throw new Error('buffered path should not run')},
+    replyStream:async()=>({line:'Safe synthetic line',action:'continue'}),
+    streamAudio:async(_text,_language,onChunk,signal)=>{
+      await new Promise(resolve=>{releaseAudio=resolve})
+      signal.throwIfAborted()
+      await onChunk(Buffer.from('ID3'))
+    },
+  },{UpstreamSocket,authenticate:async()=>({profileID:'synthetic-progressive-test'})})
+  server.listen(0,'127.0.0.1');await once(server,'listening')
+  let client
+  try{
+    client=new WebSocket(`ws://127.0.0.1:${server.address().port}/web/voice-stream`)
+    await once(client,'open')
+    let next=once(client,'message');client.send(JSON.stringify({type:'auth',token:'synthetic',language:'english'}))
+    assert.ok(JSON.parse((await next)[0].toString()).capabilities.includes('reply_stream'))
+    next=once(client,'message')
+    client.send(JSON.stringify({type:'reply',requestID:1,body:{preferProgressive:true,language:'english'}}))
+    const early=JSON.parse((await next)[0].toString())
+    assert.equal(early.result.line,'Safe synthetic line')
+    assert.equal(early.result.speech.stream,true)
+    const audioEvents=[];client.on('message',raw=>audioEvents.push(JSON.parse(raw.toString())))
+    releaseAudio()
+    const deadline=Date.now()+2000
+    while(audioEvents.length<2 && Date.now()<deadline)await new Promise(resolve=>setTimeout(resolve,5))
+    assert.deepEqual(audioEvents[0],{type:'reply_audio_chunk',requestID:1,audio:'SUQz'})
+    assert.equal(audioEvents[1]?.type,'reply_audio_done')
+  }finally{
+    client?.terminate();for(const socket of sockets.clients)socket.terminate()
+    await new Promise(resolve=>sockets.close(resolve));await new Promise(resolve=>server.close(resolve))
+    globalThis.fetch=oldFetch
+    if(oldPilot===undefined)delete process.env.CHILD_PILOT_MODE;else process.env.CHILD_PILOT_MODE=oldPilot
+    if(oldKey===undefined)delete process.env.OPENAI_API_KEY;else process.env.OPENAI_API_KEY=oldKey
+  }
+})
+
 test('authenticated socket grading preserves validation, moderation, and authoritative rubric; cancels upstream work',async()=>{
   const oldFetch=globalThis.fetch,oldPilot=process.env.CHILD_PILOT_MODE,oldKey=process.env.OPENAI_API_KEY
   process.env.CHILD_PILOT_MODE='false';process.env.OPENAI_API_KEY='synthetic'

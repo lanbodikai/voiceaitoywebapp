@@ -79,7 +79,7 @@ export function attachStreamingVoice(server, moderate, handlers = {}, dependenci
           upstream.on('message',async(raw)=>{
             try {
               const event=JSON.parse(raw.toString())
-              if(event.type==='session.created' || event.type==='transcription_session.created') {ready=true;clearTimeout(authTimer);send({type:'ready',capabilities:['reply','synthesize','evaluate'].filter(type=>typeof handlers[type]==='function')})}
+              if(event.type==='session.created' || event.type==='transcription_session.created') {ready=true;clearTimeout(authTimer);send({type:'ready',capabilities:[...['reply','synthesize','evaluate'].filter(type=>typeof handlers[type]==='function'),...(handlers.replyStream && handlers.streamAudio ? ['reply_stream'] : [])]})}
               if(event.type==='input_audio_buffer.committed') items.set(event.item_id,commits.shift())
               if(event.type==='conversation.item.input_audio_transcription.completed') {
                 const turn=items.get(event.item_id); items.delete(event.item_id)
@@ -109,8 +109,22 @@ export function attachStreamingVoice(server, moderate, handlers = {}, dependenci
           const pending=new AbortController();requests.set(message.requestID,pending)
           try {
             const proof=message.type==='evaluate' ? safeTranscriptHash : undefined
-            const result=await handlers[message.type](message.body,pending.signal,proof)
-            if(!pending.signal.aborted)send({type:'reply',requestID:message.requestID,result})
+            if(message.type==='reply' && message.body?.preferProgressive===true && handlers.replyStream && handlers.streamAudio) {
+              const result=await handlers.replyStream(message.body,pending.signal)
+              if(pending.signal.aborted)return
+              const language=message.body.language
+              if(result.skipSpeech){send({type:'reply',requestID:message.requestID,result:{line:result.line,action:result.action}});return}
+              send({type:'reply',requestID:message.requestID,result:{...result,speech:{stream:true,mimeType:'audio/mpeg',provider:language==='english' && process.env.DEEPGRAM_API_KEY?'deepgram-aura-2':'edge-tts'}}})
+              await handlers.streamAudio(result.line,language,async chunk=>{
+                while(client.bufferedAmount>256000 && !pending.signal.aborted)await new Promise(resolve=>setTimeout(resolve,10))
+                pending.signal.throwIfAborted()
+                send({type:'reply_audio_chunk',requestID:message.requestID,audio:Buffer.from(chunk).toString('base64')})
+              },pending.signal)
+              if(!pending.signal.aborted)send({type:'reply_audio_done',requestID:message.requestID})
+            } else {
+              const result=await handlers[message.type](message.body,pending.signal,proof)
+              if(!pending.signal.aborted)send({type:'reply',requestID:message.requestID,result})
+            }
           } catch {if(!pending.signal.aborted)send({type:'request_error',requestID:message.requestID})}
           finally {requests.delete(message.requestID)}
           return

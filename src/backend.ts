@@ -115,7 +115,8 @@ export function transcribeAudio(audio: Blob, fields: Record<string, string>, sig
 
 export async function generateLine(input: Record<string, unknown>) {
   const rpc=getVoiceRPC()
-  const body={...input,preferFixedFeedback:true}
+  const progressive=typeof MediaSource!=='undefined' && MediaSource.isTypeSupported?.('audio/mpeg') && Boolean(getVoiceRPC('reply_stream'))
+  const body={...input,preferFixedFeedback:true,...(progressive?{preferProgressive:true}:{})}
   const result=await measureLatency('replyMs',()=>rpc ? rpc('reply',body) : request('/lines/generate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })) as {line:string;action:'continue'|'redirect'|'retry';speech?:PreparedSpeech}
   if(result.speech) prepareSpeech(result.line,String(input.language),result.speech)
   return result

@@ -1,8 +1,9 @@
 import { createServer } from 'node:http'
-import handler, { moderate, generateSpokenLine, evaluateAnswer } from '../api/index.mjs'
+import handler, { moderate, generateSpokenLine, generateStreamingLine, evaluateAnswer } from '../api/index.mjs'
 import { voiceRoutes } from './oracle-proxy.mjs'
 import { attachStreamingVoice } from './streaming-voice.mjs'
 import { edgeSpeech } from './edge-speech.mjs'
+import { streamSpeech } from './progressive-speech.mjs'
 
 // This standalone service deliberately contains no legacy app or database server.
 export function createVoiceServer() {
@@ -39,6 +40,8 @@ export function createVoiceServer() {
   server.maxHeadersCount = 32
   const sockets = attachStreamingVoice(server, moderate, {
     reply: generateSpokenLine,
+    replyStream: generateStreamingLine,
+    streamAudio: streamSpeech,
     evaluate: evaluateAnswer,
     synthesize: (body, signal) => edgeSpeech(body?.text, body?.language, signal),
   })
