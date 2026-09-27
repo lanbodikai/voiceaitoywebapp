@@ -12,7 +12,7 @@ test('English progressive voice streams Deepgram MP3 chunks',async()=>{
   }
   try{
     const chunks=[]
-    const provider=await streamSpeech('Hello, friend','english',chunk=>chunks.push(Array.from(chunk)))
+    const provider=await streamSpeech('Hello, friend','english',chunk=>chunks.push(Array.from(chunk)),undefined,{deepgramAllowed:true})
     assert.equal(provider,'deepgram-aura-2')
     assert.deepEqual(chunks,[[73,68],[51]])
     assert.match(request.url,/aura-2-thalia-en/)

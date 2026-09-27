@@ -3,8 +3,57 @@ import assert from 'node:assert/strict'
 import {createServer} from 'node:http'
 import {EventEmitter,once} from 'node:events'
 import WebSocket from 'ws'
-import {attachStreamingVoice} from '../server/streaming-voice.mjs'
+import {attachStreamingVoice,deepgramTranscriptionURL} from '../server/streaming-voice.mjs'
 import {evaluateAnswer,generateSpokenLine} from '../api/index.mjs'
+
+test('Deepgram receives live PCM before commit and returns a moderated final transcript',async()=>{
+  const oldKey=process.env.DEEPGRAM_API_KEY,oldSTT=process.env.DEEPGRAM_STT,oldPilot=process.env.CHILD_PILOT_MODE,oldFetch=globalThis.fetch
+  process.env.DEEPGRAM_API_KEY='synthetic-secret';process.env.DEEPGRAM_STT='true';process.env.CHILD_PILOT_MODE='false'
+  globalThis.fetch=()=>{throw new Error('OpenAI transcription should not be called')}
+  assert.match(deepgramTranscriptionURL('chinese'),/language=zh/)
+  let upstream,moderations=0,finalizes=0
+  class UpstreamSocket extends EventEmitter {
+    readyState=1;bufferedAmount=0;sent=[]
+    constructor(url,options){super();upstream=this;assert.match(url,/model=nova-3/);assert.equal(options.headers.Authorization,'Token synthetic-secret');queueMicrotask(()=>this.emit('open'))}
+    send(value){
+      this.sent.push(value)
+      if(typeof value==='string' && JSON.parse(value).type==='Finalize'){
+        const turn=++finalizes
+        queueMicrotask(()=>this.emit('message',JSON.stringify({type:'Results',is_final:true,from_finalize:true,channel:{alternatives:[{transcript:turn===1?'Synthetic train idea':'Second synthetic idea'}]}})))
+      }
+    }
+    terminate(){this.readyState=3}
+  }
+  const server=createServer()
+  const sockets=attachStreamingVoice(server,async()=>{moderations++;return {safe:true,categories:[]}},{},{UpstreamSocket,authenticate:async()=>({profileID:'synthetic-deepgram-test',consentVersion:'web-handsfree-1.3'})})
+  server.listen(0,'127.0.0.1');await once(server,'listening')
+  let client
+  try{
+    client=new WebSocket(`ws://127.0.0.1:${server.address().port}/web/voice-stream`);await once(client,'open')
+    let next=once(client,'message');client.send(JSON.stringify({type:'auth',token:'synthetic',language:'english'}))
+    assert.equal(JSON.parse((await next)[0].toString()).type,'ready')
+    client.send(JSON.stringify({type:'begin',turn:1,language:'english',storyID:'story',beatID:'beat'}))
+    client.send(Buffer.alloc(5000))
+    next=once(client,'message');client.send(JSON.stringify({type:'commit',turn:1}))
+    const transcript=JSON.parse((await next)[0].toString())
+    assert.equal(transcript.type,'transcript')
+    assert.equal(transcript.transcript,'Synthetic train idea')
+    assert.equal(moderations,1)
+    assert.ok(upstream.sent.some(item=>Buffer.isBuffer(item) && item.length===5000))
+    client.send(JSON.stringify({type:'begin',turn:2,language:'english',storyID:'story',beatID:'beat'}))
+    client.send(Buffer.alloc(5000))
+    next=once(client,'message');client.send(JSON.stringify({type:'commit',turn:2}))
+    assert.equal(JSON.parse((await next)[0].toString()).transcript,'Second synthetic idea')
+    assert.equal(moderations,2)
+  }finally{
+    client?.terminate();for(const socket of sockets.clients)socket.terminate()
+    await new Promise(resolve=>sockets.close(resolve));await new Promise(resolve=>server.close(resolve))
+    globalThis.fetch=oldFetch
+    if(oldKey===undefined)delete process.env.DEEPGRAM_API_KEY;else process.env.DEEPGRAM_API_KEY=oldKey
+    if(oldSTT===undefined)delete process.env.DEEPGRAM_STT;else process.env.DEEPGRAM_STT=oldSTT
+    if(oldPilot===undefined)delete process.env.CHILD_PILOT_MODE;else process.env.CHILD_PILOT_MODE=oldPilot
+  }
+})
 
 test('progressive reply sends the safe line before audio, then ordered MP3 chunks',async()=>{
   const oldFetch=globalThis.fetch,oldPilot=process.env.CHILD_PILOT_MODE,oldKey=process.env.OPENAI_API_KEY
@@ -19,8 +68,10 @@ test('progressive reply sends the safe line before audio, then ordered MP3 chunk
   const server=createServer()
   const sockets=attachStreamingVoice(server,async()=>({safe:true,categories:[]}),{
     reply:async()=>{throw new Error('buffered path should not run')},
-    replyStream:async()=>({line:'Safe synthetic line',action:'continue'}),
-    streamAudio:async(_text,_language,onChunk,signal)=>{
+    replyStream:async(body)=>({line:body.unsafe?'Unsafe synthetic line':'Safe synthetic line',action:'continue'}),
+    moderateOutput:async(line)=>({safe:!line.startsWith('Unsafe'),categories:[]}),
+    streamAudio:async(text,_language,onChunk,signal)=>{
+      if(text.startsWith('Unsafe')){await onChunk(Buffer.from('ID3'));return}
       await new Promise(resolve=>{releaseAudio=resolve})
       signal.throwIfAborted()
       await onChunk(Buffer.from('ID3'))
@@ -44,6 +95,9 @@ test('progressive reply sends the safe line before audio, then ordered MP3 chunk
     while(audioEvents.length<2 && Date.now()<deadline)await new Promise(resolve=>setTimeout(resolve,5))
     assert.deepEqual(audioEvents[0],{type:'reply_audio_chunk',requestID:1,audio:'SUQz'})
     assert.equal(audioEvents[1]?.type,'reply_audio_done')
+    next=once(client,'message')
+    client.send(JSON.stringify({type:'reply',requestID:2,body:{preferProgressive:true,language:'english',unsafe:true}}))
+    assert.equal(JSON.parse((await next)[0].toString()).type,'request_error','unsafe audio is never released')
   }finally{
     client?.terminate();for(const socket of sockets.clients)socket.terminate()
     await new Promise(resolve=>sockets.close(resolve));await new Promise(resolve=>server.close(resolve))

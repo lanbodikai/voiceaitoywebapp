@@ -28,8 +28,14 @@ sources. Install runtime dependencies `busboy@1.6.0` and `ws@8.21.3`; create a
 Python venv with `edge-tts==7.2.8`. Keep application files root-owned and run as
 the unprivileged `voice-ai-toy` service account using `voice-ai-toy.service`.
 Store configuration in `/etc/voice-ai-toy/runtime.env`, root-owned mode 0600.
-`DEEPGRAM_API_KEY` is optional and enables faster progressive English Aura-2
-speech. Do not put it in the repository, Vercel browser variables, or logs.
+`DEEPGRAM_API_KEY` enables progressive English Aura-2 speech. Set
+`DEEPGRAM_STT=true` to use Nova-3 streaming recognition. Both new services
+require a recorded `web-handsfree-1.3` consent version; older sessions stay on
+OpenAI transcription and Edge-TTS. Apply
+`supabase/20260927_deepgram_consent.sql` and
+`supabase/20260927_consent_version_response.sql` before enabling the flag or
+deploying the updated disclosure. Do not put the key in the repository,
+Vercel browser variables, or logs.
 Copy the *active* privacy flags exactly; never change them just to make health pass.
 
 The service caps Node heap at 128 MB, simultaneous TTS workers at 2, and sockets

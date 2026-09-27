@@ -396,15 +396,14 @@ function validateSpokenLine(body) {
   if ((body.checkpointID !== undefined && !validText(body.checkpointID,80)) || (body.currentQuestion !== undefined && !validText(body.currentQuestion,180))) throw statusError(400)
 }
 
-// The live voice socket uses this for progressive audio. Every line is
-// moderated before any audio is made available to the browser.
-export async function generateStreamingLine(body, signal) {
+// The voice socket checks output safety while synthesis starts; it releases
+// neither the line nor audio until that check passes.
+export async function generateCandidateLine(body, signal) {
   validateSpokenLine(body)
   if (!(await moderate(body.learnerSpeech,signal)).safe) throw statusError(422)
   signal?.throwIfAborted()
   const generated=await generateLine(body,signal)
   signal?.throwIfAborted()
-  if (!(await moderate(generated.line,signal)).safe) throw statusError(422)
   return body.preferFixedFeedback===true && generated.line===boundaryLines[body.language].retry ? {...generated,skipSpeech:true} : generated
 }
 

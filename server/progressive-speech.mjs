@@ -3,8 +3,8 @@ import { runtimeLimit } from './runtime-limits.mjs'
 
 let activeDeepgram=0
 
-export async function streamSpeech(text, language, onChunk, signal) {
-  if (language !== 'english' || !process.env.DEEPGRAM_API_KEY) {
+export async function streamSpeech(text, language, onChunk, signal, options={}) {
+  if (language !== 'english' || !process.env.DEEPGRAM_API_KEY || !options.deepgramAllowed) {
     await streamEdgeSpeech(text, language, onChunk, signal)
     return 'edge-tts'
   }
