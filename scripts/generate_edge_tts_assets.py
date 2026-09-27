@@ -26,10 +26,15 @@ EN_VOICE = "en-US-AvaNeural"
 
 
 def feedback_cues(stories: dict) -> dict[str, tuple[str, str, str, str]]:
-    cues = {"en_feedback_success_v1": ("You did it!", EN_VOICE, "-5%", "+0Hz")}
+    cues = {"en_feedback_success_v1": ("Lovely!", EN_VOICE, "-5%", "+0Hz")}
     boundaries = json.loads((ROOT / "src/data/conversation-boundaries.json").read_text(encoding="utf-8"))
     for language, voice, pitch in [("english", EN_VOICE, "+0Hz"), ("chinese", ZH_VOICE, "+1Hz")]:
         cues[f"{language}_feedback_retry_v1"] = (boundaries[language]["retry"], voice, "-5%", pitch)
+    for filename, prefix in [("story-continue-lines.json", "story_continue"), ("voice-picker-lines.json", "voice_picker")]:
+        lines = json.loads((ROOT / "src/data" / filename).read_text(encoding="utf-8"))
+        for name, line in lines.items():
+            cues[f"{prefix}_{name}_zh"] = (line["zh"], ZH_VOICE, "-5%", "+1Hz")
+            cues[f"{prefix}_{name}_en"] = (line["en"], EN_VOICE, "-5%", "+0Hz")
     for story in stories["stories"]:
         for beat in story["beats"]:
             checkpoint = beat["checkpoint"]

@@ -911,6 +911,8 @@
           "checkpoint": {
             "id": "bengbeng-thanks",
             "kind": "comprehension",
+          "sufficientConceptIDs": ["thanks", "yummy"],
+          "knownAnswerPhrases": ["She said thanks", "She said thank you", "Thanks, ChooChoo", "Thank you, ChooChoo", "Thank you, so yummy", "Bengbeng said thank you", "谢谢啾啾", "谢谢啾啾真好吃", "蹦蹦说谢谢"],
             "promptType": "recall",
             "question": "蹦蹦吃完以后，大声说了什么？",
             "englishQuestion": "What did Bengbeng say after she finished eating?",

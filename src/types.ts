@@ -38,6 +38,10 @@ export interface Checkpoint {
   englishQuestion: string
   audioCue: string
   concepts: Concept[]
+  /** A clearly expressed one of these concepts completes this checkpoint. */
+  sufficientConceptIDs?: string[]
+  /** Curated full utterances that may take the local fast path. */
+  knownAnswerPhrases?: string[]
   relatedTerms: string[]
   knownWrongTerms: string[]
   recast: string

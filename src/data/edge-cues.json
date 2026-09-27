@@ -7,10 +7,10 @@
     "voice": "zh-CN-XiaoxiaoNeural"
   },
   "en_feedback_success_v1": {
-    "audioHash": "32090b76fe63db8c406ae0cd36c8f1844eff4713dc8b77cc7ddcac9273a2c397",
+    "audioHash": "1b4e22e81440dece57908ce1f71a9379e6f7cbf2ddafbcd8c2fb63be83cec0b5",
     "pitch": "+0Hz",
     "rate": "-5%",
-    "textHash": "7f6dd03e6c9e69016d2fee36a8dcc6ebac3bf3e4d20fefac17e65c94cef8b4ac",
+    "textHash": "bb0e844542d843b9ec8da05ca483de9c9e7db12558c93b74d6317517f69de4bd",
     "voice": "en-US-AvaNeural"
   },
   "en_hf_listening_v1": {
@@ -2981,6 +2981,34 @@
     "textHash": "ae1c570f8a245f04afb60dc98fdee1402317a7cb38fb8df030f58505d3d88798",
     "voice": "zh-CN-XiaoxiaoNeural"
   },
+  "story_continue_attempt_en": {
+    "audioHash": "53357386aa75d6d6453651fa0b8f12f99b0e43329bf8f0cbf853a779d1617059",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "f66d57271f7fb2a299bad515c7031a228f4e930b917577a75544447721b8f8d4",
+    "voice": "en-US-AvaNeural"
+  },
+  "story_continue_attempt_zh": {
+    "audioHash": "a648edc681d977e470c39d8326dcdda61cc515cc309c5fc0179e3e612fef3bba",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "ff3d2f253907940b0f795b2a89c2816e86b538de4faddb36870a7f8de732811a",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "story_continue_noResponse_en": {
+    "audioHash": "2a6d722c00a870f9e37ad40882133976e057c2efcabf479f9974a2ad53c0dcb0",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "fbdbe01833d19c748fcb6af5871ac786b41d15deaf5b74f8e086342e1eac875b",
+    "voice": "en-US-AvaNeural"
+  },
+  "story_continue_noResponse_zh": {
+    "audioHash": "78ca6c018747d37bd262e6f5f7ea29fe731f320d010540a8b75a7c9765a1dea9",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "1eeb274ada620e6a4180b1490d095b1952290ac99972ef60f1b8385b58c02c33",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
   "success_choochoo-birthday-cake_call-a-friend": {
     "audioHash": "47b8fbb186f2b0276811ae005aeb601503d79e6dd1b07bf3bed989a95fa3f366",
     "pitch": "+1Hz",
@@ -3196,6 +3224,34 @@
     "pitch": "+1Hz",
     "rate": "-5%",
     "textHash": "7ca9079911cdf8cd3e5ec908d644520b2d82edfad4f4b38fc11bc569827adb56",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "voice_picker_choices_en": {
+    "audioHash": "edfdfbfbec62f5f21256c4761e0759e648b26d3d5c6dc11bccaaa668e7956d18",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "9225d87fecccd85bfb857c850d56b3cb6927bd81c637a4ac2057195d1b85b4b8",
+    "voice": "en-US-AvaNeural"
+  },
+  "voice_picker_choices_zh": {
+    "audioHash": "416c57059f580650ac2d5043b0f223bd642e3104052375dfba6b8b7def74e567",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "63e85bd45437dedf8409c7795c65de8a30ad8de1b28f921ca89e4c157917798e",
+    "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  "voice_picker_prompt_en": {
+    "audioHash": "c329a3a2dce508282a6596d071bb31c495012e819ce39910fe2abf822af44cc4",
+    "pitch": "+0Hz",
+    "rate": "-5%",
+    "textHash": "4c2a32f87502cd9137c688370db7dfa7691a5cbf0d5780b0d6abc309852f7476",
+    "voice": "en-US-AvaNeural"
+  },
+  "voice_picker_prompt_zh": {
+    "audioHash": "17a5183444b077fd94d362a469f33db1453d1124f2c836e5cd4b2200f68101bb",
+    "pitch": "+1Hz",
+    "rate": "-5%",
+    "textHash": "514b42f4879c85fc365213e80abfb1817524e1544498e1eefae4d9ab4e183744",
     "voice": "zh-CN-XiaoxiaoNeural"
   }
 }

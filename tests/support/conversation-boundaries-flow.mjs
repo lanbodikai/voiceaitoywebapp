@@ -44,6 +44,7 @@ try {
         export const setSpeechRate=()=>{}; export const cueForLanguage=x=>x;
         export const storyFeedbackCue=()=>undefined; export const playEarcon=()=>{}; export const playEffect=()=>{};
         export const preloadStoryFeedback=()=>()=>{};
+        export const preloadFixedSpeech=()=>()=>{};
       `}))
       await page.route('**/src/useHandsFree.ts*',route=>route.fulfill({contentType:'application/javascript',body:`
         import React from '${reactURL}'; const {useState,useRef}=React;
@@ -104,8 +105,8 @@ try {
       await page.evaluate(()=>window.failSpeech())
       await page.waitForFunction(retry=>window.spoken.at(-1)===retry,boundaryLines[language].retry)
       const beforeSilence=await page.evaluate(()=>window.spoken.length)
-      for(let i=0;i<3;i++) await page.clock.fastForward(18100)
-      assert.equal(await page.evaluate(()=>window.spoken.length),beforeSilence,'unclear speech must not turn into silent auto-advance or repeated question')
+      await page.clock.fastForward(12100)
+      assert.equal(await page.evaluate(()=>window.spoken.length),beforeSilence+(mode==='play'?0:1),'a quiet story repair gets one spoken invitation')
       assert.equal(await page.evaluate(()=>window.events.filter(event=>event.type==='checkpoint_completed'||event.type==='play_turn').length),initialCompletions)
       assert.equal(await page.locator('.completion-screen').count(),0)
       assert.equal(await page.locator('.story-puzzle-picture .puzzle-piece').count(), initialPieces, 'repairs must not place puzzle pieces')
@@ -213,7 +214,7 @@ try {
         assert.equal(await page.evaluate(()=>window.events.filter(event=>event.type==='play_turn').length),1)
       }
       assert.deepEqual(errors,[])
-      console.log(`PASS ${language} ${mode}: repeated redirects, unclear speech, service errors, silence hold, meaningful recovery${mode==='open'?', wrapup guard':''}`)
+      console.log(`PASS ${language} ${mode}: repeated redirects, unclear speech, service errors, spoken silence recovery, meaningful recovery${mode==='open'?', wrapup guard':''}`)
       await page.close()
     }
   }

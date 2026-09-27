@@ -4,6 +4,7 @@ import { savedCollections, savedProgress } from './progress'
 import { earnedPuzzlePieceCount, puzzleLayout, savedPuzzleLayout, storyProgressPercentage } from './puzzle'
 import { PuzzleSeams } from './StoryPuzzle'
 import { playIntro } from './playContent'
+import { VoiceStoryPicker } from './VoiceStoryPicker'
 import type { SessionConfig } from './session'
 import type { LessonLanguage, Story } from './types'
 import './Dashboard.css'
@@ -16,9 +17,9 @@ export function PuzzleArtwork({ story, language, decorative = false }: { story: 
     : <img src={`/illustrations/${encodeURIComponent(story.puzzle.imageAsset)}.png`} alt={decorative ? '' : alt} loading="lazy" decoding="async" width="1200" height="750" onError={() => setFailed(true)} />
 }
 
-export function Dashboard({ config, onLanguage, onSettings, onStory, onPlay, onInspect }: {
+export function Dashboard({ config, onLanguage, onSettings, onStory, onVoiceStory, onPlay, onInspect }: {
   config: SessionConfig; onLanguage: (language: LessonLanguage) => void; onSettings: () => void
-  onStory: (story: Story) => void; onPlay: () => void; onInspect: (story: Story) => void
+  onStory: (story: Story) => void; onVoiceStory: (story: Story) => void; onPlay: () => void; onInspect: (story: Story) => void
 }) {
   const [, refresh] = useState(0)
   useEffect(() => {
@@ -52,6 +53,7 @@ export function Dashboard({ config, onLanguage, onSettings, onStory, onPlay, onI
           <small>{t('每个故事，都有一份惊喜。', 'A keepsake from every adventure.')}</small>
         </div>
       </section>
+      <VoiceStoryPicker language={language} onStory={onVoiceStory} />
       <section className="story-shelf" aria-labelledby="story-shelf-title">
         <div className="dashboard-section-heading"><h2 id="story-shelf-title">{t('你的故事', 'Your stories')}</h2><span>{t('选一个喜欢的，开始吧。', 'Pick a story and make it yours.')}</span></div>
         <div className="mode-grid dashboard-story-grid">

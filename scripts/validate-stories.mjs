@@ -40,6 +40,8 @@ for (const story of catalog.stories || []) {
     if (!['comprehension', 'choice', 'open'].includes(checkpoint?.kind)) errors.push(`${location}: invalid checkpoint kind`)
     if (!Array.isArray(checkpoint?.hints) || checkpoint.hints.length !== 4 || checkpoint.hints.some((hint, index) => hint.level !== index + 1 || !hint.text)) errors.push(`${location}: must have exactly four ordered hints`)
     if (!Array.isArray(checkpoint?.concepts) || checkpoint.concepts.length < 1) errors.push(`${location}: missing answer concepts`)
+    if (checkpoint?.sufficientConceptIDs && (!Array.isArray(checkpoint.sufficientConceptIDs) || checkpoint.sufficientConceptIDs.length === 0 || checkpoint.sufficientConceptIDs.some(id => !checkpoint.concepts.some(concept => concept.id === id)))) errors.push(`${location}: invalid sufficient concept IDs`)
+    if (checkpoint?.knownAnswerPhrases && (!Array.isArray(checkpoint.knownAnswerPhrases) || checkpoint.knownAnswerPhrases.length === 0 || checkpoint.knownAnswerPhrases.some(phrase => typeof phrase !== 'string' || !phrase.trim()))) errors.push(`${location}: invalid known answer phrases`)
     if (!checkpoint?.reward?.id || !checkpoint.reward.emoji) errors.push(`${location}: missing reward`)
     if (beat.nextBeatId && !beats.has(beat.nextBeatId)) errors.push(`${location}: unknown next beat ${beat.nextBeatId}`)
     for (const branch of checkpoint?.branches || []) {

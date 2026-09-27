@@ -2,6 +2,7 @@ import { takePreparedSpeech, type PreparedSpeech } from './preparedSpeech.ts'
 import edgeCueIDs from './data/edge-cue-ids.json' with { type: 'json' }
 import edgeCues from './data/edge-cues.json' with { type: 'json' }
 import feedback from './data/fixed-feedback.json' with { type: 'json' }
+import storyContinueLines from './data/story-continue-lines.json' with { type: 'json' }
 import { audioContextClass } from './browserCompat.ts'
 import { measureLatency, startAudioLatency } from './latency.ts'
 let activeAudio: HTMLAudioElement | undefined
@@ -34,10 +35,19 @@ function cueURL(cueID:string) {
   return isCertifiedEdgeCue(cueID) && metadata ? `/audio/${encodeURIComponent(cueID)}.mp3?v=${metadata.audioHash.slice(0,12)}` : undefined
 }
 
+export function preloadFixedSpeech(text:string,language:'chinese'|'english') {
+  if(typeof document==='undefined')return ()=>{}
+  const cue=fixedFeedbackCue(text,language)
+  const url=cue && cueURL(cue)
+  if(!url)return ()=>{}
+  const link=document.createElement('link');link.rel='prefetch';link.as='audio';link.href=url;document.head.append(link)
+  return ()=>link.remove()
+}
+
 /** Only warm the active checkpoint's fixed feedback. Never plays or opens a mic. */
 export function preloadStoryFeedback(storyID:string,checkpointID:string,language:'chinese'|'english') {
   if(typeof document==='undefined')return ()=>{}
-  const cues=[storyFeedbackCue(storyID,checkpointID,'success',language),`${language}_feedback_retry_v1`,...Array.from({length:4},(_,i)=>storyFeedbackCue(storyID,checkpointID,'hint',language,i+1))]
+  const cues=[storyFeedbackCue(storyID,checkpointID,'success',language),`${language}_feedback_retry_v1`,...Array.from({length:4},(_,i)=>storyFeedbackCue(storyID,checkpointID,'hint',language,i+1)),...Object.values(storyContinueLines).map(line=>fixedFeedbackCue(language==='english'?line.en:line.zh,language))]
   const links=cues.flatMap(cue=>{
     const url=cue && cueURL(cue)
     if(!url)return []

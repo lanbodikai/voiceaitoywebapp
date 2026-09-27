@@ -43,7 +43,12 @@ export function evaluateLocal(transcript: string, checkpoint: Checkpoint, target
   // Only an exact known answer takes the fast path; all other speech gets semantic
   // evaluation, including open questions and short but meaningful Mandarin ideas.
   const exactKnownAnswer = checkpoint.concepts.some(concept => [...concept.zh, ...concept.homophones, ...concept.en].some(term => normalize(term) === value))
+    || checkpoint.knownAnswerPhrases?.some(phrase => normalize(phrase) === value)
   if (!exactKnownAnswer) return { verdict: 'uncertain', language, matchedConcepts, confidence: 0.4 }
+  if (checkpoint.sufficientConceptIDs?.some(id => matchedConcepts.includes(id))) {
+    const target = matches.some(match => matchedConcepts.includes(match.id) && (targetLanguage === 'chinese' ? match.chinese : match.english))
+    return { verdict: target ? 'correct' : 'meaningUnderstood', language, matchedConcepts, confidence: 0.99 }
+  }
   if (checkpoint.kind === 'open') {
     const target = matches.some(match => targetLanguage === 'chinese' ? match.chinese : match.english)
     return { verdict: target ? 'correct' : 'meaningUnderstood', language, matchedConcepts, confidence: 0.95 }

@@ -38,6 +38,7 @@ try {
     export const cueForLanguage=x=>x;
     export const storyFeedbackCue=()=>undefined;
     export const preloadStoryFeedback=()=>()=>{};
+    export const preloadFixedSpeech=()=>()=>{};
     export const playEarcon=()=>{};
     export const playEffect=()=>{};
   `}))

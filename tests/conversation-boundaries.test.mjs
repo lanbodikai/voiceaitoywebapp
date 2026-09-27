@@ -69,6 +69,7 @@ for (const language of ['english','chinese']) {
       const result = await evaluate({rubric,transcript:weather,attempt:99,hintLevel:99,detectedLanguage:language})
       assert.equal(result.verdict,'uncertain')
       const request = requests[0]
+      assert.deepEqual(requests.slice(0,2).map(item=>item.reasoning.effort),['low','medium'])
       assert.ok(request.input[0].content.includes(evaluationBoundaries[language]))
       assert.ok(request.text.format.schema.properties.verdict.enum.includes('offTopic'))
       assert.ok(request.text.format.schema.properties.verdict.enum.includes('unusable'))
@@ -78,9 +79,9 @@ for (const language of ['english','chinese']) {
       if (language === 'english') assert.doesNotMatch(data.question,/\p{Script=Han}/u)
       const generated = await generateLine({language,kind:'tangent',previousLine:rubric.question,learnerSpeech:weather,storyID:'choochoo-birthday-cake',checkpointID:'call-a-friend'})
       assert.equal(generated.action,'redirect')
-      assert.ok(requests[2].input[0].content.includes(replyBoundaries[language]))
-      assert.deepEqual(requests[2].text.format.schema.required,['line'])
-      assert.equal(requests[1].text.format.name,'turn_understanding','understanding runs before creative generation')
+      assert.ok(requests[3].input[0].content.includes(replyBoundaries[language]))
+      assert.deepEqual(requests[3].text.format.schema.required,['line'])
+      assert.equal(requests[2].text.format.name,'turn_understanding','understanding runs before creative generation')
     } finally {
       globalThis.fetch = priorFetch
       if (priorKey === undefined) delete process.env.OPENAI_API_KEY; else process.env.OPENAI_API_KEY = priorKey
@@ -113,7 +114,38 @@ test('low-confidence, contradictory, or invented-concept grades cannot advance a
   }
 })
 
-test('unclear speech is held before the creative model runs, in both languages and every reply kind', async () => {
+test('clear low-effort grades return immediately; ambiguous grades get one deeper check', async () => {
+  const priorFetch=globalThis.fetch,priorKey=process.env.OPENAI_API_KEY
+  process.env.OPENAI_API_KEY='synthetic-test-key'
+  try {
+    const rubric=localizedRubric('choochoo-birthday-cake','call-a-friend','chinese')
+    const efforts=[]
+    globalThis.fetch=async(_url,init)=>{
+      const request=JSON.parse(init.body)
+      efforts.push(request.reasoning.effort)
+      const uncertain={meaningStatus:'unclear',verdict:'uncertain',language:'chinese',matchedConcepts:[],confidence:0.95}
+      const clear={meaningStatus:'clear',verdict:'offTopic',language:'chinese',matchedConcepts:[],confidence:0.99}
+      return Response.json({output_text:JSON.stringify(efforts.length===1?clear:efforts.length===2?uncertain:clear)})
+    }
+    assert.equal((await evaluate({rubric,transcript:'今天天气很好'})).verdict,'offTopic')
+    assert.deepEqual(efforts,['low'])
+    assert.equal((await evaluate({rubric,transcript:'姐姐买了一辆新自行车'})).verdict,'offTopic')
+    assert.deepEqual(efforts,['low','low','medium'])
+    globalThis.fetch=async(_url,init)=>{
+      const request=JSON.parse(init.body)
+      efforts.push(request.reasoning.effort)
+      if(request.reasoning.effort==='low')return Response.json({output_text:''})
+      return Response.json({output_text:JSON.stringify({meaningStatus:'clear',verdict:'offTopic',language:'chinese',matchedConcepts:[],confidence:0.99})})
+    }
+    assert.equal((await evaluate({rubric,transcript:'今天天气很好'})).verdict,'offTopic')
+    assert.deepEqual(efforts,['low','low','medium','low','medium'])
+  } finally {
+    globalThis.fetch=priorFetch
+    if(priorKey===undefined)delete process.env.OPENAI_API_KEY;else process.env.OPENAI_API_KEY=priorKey
+  }
+})
+
+test('unclear speech never plays a speculative draft, in both languages and every reply kind', async () => {
   const priorFetch=globalThis.fetch, priorKey=process.env.OPENAI_API_KEY
   process.env.OPENAI_API_KEY='synthetic-test-key'
   try {
@@ -121,13 +153,37 @@ test('unclear speech is held before the creative model runs, in both languages a
       let calls=0
       globalThis.fetch=async(_url,init)=>{
         calls++
-        assert.equal(JSON.parse(init.body).text.format.name,'turn_understanding')
+        assert.ok(['turn_understanding','play_line'].includes(JSON.parse(init.body).text.format.name))
         return new Response(JSON.stringify({output_text:JSON.stringify({action:'retry',confidence:0.95})}))
       }
       assert.deepEqual(await generateLine({language,kind,previousLine:'A pending question',learnerSpeech:'synthetic garbled input'}),{action:'retry',line:boundaryLines[language].retry})
-      assert.equal(calls,1)
+      assert.equal(calls,kind==='tangent'?1:2)
     }
   } finally {
+    globalThis.fetch=priorFetch
+    if(priorKey===undefined)delete process.env.OPENAI_API_KEY;else process.env.OPENAI_API_KEY=priorKey
+  }
+})
+
+test('a relevant play draft starts while independent understanding is still running',async()=>{
+  const priorFetch=globalThis.fetch,priorKey=process.env.OPENAI_API_KEY
+  process.env.OPENAI_API_KEY='synthetic-test-key'
+  let releaseUnderstanding,draftStarted=false
+  const gate=new Promise(resolve=>{releaseUnderstanding=resolve})
+  globalThis.fetch=async(_url,init)=>{
+    const name=JSON.parse(init.body).text.format.name
+    if(name==='play_line'){draftStarted=true;return Response.json({output_text:'{"line":"The dragon helps the rabbit lift the basket!"}'})}
+    await gate
+    return Response.json({output_text:'{"action":"continue","confidence":0.98}'})
+  }
+  try {
+    const result=generateLine({language:'english',kind:'imaginativePlay',previousLine:'Who can help the rabbit?',learnerSpeech:'A dragon can help!',storyContext:'The rabbit has a heavy basket.'})
+    await Promise.resolve()
+    assert.equal(draftStarted,true)
+    releaseUnderstanding()
+    assert.equal((await result).action,'continue')
+  } finally {
+    releaseUnderstanding()
     globalThis.fetch=priorFetch
     if(priorKey===undefined)delete process.env.OPENAI_API_KEY;else process.env.OPENAI_API_KEY=priorKey
   }
