@@ -21,6 +21,7 @@ const js = await (await fetch(new URL(asset, site))).text()
 const supabaseURL = js.match(/https:\/\/[a-z0-9]+\.supabase\.co/)?.[0]
 const publishableKey = js.match(/sb_publishable_[A-Za-z0-9_-]+/)?.[0]
 assert.ok(supabaseURL && publishableKey, 'public Supabase configuration found')
+assert.ok(js.includes(`wss://${domain}/web/voice-stream`), 'published browser bundle uses AWS streaming')
 const signup = await fetch(`${supabaseURL}/auth/v1/signup`, {
   method: 'POST', headers: { apikey: publishableKey, 'Content-Type': 'application/json' }, body: '{}',
 })
@@ -96,3 +97,13 @@ for (const [region, ip] of targets) {
   const streamMs = await streamingHandshake(ip)
   console.log(`${region}: health ${health.ms}ms, grade ${grade.ms}ms, speech ${speech.ms}ms, streaming ready ${streamMs}ms`)
 }
+
+const published = await fetch(new URL('/api/speech/synthesize', site), {
+  method: 'POST',
+  headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+  body: JSON.stringify({ text: 'Hello, friend.', language: 'english' }),
+})
+assert.equal(published.status, 200, 'published HTTPS speech proxy')
+assert.equal(published.headers.get('x-choochoo-voice'), 'voice-runtime', 'published proxy uses AWS, not Oracle')
+assert.ok((await published.json()).audioBase64, 'published proxy returns speech')
+console.log('production: browser stream URL and Vercel voice proxy use AWS')
