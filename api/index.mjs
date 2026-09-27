@@ -178,12 +178,15 @@ export async function moderate(input, signal) {
 }
 
 // Both authenticated HTTP and voice RPC use the same validation and safety gate.
-export async function evaluateAnswer(body, signal) {
+export async function evaluateAnswer(body, signal, safeTranscriptHash) {
   signal?.throwIfAborted()
   if (!body || !['english','chinese'].includes(body.targetLanguage) || !validText(body.transcript,500)) throw statusError(400)
   const rubric=localizedRubric(body.storyID,body.checkpointID,body.targetLanguage)
   if (!rubric) throw statusError(400)
-  if (!(await moderate(body.transcript,signal)).safe) throw statusError(422)
+  // The third argument is supplied only by the authenticated streaming adapter.
+  // HTTP and changed socket transcripts still get a fresh moderation check.
+  const sameModeratedSpeech = safeTranscriptHash && safeTranscriptHash === createHash('sha256').update(body.transcript).digest('hex')
+  if (!sameModeratedSpeech && !(await moderate(body.transcript,signal)).safe) throw statusError(422)
   const result=await evaluate({rubric,transcript:body.transcript},signal)
   signal?.throwIfAborted()
   rememberEvaluation(body,result)

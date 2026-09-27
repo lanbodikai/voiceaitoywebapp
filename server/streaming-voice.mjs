@@ -1,4 +1,5 @@
 import WebSocket, { WebSocketServer } from 'ws'
+import { createHash } from 'node:crypto'
 import { guestAction } from './progress-store.mjs'
 import { localizedRubric, storySelectionWords } from './conversation-boundaries.mjs'
 import { runtimeLimit } from './runtime-limits.mjs'
@@ -34,7 +35,7 @@ export function attachStreamingVoice(server, moderate, handlers = {}, dependenci
   })
   sockets.on('connection',(client)=>{
     let upstream, profile, authenticating = false, ready = false, current = 0, capturing = false, bytes = 0, turns = 0
-    let startedAt = Date.now(), lastMessage = Date.now()
+    let startedAt = Date.now(), lastMessage = Date.now(), safeTranscriptHash
     const commits = [], items = new Map()
     const requests = new Map()
     let requestCount=0,requestWindow=Date.now()
@@ -47,7 +48,7 @@ export function attachStreamingVoice(server, moderate, handlers = {}, dependenci
     client.on('close',()=>{
       clearTimeout(authTimer); clearTimeout(lifetime); clearInterval(idle); controller.abort(); upstream?.terminate()
       if(profile) { const n=(counts.get(profile)||1)-1; if(n) counts.set(profile,n); else counts.delete(profile) }
-      commits.length=0; items.clear()
+      commits.length=0; items.clear(); safeTranscriptHash=undefined
       for(const pending of requests.values())pending.abort();requests.clear()
     })
     client.on('error',close)
@@ -87,7 +88,12 @@ export function attachStreamingVoice(server, moderate, handlers = {}, dependenci
                 if(turn!==current || !turn) return
                 const transcript=String(event.transcript||'').slice(0,500)
                 const safety=transcript.trim()?await moderate(transcript):{safe:true,categories:[]}
-                if(turn===current && !controller.signal.aborted) send({type:'transcript',turn,transcript,safety})
+                if(turn===current && !controller.signal.aborted) {
+                  // Keep only a hash of this server-moderated turn; a client-supplied grade
+                  // can reuse safety only for the exact same transcript on this socket.
+                  safeTranscriptHash=safety.safe && transcript.trim() ? createHash('sha256').update(transcript).digest('hex') : undefined
+                  send({type:'transcript',turn,transcript,safety})
+                }
               }
               if(event.type==='conversation.item.input_audio_transcription.failed') {send({type:'error',turn:items.get(event.item_id)});items.delete(event.item_id)}
               if(event.type==='error') close()
@@ -102,7 +108,8 @@ export function attachStreamingVoice(server, moderate, handlers = {}, dependenci
           if(++requestCount>60 || requests.size>=2 || !Number.isSafeInteger(message.requestID) || requests.has(message.requestID) || !handlers[message.type]) {close();return}
           const pending=new AbortController();requests.set(message.requestID,pending)
           try {
-            const result=await handlers[message.type](message.body,pending.signal)
+            const proof=message.type==='evaluate' ? safeTranscriptHash : undefined
+            const result=await handlers[message.type](message.body,pending.signal,proof)
             if(!pending.signal.aborted)send({type:'reply',requestID:message.requestID,result})
           } catch {if(!pending.signal.aborted)send({type:'request_error',requestID:message.requestID})}
           finally {requests.delete(message.requestID)}
@@ -113,7 +120,7 @@ export function attachStreamingVoice(server, moderate, handlers = {}, dependenci
           if(!Number.isSafeInteger(message.turn) || message.turn<=current || !['chinese','english'].includes(message.language)) {close();return}
           if(Date.now()-startedAt>60000) {turns=0;startedAt=Date.now()}
           if(++turns>60 || commits.length>5 || items.size>5) {close();return}
-          current=message.turn;bytes=0;capturing=true
+          current=message.turn;bytes=0;capturing=true;safeTranscriptHash=undefined
           upstream.send(JSON.stringify({type:'input_audio_buffer.clear'}))
           upstream.send(JSON.stringify({type:'session.update',session:transcriptionConfig(message.language,message.storyID,message.beatID)}))
         } else if(message.type==='commit' && message.turn===current && capturing) {

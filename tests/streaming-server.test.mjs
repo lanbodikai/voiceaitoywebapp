@@ -68,6 +68,56 @@ test('authenticated socket grading preserves validation, moderation, and authori
   }
 })
 
+test('streaming safety proof skips only the duplicate moderation of the exact transcript',async()=>{
+  const oldFetch=globalThis.fetch,oldPilot=process.env.CHILD_PILOT_MODE,oldKey=process.env.OPENAI_API_KEY
+  process.env.CHILD_PILOT_MODE='false';process.env.OPENAI_API_KEY='synthetic'
+  let streamModerations=0,apiModerations=0,grades=0
+  globalThis.fetch=async(url,init)=>{
+    if(url.endsWith('/client_secrets'))return Response.json({value:'synthetic'})
+    if(url.endsWith('/moderations')){apiModerations++;return Response.json({results:[{flagged:JSON.parse(init.body).input==='unsafe synthetic',categories:{}}]})}
+    grades++;return Response.json({output_text:JSON.stringify({meaningStatus:'clear',verdict:'correct',language:'english',matchedConcepts:['thanks'],confidence:0.99})})
+  }
+  class UpstreamSocket extends EventEmitter {
+    readyState=1;bufferedAmount=0
+    constructor(){super();queueMicrotask(()=>this.emit('message',JSON.stringify({type:'session.created'})))}
+    send(value){
+      if(JSON.parse(value).type!=='input_audio_buffer.commit')return
+      queueMicrotask(()=>{
+        this.emit('message',JSON.stringify({type:'input_audio_buffer.committed',item_id:'synthetic-item'}))
+        this.emit('message',JSON.stringify({type:'conversation.item.input_audio_transcription.completed',item_id:'synthetic-item',transcript:'thanks'}))
+      })
+    }
+    terminate(){this.readyState=3}
+  }
+  const server=createServer()
+  const sockets=attachStreamingVoice(server,async()=>{streamModerations++;return {safe:true,categories:[]}},{evaluate:evaluateAnswer},{UpstreamSocket,authenticate:async()=>({profileID:'synthetic-proof-test'})})
+  server.listen(0,'127.0.0.1');await once(server,'listening')
+  let client
+  try {
+    client=new WebSocket(`ws://127.0.0.1:${server.address().port}/web/voice-stream`);await once(client,'open')
+    let reply=once(client,'message');client.send(JSON.stringify({type:'auth',token:'synthetic',language:'english'}));assert.equal(JSON.parse((await reply)[0]).type,'ready')
+    client.send(JSON.stringify({type:'begin',turn:1,language:'english',storyID:'choochoo-noodle-shop',beatID:'bengbeng-thanks'}))
+    client.send(Buffer.alloc(4800))
+    reply=once(client,'message');client.send(JSON.stringify({type:'commit',turn:1}))
+    assert.equal(JSON.parse((await reply)[0]).transcript,'thanks')
+    assert.equal(streamModerations,1)
+    const body={storyID:'choochoo-noodle-shop',checkpointID:'bengbeng-thanks',targetLanguage:'english',transcript:'thanks'}
+    reply=once(client,'message');client.send(JSON.stringify({type:'evaluate',requestID:1,body}))
+    assert.equal(JSON.parse((await reply)[0]).type,'reply')
+    assert.equal(apiModerations,0,'exact trusted transcript uses its streaming moderation')
+    reply=once(client,'message');client.send(JSON.stringify({type:'evaluate',requestID:2,body:{...body,transcript:'unsafe synthetic'}}))
+    assert.equal(JSON.parse((await reply)[0]).type,'request_error')
+    assert.equal(apiModerations,1,'changed text must be moderated again')
+    assert.equal(grades,1,'unsafe changed text never reaches grading')
+  }finally{
+    client?.terminate();for(const socket of sockets.clients)socket.terminate()
+    await new Promise(resolve=>sockets.close(resolve));await new Promise(resolve=>server.close(resolve))
+    globalThis.fetch=oldFetch
+    if(oldPilot===undefined)delete process.env.CHILD_PILOT_MODE;else process.env.CHILD_PILOT_MODE=oldPilot
+    if(oldKey===undefined)delete process.env.OPENAI_API_KEY;else process.env.OPENAI_API_KEY=oldKey
+  }
+})
+
 test('a fixed retry skips speech synthesis but still moderates input and output',async()=>{
   const oldFetch=globalThis.fetch,oldKey=process.env.OPENAI_API_KEY
   process.env.OPENAI_API_KEY='synthetic'
