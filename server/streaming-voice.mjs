@@ -176,7 +176,7 @@ export function attachStreamingVoice(server, moderate, handlers = {}, dependenci
               if(synthesisError)throw synthesisError
               if(!pending.signal.aborted)send({type:'reply_audio_done',requestID:message.requestID})
             } else {
-            const result=await handlers[message.type](message.body,pending.signal,proof,guestConsentVersion)
+              const result=await handlers[message.type](message.body,pending.signal,proof,guestConsentVersion)
               if(!pending.signal.aborted)send({type:'reply',requestID:message.requestID,result})
             }
           } catch {if(!pending.signal.aborted)send({type:'request_error',requestID:message.requestID})}
