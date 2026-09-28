@@ -20,6 +20,7 @@ try {
       const completedBeforeBeat = story.beats.filter(item => item.id !== beat.id).slice(0, story.typicalPathLength - 1).map(item => item.checkpoint.id)
       await page.addInitScript(({language,mode,beat,storyID,completedBeforeBeat}) => {
         localStorage.setItem('choochoo:preferences',JSON.stringify({language}))
+        localStorage.setItem('choochoo:consent:fixture',JSON.stringify('web-handsfree-1.4'))
         localStorage.setItem('choochoo:learner:device',JSON.stringify({nameAsked:true,name:'Luna'}))
         if(mode === 'open') localStorage.setItem('choochoo:progress:',JSON.stringify([{storyID,language,snapshot:{beatID:beat.id,phase:'story',completed:false,attemptCount:0,hintLevel:0,beatPath:[beat.id],completedCheckpoints:completedBeforeBeat,rewardIDs:[],vocabularyIDs:[]}}]))
         window.spoken=[]; window.events=[]; window.requests=[]; window.verdict='offTopic'; window.action='redirect'
@@ -65,7 +66,10 @@ try {
         await page.waitForFunction(()=>!['Thinking','想一想','ChooChoo is speaking','ChooChoo 在说话'].includes(document.querySelector('.room-state')?.textContent))
         await page.clock.runFor(40)
       }
-      if(mode === 'play') await respond(language === 'english' ? 'boat' : '小船')
+      if(mode === 'play') {
+        await respond(language === 'english' ? 'boat' : '小船')
+        await page.waitForFunction(() => document.querySelector('.room-copy h1')?.textContent === window.spoken.at(-1))
+      }
       else {
         await page.waitForFunction(()=>window.spoken.at(-1)?.match(/Ready for our story|准备好听故事/),undefined,{timeout:5000}).catch(async error=>{console.error(await page.evaluate(()=>({spoken:window.spoken,body:document.body.innerText})));throw error})
         const readyPrompt = await page.evaluate(()=>window.spoken.at(-1))
@@ -92,7 +96,7 @@ try {
       }
       for(let i=0;i<4;i++) {
         await respond(language === 'english' ? "Today's weather is good" : '今天天气很好')
-        assert.ok((await page.evaluate(()=>window.spoken.at(-1))).endsWith(originalQuestion), JSON.stringify(await page.evaluate(()=>({spoken:window.spoken.slice(-4),state:document.querySelector('.room-state')?.textContent}))))
+        assert.ok((await page.evaluate(()=>window.spoken.at(-1))).endsWith(originalQuestion), JSON.stringify(await page.evaluate(()=>({spoken:window.spoken.slice(-4),requests:window.requests.slice(-2),action:window.action,state:document.querySelector('.room-state')?.textContent}))))
       }
       await page.evaluate(()=>{window.verdict='uncertain';window.action='retry'})
       for(const text of ['', 'purple the because yesterday','啊那个蓝七昨天','purple the because yesterday']) {

@@ -10,6 +10,7 @@ try {
   const reactURL = transformed.match(/"(\/node_modules\/\.vite\/deps\/react\.js\?v=[^"]+)"/)[1]
   await page.addInitScript(() => {
     localStorage.setItem('choochoo:preferences',JSON.stringify({language:'english'}))
+    localStorage.setItem('choochoo:consent:fixture',JSON.stringify('web-handsfree-1.4'))
     window.spoken=[]
   })
   await page.route('**/src/supabase.ts*', route=>route.fulfill({contentType:'application/javascript',body:`

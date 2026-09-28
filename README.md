@@ -81,6 +81,17 @@ Dashboard rollout: apply `supabase/20260922_puzzle_events.sql`, then `supabase/2
 
 ## Verification
 
+Jev grading is an opt-in server-side fast path for high-confidence story choice
+and comprehension answers. OpenAI moderation still runs first, and OpenAI
+grading handles uncertain answers, other-language answers, open questions,
+Jev errors, and timeouts. To roll it out: apply
+`supabase/20260928_jev_consent.sql` before releasing the updated web client;
+then set `JEV_GRADING_ENABLED=true`, a freshly rotated `TYPESAFE_API_KEY`, and
+optionally `TYPESAFE_MODEL=jev-1.13.0` on **both** voice servers. Do not put the
+key in Vite variables or the repository. Only guests who accepted the new
+`web-handsfree-1.4` disclosure can use Jev; older clients keep OpenAI grading.
+Review TypeSafe's data-processing terms before enabling this for children.
+
 Use Node 24 or newer for the TypeScript source tests:
 
 ```bash

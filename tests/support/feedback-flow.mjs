@@ -16,6 +16,7 @@ try {
     const reactURL = transformed.match(/"(\/node_modules\/\.vite\/deps\/react\.js\?v=[^"]+)"/)[1]
     await page.addInitScript(({ language, storyID, beatID }) => {
       localStorage.setItem('choochoo:preferences', JSON.stringify({ language }))
+      localStorage.setItem('choochoo:consent:fixture', JSON.stringify('web-handsfree-1.4'))
       localStorage.setItem('choochoo:learner:device', JSON.stringify({ nameAsked: true, name: 'Luna' }))
       localStorage.setItem('choochoo:progress:', JSON.stringify([{ storyID, language, snapshot: { beatID, phase: 'story', completed: false, attemptCount: 0, hintLevel: 0, beatPath: [beatID], completedCheckpoints: [], rewardIDs: [], vocabularyIDs: [] } }]))
       window.spoken = []; window.remoteGrades = 0; window.events = []

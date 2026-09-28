@@ -30,7 +30,7 @@ type ConversationState = 'join' | 'speaking' | 'listening' | 'thinking' | 'ready
 type StoryPhase = 'lobby' | 'name' | 'ready' | 'story' | 'recast' | 'wrapup' | 'audioProblem' | 'unsafe'
 
 const LazyConversationOrb = lazy(() => import('./ConversationOrb').then((module) => ({ default: module.ConversationOrb })))
-const consentVersion='web-handsfree-1.3'
+const consentVersion='web-handsfree-1.4'
 
 function ConversationOrb({ state }: { state: OrbState }) {
   return <Suspense fallback={<div className="three-orb"><div className="three-orb-fallback" /></div>}><LazyConversationOrb state={state} /></Suspense>
@@ -110,7 +110,7 @@ function ConsentScreen({ language, onLanguage, onContinue }: { language: LessonL
       <h1>{t('故事，从这里开始。', 'A little story. A big adventure.')}</h1>
       <div className="consent-copy">
         <p>{t('和 ChooChoo 听故事、聊想法。开始前，请由成人确认。', 'Listen, talk, and imagine with ChooChoo. A grown-up needs to confirm before you begin.')}</p>
-        <p>{t('打开麦克风后，应用在本机检测说话声，并将语音分段发送给 Deepgram 识别，再由 OpenAI 生成回复；服务切换期间可能使用 OpenAI 识别。英语对话的动态回复文字会发送给 Deepgram 生成语音；中文回复、固定语音以及不支持流式播放的浏览器使用微软 Edge 语音服务。附近其他人的声音也可能被识别。随时可关闭麦克风；除下方说明的本机称呼外，本应用不保存录音或对话文字。', 'While the microphone is on, speech is detected on this device and streamed in small chunks to Deepgram for transcription, then OpenAI generates the reply. OpenAI transcription may be used during a service transition. Dynamic English reply text is sent to Deepgram for speech; Mandarin replies, fixed lines, and browsers without streaming playback use Microsoft’s Edge speech service. Nearby voices may also be picked up. You can turn the mic off at any time. Except for the local nickname described below, this app does not save recordings or conversation transcripts.')}</p>
+        <p>{t('打开麦克风后，应用在本机检测说话声，并将语音分段发送给 Deepgram 识别，再由 OpenAI 生成回复；服务切换期间可能使用 OpenAI 识别。故事问题的转写文字可能发送给 TypeSafe AI 的 Jev 模型快速判断；不确定时由 OpenAI 判断。英语对话的动态回复文字会发送给 Deepgram 生成语音；中文回复、固定语音以及不支持流式播放的浏览器使用微软 Edge 语音服务。附近其他人的声音也可能被识别。随时可关闭麦克风；除下方说明的本机称呼外，本应用不保存录音或对话文字。', 'While the microphone is on, speech is detected on this device and streamed in small chunks to Deepgram for transcription, then OpenAI generates the reply. OpenAI transcription may be used during a service transition. Transcribed answers to story questions may be sent to TypeSafe AI’s Jev model for a quick check; uncertain answers are checked by OpenAI. Dynamic English reply text is sent to Deepgram for speech; Mandarin replies, fixed lines, and browsers without streaming playback use Microsoft’s Edge speech service. Nearby voices may also be picked up. You can turn the mic off at any time. Except for the local nickname described below, this app does not save recordings or conversation transcripts.')}</p>
         <p>{t('请在成人陪同下使用。ChooChoo 是 AI，可能听错或说错。', 'Stay with your child while using ChooChoo. It is AI and can misunderstand or make mistakes.')}</p>
         <p>{t('ChooChoo 会问一次你喜欢的称呼，只保存在这个浏览器中，不会随进度上传。我们用随机访客编号保存故事进度、答题次数和需要练习的词语。', 'ChooChoo asks once what you like to be called. That nickname stays only in this browser and is not uploaded with progress. A random guest ID saves story progress, answer attempts, and words to practice.')}</p>
       </div>

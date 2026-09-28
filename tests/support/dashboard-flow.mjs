@@ -12,6 +12,7 @@ try {
   const source=await (await page.request.get(`${site}/src/App.tsx`)).text()
   const reactURL=source.match(/"(\/node_modules\/\.vite\/deps\/react\.js\?v=[^"]+)"/)[1]
   await page.addInitScript(stories=>{
+    localStorage.setItem('choochoo:consent:fixture',JSON.stringify('web-handsfree-1.4'))
     if(!localStorage.getItem('dashboard-fixture')) {
       localStorage.setItem('dashboard-fixture','true')
       localStorage.setItem('choochoo:guest-profile',JSON.stringify('dashboard-guest'))

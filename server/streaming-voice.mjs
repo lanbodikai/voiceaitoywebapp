@@ -39,7 +39,7 @@ export function attachStreamingVoice(server, moderate, handlers = {}, dependenci
   })
   sockets.on('connection',(client)=>{
     let upstream, profile, authenticating = false, ready = false, current = 0, capturing = false, bytes = 0, turns = 0
-    let provider='openai',dgLanguage,dgCommitted=false,dgDelivered=false,dgInterim='',dgTimer,deepgramAllowed=false
+    let provider='openai',dgLanguage,dgCommitted=false,dgDelivered=false,dgInterim='',dgTimer,deepgramAllowed=false,guestConsentVersion
     let dgFinal=[]
     let startedAt = Date.now(), lastMessage = Date.now(), safeTranscriptHash
     const commits = [], items = new Map()
@@ -92,7 +92,8 @@ export function attachStreamingVoice(server, moderate, handlers = {}, dependenci
           const guest=await authenticate(`Bearer ${message.token}`,'load')
           if(controller.signal.aborted || (counts.get(guest.profileID)||0)>=2) {close();return}
           profile=guest.profileID; counts.set(profile,(counts.get(profile)||0)+1)
-          deepgramAllowed=guest.consentVersion==='web-handsfree-1.3'
+          guestConsentVersion=guest.consentVersion
+          deepgramAllowed=['web-handsfree-1.3','web-handsfree-1.4'].includes(guestConsentVersion)
           if(deepgramAllowed && process.env.DEEPGRAM_STT==='true' && process.env.DEEPGRAM_API_KEY){
             provider='deepgram';dgLanguage=message.language
             upstream=new UpstreamSocket(deepgramTranscriptionURL(message.language),{headers:{Authorization:`Token ${process.env.DEEPGRAM_API_KEY}`},handshakeTimeout:8000})
@@ -175,7 +176,7 @@ export function attachStreamingVoice(server, moderate, handlers = {}, dependenci
               if(synthesisError)throw synthesisError
               if(!pending.signal.aborted)send({type:'reply_audio_done',requestID:message.requestID})
             } else {
-              const result=await handlers[message.type](message.body,pending.signal,proof)
+            const result=await handlers[message.type](message.body,pending.signal,proof,guestConsentVersion)
               if(!pending.signal.aborted)send({type:'reply',requestID:message.requestID,result})
             }
           } catch {if(!pending.signal.aborted)send({type:'request_error',requestID:message.requestID})}

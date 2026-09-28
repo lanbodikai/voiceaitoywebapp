@@ -5,6 +5,7 @@ import { guestAction, learningEvents, progressSnapshot } from '../server/progres
 import { proxyVoice, voiceRoutes } from '../server/oracle-proxy.mjs'
 import { transcribeRealtime } from '../server/realtime-audio.mjs'
 import { edgeSpeech } from '../server/edge-speech.mjs'
+import { tryJevEvaluation } from '../server/jev-evaluation.mjs'
 
 export const config = { api: { bodyParser: false } }
 
@@ -21,10 +22,12 @@ export default async function handler(request, response) {
 
   try {
     const user = await authenticatedUser(request.headers.authorization)
+    let consentVersion
     if (!allowRequest(user.id)) return json(response, 429, { error: 'Please wait a moment and try again' })
     if (voiceRoutes.has(route)) {
       // Verify an existing consented guest profile before sending speech anywhere.
-      await guestAction(request.headers.authorization, 'load')
+      const guest = await guestAction(request.headers.authorization, 'load')
+      consentVersion = guest.consentVersion
       const cancelled = new AbortController()
       const disconnect = () => { if (!response.writableEnded) cancelled.abort() }
       response.once('close', disconnect)
@@ -86,7 +89,7 @@ export default async function handler(request, response) {
     }
     if (route === 'answers/evaluate') {
       const body = await readJSON(request)
-      return json(response, 200, await evaluateAnswer(body, request.voiceSignal))
+      return json(response, 200, await evaluateAnswer(body, request.voiceSignal, undefined, consentVersion))
     }
     if (route === 'lines/generate') {
       const body = await readJSON(request)
@@ -178,7 +181,7 @@ export async function moderate(input, signal) {
 }
 
 // Both authenticated HTTP and voice RPC use the same validation and safety gate.
-export async function evaluateAnswer(body, signal, safeTranscriptHash) {
+export async function evaluateAnswer(body, signal, safeTranscriptHash, consentVersion) {
   signal?.throwIfAborted()
   if (!body || !['english','chinese'].includes(body.targetLanguage) || !validText(body.transcript,500)) throw statusError(400)
   const rubric=localizedRubric(body.storyID,body.checkpointID,body.targetLanguage)
@@ -187,7 +190,9 @@ export async function evaluateAnswer(body, signal, safeTranscriptHash) {
   // HTTP and changed socket transcripts still get a fresh moderation check.
   const sameModeratedSpeech = safeTranscriptHash && safeTranscriptHash === createHash('sha256').update(body.transcript).digest('hex')
   if (!sameModeratedSpeech && !(await moderate(body.transcript,signal)).safe) throw statusError(422)
-  const result=await evaluate({rubric,transcript:body.transcript},signal)
+  const result=(consentVersion === 'web-handsfree-1.4'
+    ? await tryJevEvaluation({rubric,transcript:body.transcript},signal)
+    : undefined) ?? await evaluate({rubric,transcript:body.transcript},signal)
   signal?.throwIfAborted()
   rememberEvaluation(body,result)
   return result
