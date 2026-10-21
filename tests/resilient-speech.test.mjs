@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { synthesizeSpeech, streamResilientSpeech, resetSpeechFallbackForTests } from '../server/resilient-speech.mjs'
-import { checkVoiceCanary, readVoiceCanary } from '../server/voice-canary.mjs'
+import { checkVoiceCanary, readVoiceCanary, memoryPressureFromLinux } from '../server/voice-canary.mjs'
 
 test('failed Edge synthesis falls back to OpenAI without logging or retaining speech', async () => {
   const old = { key: process.env.OPENAI_API_KEY, python: process.env.EDGE_TTS_PYTHON, enabled: process.env.SPEECH_FALLBACK_ENABLED, fetch: globalThis.fetch }
@@ -62,4 +62,13 @@ test('canary fails closed when unavailable or stale', async () => {
   assert.equal(report.ok, false)
   assert.equal(report.languages.english.ok, false)
   assert.deepEqual(readVoiceCanary('/path/that/does/not/exist'), { ok: false, degraded: true })
+})
+
+test('memory pressure marks low headroom, swap use, or a new OOM kill', () => {
+  const meminfo = 'MemAvailable: 153600 kB\nSwapTotal: 1048576 kB\nSwapFree: 1048576 kB\n'
+  const vmstat = 'oom_kill 7\n'
+  assert.equal(memoryPressureFromLinux(meminfo, vmstat, 7).warning, false)
+  assert.equal(memoryPressureFromLinux(meminfo, vmstat, 6).warning, true)
+  assert.equal(memoryPressureFromLinux(meminfo.replace('153600', '32768'), vmstat, 7).warning, true)
+  assert.equal(memoryPressureFromLinux(meminfo.replace('SwapFree: 1048576', 'SwapFree: 524288'), vmstat, 7).warning, true)
 })

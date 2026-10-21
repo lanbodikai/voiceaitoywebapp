@@ -60,6 +60,10 @@ the runtime starts, then `systemctl enable --now voice-ai-toy-canary.timer`.
 The status file is under `/var/lib/voice-ai-toy-monitor` and contains only
 booleans, provider labels, and a timestamp. A failed timer run writes one
 sanitized journal marker, `voice_canary_unhealthy`.
+The same timer records available memory, swap use, and the kernel OOM-kill
+counter. It emits `voice_memory_pressure` when available RAM falls below
+64 MiB, swap use exceeds 256 MiB, or an OOM kill occurred since its last run.
+Memory pressure is reported as degraded but does not by itself fail DNS health.
 
 Put Caddy in front of loopback port 8787. Expose only HTTP/HTTPS publicly; restrict
 SSH to approved management access. Do not expose 8787 or install a database.
@@ -72,7 +76,10 @@ The user purchased `260926731.xyz` at Porkbun. The planned backend hostname is
 Route 53 public hosted zone `Z03136631Y6HZQZ7QSFMF` has been created in the
 approved AWS account. Porkbun now lists its four Route 53 nameservers, and the
 `api` A records have US East/US West latency routing with region-specific HTTP
-health checks. The `.xyz` registry and public resolvers published the new
+health checks. Both checks now request `/health/voice` with the API hostname in
+the Host header, so a region with failed bilingual speech probes is removed from
+normal DNS answers. This does not test grading or already-open WebSockets.
+The `.xyz` registry and public resolvers published the new
 delegation, and both health checks are healthy. Never use or change
 `mousefit.pro`.
 
@@ -106,11 +113,15 @@ test guests and fixed synthetic text; it sends no child recording.
    handshake, then confirms the published browser and Vercel proxy use AWS.
 2. Verify real-device interruption/reconnect and end-of-speech-to-audio latency
    separately. DNS failover depends on caches/60-second TTL and cannot move an
-   existing WebSocket. Route 53 health checks monitor the local runtime, not
-   OpenAI/Supabase availability.
-3. The Vercel production variables are
+   existing WebSocket. The cached Route 53 check tests speech but not the
+   OpenAI grading or Supabase paths; the full smoke test does that.
+3. Deploy the frontend's audio-provider allowlist first, then one AWS region at
+   a time. After each region, run its canary and `SMOKE_REGION=west` or `east`
+   with the full smoke script before proceeding. Keep the previous source and
+   service unit for rollback.
+4. The Vercel production variables are
    `VOICE_API_ORIGIN=https://api.260926731.xyz/web` and
    `VITE_VOICE_STREAM_URL=wss://api.260926731.xyz/web/voice-stream`.
-4. Rollback: remove those two Vercel production overrides and redeploy the
+5. Rollback: remove those two Vercel production overrides and redeploy the
    prior frontend. Existing legacy defaults still route to Oracle. Do not
    delete Oracle Voice AI Toy as part of rollback.

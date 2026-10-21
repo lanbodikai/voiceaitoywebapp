@@ -42,7 +42,19 @@ export function readVoiceCanary(path = process.env.VOICE_CANARY_STATUS_FILE || c
     return {
       ok: report.ok === true && ['english', 'chinese'].every(language => report.languages?.[language]?.ok === true),
       degraded: report.degraded === true,
+      memoryPressure: report.memory?.warning === true,
       checkedAt: report.checkedAt,
     }
   } catch { return { ok: false, degraded: true } }
+}
+
+export function memoryPressureFromLinux(meminfo, vmstat, previousOomKills = 0) {
+  const value = (source, key) => Number(source.match(new RegExp(`^${key}:?\\s+(\\d+)`, 'm'))?.[1] || 0)
+  const availableMiB = Math.round(value(meminfo, 'MemAvailable') / 1024)
+  const swapUsedMiB = Math.round((value(meminfo, 'SwapTotal') - value(meminfo, 'SwapFree')) / 1024)
+  const oomKills = value(vmstat, 'oom_kill')
+  return {
+    availableMiB, swapUsedMiB, oomKills,
+    warning: availableMiB < 64 || swapUsedMiB > 256 || oomKills > previousOomKills,
+  }
 }

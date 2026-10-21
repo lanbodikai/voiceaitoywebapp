@@ -26,7 +26,7 @@ export function createVoiceServer() {
       const canary = readVoiceCanary()
       const ok = configured && permitted && canary.ok
       response.statusCode = ok ? 200 : 503
-      response.end(JSON.stringify({ ok, degraded: canary.degraded, checkedAt: canary.checkedAt || null }))
+      response.end(JSON.stringify({ ok, degraded: canary.degraded, memoryPressure: canary.memoryPressure === true, checkedAt: canary.checkedAt || null }))
       return
     }
     const route = pathname.startsWith('/web/') ? pathname.slice(5) : ''
