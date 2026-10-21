@@ -33,10 +33,11 @@ sources. Install runtime dependencies `busboy@1.6.0` and `ws@8.21.3`; create a
 Python venv with `edge-tts==7.3.1`. Keep application files root-owned and run as
 the unprivileged `voice-ai-toy` service account using `voice-ai-toy.service`.
 Store configuration in `/etc/voice-ai-toy/runtime.env`, root-owned mode 0600.
-The OpenAI speech fallback uses the already configured `OPENAI_API_KEY` and
-`gpt-4o-mini-tts` for English and Chinese. Set `SPEECH_FALLBACK_ENABLED=false`
-only for a controlled rollback. The Speech API model is scheduled for retirement
-on 2027-01-06; migrate the fallback before that date.
+The optional OpenAI speech fallback uses `OPENAI_API_KEY` and `gpt-4o-mini-tts`
+for English and Chinese. It is off by default: the current production key returns
+`model_not_found` for speech models, so do not enable it until a live bilingual
+test succeeds. The Speech API model is scheduled for retirement on 2027-01-06;
+migrate any enabled fallback before that date.
 On 512 MB Lightsail instances, provision a 1 GB swap file to absorb transient
 memory spikes during system maintenance; both production instances use one.
 `DEEPGRAM_API_KEY` enables progressive English Aura-2 speech. Set

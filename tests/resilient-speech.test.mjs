@@ -40,14 +40,21 @@ test('failed Edge synthesis falls back to OpenAI without logging or retaining sp
 })
 
 test('canary checks both languages and marks fallback as degraded', async () => {
-  const report = await checkVoiceCanary(async (_text, language, onChunk) => {
-    if (language === 'english') throw new Error('Primary down')
-    onChunk(Uint8Array.of(1))
-  }, async (_text, _language, onChunk) => onChunk(Uint8Array.of(2)))
-  assert.equal(report.ok, true)
-  assert.equal(report.degraded, true)
-  assert.equal(report.languages.english.provider, 'openai-tts')
-  assert.equal(report.languages.chinese.provider, 'edge-tts')
+  const previous = process.env.SPEECH_FALLBACK_ENABLED
+  process.env.SPEECH_FALLBACK_ENABLED = 'true'
+  try {
+    const report = await checkVoiceCanary(async (_text, language, onChunk) => {
+      if (language === 'english') throw new Error('Primary down')
+      onChunk(Uint8Array.of(1))
+    }, async (_text, _language, onChunk) => onChunk(Uint8Array.of(2)))
+    assert.equal(report.ok, true)
+    assert.equal(report.degraded, true)
+    assert.equal(report.languages.english.provider, 'openai-tts')
+    assert.equal(report.languages.chinese.provider, 'edge-tts')
+  } finally {
+    if (previous === undefined) delete process.env.SPEECH_FALLBACK_ENABLED
+    else process.env.SPEECH_FALLBACK_ENABLED = previous
+  }
 })
 
 test('canary fails closed when unavailable or stale', async () => {

@@ -3,7 +3,7 @@ import { openAISpeech, streamOpenAISpeech } from './openai-speech.mjs'
 
 let preferFallbackUntil = 0
 const fallbackWindowMs = 5 * 60 * 1000
-const canFallback = () => process.env.SPEECH_FALLBACK_ENABLED !== 'false' && Boolean(process.env.OPENAI_API_KEY)
+const canFallback = () => process.env.SPEECH_FALLBACK_ENABLED === 'true' && Boolean(process.env.OPENAI_API_KEY)
 const isProviderFailure = error => error?.statusCode === 502 || error?.message === 'Speech process failed'
 
 export async function synthesizeSpeech(text, language, signal) {

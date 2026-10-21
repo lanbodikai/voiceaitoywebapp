@@ -18,7 +18,7 @@ export async function checkVoiceCanary(primary = streamEdgeSpeech, fallback = st
     } catch {
       count.bytes = 0
       try {
-        if (process.env.SPEECH_FALLBACK_ENABLED === 'false') throw new Error('Fallback disabled')
+        if (process.env.SPEECH_FALLBACK_ENABLED !== 'true') throw new Error('Fallback disabled')
         await fallback(phrase, language, receive)
         if (!count.bytes) throw new Error('Empty speech')
         languages[language] = { ok: true, provider: 'openai-tts' }
