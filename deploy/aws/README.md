@@ -25,9 +25,11 @@ OpenAI/Supabase availability test and incurs no model usage.
 
 On dedicated Ubuntu servers, install Node LTS and Python from verified official
 sources. Install runtime dependencies `busboy@1.6.0` and `ws@8.21.3`; create a
-Python venv with `edge-tts==7.2.8`. Keep application files root-owned and run as
+Python venv with `edge-tts==7.3.1`. Keep application files root-owned and run as
 the unprivileged `voice-ai-toy` service account using `voice-ai-toy.service`.
 Store configuration in `/etc/voice-ai-toy/runtime.env`, root-owned mode 0600.
+On 512 MB Lightsail instances, provision a 1 GB swap file to absorb transient
+memory spikes during system maintenance; both production instances use one.
 `DEEPGRAM_API_KEY` enables progressive English Aura-2 speech. Set
 `DEEPGRAM_STT=true` to use Nova-3 streaming recognition. Both new services
 require a recorded `web-handsfree-1.3` consent version; older sessions stay on

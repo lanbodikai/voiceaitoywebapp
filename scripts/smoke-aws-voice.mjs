@@ -6,10 +6,10 @@ import WebSocket from 'ws'
 
 const site = process.env.SMOKE_SITE
 if (!site) throw new Error('Set SMOKE_SITE to the existing public website URL')
-const targets = [
-  ['east', '100.51.236.202'],
-  ['west', '100.23.30.205'],
-]
+const regionalIPs = { east: '100.51.236.202', west: '100.23.30.205' }
+const requestedRegion = process.env.SMOKE_REGION
+if (requestedRegion && !regionalIPs[requestedRegion]) throw new Error('SMOKE_REGION must be east or west')
+const targets = requestedRegion ? [[requestedRegion, regionalIPs[requestedRegion]]] : Object.entries(regionalIPs)
 const domain = 'api.260926731.xyz'
 const lookupFor = ip => (_hostname, options, callback) => options.all
   ? callback(null, [{ address: ip, family: 4 }])

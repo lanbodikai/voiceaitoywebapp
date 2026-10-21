@@ -28,11 +28,11 @@ sudo env PATH="/opt/voice-ai-toy/node/bin:/usr/bin:/bin" \
   --prefix /opt/voice-ai-toy/current --omit=dev --no-audit --no-fund \
   --no-package-lock --save=false busboy@1.6.0 ws@8.21.3
 
-if [ ! -x /opt/voice-ai-toy/tts/bin/python ]; then
-  sudo python3 -m venv /opt/voice-ai-toy/tts
+if [ ! -x /opt/voice-ai-toy/tts-7.3.1/bin/python ]; then
+  sudo python3 -m venv /opt/voice-ai-toy/tts-7.3.1
 fi
-sudo /opt/voice-ai-toy/tts/bin/pip install \
-  --disable-pip-version-check --no-cache-dir 'edge-tts==7.2.8'
+sudo /opt/voice-ai-toy/tts-7.3.1/bin/pip install \
+  --disable-pip-version-check --no-cache-dir 'edge-tts==7.3.1'
 
 sudo install -m 644 /tmp/voice-ai-toy.service /etc/systemd/system/voice-ai-toy.service
 sudo systemctl daemon-reload
