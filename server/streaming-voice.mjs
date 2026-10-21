@@ -169,7 +169,7 @@ export function attachStreamingVoice(server, moderate, handlers = {}, dependenci
               if(pending.signal.aborted)return
               if(result.skipSpeech){send({type:'reply',requestID:message.requestID,result:{line:result.line,action:result.action}});return}
               if(synthesisError)throw synthesisError
-              send({type:'reply',requestID:message.requestID,result:{line:result.line,action:result.action,speech:{stream:true,mimeType:'audio/mpeg',provider:language==='english' && process.env.DEEPGRAM_API_KEY && deepgramAllowed?'deepgram-aura-2':'edge-tts'}}})
+              send({type:'reply',requestID:message.requestID,result:{line:result.line,action:result.action,speech:{stream:true,mimeType:'audio/mpeg',provider:language==='english' && process.env.DEEPGRAM_API_KEY && deepgramAllowed?'deepgram-aura-2':'voice-runtime'}}})
               while(buffered.length)await sendChunk(buffered.shift())
               released=true
               await synthesis

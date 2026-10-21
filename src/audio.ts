@@ -91,7 +91,7 @@ function playCue(cueID: string) {
   return url ? playAudio(url) : Promise.resolve(false)
 }
 function playPrepared(speech:PreparedSpeech) {
-  if(!['edge-tts','deepgram-aura-2'].includes(speech.provider) || speech.mimeType!=='audio/mpeg') return Promise.resolve(false)
+  if(!['edge-tts','deepgram-aura-2','openai-tts','voice-runtime'].includes(speech.provider) || speech.mimeType!=='audio/mpeg') return Promise.resolve(false)
   if('stream' in speech)return playStream(speech.stream)
   const bytes=Uint8Array.from(atob(speech.audioBase64),c=>c.charCodeAt(0))
   const url=URL.createObjectURL(new Blob([bytes],{type:'audio/mpeg'}));bytes.fill(0)

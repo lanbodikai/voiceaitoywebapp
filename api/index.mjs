@@ -4,7 +4,7 @@ import { boundaryLines, evaluationBoundaries, replyBoundaries, understandingInst
 import { guestAction, learningEvents, progressSnapshot } from '../server/progress-store.mjs'
 import { proxyVoice, voiceRoutes } from '../server/oracle-proxy.mjs'
 import { transcribeRealtime } from '../server/realtime-audio.mjs'
-import { edgeSpeech } from '../server/edge-speech.mjs'
+import { synthesizeSpeech } from '../server/resilient-speech.mjs'
 import { tryJevEvaluation } from '../server/jev-evaluation.mjs'
 
 export const config = { api: { bodyParser: false } }
@@ -80,7 +80,7 @@ export default async function handler(request, response) {
     }
     if (route === 'speech/synthesize') {
       const body = await readJSON(request)
-      return json(response, 200, await edgeSpeech(body.text, body.language, request.voiceSignal))
+      return json(response, 200, await synthesizeSpeech(body.text, body.language, request.voiceSignal))
     }
     if (route === 'answers/safety-check') {
       const body = await readJSON(request)
@@ -424,7 +424,7 @@ export async function generateSpokenLine(body, signal) {
     if(!(await moderate(generated.line,signal)).safe)throw statusError(422)
     return generated
   }
-  const [safety,speech]=await Promise.all([moderate(generated.line),edgeSpeech(generated.line,body.language,signal)])
+  const [safety,speech]=await Promise.all([moderate(generated.line),synthesizeSpeech(generated.line,body.language,signal)])
   if (!safety.safe) throw statusError(422)
   return {...generated,speech}
 }

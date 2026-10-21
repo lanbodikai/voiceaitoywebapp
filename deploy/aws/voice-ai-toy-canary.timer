@@ -1,0 +1,12 @@
+[Unit]
+Description=Check both Voice AI Toy speech languages every five minutes
+
+[Timer]
+OnBootSec=30s
+OnUnitActiveSec=5min
+RandomizedDelaySec=20s
+Persistent=true
+Unit=voice-ai-toy-canary.service
+
+[Install]
+WantedBy=timers.target

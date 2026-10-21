@@ -2,8 +2,9 @@ import { createServer } from 'node:http'
 import handler, { moderate, generateSpokenLine, generateCandidateLine, evaluateAnswer } from '../api/index.mjs'
 import { voiceRoutes } from './oracle-proxy.mjs'
 import { attachStreamingVoice } from './streaming-voice.mjs'
-import { edgeSpeech } from './edge-speech.mjs'
+import { synthesizeSpeech } from './resilient-speech.mjs'
 import { streamSpeech } from './progressive-speech.mjs'
+import { readVoiceCanary } from './voice-canary.mjs'
 
 // This standalone service deliberately contains no legacy app or database server.
 export function createVoiceServer() {
@@ -17,6 +18,15 @@ export function createVoiceServer() {
       const permitted = process.env.CHILD_PILOT_MODE === 'false' || process.env.OPENAI_ZDR_VERIFIED === 'true'
       response.statusCode = configured && permitted ? 200 : 503
       response.end(JSON.stringify({ ok: configured && permitted }))
+      return
+    }
+    if (request.method === 'GET' && pathname === '/health/voice') {
+      const configured = ['OPENAI_API_KEY', 'VITE_SUPABASE_URL', 'VITE_SUPABASE_PUBLISHABLE_KEY'].every(key => Boolean(process.env[key]))
+      const permitted = process.env.CHILD_PILOT_MODE === 'false' || process.env.OPENAI_ZDR_VERIFIED === 'true'
+      const canary = readVoiceCanary()
+      const ok = configured && permitted && canary.ok
+      response.statusCode = ok ? 200 : 503
+      response.end(JSON.stringify({ ok, degraded: canary.degraded, checkedAt: canary.checkedAt || null }))
       return
     }
     const route = pathname.startsWith('/web/') ? pathname.slice(5) : ''
@@ -44,7 +54,7 @@ export function createVoiceServer() {
     moderateOutput: moderate,
     streamAudio: streamSpeech,
     evaluate: evaluateAnswer,
-    synthesize: (body, signal) => edgeSpeech(body?.text, body?.language, signal),
+    synthesize: (body, signal) => synthesizeSpeech(body?.text, body?.language, signal),
   })
   return { server, sockets }
 }

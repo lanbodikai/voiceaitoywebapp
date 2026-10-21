@@ -2,6 +2,10 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { once } from 'node:events'
 import { Readable } from 'node:stream'
+import { writeFile, unlink } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
+import { randomUUID } from 'node:crypto'
 import { createVoiceServer } from '../server/voice-server.mjs'
 import { proxyVoice } from '../server/oracle-proxy.mjs'
 import { runtimeLimit } from '../server/runtime-limits.mjs'
@@ -15,10 +19,12 @@ function restoreEnvironment(saved) {
 }
 
 test('standalone runtime exposes no legacy, Mousefit, or progress endpoints; health fails closed', async () => {
-  const keys = ['VOICE_RUNTIME', 'OPENAI_API_KEY', 'VITE_SUPABASE_URL', 'VITE_SUPABASE_PUBLISHABLE_KEY', 'CHILD_PILOT_MODE', 'OPENAI_ZDR_VERIFIED']
+  const keys = ['VOICE_RUNTIME', 'OPENAI_API_KEY', 'VITE_SUPABASE_URL', 'VITE_SUPABASE_PUBLISHABLE_KEY', 'CHILD_PILOT_MODE', 'OPENAI_ZDR_VERIFIED', 'VOICE_CANARY_STATUS_FILE']
   const saved = Object.fromEntries(keys.map(key => [key, process.env[key]]))
   for (const key of keys) delete process.env[key]
   process.env.VOICE_RUNTIME = 'true'
+  const canaryFile = join(tmpdir(), `voice-canary-${randomUUID()}.json`)
+  process.env.VOICE_CANARY_STATUS_FILE = canaryFile
   const { server, sockets } = createVoiceServer()
   server.listen(0, '127.0.0.1')
   await once(server, 'listening')
@@ -38,7 +44,13 @@ test('standalone runtime exposes no legacy, Mousefit, or progress endpoints; hea
     assert.equal((await fetch(`${origin}/health`)).status, 503, 'configured but privacy gate not enabled')
     process.env.OPENAI_ZDR_VERIFIED = 'true'
     assert.deepEqual(await (await fetch(`${origin}/health`)).json(), { ok: true })
+    assert.equal((await fetch(`${origin}/health/voice`)).status, 503, 'no cached speech check')
+    await writeFile(canaryFile, JSON.stringify({ checkedAt: new Date().toISOString(), ok: true, degraded: false, languages: { english: { ok: true }, chinese: { ok: true } } }))
+    const voiceHealth = await fetch(`${origin}/health/voice`)
+    assert.equal(voiceHealth.status, 200)
+    assert.equal((await voiceHealth.json()).ok, true)
   } finally {
+    await unlink(canaryFile).catch(() => {})
     await new Promise(resolve => sockets.close(resolve))
     await new Promise(resolve => server.close(resolve))
     restoreEnvironment(saved)

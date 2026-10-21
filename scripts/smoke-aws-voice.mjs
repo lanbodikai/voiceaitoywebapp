@@ -85,6 +85,9 @@ function streamingHandshake(ip) {
 for (const [region, ip] of targets) {
   const health = await request(ip, '/health')
   assert.equal(health.status, 200, `${region} health`)
+  const voiceHealth = await request(ip, '/health/voice')
+  assert.equal(voiceHealth.status, 200, `${region} bilingual voice canary`)
+  assert.equal(voiceHealth.body.ok, true, `${region} bilingual voice canary result`)
   const grade = await request(ip, '/web/answers/evaluate', {
     storyID: 'choochoo-birthday-cake', checkpointID: 'call-a-friend',
     targetLanguage: 'english', transcript: 'Call Feifei the fox.',
@@ -95,7 +98,7 @@ for (const [region, ip] of targets) {
   assert.equal(speech.status, 200, `${region} synthetic speech status`)
   assert.ok(speech.body.audio || speech.body.audioBase64, `${region} synthetic speech audio`)
   const streamMs = await streamingHandshake(ip)
-  console.log(`${region}: health ${health.ms}ms, grade ${grade.ms}ms, speech ${speech.ms}ms, streaming ready ${streamMs}ms`)
+  console.log(`${region}: health ${health.ms}ms, voice canary ${voiceHealth.ms}ms, grade ${grade.ms}ms, speech ${speech.ms}ms, streaming ready ${streamMs}ms`)
 }
 
 const published = await fetch(new URL('/api/speech/synthesize', site), {

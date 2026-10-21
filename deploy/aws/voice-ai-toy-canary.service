@@ -1,0 +1,26 @@
+[Unit]
+Description=Voice AI Toy synthetic speech canary
+After=network-online.target voice-ai-toy.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=voice-ai-toy
+Group=voice-ai-toy
+WorkingDirectory=/opt/voice-ai-toy/current
+EnvironmentFile=/etc/voice-ai-toy/runtime.env
+Environment=EDGE_TTS_PYTHON=/opt/voice-ai-toy/tts-7.3.1/bin/python
+StateDirectory=voice-ai-toy-monitor
+UMask=0077
+ExecStart=/opt/voice-ai-toy/node/bin/node scripts/aws-voice-canary.mjs
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+TimeoutStartSec=40
+StandardOutput=null
+StandardError=journal

@@ -22,12 +22,21 @@ The standalone entry point is `server/voice-entry.mjs`. It binds to loopback por
 It imports no legacy Oracle application. `/health` returns 503 when configuration
 or the existing child-pilot privacy gate is not ready; it is not an upstream
 OpenAI/Supabase availability test and incurs no model usage.
+`/health/voice` reports the cached bilingual synthetic speech result. It returns
+503 if the check is older than 15 minutes or if neither Edge TTS nor its OpenAI
+fallback can synthesize a language. The five-minute systemd timer uses fixed
+phrases only, not recordings or children's text. It costs nothing at OpenAI
+while Edge TTS works; fallback requests are billed when Edge fails.
 
 On dedicated Ubuntu servers, install Node LTS and Python from verified official
 sources. Install runtime dependencies `busboy@1.6.0` and `ws@8.21.3`; create a
 Python venv with `edge-tts==7.3.1`. Keep application files root-owned and run as
 the unprivileged `voice-ai-toy` service account using `voice-ai-toy.service`.
 Store configuration in `/etc/voice-ai-toy/runtime.env`, root-owned mode 0600.
+The OpenAI speech fallback uses the already configured `OPENAI_API_KEY` and
+`gpt-4o-mini-tts` for English and Chinese. Set `SPEECH_FALLBACK_ENABLED=false`
+only for a controlled rollback. The Speech API model is scheduled for retirement
+on 2027-01-06; migrate the fallback before that date.
 On 512 MB Lightsail instances, provision a 1 GB swap file to absorb transient
 memory spikes during system maintenance; both production instances use one.
 `DEEPGRAM_API_KEY` enables progressive English Aura-2 speech. Set
@@ -45,6 +54,11 @@ at 8 per region. These are conservative demo limits, not a load-test capacity
 claim. HTTP/per-profile limits remain per process, not globally shared between
 regions. Verify actual peak RSS under representative synthetic voice traffic.
 Application output is suppressed; do not add request-body or child-speech logs.
+Install `voice-ai-toy-canary.service` and `.timer`, start the service once after
+the runtime starts, then `systemctl enable --now voice-ai-toy-canary.timer`.
+The status file is under `/var/lib/voice-ai-toy-monitor` and contains only
+booleans, provider labels, and a timestamp. A failed timer run writes one
+sanitized journal marker, `voice_canary_unhealthy`.
 
 Put Caddy in front of loopback port 8787. Expose only HTTP/HTTPS publicly; restrict
 SSH to approved management access. Do not expose 8787 or install a database.

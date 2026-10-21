@@ -15,6 +15,7 @@ Environment=NODE_OPTIONS=--max-old-space-size=128
 Environment=VOICE_MAX_TTS=2
 Environment=VOICE_MAX_CONNECTIONS=8
 Environment=EDGE_TTS_PYTHON=/opt/voice-ai-toy/tts-7.3.1/bin/python
+StateDirectory=voice-ai-toy-monitor
 ExecStart=/opt/voice-ai-toy/node/bin/node server/voice-entry.mjs
 Restart=on-failure
 RestartSec=3

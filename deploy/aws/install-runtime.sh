@@ -35,5 +35,7 @@ sudo /opt/voice-ai-toy/tts-7.3.1/bin/pip install \
   --disable-pip-version-check --no-cache-dir 'edge-tts==7.3.1'
 
 sudo install -m 644 /tmp/voice-ai-toy.service /etc/systemd/system/voice-ai-toy.service
+sudo install -m 644 /tmp/voice-ai-toy-canary.service /etc/systemd/system/voice-ai-toy-canary.service
+sudo install -m 644 /tmp/voice-ai-toy-canary.timer /etc/systemd/system/voice-ai-toy-canary.timer
 sudo systemctl daemon-reload
-printf 'Runtime installed; configure /etc/voice-ai-toy/runtime.env before starting.\n'
+printf 'Runtime installed; configure /etc/voice-ai-toy/runtime.env, then start the runtime and enable the canary timer.\n'

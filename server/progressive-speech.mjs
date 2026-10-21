@@ -1,12 +1,11 @@
-import { streamEdgeSpeech } from './edge-speech.mjs'
+import { streamResilientSpeech } from './resilient-speech.mjs'
 import { runtimeLimit } from './runtime-limits.mjs'
 
 let activeDeepgram=0
 
 export async function streamSpeech(text, language, onChunk, signal, options={}) {
   if (language !== 'english' || !process.env.DEEPGRAM_API_KEY || !options.deepgramAllowed) {
-    await streamEdgeSpeech(text, language, onChunk, signal)
-    return 'edge-tts'
+    return streamResilientSpeech(text, language, onChunk, signal)
   }
   if (typeof text !== 'string' || !text.trim() || text.length > 1600) throw new Error('Invalid speech')
   if(activeDeepgram>=runtimeLimit('VOICE_MAX_TTS',8,8))throw new Error('Speech busy')
